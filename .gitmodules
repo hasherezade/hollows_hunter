@@ -1,0 +1,3 @@
+[submodule "pe-sieve"]
+	path = pe-sieve
+	url = https://github.com/hasherezade/pe-sieve.git
