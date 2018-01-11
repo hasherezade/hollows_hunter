@@ -24,6 +24,7 @@ set ( PESIEVE_AS_DLL ON CACHE BOOL "Enable building PE-sieve as a DLL" FORCE)
 add_subdirectory (pe-sieve)
 set ( PESIEVE_LIB $<TARGET_FILE:pe-sieve> CACHE FILE "PE-sieve library path" )
 
+cmake_policy(SET CMP0015 NEW)
 LINK_DIRECTORIES ( ${PESIEVE_LIB} )
 add_executable ( ${PROJECT_NAME} ${hdrs} ${srcs} main.cpp )
 target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} )
