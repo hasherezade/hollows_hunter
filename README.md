@@ -6,7 +6,8 @@ A process scanner detecting and dumping hollowed PE modules.
 Uses PE-sieve (DLL version):
 https://github.com/hasherezade/pe-sieve.git
 
-_WARNING: Experimental_
+<b>WARNING</b>: This is an early beta version. Bugs? Remarks? Mail me: hasherezade@gmail.com
+</br>
 
 Clone:
 -
