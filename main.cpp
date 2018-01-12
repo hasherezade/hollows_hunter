@@ -18,10 +18,14 @@ bool is_replaced_process(t_params args)
 {
     t_report report = PESieve_scan(args);
     if (report.errors) return false;
-    if (report.replaced | report.suspicious){
+    if (report.replaced) {
+        std::cout << "Found replaced: " << args.pid << std::endl;
         return true;
     }
-
+    if (report.suspicious) {
+        std::cout << "Found suspicious: " << args.pid << std::endl;
+        return true;
+    }
     return false;
 }
 
