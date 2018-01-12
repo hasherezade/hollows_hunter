@@ -5,9 +5,11 @@
 #include <string>
 #include <vector>
 
+#define VERSION "0.1"
+
 #define PARAM_FILTER "/mfilter"
 #define PARAM_IMP_REC "/imp"
-#define PARAM_QUIET "/quiet"
+#define PARAM_HOOKS "/hooks"
 
 #include "pe_sieve_api.h"
 #pragma comment(lib, "pe-sieve.lib")
@@ -51,6 +53,8 @@ size_t find_replaced_process(std::vector<DWORD> &replaced, t_params args)
 
 int main(int argc, char *argv[])
 {
+    std::cout << "HooksFinder v." << VERSION << std::endl;
+
     t_params args = { 0 };
     args.quiet = true;
     args.modules_filter = 3;
@@ -68,25 +72,29 @@ int main(int argc, char *argv[])
             }
             i++;
         }
-        else if (!strcmp(argv[i], PARAM_QUIET)) {
-            args.quiet = true;
+        else if (!strcmp(argv[i], PARAM_HOOKS)) {
+            args.no_hooks = false;
         }
     }
 
     std::vector<DWORD> replaced;
     find_replaced_process(replaced, args);
-    std::cout << "All Replaced: " << std::dec << replaced.size() << std::endl;
+    std::cout << "--------" << std::endl;
+    std::cout << "SUMMARY:" << std::endl;
+    std::cout << "[+] Total Replaced: " << std::dec << replaced.size() << std::endl;
+    std::cout << "[+] List of replaced: " << std::endl;
 
     char image_buf[MAX_PATH] = { 0 };
     std::vector<DWORD>::iterator itr;
+    size_t i = 0;
     for (itr = replaced.begin(); itr != replaced.end(); itr++) {
         DWORD pid = *itr;
-        std::cout << "[+] PID: " << std::dec << pid << std::endl;
+        std::cout << "[" << i++ <<"]:\n> PID: " << std::dec << pid << std::endl;
         HANDLE hProcess = OpenProcess( PROCESS_QUERY_INFORMATION, FALSE, pid);
         if (hProcess) {
             memset(image_buf, 0, MAX_PATH);
             GetProcessImageFileNameA(hProcess, image_buf, MAX_PATH);
-            std::cout << image_buf << std::endl;
+            std::cout << "> Path: " << image_buf << std::endl;
             CloseHandle(hProcess);
         }
     }
