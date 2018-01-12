@@ -19,11 +19,11 @@ bool is_replaced_process(t_params args)
     t_report report = PESieve_scan(args);
     if (report.errors) return false;
     if (report.replaced) {
-        std::cout << "Found replaced: " << args.pid << std::endl;
+        std::cout << "Found replaced: " << std::dec << args.pid << std::endl;
         return true;
     }
     if (report.suspicious) {
-        std::cout << "Found suspicious: " << args.pid << std::endl;
+        std::cout << "Found suspicious: " << std::dec << args.pid << std::endl;
         return true;
     }
     return false;
@@ -86,8 +86,9 @@ int main(int argc, char *argv[])
     std::cout << "--------" << std::endl;
     std::cout << "SUMMARY:" << std::endl;
     std::cout << "[+] Total Replaced: " << std::dec << replaced.size() << std::endl;
-    std::cout << "[+] List of replaced: " << std::endl;
-
+    if (replaced.size() > 0) {
+        std::cout << "[+] List of replaced: " << std::endl;
+    }
     char image_buf[MAX_PATH] = { 0 };
     std::vector<DWORD>::iterator itr;
     size_t i = 0;
