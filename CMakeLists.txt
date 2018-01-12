@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 2.8)
 project (hollows_hunter)
-
+option(HH_BUILD_TESTING "enable testing for peconv" ON)
 
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
 
@@ -31,3 +31,11 @@ target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} )
 
 # dependencies
 add_dependencies( ${PROJECT_NAME} ${M_PESIEVE} )
+
+# Setup testing
+if(HH_BUILD_TESTING)
+	enable_testing()
+
+	# 0) does the application run
+	add_test (TestRuns hollows_hunter)
+endif()

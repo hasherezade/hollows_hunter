@@ -42,3 +42,10 @@ after_build:
   - cd build64
   - cp pe-sieve\Debug\pe-sieve.dll Debug\
   - cd ..
+  
+test_script:
+  - cd build32
+  - ctest -V
+  - cd ..
+  - cd build64
+  - ctest -V
