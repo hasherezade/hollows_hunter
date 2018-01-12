@@ -53,7 +53,7 @@ size_t find_replaced_process(std::vector<DWORD> &replaced, t_params args)
 
 int main(int argc, char *argv[])
 {
-    std::cout << "HooksFinder v." << VERSION << std::endl;
+    std::cout << "HollowsHunter v." << VERSION << std::endl;
 
     t_params args = { 0 };
     args.quiet = true;
