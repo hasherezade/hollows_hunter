@@ -35,3 +35,10 @@ build_script:
   - cmake --build .
   - cd ..
   
+after_build:
+  - cd build32
+  - cp pe-sieve\Debug\pe-sieve.dll Debug\
+  - cd ..
+  - cd build64
+  - cp pe-sieve\Debug\pe-sieve.dll Debug\
+  - cd ..
