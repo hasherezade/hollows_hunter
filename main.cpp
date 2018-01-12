@@ -98,6 +98,5 @@ int main(int argc, char *argv[])
             CloseHandle(hProcess);
         }
     }
-    system("pause");
     return 0;
 }
