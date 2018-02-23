@@ -85,9 +85,9 @@ int main(int argc, char *argv[])
     find_replaced_process(replaced, args);
     std::cout << "--------" << std::endl;
     std::cout << "SUMMARY:" << std::endl;
-    std::cout << "[+] Total Replaced: " << std::dec << replaced.size() << std::endl;
+    std::cout << "[+] Total Suspicious: " << std::dec << replaced.size() << std::endl;
     if (replaced.size() > 0) {
-        std::cout << "[+] List of replaced: " << std::endl;
+        std::cout << "[+] List of suspicious: " << std::endl;
     }
     char image_buf[MAX_PATH] = { 0 };
     std::vector<DWORD>::iterator itr;
