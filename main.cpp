@@ -82,8 +82,14 @@ int main(int argc, char *argv[])
     }
 
     std::vector<DWORD> replaced;
+
+    DWORD start_tick = GetTickCount();
+
     find_replaced_process(replaced, args);
+    DWORD total_time = GetTickCount() - start_tick;
     std::cout << "--------" << std::endl;
+    std::cout << "Finished scan in: " << std::dec << total_time << " miliseconds" << std::endl;
+
     std::cout << "SUMMARY:" << std::endl;
     std::cout << "[+] Total Suspicious: " << std::dec << replaced.size() << std::endl;
     if (replaced.size() > 0) {
