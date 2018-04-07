@@ -2,10 +2,10 @@ shallow_clone: true
 
 os:
   - Visual Studio 2015
-
+  
 platform: x64
   - x64
-
+  
 branches:
   only:
     - master
@@ -20,32 +20,29 @@ build:
 configuration:
   - Debug
   
+environment:
+  matrix:
+    - env_arch: "x64"
+    - env_arch: "x86"
+    
 before_build:
   - git clone --recursive https://github.com/hasherezade/pe-sieve.git
-  
+
 build_script:
-  - mkdir build32
-  - cd build32
-  - cmake .. -G "Visual Studio 14 2015"
+  - mkdir build
+  - cd build
+  - if [%env_arch%]==[x64] (
+      cmake .. -A x64 )
+  - if [%env_arch%]==[x86] (
+      cmake .. )
   - cmake --build .
   - cd ..
-  - mkdir build64
-  - cd build64
-  - cmake .. -G "Visual Studio 14 2015 Win64"
-  - cmake --build .
-  - cd ..
-  
+
 after_build:
-  - cd build32
+  - cd build
   - cp pe-sieve\Debug\pe-sieve.dll Debug\
   - cd ..
-  - cd build64
-  - cp pe-sieve\Debug\pe-sieve.dll Debug\
-  - cd ..
-  
+ 
 test_script:
-  - cd build32
-  - ctest -V
-  - cd ..
-  - cd build64
+  - cd build
   - ctest -V
