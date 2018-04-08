@@ -13,10 +13,7 @@ branches:
 install:
   - cinst cmake
   - set PATH=C:\Program Files\CMake\bin;%PATH%
-  - git init
-  - git remote add origin https://github.com/hasherezade/hollows_hunter.git
-  - git branch --set-upstream-to=origin/master master
-  - git pull --rebase
+  - choco install gitversion.portable -pre -y
   - git submodule update --init --recursive
 
 build:
