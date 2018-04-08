@@ -26,8 +26,8 @@ environment:
     - env_arch: "x86"
     
 before_build:
-  - git status
-  - git clone --recursive https://github.com/hasherezade/pe-sieve.git
+  - git clone --recursive https://github.com/hasherezade/hollows_hunter.git
+  - cd hollows_hunter
   
 build_script:
   - mkdir build
