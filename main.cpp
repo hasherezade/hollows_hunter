@@ -10,6 +10,7 @@
 #define PARAM_FILTER "/mfilter"
 #define PARAM_IMP_REC "/imp"
 #define PARAM_HOOKS "/hooks"
+#define PARAM_SHELLCODE "/shellc"
 
 #include "pe_sieve_api.h"
 #pragma comment(lib, "pe-sieve.lib")
@@ -78,6 +79,9 @@ int main(int argc, char *argv[])
         }
         else if (!strcmp(argv[i], PARAM_HOOKS)) {
             args.no_hooks = false;
+        }
+        else if (!strcmp(argv[i], PARAM_SHELLCODE)) {
+            args.shellcode = true;
         }
     }
 
