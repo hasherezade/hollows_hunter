@@ -5,15 +5,44 @@
 #include <string>
 #include <vector>
 
+#include "term_util.h"
+
 #define VERSION "0.1"
 
-#define PARAM_FILTER "/mfilter"
+#define PARAM_MODULES_FILTER "/mfilter"
 #define PARAM_IMP_REC "/imp"
 #define PARAM_HOOKS "/hooks"
 #define PARAM_SHELLCODE "/shellc"
 
+#define PARAM_HELP "/help"
+#define PARAM_HELP2  "/?"
+
 #include "pe_sieve_api.h"
 #pragma comment(lib, "pe-sieve.lib")
+
+void print_help()
+{
+    const int hdr_color = 14;
+    const int param_color = 15;
+
+    print_in_color(hdr_color, "\nOptional: \n");
+    print_in_color(param_color, PARAM_IMP_REC);
+    std::cout << "\t: Enable recovering imports. ";
+    std::cout << "(Warning: it may slow down the scan)\n";
+
+    print_in_color(param_color, PARAM_SHELLCODE);
+    std::cout << "\t: Detect shellcode implants. (By default it detects PE only).\n";
+
+    print_in_color(param_color, PARAM_HOOKS);
+    std::cout << " : Detect hooks and in-memory patches.\n";
+    std::cout << "---" << std::endl;
+
+#ifdef _WIN64
+    print_in_color(param_color, PARAM_MODULES_FILTER);
+    std::cout << " <*mfilter_id>\n\t: Filter the scanned modules.\n";
+    std::cout << "*mfilter_id:\n\t0 - no filter\n\t1 - 32bit\n\t2 - 64bit\n\t3 - all (default)\n";
+#endif
+}
 
 bool is_replaced_process(t_params args)
 {
@@ -56,10 +85,20 @@ size_t find_replaced_process(std::vector<DWORD> &replaced, t_params args)
     return replaced.size();
 }
 
+void print_banner()
+{
+    set_color(15);
+    std::cout << "HollowsHunter v." << VERSION << std::endl;
+    std::cout << "using: PE-sieve v.";
+    DWORD pesieve_ver = PESieve_version();
+    OUT_PADDED_HEX(std::cout, pesieve_ver);
+    std::cout << std::endl;
+    unset_color();
+}
+
 int main(int argc, char *argv[])
 {
-    std::cout << "HollowsHunter v." << VERSION << std::endl;
-
+    print_banner();
     t_params args = { 0 };
     args.quiet = true;
     args.modules_filter = 3;
@@ -67,10 +106,15 @@ int main(int argc, char *argv[])
 
     //Parse parameters
     for (int i = 1; i < argc; i++) {
+        if (!strcmp(argv[i], PARAM_HELP) || !strcmp(argv[i], PARAM_HELP2)) {
+            print_help();
+            return 0;
+        }
         if (!strcmp(argv[i], PARAM_IMP_REC)) {
             args.imp_rec = true;
         }
-        else if (!strcmp(argv[i], PARAM_FILTER) && i < argc) {
+
+        else if (!strcmp(argv[i], PARAM_MODULES_FILTER) && i < argc) {
             args.modules_filter = atoi(argv[i + 1]);
             if (args.modules_filter > LIST_MODULES_ALL) {
                 args.modules_filter = LIST_MODULES_ALL;
