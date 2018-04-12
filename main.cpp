@@ -7,6 +7,12 @@
 
 #include "term_util.h"
 
+#include <Psapi.h>
+#pragma comment(lib,"psapi.lib")
+
+#include "pe_sieve_api.h"
+#pragma comment(lib, "pe-sieve.lib")
+
 #define VERSION "0.1"
 
 #define PARAM_MODULES_FILTER "/mfilter"
@@ -16,9 +22,6 @@
 
 #define PARAM_HELP "/help"
 #define PARAM_HELP2  "/?"
-
-#include "pe_sieve_api.h"
-#pragma comment(lib, "pe-sieve.lib")
 
 void print_help()
 {
