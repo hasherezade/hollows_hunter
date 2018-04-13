@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
     find_replaced_process(replaced, args);
     DWORD total_time = GetTickCount() - start_tick;
     std::cout << "--------" << std::endl;
-    std::cout << "Finished scan in: " << std::dec << total_time << " miliseconds" << std::endl;
+    std::cout << "Finished scan in: " << std::dec << total_time << " milliseconds" << std::endl;
 
     std::cout << "SUMMARY:" << std::endl;
     std::cout << "[+] Total Suspicious: " << std::dec << replaced.size() << std::endl;
