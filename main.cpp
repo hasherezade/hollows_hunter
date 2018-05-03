@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <windows.h>
 #include <psapi.h>
-#include <iostream>
+
 #include <string>
 #include <vector>
+#include <iostream>
+#include <sstream>
 
 #include "term_util.h"
 
@@ -88,13 +90,26 @@ size_t find_replaced_process(std::vector<DWORD> &replaced, t_params args)
     return replaced.size();
 }
 
+std::string version_to_str(DWORD version)
+{
+    BYTE *chunks = (BYTE*) &version;
+    std::stringstream stream;
+    stream << std::hex <<
+        (int)chunks[3] << "." <<
+        (int)chunks[2] << "." <<
+        (int)chunks[1] << "." <<
+        (int)chunks[0];
+
+    return stream.str();
+}
+
 void print_banner()
 {
     set_color(15);
     std::cout << "HollowsHunter v." << VERSION << std::endl;
-    std::cout << "using: PE-sieve v.";
+    
     DWORD pesieve_ver = PESieve_version();
-    OUT_PADDED_HEX(std::cout, pesieve_ver);
+    std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver) << std::endl;
     std::cout << std::endl;
     unset_color();
 }
