@@ -2,6 +2,21 @@
 
 #include <iostream>
 
+
+void hh_args_init(t_hh_params &hh_args)
+{
+    hh_args.pesieve_args = { 0 };
+
+    hh_args.pesieve_args.quiet = true;
+    hh_args.pesieve_args.modules_filter = 3;
+    hh_args.pesieve_args.no_hooks = true;
+
+    hh_args.loop_scanning = false;
+    hh_args.pname = "";
+}
+
+//---
+
 bool is_replaced_process(t_params args)
 {
     t_report report = PESieve_scan(args);
@@ -17,7 +32,7 @@ bool is_replaced_process(t_params args)
     return false;
 }
 
-bool get_process_name(IN HANDLE hProcess, OUT LPSTR nameBuf, IN SIZE_T nameMax)
+bool get_process_name(IN HANDLE hProcess, OUT LPSTR nameBuf, IN DWORD nameMax)
 {
     HMODULE hMod;
     DWORD cbNeeded;
@@ -46,7 +61,7 @@ bool is_searched_process(DWORD processID, const char* searchedName)
     return false;
 }
 
-size_t find_suspicious_process(std::vector<DWORD> &replaced, t_params args, std::string pname)
+size_t find_suspicious_process(std::vector<DWORD> &replaced, t_hh_params &hh_args)
 {
     DWORD aProcesses[1024], cbNeeded, cProcesses;
     unsigned int i;
@@ -63,15 +78,15 @@ size_t find_suspicious_process(std::vector<DWORD> &replaced, t_params args, std:
     for (i = 0; i < cProcesses; i++) {
         if (aProcesses[i] == 0) continue;
         DWORD pid = aProcesses[i];
-        if (pname != "") {
-            if (!is_searched_process(pid, pname.c_str())) {
+        if (hh_args.pname != "") {
+            if (!is_searched_process(pid, hh_args.pname.c_str())) {
                 //it is not the searched process, so skip it
                 continue;
             }
         }
         std::cout << ">> Scanning PID: " << std::dec << pid << std::endl;
-        args.pid = pid;
-        if (is_replaced_process(args)) {
+        hh_args.pesieve_args.pid = pid;
+        if (is_replaced_process(hh_args.pesieve_args)) {
             replaced.push_back(pid);
         }
     }

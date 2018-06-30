@@ -74,13 +74,13 @@ void print_banner()
     unset_color();
 }
 
-size_t deploy_scan(t_params pesieve_args, std::string pname)
+size_t deploy_scan(t_hh_params &hh_args)
 {
     std::vector<DWORD> suspicious_pids;
 
     DWORD start_tick = GetTickCount();
 
-    find_suspicious_process(suspicious_pids, pesieve_args, pname);
+    find_suspicious_process(suspicious_pids, hh_args);
     DWORD total_time = GetTickCount() - start_tick;
     std::cout << "--------" << std::endl;
     std::cout << "Finished scan in: " << std::dec << total_time << " milliseconds" << std::endl;
@@ -110,13 +110,10 @@ size_t deploy_scan(t_params pesieve_args, std::string pname)
 int main(int argc, char *argv[])
 {
     print_banner();
-    t_params args = { 0 };
-    args.quiet = true;
-    args.modules_filter = 3;
-    args.no_hooks = true;
 
-    bool loop_scanning = false;
-    std::string pname = "";
+    t_hh_params hh_args;
+    hh_args_init(hh_args);
+
     //Parse parameters
     for (int i = 1; i < argc; i++) {
         if (!strcmp(argv[i], PARAM_HELP) || !strcmp(argv[i], PARAM_HELP2)) {
@@ -124,33 +121,33 @@ int main(int argc, char *argv[])
             return 0;
         }
         if (!strcmp(argv[i], PARAM_IMP_REC)) {
-            args.imp_rec = true;
+            hh_args.pesieve_args.imp_rec = true;
         }
 
         else if (!strcmp(argv[i], PARAM_MODULES_FILTER) && i < argc) {
-            args.modules_filter = atoi(argv[i + 1]);
-            if (args.modules_filter > LIST_MODULES_ALL) {
-                args.modules_filter = LIST_MODULES_ALL;
+            hh_args.pesieve_args.modules_filter = atoi(argv[i + 1]);
+            if (hh_args.pesieve_args.modules_filter > LIST_MODULES_ALL) {
+                hh_args.pesieve_args.modules_filter = LIST_MODULES_ALL;
             }
             i++;
         }
         else if (!strcmp(argv[i], PARAM_HOOKS)) {
-            args.no_hooks = false;
+            hh_args.pesieve_args.no_hooks = false;
         }
         else if (!strcmp(argv[i], PARAM_SHELLCODE)) {
-            args.shellcode = true;
+            hh_args.pesieve_args.shellcode = true;
         }
         else if (!strcmp(argv[i], PARAM_LOOP)) {
-            loop_scanning = true;
+            hh_args.loop_scanning = true;
         }
         else if (!strcmp(argv[i], PARAM_PNAME) && i < argc) {
-            pname = argv[i + 1];
+            hh_args.pname = argv[i + 1];
         }
     }
 
     do {
-        size_t res = deploy_scan(args, pname);
-    } while (loop_scanning);
+        size_t res = deploy_scan(hh_args);
+    } while (hh_args.loop_scanning);
 
     return 0;
 }
