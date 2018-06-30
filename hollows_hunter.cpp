@@ -1,7 +1,7 @@
 #include "hollows_hunter.h"
 
 #include <iostream>
-
+#include <string.h>
 
 void hh_args_init(t_hh_params &hh_args)
 {
@@ -51,7 +51,8 @@ bool is_searched_process(DWORD processID, const char* searchedName)
 
     CHAR szProcessName[MAX_PATH];
     if (get_process_name(hProcess, szProcessName, MAX_PATH)) {
-        if (strcmp(szProcessName, searchedName) == 0) {
+
+        if (stricmp(szProcessName, searchedName) == 0) {
             printf("%s  (PID: %u)\n", szProcessName, processID);
             CloseHandle(hProcess);
             return true;
