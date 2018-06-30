@@ -1,19 +1,12 @@
 #include <stdio.h>
-#include <windows.h>
-#include <psapi.h>
 
 #include <string>
 #include <vector>
-#include <iostream>
+
 #include <sstream>
 
 #include "term_util.h"
-
-#include <Psapi.h>
-#pragma comment(lib,"psapi.lib")
-
-#include "pe_sieve_api.h"
-#pragma comment(lib, "pe-sieve.lib")
+#include "hollows_hunter.h"
 
 #define VERSION "0.1"
 
@@ -21,6 +14,7 @@
 #define PARAM_IMP_REC "/imp"
 #define PARAM_HOOKS "/hooks"
 #define PARAM_SHELLCODE "/shellc"
+#define PARAM_PNAME "/pname"
 #define PARAM_LOOP "/loop"
 
 #define PARAM_HELP "/help"
@@ -42,6 +36,9 @@ void print_help()
     print_in_color(param_color, PARAM_HOOKS);
     std::cout << " : Detect hooks and in-memory patches.\n";
 
+    print_in_color(param_color, PARAM_PNAME);
+    std::cout << " <process_name>\n\t: Scan only processes with given name.\n";
+
     print_in_color(param_color, PARAM_LOOP);
     std::cout << "  : Enable continuous scanning.\n";
 
@@ -51,47 +48,6 @@ void print_help()
     std::cout << "*mfilter_id:\n\t0 - no filter\n\t1 - 32bit\n\t2 - 64bit\n\t3 - all (default)\n";
 #endif
     std::cout << "---" << std::endl;
-}
-
-bool is_replaced_process(t_params args)
-{
-    t_report report = PESieve_scan(args);
-    if (report.errors) return false;
-    if (report.replaced) {
-        std::cout << "Found replaced: " << std::dec << args.pid << std::endl;
-        return true;
-    }
-    if (report.suspicious) {
-        std::cout << "Found suspicious: " << std::dec << args.pid << std::endl;
-        return true;
-    }
-    return false;
-}
-
-size_t find_replaced_process(std::vector<DWORD> &replaced, t_params args)
-{
-    DWORD aProcesses[1024], cbNeeded, cProcesses;
-    unsigned int i;
-
-    if ( !EnumProcesses( aProcesses, sizeof(aProcesses), &cbNeeded)) {
-        return NULL;
-    }
-
-    //calculate how many process identifiers were returned.
-    cProcesses = cbNeeded / sizeof(DWORD);
-
-    char image_buf[MAX_PATH] = { 0 };
-
-    for ( i = 0; i < cProcesses; i++ ) {
-        if ( aProcesses[i] == 0 ) continue;
-        DWORD pid = aProcesses[i];
-        std::cout << ">> Scanning PID: " << std::dec << pid << std::endl;
-        args.pid = pid;
-        if ( is_replaced_process(args) ) {
-            replaced.push_back(pid);
-        }
-    }
-    return replaced.size();
 }
 
 std::string version_to_str(DWORD version)
@@ -118,13 +74,13 @@ void print_banner()
     unset_color();
 }
 
-size_t deploy_scan(t_params pesieve_args)
+size_t deploy_scan(t_hh_params &hh_args)
 {
     std::vector<DWORD> suspicious_pids;
 
     DWORD start_tick = GetTickCount();
 
-    find_replaced_process(suspicious_pids, pesieve_args);
+    find_suspicious_process(suspicious_pids, hh_args);
     DWORD total_time = GetTickCount() - start_tick;
     std::cout << "--------" << std::endl;
     std::cout << "Finished scan in: " << std::dec << total_time << " milliseconds" << std::endl;
@@ -154,12 +110,9 @@ size_t deploy_scan(t_params pesieve_args)
 int main(int argc, char *argv[])
 {
     print_banner();
-    t_params args = { 0 };
-    args.quiet = true;
-    args.modules_filter = 3;
-    args.no_hooks = true;
 
-    bool loop_scanning = false;
+    t_hh_params hh_args;
+    hh_args_init(hh_args);
 
     //Parse parameters
     for (int i = 1; i < argc; i++) {
@@ -168,30 +121,33 @@ int main(int argc, char *argv[])
             return 0;
         }
         if (!strcmp(argv[i], PARAM_IMP_REC)) {
-            args.imp_rec = true;
+            hh_args.pesieve_args.imp_rec = true;
         }
 
         else if (!strcmp(argv[i], PARAM_MODULES_FILTER) && i < argc) {
-            args.modules_filter = atoi(argv[i + 1]);
-            if (args.modules_filter > LIST_MODULES_ALL) {
-                args.modules_filter = LIST_MODULES_ALL;
+            hh_args.pesieve_args.modules_filter = atoi(argv[i + 1]);
+            if (hh_args.pesieve_args.modules_filter > LIST_MODULES_ALL) {
+                hh_args.pesieve_args.modules_filter = LIST_MODULES_ALL;
             }
             i++;
         }
         else if (!strcmp(argv[i], PARAM_HOOKS)) {
-            args.no_hooks = false;
+            hh_args.pesieve_args.no_hooks = false;
         }
         else if (!strcmp(argv[i], PARAM_SHELLCODE)) {
-            args.shellcode = true;
+            hh_args.pesieve_args.shellcode = true;
         }
         else if (!strcmp(argv[i], PARAM_LOOP)) {
-            loop_scanning = true;
+            hh_args.loop_scanning = true;
+        }
+        else if (!strcmp(argv[i], PARAM_PNAME) && i < argc) {
+            hh_args.pname = argv[i + 1];
         }
     }
 
     do {
-        size_t res = deploy_scan(args);
-    } while (loop_scanning);
+        size_t res = deploy_scan(hh_args);
+    } while (hh_args.loop_scanning);
 
     return 0;
 }
