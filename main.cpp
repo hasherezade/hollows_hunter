@@ -21,6 +21,7 @@
 #define PARAM_IMP_REC "/imp"
 #define PARAM_HOOKS "/hooks"
 #define PARAM_SHELLCODE "/shellc"
+#define PARAM_LOOP "/loop"
 
 #define PARAM_HELP "/help"
 #define PARAM_HELP2  "/?"
@@ -40,13 +41,16 @@ void print_help()
 
     print_in_color(param_color, PARAM_HOOKS);
     std::cout << " : Detect hooks and in-memory patches.\n";
-    std::cout << "---" << std::endl;
+
+    print_in_color(param_color, PARAM_LOOP);
+    std::cout << "  : Enable continuous scanning.\n";
 
 #ifdef _WIN64
     print_in_color(param_color, PARAM_MODULES_FILTER);
     std::cout << " <*mfilter_id>\n\t: Filter the scanned modules.\n";
     std::cout << "*mfilter_id:\n\t0 - no filter\n\t1 - 32bit\n\t2 - 64bit\n\t3 - all (default)\n";
 #endif
+    std::cout << "---" << std::endl;
 }
 
 bool is_replaced_process(t_params args)
@@ -114,6 +118,39 @@ void print_banner()
     unset_color();
 }
 
+size_t deploy_scan(t_params pesieve_args)
+{
+    std::vector<DWORD> suspicious_pids;
+
+    DWORD start_tick = GetTickCount();
+
+    find_replaced_process(suspicious_pids, pesieve_args);
+    DWORD total_time = GetTickCount() - start_tick;
+    std::cout << "--------" << std::endl;
+    std::cout << "Finished scan in: " << std::dec << total_time << " milliseconds" << std::endl;
+
+    std::cout << "SUMMARY:" << std::endl;
+    std::cout << "[+] Total Suspicious: " << std::dec << suspicious_pids.size() << std::endl;
+    if (suspicious_pids.size() > 0) {
+        std::cout << "[+] List of suspicious: " << std::endl;
+    }
+    char image_buf[MAX_PATH] = { 0 };
+    std::vector<DWORD>::iterator itr;
+    size_t i = 0;
+    for (itr = suspicious_pids.begin(); itr != suspicious_pids.end(); itr++) {
+        DWORD pid = *itr;
+        std::cout << "[" << i++ << "]:\n> PID: " << std::dec << pid << std::endl;
+        HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, pid);
+        if (hProcess) {
+            memset(image_buf, 0, MAX_PATH);
+            GetProcessImageFileNameA(hProcess, image_buf, MAX_PATH);
+            std::cout << "> Path: " << image_buf << std::endl;
+            CloseHandle(hProcess);
+        }
+    }
+    return suspicious_pids.size();
+}
+
 int main(int argc, char *argv[])
 {
     print_banner();
@@ -121,6 +158,8 @@ int main(int argc, char *argv[])
     args.quiet = true;
     args.modules_filter = 3;
     args.no_hooks = true;
+
+    bool loop_scanning = false;
 
     //Parse parameters
     for (int i = 1; i < argc; i++) {
@@ -145,35 +184,14 @@ int main(int argc, char *argv[])
         else if (!strcmp(argv[i], PARAM_SHELLCODE)) {
             args.shellcode = true;
         }
-    }
-
-    std::vector<DWORD> replaced;
-
-    DWORD start_tick = GetTickCount();
-
-    find_replaced_process(replaced, args);
-    DWORD total_time = GetTickCount() - start_tick;
-    std::cout << "--------" << std::endl;
-    std::cout << "Finished scan in: " << std::dec << total_time << " milliseconds" << std::endl;
-
-    std::cout << "SUMMARY:" << std::endl;
-    std::cout << "[+] Total Suspicious: " << std::dec << replaced.size() << std::endl;
-    if (replaced.size() > 0) {
-        std::cout << "[+] List of suspicious: " << std::endl;
-    }
-    char image_buf[MAX_PATH] = { 0 };
-    std::vector<DWORD>::iterator itr;
-    size_t i = 0;
-    for (itr = replaced.begin(); itr != replaced.end(); itr++) {
-        DWORD pid = *itr;
-        std::cout << "[" << i++ <<"]:\n> PID: " << std::dec << pid << std::endl;
-        HANDLE hProcess = OpenProcess( PROCESS_QUERY_INFORMATION, FALSE, pid);
-        if (hProcess) {
-            memset(image_buf, 0, MAX_PATH);
-            GetProcessImageFileNameA(hProcess, image_buf, MAX_PATH);
-            std::cout << "> Path: " << image_buf << std::endl;
-            CloseHandle(hProcess);
+        else if (!strcmp(argv[i], PARAM_LOOP)) {
+            loop_scanning = true;
         }
     }
+
+    do {
+        size_t res = deploy_scan(args);
+    } while (loop_scanning);
+
     return 0;
 }
