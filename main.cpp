@@ -8,7 +8,7 @@
 #include "term_util.h"
 #include "hollows_hunter.h"
 
-#define VERSION "0.1"
+#define VERSION "0.1.5"
 
 #define PARAM_MODULES_FILTER "/mfilter"
 #define PARAM_IMP_REC "/imp"
