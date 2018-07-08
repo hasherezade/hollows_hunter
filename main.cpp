@@ -15,6 +15,7 @@
 #define PARAM_HOOKS "/hooks"
 #define PARAM_SHELLCODE "/shellc"
 #define PARAM_PNAME "/pname"
+#define PARAM_KILL "/kill"
 #define PARAM_LOOP "/loop"
 
 #define PARAM_HELP "/help"
@@ -41,6 +42,9 @@ void print_help()
 
     print_in_color(param_color, PARAM_LOOP);
     std::cout << "  : Enable continuous scanning.\n";
+    
+    print_in_color(param_color, PARAM_KILL);
+    std::cout << "  : Kill processes detected as suspicious\n";
 
 #ifdef _WIN64
     print_in_color(param_color, PARAM_MODULES_FILTER);
@@ -74,6 +78,49 @@ void print_banner()
     unset_color();
 }
 
+size_t kill_suspicious(std::vector<DWORD> &suspicious_pids)
+{
+    size_t killed = 0;
+    std::vector<DWORD>::iterator itr;
+    for (itr = suspicious_pids.begin(); itr != suspicious_pids.end(); itr++) {
+        DWORD pid = *itr;
+        HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, pid);
+        if (!hProcess) {
+            continue;
+        }
+        if (TerminateProcess(hProcess, 0)) {
+            killed++;
+        } else {
+            std::cerr << "Could not terminate process. PID = " << pid << std::endl;
+        }
+        CloseHandle(hProcess);
+    }
+    return killed;
+}
+
+size_t print_suspicious(std::vector<DWORD> &suspicious_pids)
+{
+    std::vector<DWORD>::iterator itr;
+    char image_buf[MAX_PATH] = { 0 };
+    size_t printed = 0;
+    size_t counter = 0;
+    for (itr = suspicious_pids.begin(); itr != suspicious_pids.end(); itr++) {
+        DWORD pid = *itr;
+        std::cout << "[" << counter++ << "]:\n> PID: " << std::dec << pid << std::endl;
+        HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, pid);
+        if (!hProcess) {
+            continue;
+        }
+        memset(image_buf, 0, MAX_PATH);
+        GetProcessImageFileNameA(hProcess, image_buf, MAX_PATH);
+        std::cout << "> Path: " << image_buf << std::endl;
+        CloseHandle(hProcess);
+        printed++;
+    }
+    return printed;
+}
+
+
 size_t deploy_scan(t_hh_params &hh_args)
 {
     std::vector<DWORD> suspicious_pids;
@@ -90,19 +137,9 @@ size_t deploy_scan(t_hh_params &hh_args)
     if (suspicious_pids.size() > 0) {
         std::cout << "[+] List of suspicious: " << std::endl;
     }
-    char image_buf[MAX_PATH] = { 0 };
-    std::vector<DWORD>::iterator itr;
-    size_t i = 0;
-    for (itr = suspicious_pids.begin(); itr != suspicious_pids.end(); itr++) {
-        DWORD pid = *itr;
-        std::cout << "[" << i++ << "]:\n> PID: " << std::dec << pid << std::endl;
-        HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, pid);
-        if (hProcess) {
-            memset(image_buf, 0, MAX_PATH);
-            GetProcessImageFileNameA(hProcess, image_buf, MAX_PATH);
-            std::cout << "> Path: " << image_buf << std::endl;
-            CloseHandle(hProcess);
-        }
+    print_suspicious(suspicious_pids);
+    if (hh_args.kill_suspicious) {
+        kill_suspicious(suspicious_pids);
     }
     return suspicious_pids.size();
 }
@@ -139,6 +176,9 @@ int main(int argc, char *argv[])
         }
         else if (!strcmp(argv[i], PARAM_LOOP)) {
             hh_args.loop_scanning = true;
+        }
+        else if (!strcmp(argv[i], PARAM_KILL)) {
+            hh_args.kill_suspicious = true;
         }
         else if (!strcmp(argv[i], PARAM_PNAME) && i < argc) {
             hh_args.pname = argv[i + 1];
