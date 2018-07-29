@@ -5,7 +5,8 @@
 
 void hh_args_init(t_hh_params &hh_args)
 {
-    hh_args.pesieve_args = { 0 };
+    //reset PE-sieve params:
+    memset(&hh_args.pesieve_args, 0, sizeof(t_params));
 
     hh_args.pesieve_args.quiet = true;
     hh_args.pesieve_args.modules_filter = 3;
@@ -52,7 +53,7 @@ bool is_searched_process(DWORD processID, const char* searchedName)
     CHAR szProcessName[MAX_PATH];
     if (get_process_name(hProcess, szProcessName, MAX_PATH)) {
 
-        if (stricmp(szProcessName, searchedName) == 0) {
+        if (_stricmp(szProcessName, searchedName) == 0) {
             printf("%s  (PID: %u)\n", szProcessName, processID);
             CloseHandle(hProcess);
             return true;
@@ -79,7 +80,7 @@ size_t find_suspicious_process(std::vector<DWORD> &replaced, t_hh_params &hh_arg
     for (i = 0; i < cProcesses; i++) {
         if (aProcesses[i] == 0) continue;
         DWORD pid = aProcesses[i];
-        if (hh_args.pname != "") {
+        if (hh_args.pname.length() > 0) {
             if (!is_searched_process(pid, hh_args.pname.c_str())) {
                 //it is not the searched process, so skip it
                 continue;
