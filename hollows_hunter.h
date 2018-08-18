@@ -13,10 +13,11 @@ typedef struct {
     std::string pname;
     bool loop_scanning;
     bool kill_suspicious;
+    bool quiet;
     t_params pesieve_args; //PE-sieve parameters
 } t_hh_params;
 
 
 void hh_args_init(t_hh_params &args);
 
-size_t find_suspicious_process(std::vector<DWORD> &replaced, t_hh_params &hh_args);
+size_t pesieve_scan(std::vector<DWORD> &suspicious, t_hh_params &hh_args);

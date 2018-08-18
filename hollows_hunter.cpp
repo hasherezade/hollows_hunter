@@ -15,20 +15,22 @@ void hh_args_init(t_hh_params &hh_args)
     hh_args.kill_suspicious = false;
     hh_args.loop_scanning = false;
     hh_args.pname = "";
+
+    hh_args.quiet = false;
 }
 
 //---
 
-bool is_replaced_process(t_params args)
+bool is_suspicious_process(t_params args)
 {
     t_report report = PESieve_scan(args);
     if (report.errors) return false;
     if (report.replaced) {
-        std::cout << "Found replaced: " << std::dec << args.pid << std::endl;
+        std::cout << "[+] Found replaced: " << std::dec << args.pid << std::endl;
         return true;
     }
     if (report.suspicious) {
-        std::cout << "Found suspicious: " << std::dec << args.pid << std::endl;
+        std::cout << "[+] Found suspicious: " << std::dec << args.pid << std::endl;
         return true;
     }
     return false;
@@ -46,7 +48,7 @@ bool get_process_name(IN HANDLE hProcess, OUT LPSTR nameBuf, IN DWORD nameMax)
     return false;
 }
 
-bool is_searched_process(DWORD processID, const char* searchedName)
+bool is_searched_process(DWORD processID, const char* searchedName, bool is_quiet)
 {
     HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processID);
     if (hProcess == NULL) return false;
@@ -55,7 +57,9 @@ bool is_searched_process(DWORD processID, const char* searchedName)
     if (get_process_name(hProcess, szProcessName, MAX_PATH)) {
 
         if (_stricmp(szProcessName, searchedName) == 0) {
-            printf("%s  (PID: %u)\n", szProcessName, processID);
+            if (!is_quiet) {
+                printf("%s  (PID: %u)\n", szProcessName, processID);
+            }
             CloseHandle(hProcess);
             return true;
         }
@@ -64,7 +68,7 @@ bool is_searched_process(DWORD processID, const char* searchedName)
     return false;
 }
 
-size_t find_suspicious_process(std::vector<DWORD> &replaced, t_hh_params &hh_args)
+size_t pesieve_scan(std::vector<DWORD> &suspicious, t_hh_params &hh_args)
 {
     DWORD aProcesses[1024], cbNeeded, cProcesses;
     unsigned int i;
@@ -82,16 +86,18 @@ size_t find_suspicious_process(std::vector<DWORD> &replaced, t_hh_params &hh_arg
         if (aProcesses[i] == 0) continue;
         DWORD pid = aProcesses[i];
         if (hh_args.pname.length() > 0) {
-            if (!is_searched_process(pid, hh_args.pname.c_str())) {
+            if (!is_searched_process(pid, hh_args.pname.c_str(), hh_args.quiet)) {
                 //it is not the searched process, so skip it
                 continue;
             }
         }
-        std::cout << ">> Scanning PID: " << std::dec << pid << std::endl;
+        if (!hh_args.quiet) {
+            std::cout << ">> Scanning PID: " << std::dec << pid << std::endl;
+        }
         hh_args.pesieve_args.pid = pid;
-        if (is_replaced_process(hh_args.pesieve_args)) {
-            replaced.push_back(pid);
+        if (is_suspicious_process(hh_args.pesieve_args)) {
+            suspicious.push_back(pid);
         }
     }
-    return replaced.size();
+    return suspicious.size();
 }

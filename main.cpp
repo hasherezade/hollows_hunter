@@ -8,7 +8,7 @@
 #include "term_util.h"
 #include "hollows_hunter.h"
 
-#define VERSION "0.1.5"
+#define VERSION "0.1.6"
 
 #define PARAM_MODULES_FILTER "/mfilter"
 #define PARAM_IMP_REC "/imp"
@@ -17,6 +17,7 @@
 #define PARAM_PNAME "/pname"
 #define PARAM_KILL "/kill"
 #define PARAM_LOOP "/loop"
+#define PARAM_QUIET "/quiet"
 
 #define PARAM_HELP "/help"
 #define PARAM_HELP2  "/?"
@@ -42,7 +43,7 @@ void print_help()
 
     print_in_color(param_color, PARAM_LOOP);
     std::cout << "  : Enable continuous scanning.\n";
-    
+
     print_in_color(param_color, PARAM_KILL);
     std::cout << "  : Kill processes detected as suspicious\n";
 
@@ -51,6 +52,9 @@ void print_help()
     std::cout << " <*mfilter_id>\n\t: Filter the scanned modules.\n";
     std::cout << "*mfilter_id:\n\t0 - no filter\n\t1 - 32bit\n\t2 - 64bit\n\t3 - all (default)\n";
 #endif
+    print_in_color(param_color, PARAM_QUIET);
+    std::cout << "\t: Print only the summary and minimalistic info.\n";
+
     std::cout << "---" << std::endl;
 }
 
@@ -127,7 +131,7 @@ size_t deploy_scan(t_hh_params &hh_args)
 
     DWORD start_tick = GetTickCount();
 
-    find_suspicious_process(suspicious_pids, hh_args);
+    pesieve_scan(suspicious_pids, hh_args);
     DWORD total_time = GetTickCount() - start_tick;
     std::cout << "--------" << std::endl;
     std::cout << "Finished scan in: " << std::dec << total_time << " milliseconds" << std::endl;
@@ -182,6 +186,9 @@ int main(int argc, char *argv[])
         }
         else if (!strcmp(argv[i], PARAM_PNAME) && i < argc) {
             hh_args.pname = argv[i + 1];
+        }
+        else if (!strcmp(argv[i], PARAM_QUIET)) {
+            hh_args.quiet = true;
         }
     }
 
