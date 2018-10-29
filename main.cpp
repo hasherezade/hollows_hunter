@@ -8,13 +8,13 @@
 #include "term_util.h"
 #include "hollows_hunter.h"
 
-#define VERSION "0.1.7-a"
+#define VERSION "0.1.7-b"
 
 #define PARAM_MODULES_FILTER "/mfilter"
 #define PARAM_IMP_REC "/imp"
 #define PARAM_HOOKS "/hooks"
 #define PARAM_SHELLCODE "/shellc"
-#define PARAM_NO_UNMAP "/vdump"
+#define PARAM_DUMP_MODE "/dmode"
 
 #define PARAM_PNAME "/pname"
 #define PARAM_KILL "/kill"
@@ -39,9 +39,14 @@ void print_help()
 
     print_in_color(param_color, PARAM_HOOKS);
     std::cout << " : Detect hooks and in-memory patches.\n";
-    
-    print_in_color(param_color, PARAM_NO_UNMAP);
-    std::cout << "\t: Do not unmap PE files before dumping. (Keep in virtual format).\n";
+
+    print_in_color(param_color, PARAM_DUMP_MODE);
+    std::cout << " <*dump_mode>\n\t: Set in which mode the detected PE files should be dumped.\n";
+    std::cout << "*dump_mode:\n"
+        << "\t" << 0 << " - autodetect (default)\n"
+        << "\t" << 1 << " - virtual (as it is in the memory, no unmapping)\n"
+        << "\t" << 2 << " - unmapped (converted to raw using sections' raw headers)\n"
+        << "\t" << 3 << " - realigned raw (converted raw format to be the same as virtual)\n";
 
     print_in_color(param_color, PARAM_PNAME);
     std::cout << " <process_name>\n\t: Scan only processes with given name.\n";
@@ -183,8 +188,9 @@ int main(int argc, char *argv[])
         else if (!strcmp(argv[i], PARAM_SHELLCODE)) {
             hh_args.pesieve_args.shellcode = true;
         }
-        else if (!strcmp(argv[i], PARAM_NO_UNMAP)) {
-            hh_args.pesieve_args.no_unmap = true;
+        else if (!strcmp(argv[i], PARAM_DUMP_MODE) && (i + 1) < argc) {
+            hh_args.pesieve_args.dump_mode = atoi(argv[i + 1]);
+            ++i;
         }
         else if (!strcmp(argv[i], PARAM_LOOP)) {
             hh_args.loop_scanning = true;
