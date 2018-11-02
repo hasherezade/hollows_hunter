@@ -1,6 +1,7 @@
 # hollows_hunter
 [![Build status](https://ci.appveyor.com/api/projects/status/nsc2eux5986y1shq?svg=true)](https://ci.appveyor.com/project/hasherezade/hollows-hunter)
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-blue.svg)](https://opensource.org/licenses/BSD-2-Clause)
+[![Github All Releases](https://img.shields.io/github/downloads/hasherezade/hollows_hunter/total.svg)](http://www.somsubhra.com/github-release-stats/?username=hasherezade&repository=hollows_hunter)
 
 A process scanner detecting and dumping hollowed PE modules.
 
