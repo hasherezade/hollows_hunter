@@ -175,7 +175,7 @@ int main(int argc, char *argv[])
             hh_args.pesieve_args.imp_rec = true;
         }
 
-        else if (!strcmp(argv[i], PARAM_MODULES_FILTER) && i < argc) {
+        else if (!strcmp(argv[i], PARAM_MODULES_FILTER) && (i + 1) < argc) {
             hh_args.pesieve_args.modules_filter = atoi(argv[i + 1]);
             if (hh_args.pesieve_args.modules_filter > LIST_MODULES_ALL) {
                 hh_args.pesieve_args.modules_filter = LIST_MODULES_ALL;
@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
         else if (!strcmp(argv[i], PARAM_KILL)) {
             hh_args.kill_suspicious = true;
         }
-        else if (!strcmp(argv[i], PARAM_PNAME) && i < argc) {
+        else if (!strcmp(argv[i], PARAM_PNAME) && (i + 1) < argc) {
             hh_args.pname = argv[i + 1];
         }
         else if (!strcmp(argv[i], PARAM_QUIET)) {
