@@ -10,62 +10,127 @@
 
 #define VERSION "0.1.7-b"
 
-#define PARAM_MODULES_FILTER "/mfilter"
-#define PARAM_IMP_REC "/imp"
+//scan options:
 #define PARAM_HOOKS "/hooks"
 #define PARAM_SHELLCODE "/shellc"
+#define PARAM_MODULES_FILTER "/mfilter"
+#define PARAM_PNAME "/pname"
+#define PARAM_LOOP "/loop"
+
+//dump options:
+#define PARAM_IMP_REC "/imp"
 #define PARAM_DUMP_MODE "/dmode"
 
-#define PARAM_PNAME "/pname"
-#define PARAM_KILL "/kill"
-#define PARAM_LOOP "/loop"
+//output options:
 #define PARAM_QUIET "/quiet"
+#define PARAM_OUT_FILTER "/ofilter"
+#define PARAM_KILL "/kill"
 
+//info:
 #define PARAM_HELP "/help"
 #define PARAM_HELP2  "/?"
+
+std::string translate_dump_mode(const DWORD dump_mode)
+{
+    switch (dump_mode) {
+    case 0:
+        return "autodetect (default)";
+    case 1:
+        return "virtual (as it is in the memory, no unmapping)";
+    case 2:
+        return "unmapped (converted to raw using sections' raw headers)";
+    case 3:
+        return "realigned raw (converted raw format to be the same as virtual)";
+    }
+    return "undefined";
+}
+
+std::string translate_out_filter(const t_output_filter o_filter)
+{
+    switch (o_filter) {
+    case OUT_FULL:
+        return "no filter: dump everything (default)";
+    case OUT_NO_DUMPS:
+        return "don't dump the modified PEs, but save the report";
+    case OUT_NO_DIR:
+        return "don't create the output directory at all";
+    }
+    return "undefined";
+}
+
+std::string translate_modules_filter(DWORD m_filter)
+{
+    switch (m_filter) {
+    case LIST_MODULES_DEFAULT:
+        return "no filter (as the scanner)";
+    case LIST_MODULES_32BIT:
+        return "32bit only";
+    case LIST_MODULES_64BIT:
+        return "64bit only";
+    case LIST_MODULES_ALL:
+        return "all accessible (default)";
+    }
+    return "undefined";
+}
 
 void print_help()
 {
     const int hdr_color = 14;
     const int param_color = 15;
+    const int separator_color = 6;
 
-    print_in_color(hdr_color, "\nOptional: \n");
-    print_in_color(param_color, PARAM_IMP_REC);
-    std::cout << "\t: Enable recovering imports. ";
-    std::cout << "(Warning: it may slow down the scan)\n";
-
-    print_in_color(param_color, PARAM_SHELLCODE);
-    std::cout << "\t: Detect shellcode implants. (By default it detects PE only).\n";
-
-    print_in_color(param_color, PARAM_HOOKS);
-    std::cout << " : Detect hooks and in-memory patches.\n";
-
-    print_in_color(param_color, PARAM_DUMP_MODE);
-    std::cout << " <*dump_mode>\n\t: Set in which mode the detected PE files should be dumped.\n";
-    std::cout << "*dump_mode:\n"
-        << "\t" << 0 << " - autodetect (default)\n"
-        << "\t" << 1 << " - virtual (as it is in the memory, no unmapping)\n"
-        << "\t" << 2 << " - unmapped (converted to raw using sections' raw headers)\n"
-        << "\t" << 3 << " - realigned raw (converted raw format to be the same as virtual)\n";
+    print_in_color(hdr_color, "Optional: \n");
+    print_in_color(separator_color, "\n---scan options---\n");
 
     print_in_color(param_color, PARAM_PNAME);
     std::cout << " <process_name>\n\t: Scan only processes with given name.\n";
 
-    print_in_color(param_color, PARAM_LOOP);
-    std::cout << "  : Enable continuous scanning.\n";
+    print_in_color(param_color, PARAM_HOOKS);
+    std::cout << "  : Detect hooks and in-memory patches.\n";
 
-    print_in_color(param_color, PARAM_KILL);
-    std::cout << "  : Kill processes detected as suspicious\n";
+    print_in_color(param_color, PARAM_SHELLCODE);
+    std::cout << "\t: Detect shellcode implants. (By default it detects PE only).\n";
 
 #ifdef _WIN64
     print_in_color(param_color, PARAM_MODULES_FILTER);
     std::cout << " <*mfilter_id>\n\t: Filter the scanned modules.\n";
-    std::cout << "*mfilter_id:\n\t0 - no filter\n\t1 - 32bit\n\t2 - 64bit\n\t3 - all (default)\n";
+    std::cout << "*mfilter_id:\n";
+    for (size_t i = 0; i <= LIST_MODULES_ALL; i++) {
+        std::cout << "\t" << i << " - " << translate_modules_filter(i) << "\n";
+    }
 #endif
+
+    print_in_color(param_color, PARAM_LOOP);
+    std::cout << "   : Enable continuous scanning.\n";
+
+    print_in_color(separator_color, "\n---dump options---\n");
+
+    print_in_color(param_color, PARAM_IMP_REC);
+    std::cout << "\t: Enable recovering imports. ";
+    std::cout << "(Warning: it may slow down the scan)\n";
+
+    print_in_color(param_color, PARAM_DUMP_MODE);
+    std::cout << " <*dump_mode>\n\t: Set in which mode the detected PE files should be dumped.\n";
+    std::cout << "*dump_mode:\n";
+    for (size_t i = 0; i < 4; i++) {
+        std::cout << "\t" << i << " - " << translate_dump_mode(i) << "\n";
+    }
+
+    print_in_color(separator_color, "\n---output options---\n");
+
+    print_in_color(param_color, PARAM_OUT_FILTER);
+    std::cout << " <*ofilter_id>\n\t: Filter the dumped output.\n";
+    std::cout << "*ofilter_id:\n";
+    for (size_t i = 0; i < OUT_FILTERS_COUNT; i++) {
+        t_output_filter mode = (t_output_filter)(i);
+        std::cout << "\t" << mode << " - " << translate_out_filter(mode) << "\n";
+    }
+
+    print_in_color(param_color, PARAM_KILL);
+    std::cout << "   : Kill processes detected as suspicious\n";
+
     print_in_color(param_color, PARAM_QUIET);
     std::cout << "\t: Print only the summary and minimalistic info.\n";
-
-    std::cout << "---" << std::endl;
 }
 
 std::string version_to_str(DWORD version)
@@ -191,6 +256,10 @@ int main(int argc, char *argv[])
         else if (!strcmp(argv[i], PARAM_DUMP_MODE) && (i + 1) < argc) {
             hh_args.pesieve_args.dump_mode = atoi(argv[i + 1]);
             ++i;
+        }
+        else if (!strcmp(argv[i], PARAM_OUT_FILTER) && (i + 1) < argc) {
+            hh_args.pesieve_args.out_filter = static_cast<t_output_filter>(atoi(argv[i + 1]));
+            i++;
         }
         else if (!strcmp(argv[i], PARAM_LOOP)) {
             hh_args.loop_scanning = true;
