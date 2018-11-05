@@ -29,6 +29,7 @@
 //info:
 #define PARAM_HELP "/help"
 #define PARAM_HELP2  "/?"
+#define PARAM_VERSION  "/version"
 
 std::string translate_dump_mode(const DWORD dump_mode)
 {
@@ -98,7 +99,7 @@ void print_help()
     const int param_color = 15;
     const int separator_color = 6;
 
-    print_in_color(hdr_color, "Optional: \n");
+    print_in_color(hdr_color, "\nOptional: \n");
     print_in_color(separator_color, "\n---scan options---\n");
 
     print_in_color(param_color, PARAM_PNAME);
@@ -150,6 +151,13 @@ void print_help()
 
     print_in_color(param_color, PARAM_QUIET);
     std::cout << "\t: Print only the summary and minimalistic info.\n";
+
+    print_in_color(hdr_color, "\nInfo: \n");
+    print_in_color(param_color, PARAM_HELP);
+    std::cout << "    : Print this help.\n";
+    print_in_color(param_color, PARAM_VERSION);
+    std::cout << " : Print version number.\n";
+    std::cout << "---" << std::endl;
 }
 
 std::string version_to_str(DWORD version)
@@ -172,7 +180,6 @@ void print_version()
     
     DWORD pesieve_ver = PESieve_version();
     std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver) << std::endl;
-    std::cout << std::endl;
     unset_color();
 }
 
@@ -218,7 +225,6 @@ size_t print_suspicious(std::vector<DWORD> &suspicious_pids)
     return printed;
 }
 
-
 size_t deploy_scan(t_hh_params &hh_args)
 {
     std::vector<DWORD> suspicious_pids;
@@ -255,10 +261,13 @@ int main(int argc, char *argv[])
             print_help();
             return 0;
         }
+        if (!strcmp(argv[i], PARAM_VERSION)) {
+            print_version();
+            return 0;
+        }
         if (!strcmp(argv[i], PARAM_IMP_REC)) {
             hh_args.pesieve_args.imp_rec = true;
         }
-
         else if (!strcmp(argv[i], PARAM_MODULES_FILTER) && (i + 1) < argc) {
             hh_args.pesieve_args.modules_filter = atoi(argv[i + 1]);
             if (hh_args.pesieve_args.modules_filter > LIST_MODULES_ALL) {
