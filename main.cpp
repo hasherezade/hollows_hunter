@@ -8,7 +8,7 @@
 #include "term_util.h"
 #include "hollows_hunter.h"
 
-#define VERSION "0.1.7-b"
+#define VERSION "0.1.8"
 
 //scan options:
 #define PARAM_HOOKS "/hooks"
