@@ -73,6 +73,25 @@ std::string translate_modules_filter(DWORD m_filter)
     return "undefined";
 }
 
+void print_logo()
+{
+    char logo2[] = ""
+        "@@@  @@@  @@@@@@  @@@      @@@       @@@@@@  @@@  @@@  @@@  @@@@@@\n"
+        "@@!  @@@ @@!  @@@ @@!      @@!      @@!  @@@ @@!  @@!  @@! !@@    \n"
+        "@!@!@!@! @!@  !@! @!!      @!!      @!@  !@! @!!  !!@  @!@  !@@!! \n"
+        "!!:  !!! !!:  !!! !!:      !!:      !!:  !!!  !:  !!:  !!      !:!\n"
+        " :   : :  : :. :  : ::.: : : ::.: :  : :. :    ::.:  :::   ::.: : \n"
+        "       @@@  @@@ @@@  @@@ @@@  @@@ @@@@@@@ @@@@@@@@ @@@@@@@        \n"
+        "       @@!  @@@ @@!  @@@ @@!@!@@@   @!!   @@!      @@!  @@@       \n"
+        "       @!@!@!@! @!@  !@! @!@@!!@!   @!!   @!!!:!   @!@!!@!        \n"
+        "       !!:  !!! !!:  !!! !!:  !!!   !!:   !!:      !!: :!!        \n"
+        "        :   : :  :.:: :  ::    :     :    : :: ::   :   : :       \n";
+    char *logo = logo2;
+    set_color(5);
+    std::cout << "\n" << logo << std::endl;
+}
+
+
 void print_help()
 {
     const int hdr_color = 14;
@@ -146,7 +165,7 @@ std::string version_to_str(DWORD version)
     return stream.str();
 }
 
-void print_banner()
+void print_version()
 {
     set_color(15);
     std::cout << "HollowsHunter v." << VERSION << std::endl;
@@ -225,14 +244,14 @@ size_t deploy_scan(t_hh_params &hh_args)
 
 int main(int argc, char *argv[])
 {
-    print_banner();
-
     t_hh_params hh_args;
     hh_args_init(hh_args);
 
     //Parse parameters
     for (int i = 1; i < argc; i++) {
         if (!strcmp(argv[i], PARAM_HELP) || !strcmp(argv[i], PARAM_HELP2)) {
+            print_logo();
+            print_version();
             print_help();
             return 0;
         }
@@ -274,7 +293,7 @@ int main(int argc, char *argv[])
             hh_args.quiet = true;
         }
     }
-
+    print_version();
     do {
         size_t res = deploy_scan(hh_args);
     } while (hh_args.loop_scanning);
