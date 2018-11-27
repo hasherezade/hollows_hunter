@@ -9,7 +9,6 @@ Scans all running processes. Recognizes and dumps a variety of potentially malic
 Uses PE-sieve (DLL version):
 https://github.com/hasherezade/pe-sieve.git
 
-<b>WARNING</b>: This is an early beta version. Bugs? Remarks? Mail me: hasherezade@gmail.com
 </br>
 
 Clone:
