@@ -6,10 +6,8 @@
 
 Scans all running processes. Recognizes and dumps a variety of potentially malicious implants (replaced/implanted PEs, shellcodes, hooks, in-memory patches).
 
-Uses PE-sieve (DLL version):
+Uses PE-sieve (DLL version): 
 https://github.com/hasherezade/pe-sieve.git
-
-</br>
 
 Clone:
 -
