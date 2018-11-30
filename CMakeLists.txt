@@ -19,6 +19,7 @@ set (srcs
 
 set (hdrs
 	term_util.h
+	color_scheme.h
 	hollows_hunter.h
 )
 

@@ -6,10 +6,12 @@
 #include <sstream>
 
 #include "term_util.h"
+#include "color_scheme.h"
 #include "hollows_hunter.h"
 
 #define VERSION "0.1.8"
 
+#define PARAM_SWITCH '/'
 //scan options:
 #define PARAM_HOOKS "/hooks"
 #define PARAM_SHELLCODE "/shellc"
@@ -95,9 +97,9 @@ void print_logo()
 
 void print_help()
 {
-    const int hdr_color = 14;
-    const int param_color = 15;
-    const int separator_color = 6;
+    const int hdr_color = HEADER_COLOR;
+    const int param_color = HILIGHTED_COLOR;
+    const int separator_color = SEPARATOR_COLOR;
 
     print_in_color(hdr_color, "\nOptional: \n");
     print_in_color(separator_color, "\n---scan options---\n");
@@ -175,7 +177,7 @@ std::string version_to_str(DWORD version)
 
 void print_version()
 {
-    set_color(15);
+    set_color(HILIGHTED_COLOR);
     std::cout << "HollowsHunter v." << VERSION << std::endl;
     
     DWORD pesieve_ver = PESieve_version();
@@ -248,6 +250,15 @@ size_t deploy_scan(t_hh_params &hh_args)
     return suspicious_pids.size();
 }
 
+void print_unknown_param(const char *param)
+{
+    print_in_color(WARNING_COLOR, "Unknown parameter: ");
+    std::cout << param << "\n";
+    print_in_color(HILIGHTED_COLOR, "Available parameters:\n");
+
+    print_help();
+}
+
 int main(int argc, char *argv[])
 {
     t_hh_params hh_args;
@@ -300,6 +311,10 @@ int main(int argc, char *argv[])
         }
         else if (!strcmp(argv[i], PARAM_QUIET)) {
             hh_args.quiet = true;
+        }
+        else if (strlen(argv[i]) > 0) {
+            print_unknown_param(argv[i]);
+            return 0;
         }
     }
     print_version();
