@@ -234,7 +234,7 @@ int main(int argc, char *argv[])
         }
         else if (!strcmp(argv[i], PARAM_DUMP_MODE) && (i + 1) < argc) {
             hh_args.pesieve_args.dump_mode = atoi(argv[i + 1]);
-            ++i;
+            i++;
         }
         else if (!strcmp(argv[i], PARAM_OUT_FILTER) && (i + 1) < argc) {
             hh_args.pesieve_args.out_filter = static_cast<t_output_filter>(atoi(argv[i + 1]));
@@ -248,6 +248,7 @@ int main(int argc, char *argv[])
         }
         else if (!strcmp(argv[i], PARAM_PNAME) && (i + 1) < argc) {
             hh_args.pname = argv[i + 1];
+            i++;
         }
         else if (!strcmp(argv[i], PARAM_QUIET)) {
             hh_args.quiet = true;
