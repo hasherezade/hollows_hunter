@@ -8,11 +8,9 @@ bool is_suspicious_process(t_params args)
     t_report report = PESieve_scan(args);
     if (report.errors) return false;
     if (report.replaced) {
-        std::cout << "[+] Found replaced: " << std::dec << args.pid << std::endl;
         return true;
     }
     if (report.suspicious) {
-        std::cout << "[+] Found suspicious: " << std::dec << args.pid << std::endl;
         return true;
     }
     return false;
