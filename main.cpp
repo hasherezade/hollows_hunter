@@ -4,6 +4,7 @@
 #include <vector>
 
 #include <sstream>
+#include <time.h>
 
 #include "term_util.h"
 #include "color_scheme.h"
@@ -27,6 +28,7 @@
 #define PARAM_QUIET "/quiet"
 #define PARAM_OUT_FILTER "/ofilter"
 #define PARAM_KILL "/kill"
+#define PARAM_UNIQUE_DIR "/uniqd"
 
 //info:
 #define PARAM_HELP "/help"
@@ -148,6 +150,10 @@ void print_help()
         std::cout << "\t" << mode << " - " << translate_out_filter(mode) << "\n";
     }
 
+    print_in_color(param_color, PARAM_UNIQUE_DIR);
+    std::cout << "\t: Make a unique directory for the output of the scan.\n"
+        << "\t(Prevents overwriting results from previous scans)\n";
+
     print_in_color(param_color, PARAM_KILL);
     std::cout << "   : Kill processes detected as suspicious\n";
 
@@ -227,12 +233,43 @@ size_t print_suspicious(std::vector<DWORD> &suspicious_pids)
     return printed;
 }
 
+std::string make_dir_name(std::string baseDir, time_t timestamp)
+{
+    std::stringstream stream;
+    if (baseDir.length() > 0) {
+        stream << baseDir;
+        stream << "\\";
+    }
+    stream << "scan_";
+    stream << timestamp;
+    return stream.str();
+}
+
+bool set_output_dir(t_params &args, const char *new_dir)
+{
+    if (!new_dir) return false;
+
+    size_t new_len = strlen(new_dir);
+    size_t buffer_len = sizeof(args.output_dir);
+    if (new_len > buffer_len) return false;
+
+    memset(args.output_dir, 0, buffer_len);
+    memcpy(args.output_dir, new_dir, new_len);
+    return true;
+}
+
 size_t deploy_scan(t_hh_params &hh_args)
 {
     std::vector<DWORD> suspicious_pids;
 
     DWORD start_tick = GetTickCount();
+    time_t start_time = time(NULL);
 
+    //set unique path
+    if (hh_args.unique_dir) {
+        std::string out_dir = make_dir_name("", start_time);
+        set_output_dir(hh_args.pesieve_args, out_dir.c_str());
+    }
     pesieve_scan(suspicious_pids, hh_args);
     DWORD total_time = GetTickCount() - start_tick;
     std::cout << "--------" << std::endl;
@@ -311,6 +348,9 @@ int main(int argc, char *argv[])
         }
         else if (!strcmp(argv[i], PARAM_QUIET)) {
             hh_args.quiet = true;
+        }
+        else if (!strcmp(argv[i], PARAM_UNIQUE_DIR)) {
+            hh_args.unique_dir = true;
         }
         else if (strlen(argv[i]) > 0) {
             print_unknown_param(argv[i]);
