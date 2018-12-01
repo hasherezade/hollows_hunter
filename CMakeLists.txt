@@ -15,12 +15,16 @@ set (srcs
 	main.cpp
 	term_util.cpp
 	hollows_hunter.cpp
+	hh_scanner.cpp
+	hh_params.cpp
 )
 
 set (hdrs
 	term_util.h
 	color_scheme.h
 	hollows_hunter.h
+	hh_scanner.h
+	hh_params.h
 )
 
 # libs
@@ -31,7 +35,7 @@ set ( PESIEVE_LIB $<TARGET_FILE:pe-sieve> CACHE FILE "PE-sieve library path" )
 cmake_policy(SET CMP0015 NEW)
 LINK_DIRECTORIES ( ${PESIEVE_LIB} )
 add_executable ( ${PROJECT_NAME} ${hdrs} ${srcs} main.cpp )
-target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} )
+target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} "psapi.lib")
 
 # dependencies
 add_dependencies( ${PROJECT_NAME} ${M_PESIEVE} )
