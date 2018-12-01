@@ -102,7 +102,7 @@ void print_help()
     const int param_color = HILIGHTED_COLOR;
     const int separator_color = SEPARATOR_COLOR;
 
-    print_in_color(hdr_color, "\nOptional: \n");
+    print_in_color(hdr_color, "Optional: \n");
     print_in_color(separator_color, "\n---scan options---\n");
 
     print_in_color(param_color, PARAM_PNAME);
@@ -183,10 +183,10 @@ std::string version_to_str(DWORD version)
 void print_version()
 {
     set_color(HILIGHTED_COLOR);
-    std::cout << "HollowsHunter v." << VERSION << std::endl;
-    
+    std::cout << "HollowsHunter v." << VERSION << "\n";
+
     DWORD pesieve_ver = PESieve_version();
-    std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver) << std::endl;
+    std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver) << "\n";
     unset_color();
 }
 
@@ -194,8 +194,7 @@ void print_unknown_param(const char *param)
 {
     print_in_color(WARNING_COLOR, "Unknown parameter: ");
     std::cout << param << "\n";
-    print_in_color(HILIGHTED_COLOR, "Available parameters:\n");
-
+    print_in_color(HILIGHTED_COLOR, "Available parameters:\n\n");
     print_help();
 }
 
@@ -209,6 +208,7 @@ int main(int argc, char *argv[])
         if (!strcmp(argv[i], PARAM_HELP) || !strcmp(argv[i], PARAM_HELP2)) {
             print_logo();
             print_version();
+            std::cout << "\n";
             print_help();
             return 0;
         }
