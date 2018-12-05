@@ -129,8 +129,7 @@ void print_help()
     print_in_color(separator_color, "\n---dump options---\n");
 
     print_in_color(param_color, PARAM_IMP_REC);
-    std::cout << "\t: Enable recovering imports. ";
-    std::cout << "(Warning: it may slow down the scan)\n";
+    std::cout << "\t: Enable recovering imports.\n";
 
     print_in_color(param_color, PARAM_DUMP_MODE);
     std::cout << " <*dump_mode>\n\t: Set in which mode the detected PE files should be dumped.\n";
