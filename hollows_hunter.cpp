@@ -81,7 +81,7 @@ size_t deploy_scan(t_hh_params &hh_args)
 
     //set unique path
     if (hh_args.unique_dir) {
-        std::string out_dir = make_dir_name("", start_time);
+        std::string out_dir = make_dir_name(hh_args.out_dir, start_time);
         set_output_dir(hh_args.pesieve_args, out_dir.c_str());
     }
     pesieve_scan(suspicious_pids, hh_args);
