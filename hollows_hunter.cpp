@@ -84,6 +84,9 @@ size_t deploy_scan(t_hh_params &hh_args)
         std::string out_dir = make_dir_name(hh_args.out_dir, start_time);
         set_output_dir(hh_args.pesieve_args, out_dir.c_str());
     }
+    else {
+        set_output_dir(hh_args.pesieve_args, hh_args.out_dir.c_str());
+    }
     pesieve_scan(suspicious_pids, hh_args);
     DWORD total_time = GetTickCount() - start_tick;
     std::cout << "--------" << std::endl;
