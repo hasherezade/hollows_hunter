@@ -197,8 +197,6 @@ void print_unknown_param(const char *param)
 {
     print_in_color(WARNING_COLOR, "Unknown parameter: ");
     std::cout << param << "\n";
-    print_in_color(HILIGHTED_COLOR, "Available parameters:\n\n");
-    print_help();
 }
 
 int main(int argc, char *argv[])
@@ -265,8 +263,14 @@ int main(int argc, char *argv[])
         }
         else if (strlen(argv[i]) > 0) {
             print_unknown_param(argv[i]);
-            return 0;
+            if (argv[i][0] == PARAM_SWITCH) {
+                print_in_color(HILIGHTED_COLOR, "Available parameters:\n\n");
+                print_help();
+                return 0;
+            }
+            // if the argument didn't have a param switch, print info but do not exit
         }
+
     }
     print_version();
     do {
