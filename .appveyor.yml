@@ -30,14 +30,7 @@ build_script:
       cmake .. -A x64 )
   - if [%env_arch%]==[x86] (
       cmake .. )
-  - cmake --build .
-  - cd ..
-
-after_build:
-  - cd build
-  - cp pe-sieve\Debug\pe-sieve.dll Debug\
-  - cd ..
+  - cmake --build . --target install
  
 test_script:
-  - cd build
   - ctest -V

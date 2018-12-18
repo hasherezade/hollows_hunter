@@ -40,10 +40,14 @@ target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} "psapi.lib")
 # dependencies
 add_dependencies( ${PROJECT_NAME} ${M_PESIEVE} )
 
+#install
+INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_BINARY_DIR} COMPONENT ${PROJECT_NAME} )
+
 # Setup testing
 if(HH_BUILD_TESTING)
 	enable_testing()
 
 	# 0) does the application run
-	add_test (TestRuns hollows_hunter)
+	add_test (TestRuns ${CMAKE_BINARY_DIR}/hollows_hunter)
+	set_tests_properties(TestRuns PROPERTIES PASS_REGULAR_EXPRESSION "Finished scan in:")
 endif()
