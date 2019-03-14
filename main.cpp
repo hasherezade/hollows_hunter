@@ -9,7 +9,7 @@
 #include "color_scheme.h"
 #include "hollows_hunter.h"
 
-#define VERSION "0.1.9"
+#define VERSION "0.2.0"
 
 #define PARAM_SWITCH '/'
 //scan options:
