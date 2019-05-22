@@ -58,13 +58,13 @@ bool get_process_name(IN HANDLE hProcess, OUT LPSTR nameBuf, IN DWORD nameMax)
 bool get_image_name(DWORD processID, CHAR szProcessName[MAX_PATH])
 {
     HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processID);
-    if (hProcess == NULL) return "";
+    if (hProcess == NULL) return false;
 
     bool is_ok = get_process_name(hProcess, szProcessName, MAX_PATH);
     CloseHandle(hProcess);
-    if (!is_ok) return "";
+    if (!is_ok) return false;
 
-    return szProcessName;
+    return true;
 }
 
 size_t kill_suspicious(std::vector<DWORD> &suspicious_pids)
