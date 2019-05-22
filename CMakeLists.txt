@@ -14,17 +14,17 @@ include_directories ( ${PESIEVE_DIR}/include )
 set (srcs
 	main.cpp
 	term_util.cpp
-	hollows_hunter.cpp
 	hh_scanner.cpp
 	hh_params.cpp
+	hh_report.cpp
 )
 
 set (hdrs
 	term_util.h
 	color_scheme.h
-	hollows_hunter.h
 	hh_scanner.h
 	hh_params.h
+	hh_report.h
 )
 
 # libs
