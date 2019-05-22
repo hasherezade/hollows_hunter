@@ -44,13 +44,18 @@ size_t HHScanReport::printSuspicious(std::stringstream &stream)
     return printed;
 }
 
-std::string strtime(const time_t &t)
+std::string strtime(const time_t t)
 {
-    struct tm tm_buf;
-    localtime_s(&tm_buf, &t);
-    std::stringstream str;
-    str << std::put_time(&tm_buf, "%F %T");
-    return str.str();
+    struct tm time_info;
+    if (localtime_s(&time_info, &t) == 0) {
+        std::stringstream str;
+        str << std::dec
+            << (1900  + time_info.tm_year) << "." << (1 + time_info.tm_mon) << "." << time_info.tm_mday
+            << " " 
+            << time_info.tm_hour << ":" << time_info.tm_min << ":" << time_info.tm_sec;
+        return str.str();
+    }
+    return "";
 }
 
 std::string HHScanReport::toString()
