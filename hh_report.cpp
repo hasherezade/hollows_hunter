@@ -3,6 +3,10 @@
 #include <string>
 #include <sstream>
 
+#include <iostream>
+#include <iomanip>
+#include <ctime>
+
 bool is_suspicious_process(t_report report)
 {
     if (report.errors) return false;
@@ -34,10 +38,19 @@ size_t HHScanReport::printSuspicious(std::stringstream &stream)
     for (itr = this->suspicious.begin(); itr != suspicious.end(); itr++) {
         DWORD pid = *itr;
         stream << "[" << counter++ << "]:\n> PID: " << std::dec << pid << std::endl;
-        stream << "> Path: " << this->pidToName[pid] << std::endl;
+        stream << "> Name: " << this->pidToName[pid] << std::endl;
         printed++;
     }
     return printed;
+}
+
+std::string strtime(const time_t &t)
+{
+    struct tm tm_buf;
+    localtime_s(&tm_buf, &t);
+    std::stringstream str;
+    str << std::put_time(&tm_buf, "%F %T");
+    return str.str();
 }
 
 std::string HHScanReport::toString()
@@ -45,12 +58,12 @@ std::string HHScanReport::toString()
     std::stringstream stream;
     //summary:
     stream << "--------" << std::endl;
-    stream << "Finished scan in: " << std::dec << getScanTime() << " milliseconds" << std::endl;
-
-    stream << "SUMMARY:" << std::endl;
-    stream << "[+] Total Suspicious: " << std::dec << countSuspicious() << std::endl;
+    stream << "Scan at: " << strtime(this->startTime) << " (" << std::dec << startTime << ")\n";
+    stream << "Finished scan in: " << std::dec << getScanTime() << " milliseconds\n";
+    stream << "SUMMARY:\n";
+    stream << "[+] Total Suspicious: " << std::dec << countSuspicious() << "\n";
     if (countSuspicious() > 0) {
-        stream << "[+] List of suspicious: " << std::endl;
+        stream << "[+] List of suspicious: \n";
     }
     printSuspicious(stream);
     return stream.str();

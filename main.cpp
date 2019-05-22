@@ -9,7 +9,7 @@
 #include "color_scheme.h"
 #include "hh_scanner.h"
 
-#define VERSION "0.2.0"
+#define VERSION "0.2.1"
 
 #define PARAM_SWITCH '/'
 //scan options:
@@ -282,8 +282,8 @@ int main(int argc, char *argv[])
             }
             // if the argument didn't have a param switch, print info but do not exit
         }
-
     }
+
     print_version();
     deploy_scan(hh_args);
 

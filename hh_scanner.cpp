@@ -2,9 +2,21 @@
 
 #include <iostream>
 #include <string.h>
-
+#include <fstream>
 #include <sstream>
 #include <time.h>
+
+
+std::string join_path(std::string baseDir, std::string subpath)
+{
+    std::stringstream stream;
+    if (baseDir.length() > 0) {
+        stream << baseDir;
+        stream << "\\";
+    }
+    stream << subpath;
+    return stream.str();
+}
 
 std::string make_dir_name(std::string baseDir, time_t timestamp)
 {
@@ -93,6 +105,7 @@ HHScanReport* HHScanner::scan()
         set_output_dir(hh_args.pesieve_args, outDir.c_str());
     }
     else {
+        this->outDir = hh_args.out_dir;
         set_output_dir(hh_args.pesieve_args, hh_args.out_dir.c_str());
     }
 
@@ -103,7 +116,7 @@ HHScanReport* HHScanner::scan()
         return NULL;
     }
 
-    HHScanReport *my_report = new HHScanReport(GetTickCount());
+    HHScanReport *my_report = new HHScanReport(GetTickCount(), start_time);
 
     //calculate how many process identifiers were returned.
     cProcesses = cbNeeded / sizeof(DWORD);
@@ -132,15 +145,43 @@ HHScanReport* HHScanner::scan()
         my_report->appendReport(report, image_buf);
     }
 
-    my_report->setEndTick(GetTickCount());
+    my_report->setEndTick(GetTickCount(), time(NULL));
     return my_report;
+}
+
+bool write_to_file(std::string report_path, std::string summary_str, bool append)
+{
+    std::ofstream final_report;
+    if (append) {
+        final_report.open(report_path, std::ios_base::app);
+    }
+    else {
+        final_report.open(report_path);
+    }
+    if (final_report.is_open()) {
+        final_report << summary_str;
+        final_report.close();
+        return true;
+    }
+    return false;
 }
 
 void HHScanner::summarizeScan(HHScanReport *hh_report)
 {
     if (!hh_report) return;
+    
+    std::string summary_str = hh_report->toString();
+    std::cout << summary_str;
 
-    std::cout << hh_report->toString();
+    if (hh_args.pesieve_args.out_filter != OUT_NO_DIR) {
+        //file the same report into the directory with dumps:
+        if (hh_report->suspicious.size()) {
+            std::string report_path = join_path(this->outDir, "summary.txt");
+            write_to_file(report_path, summary_str, false);
+        }
+    }
+
+    write_to_file("log.txt", summary_str, true);
 
     if (hh_args.kill_suspicious) {
         kill_suspicious(hh_report->suspicious);

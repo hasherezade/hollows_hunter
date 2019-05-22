@@ -1,5 +1,7 @@
 #pragma once
 
+#include <time.h>
+
 #include <Windows.h>
 #include <pe_sieve_api.h>
 #include <map>
@@ -8,17 +10,19 @@
 class HHScanReport
 {
 public:
-    HHScanReport(DWORD start_tick)
-        : startTick(start_tick), endTick(0)
+    HHScanReport(DWORD start_tick, time_t start_time)
+        : startTick(start_tick), endTick(0),
+        startTime(start_time), endTime(0)
     {
     }
 
-    bool setEndTick(DWORD end_tick)
+    bool setEndTick(DWORD end_tick, time_t end_time)
     {
         if (end_tick < this->startTick) {
             return false;
         }
         this->endTick = end_tick;
+        this->endTime = end_time;
         return true;
     }
 
@@ -39,6 +43,9 @@ public:
 
 protected:
     size_t printSuspicious(std::stringstream &stream);
+
+    time_t startTime;
+    time_t endTime;
 
     DWORD startTick;
     DWORD endTick;
