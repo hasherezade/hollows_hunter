@@ -7,9 +7,9 @@
 
 #include "term_util.h"
 #include "color_scheme.h"
-#include "hollows_hunter.h"
+#include "hh_scanner.h"
 
-#define VERSION "0.2.0"
+#define VERSION "0.2.1"
 
 #define PARAM_SWITCH '/'
 //scan options:
@@ -199,6 +199,18 @@ void print_unknown_param(const char *param)
     std::cout << param << "\n";
 }
 
+void deploy_scan(t_hh_params &hh_args)
+{
+    do {
+        HHScanner hhunter(hh_args);
+        HHScanReport *report = hhunter.scan();
+        if (report) {
+            hhunter.summarizeScan(report);
+            delete report;
+        }
+    } while (hh_args.loop_scanning);
+}
+
 int main(int argc, char *argv[])
 {
     t_hh_params hh_args;
@@ -270,12 +282,10 @@ int main(int argc, char *argv[])
             }
             // if the argument didn't have a param switch, print info but do not exit
         }
-
     }
+
     print_version();
-    do {
-        size_t res = deploy_scan(hh_args);
-    } while (hh_args.loop_scanning);
+    deploy_scan(hh_args);
 
     return 0;
 }
