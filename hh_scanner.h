@@ -20,6 +20,8 @@ public:
     void summarizeScan(HHScanReport *hh_report);
 
 protected:
+    void initOutDir(time_t start_time);
+
     t_hh_params &hh_args;
     std::string outDir;
 };

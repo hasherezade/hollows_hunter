@@ -43,28 +43,22 @@ bool set_output_dir(t_params &args, const char *new_dir)
     return true;
 }
 
-bool get_process_name(IN HANDLE hProcess, OUT LPSTR nameBuf, IN DWORD nameMax)
+bool get_process_name(DWORD processID, CHAR szProcessName[MAX_PATH])
 {
-    HMODULE hMod;
-    DWORD cbNeeded;
+    memset(szProcessName, 0, MAX_PATH);
 
-    if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeeded)) {
-        GetModuleBaseNameA(hProcess, hMod, nameBuf, nameMax);
-        return true;
-    }
-    return false;
-}
-
-bool get_image_name(DWORD processID, CHAR szProcessName[MAX_PATH])
-{
     HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processID);
-    if (hProcess == NULL) return false;
+    if (!hProcess) return false;
 
-    bool is_ok = get_process_name(hProcess, szProcessName, MAX_PATH);
+    HMODULE hMod = nullptr;
+    DWORD cbNeeded = 0;
+    bool is_ok = false;
+    if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeeded)) {
+        GetModuleBaseNameA(hProcess, hMod, szProcessName, MAX_PATH);
+        is_ok = true;
+    }
     CloseHandle(hProcess);
-    if (!is_ok) return false;
-
-    return true;
+    return is_ok;
 }
 
 size_t kill_suspicious(std::vector<DWORD> &suspicious_pids)
@@ -96,9 +90,8 @@ bool is_searched_process(const char* processName, const char* searchedName)
     return false;
 }
 
-HHScanReport* HHScanner::scan()
+void HHScanner::initOutDir(time_t start_time)
 {
-    time_t start_time = time(NULL);
     //set unique path
     if (hh_args.unique_dir) {
         this->outDir = make_dir_name(hh_args.out_dir, start_time);
@@ -108,25 +101,31 @@ HHScanReport* HHScanner::scan()
         this->outDir = hh_args.out_dir;
         set_output_dir(hh_args.pesieve_args, hh_args.out_dir.c_str());
     }
+}
 
-    DWORD aProcesses[1024], cbNeeded, cProcesses;
-    unsigned int i;
-
+HHScanReport* HHScanner::scan()
+{
+    const size_t max_processes = 1024;
+    DWORD aProcesses[max_processes], cbNeeded;
     if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded)) {
         return NULL;
     }
+    //calculate how many process identifiers were returned.
+    size_t cProcesses = cbNeeded / sizeof(DWORD);
+    if (cProcesses == 0) {
+        return NULL;
+    }
 
+    time_t start_time = time(NULL);
+    initOutDir(start_time);
     HHScanReport *my_report = new HHScanReport(GetTickCount(), start_time);
 
-    //calculate how many process identifiers were returned.
-    cProcesses = cbNeeded / sizeof(DWORD);
-
-    for (i = 0; i < cProcesses; i++) {
+    for (size_t i = 0; i < cProcesses; i++) {
         if (aProcesses[i] == 0) continue;
 
         DWORD pid = aProcesses[i];
         char image_buf[MAX_PATH] = { 0 };
-        get_image_name(pid, image_buf);
+        get_process_name(pid, image_buf);
 
         if (hh_args.pname.length() > 0) {
             if (!is_searched_process(image_buf, hh_args.pname.c_str())) {
@@ -182,8 +181,7 @@ void HHScanner::summarizeScan(HHScanReport *hh_report)
     }
     if (hh_args.log) {
         write_to_file("log.txt", summary_str, true);
-    }    
-
+    }
     if (hh_args.kill_suspicious) {
         kill_suspicious(hh_report->suspicious);
     }
