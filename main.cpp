@@ -29,6 +29,7 @@
 #define PARAM_KILL "/kill"
 #define PARAM_UNIQUE_DIR "/uniqd"
 #define PARAM_DIR "/dir"
+#define PARAM_LOG "/log"
 
 //info:
 #define PARAM_HELP "/help"
@@ -160,7 +161,10 @@ void print_help()
     std::cout << "   : Kill processes detected as suspicious\n";
 
     print_in_color(param_color, PARAM_QUIET);
-    std::cout << "\t: Print only the summary and minimalistic info.\n";
+    std::cout << "\t: Display only the summary and minimalistic info.\n";
+
+    print_in_color(param_color, PARAM_LOG);
+    std::cout << "\t: Append each scan summary to the log.\n";
 
     print_in_color(hdr_color, "\nInfo: \n");
     print_in_color(param_color, PARAM_HELP);
@@ -252,6 +256,9 @@ int main(int argc, char *argv[])
         else if (!strcmp(argv[i], PARAM_OUT_FILTER) && (i + 1) < argc) {
             hh_args.pesieve_args.out_filter = static_cast<t_output_filter>(atoi(argv[i + 1]));
             i++;
+        }
+        else if (!strcmp(argv[i], PARAM_LOG)) {
+            hh_args.log = true;
         }
         else if (!strcmp(argv[i], PARAM_LOOP)) {
             hh_args.loop_scanning = true;

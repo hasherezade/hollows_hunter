@@ -180,8 +180,9 @@ void HHScanner::summarizeScan(HHScanReport *hh_report)
             write_to_file(report_path, summary_str, false);
         }
     }
-
-    write_to_file("log.txt", summary_str, true);
+    if (hh_args.log) {
+        write_to_file("log.txt", summary_str, true);
+    }    
 
     if (hh_args.kill_suspicious) {
         kill_suspicious(hh_report->suspicious);

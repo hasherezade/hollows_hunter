@@ -18,4 +18,5 @@ void hh_args_init(t_hh_params &hh_args)
     hh_args.unique_dir = false;
 
     hh_args.quiet = false;
+    hh_args.log = false;
 }

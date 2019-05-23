@@ -11,6 +11,7 @@ typedef struct {
     bool loop_scanning;
     bool kill_suspicious;
     bool quiet;
+	bool log;
     t_params pesieve_args; //PE-sieve parameters
 } t_hh_params;
 
