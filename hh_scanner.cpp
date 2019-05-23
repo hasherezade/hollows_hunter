@@ -175,12 +175,12 @@ void HHScanner::summarizeScan(HHScanReport *hh_report)
     if (hh_args.pesieve_args.out_filter != OUT_NO_DIR) {
         //file the same report into the directory with dumps:
         if (hh_report->suspicious.size()) {
-            std::string report_path = join_path(this->outDir, "summary.txt");
-            write_to_file(report_path, summary_str, false);
+            std::string report_path = join_path(this->outDir, "summary.json");
+            write_to_file(report_path, hh_report->toJSON(this->hh_args), false);
         }
     }
     if (hh_args.log) {
-        write_to_file("log.txt", summary_str, true);
+        write_to_file("hollows_hunter.log", summary_str, true);
     }
     if (hh_args.kill_suspicious) {
         kill_suspicious(hh_report->suspicious);

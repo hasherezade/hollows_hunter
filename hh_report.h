@@ -7,6 +7,8 @@
 #include <map>
 #include <vector>
 
+#include "hh_params.h"
+
 class HHScanReport
 {
 public:
@@ -40,9 +42,13 @@ public:
     }
 
     std::string toString();
+    
 
 protected:
-    size_t printSuspicious(std::stringstream &stream);
+    size_t reportsToString(std::stringstream &stream);
+
+    std::string toJSON(const t_hh_params &params);
+    size_t reportsToJSON(std::stringstream &stream, size_t level, const t_hh_params &params);
 
     time_t startTime;
     time_t endTime;
