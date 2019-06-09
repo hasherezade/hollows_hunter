@@ -34,7 +34,7 @@ public:
         return (this->endTick - this->startTick);
     }
 
-    bool appendReport(t_report &scan_report, std::string img_name);
+    bool appendReport(pesieve::t_report &scan_report, std::string img_name);
 
     size_t countSuspicious() const
     {
@@ -56,7 +56,7 @@ protected:
     DWORD startTick;
     DWORD endTick;
 
-    std::map<DWORD, t_report> pidToReport;
+    std::map<DWORD, pesieve::t_report> pidToReport;
     std::map<DWORD, std::string> pidToName;
     std::vector<DWORD> suspicious;
 

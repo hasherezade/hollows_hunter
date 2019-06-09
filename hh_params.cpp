@@ -3,7 +3,7 @@
 void hh_args_init(t_hh_params &hh_args)
 {
     //reset PE-sieve params:
-    memset(&hh_args.pesieve_args, 0, sizeof(t_params));
+    memset(&hh_args.pesieve_args, 0, sizeof(pesieve::t_params));
 
     //reset output path:
     hh_args.out_dir = "";

@@ -13,7 +13,7 @@ std::cout.fill(' '); \
 if (field_size) stream << std::setw(field_size) << ' '; \
 stream << str;
 
-bool is_suspicious_process(t_report report)
+bool is_suspicious_process(pesieve::t_report report)
 {
     if (report.errors) return false;
     if (report.suspicious) {
@@ -22,7 +22,7 @@ bool is_suspicious_process(t_report report)
     return false;
 }
 
-bool HHScanReport::appendReport(t_report &scan_report, std::string img_name)
+bool HHScanReport::appendReport(pesieve::t_report &scan_report, std::string img_name)
 {
     pidToReport[scan_report.pid] = scan_report;
     pidToName[scan_report.pid] = img_name;
