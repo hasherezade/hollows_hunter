@@ -37,6 +37,8 @@
 #define PARAM_HELP "/help"
 #define PARAM_HELP2  "/?"
 #define PARAM_VERSION  "/version"
+#define PARAM_DEFAULTS "/default"
+
 
 void print_logo()
 {
@@ -134,6 +136,8 @@ void print_help()
     std::cout << "    : Print this help.\n";
     print_in_color(param_color, PARAM_VERSION);
     std::cout << " : Print version number.\n";
+    print_in_color(param_color, PARAM_DEFAULTS);
+    std::cout << " : Print information about the default settings.\n";
     std::cout << "---" << std::endl;
 }
 
@@ -150,6 +154,14 @@ std::string version_to_str(DWORD version)
     return stream.str();
 }
 
+std::string is_enabled(bool param)
+{
+    if (param) {
+        return "Enabled";
+    }
+    return "Disabled";
+}
+
 void print_version()
 {
     set_color(HILIGHTED_COLOR);
@@ -159,6 +171,62 @@ void print_version()
     DWORD pesieve_ver = PESieve_version();
     std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver) << "\n";
     unset_color();
+}
+
+void print_defaults()
+{
+    std::cout << "\nBy default it detects implanted and replaced PE files.\n"
+        "All detected modules are dumped.\n"
+        "The reports and dumps are saved into the current directory.\n"
+        "\n";
+
+    t_hh_params hh_args;
+    hh_args_init(hh_args);
+
+    std::cout << PARAM_PNAME << " : \"" << hh_args.pname << "\"";
+    if (hh_args.pname.length() == 0) {
+        std::cout << " (all runnig processes will be scanned)";
+    }
+    else {
+        std::cout << " (only the process with name: " << hh_args.pname << " will be scanned)";
+    }
+    std::cout << "\n";
+
+    std::cout << PARAM_HOOKS << " : " << is_enabled(!hh_args.pesieve_args.no_hooks);
+    if (hh_args.pesieve_args.no_hooks) {
+        std::cout << " (do not scan for hooks and patches)";
+    }
+    else {
+        std::cout << " (include scan for hooks and patches)";
+    }
+    std::cout << "\n";
+    std::cout << PARAM_SHELLCODE << " : " << is_enabled(hh_args.pesieve_args.shellcode);
+    if (!hh_args.loop_scanning) {
+        std::cout << " (do not scan for shellcodes)";
+    }
+    std::cout << "\n";
+    std::cout << PARAM_LOOP << " : " << is_enabled(hh_args.loop_scanning);
+    if (!hh_args.loop_scanning) {
+        std::cout << " (single scan)";
+    }
+    std::cout << "\n";
+    std::cout << PARAM_IMP_REC << " : " << translate_imprec_mode(hh_args.pesieve_args.imprec_mode) << "\n";
+    std::cout << PARAM_DUMP_MODE << " : " << translate_dump_mode(hh_args.pesieve_args.dump_mode) << "\n";
+    std::cout << "\n";
+    std::cout << PARAM_OUT_FILTER << " : " << translate_out_filter(hh_args.pesieve_args.out_filter) << "\n";
+    std::cout << PARAM_DIR << " : \"" << hh_args.out_dir << "\"";
+    if (hh_args.out_dir.length() == 0) {
+        std::cout << " (current directory)";
+    }
+    std::cout << "\n";
+    std::cout << PARAM_UNIQUE_DIR << " : " << is_enabled(hh_args.unique_dir);
+    if (!hh_args.unique_dir) {
+        std::cout << " (do not create unique directory for the output)";
+    }
+    std::cout << "\n";
+    std::cout << PARAM_KILL << " : " << is_enabled(hh_args.kill_suspicious) << "\n";
+    std::cout << PARAM_QUIET << " : " << is_enabled(hh_args.quiet) << "\n";
+    std::cout << PARAM_LOG << " : " << is_enabled(hh_args.log) << "\n";
 }
 
 void print_unknown_param(const char *param)
@@ -195,6 +263,11 @@ int main(int argc, char *argv[])
         }
         if (!strcmp(argv[i], PARAM_VERSION)) {
             print_version();
+            return 0;
+        }
+        if (!strcmp(argv[i], PARAM_DEFAULTS)) {
+            print_version();
+            print_defaults();
             return 0;
         }
         else if (!strcmp(argv[i], PARAM_IMP_REC)) {
