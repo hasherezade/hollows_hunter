@@ -79,6 +79,29 @@ std::string translate_modules_filter(DWORD m_filter)
     return "undefined";
 }
 
+std::string translate_imprec_mode(const t_pesieve_imprec_mode imprec_mode)
+{
+    switch (imprec_mode) {
+    case PE_IMPREC_NONE:
+        return "none: do not recover imports (default)";
+    case PE_IMPREC_AUTO:
+        return "try to autodetect the most suitable mode";
+    case PE_IMPREC_UNERASE:
+        return "recover erased parts of the partialy damaged ImportTable";
+    case PE_IMPREC_REBUILD:
+        return "build the ImportTable from the scratch, basing on the found IAT(s)";
+    }
+    return "undefined";
+}
+
+t_pesieve_imprec_mode normalize_imprec_mode(size_t mode_id)
+{
+    if (mode_id > PE_IMPREC_MODES_COUNT) {
+        return PE_IMPREC_NONE;
+    }
+    return (t_pesieve_imprec_mode)mode_id;
+}
+
 void print_logo()
 {
     char logo2[] = ""
@@ -131,7 +154,12 @@ void print_help()
     print_in_color(separator_color, "\n---dump options---\n");
 
     print_in_color(param_color, PARAM_IMP_REC);
-    std::cout << "\t: Enable recovering imports.\n";
+    std::cout << " <*imprec_mode>\n\t: Set in which mode the ImportTable should be recovered.\n";;
+    std::cout << "*imprec_mode:\n";
+    for (size_t i = 0; i < PE_IMPREC_MODES_COUNT; i++) {
+        t_pesieve_imprec_mode mode = (t_pesieve_imprec_mode)(i);
+        std::cout << "\t" << mode << " - " << translate_imprec_mode(mode) << "\n";
+    }
 
     print_in_color(param_color, PARAM_DUMP_MODE);
     std::cout << " <*dump_mode>\n\t: Set in which mode the detected PE files should be dumped.\n";
@@ -233,8 +261,15 @@ int main(int argc, char *argv[])
             print_version();
             return 0;
         }
-        if (!strcmp(argv[i], PARAM_IMP_REC)) {
-            hh_args.pesieve_args.imp_rec = true;
+        else if (!strcmp(argv[i], PARAM_IMP_REC)) {
+            hh_args.pesieve_args.imprec_mode = PE_IMPREC_AUTO;
+            if ((i + 1) < argc) {
+                char* mode_num = argv[i + 1];
+                if (isdigit(mode_num[0])) {
+                    hh_args.pesieve_args.imprec_mode = normalize_imprec_mode(atoi(mode_num));
+                    ++i;
+                }
+            }
         }
         else if (!strcmp(argv[i], PARAM_MODULES_FILTER) && (i + 1) < argc) {
             hh_args.pesieve_args.modules_filter = atoi(argv[i + 1]);
