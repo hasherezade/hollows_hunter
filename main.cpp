@@ -153,7 +153,8 @@ std::string version_to_str(DWORD version)
 void print_version()
 {
     set_color(HILIGHTED_COLOR);
-    std::cout << "HollowsHunter v." << VERSION << "\n";
+    std::cout << "HollowsHunter v." << VERSION;
+    std::cout << " (build on: " << __DATE__ << " " << __TIME__ << ")\n";
 
     DWORD pesieve_ver = PESieve_version();
     std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver) << "\n";
