@@ -252,12 +252,9 @@ int main(int argc, char *argv[])
         }
         else if (strlen(argv[i]) > 0) {
             print_unknown_param(argv[i]);
-            if (argv[i][0] == PARAM_SWITCH) {
-                print_in_color(HILIGHTED_COLOR, "Available parameters:\n\n");
-                print_help();
-                return 0;
-            }
-            // if the argument didn't have a param switch, print info but do not exit
+            print_in_color(HILIGHTED_COLOR, "Available parameters:\n\n");
+            print_help();
+            return 0;
         }
     }
 
