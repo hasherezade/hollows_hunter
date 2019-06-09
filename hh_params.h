@@ -12,7 +12,7 @@ typedef struct {
     bool kill_suspicious;
     bool quiet;
     bool log;
-    t_params pesieve_args; //PE-sieve parameters
+    pesieve::t_params pesieve_args; //PE-sieve parameters
 } t_hh_params;
 
 void hh_args_init(t_hh_params &args);

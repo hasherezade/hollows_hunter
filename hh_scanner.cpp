@@ -6,6 +6,7 @@
 #include <sstream>
 #include <time.h>
 
+using namespace pesieve;
 
 std::string join_path(std::string baseDir, std::string subpath)
 {
@@ -140,7 +141,7 @@ HHScanReport* HHScanner::scan()
             std::cout << ">> Scanning PID: " << std::dec << pid << std::endl;
         }
         hh_args.pesieve_args.pid = pid;
-        t_report report = PESieve_scan(hh_args.pesieve_args);
+        pesieve::t_report report = PESieve_scan(hh_args.pesieve_args);
         my_report->appendReport(report, image_buf);
     }
 

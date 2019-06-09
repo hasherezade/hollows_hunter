@@ -8,6 +8,8 @@
 #include "term_util.h"
 #include "color_scheme.h"
 #include "hh_scanner.h"
+#include <pe_sieve_types.h>
+#include "params_info/pe_sieve_params_info.h"
 
 #define VERSION "0.2.1"
 
@@ -36,72 +38,6 @@
 #define PARAM_HELP2  "/?"
 #define PARAM_VERSION  "/version"
 
-std::string translate_dump_mode(const DWORD dump_mode)
-{
-    switch (dump_mode) {
-    case 0:
-        return "autodetect (default)";
-    case 1:
-        return "virtual (as it is in the memory, no unmapping)";
-    case 2:
-        return "unmapped (converted to raw using sections' raw headers)";
-    case 3:
-        return "realigned raw (converted raw format to be the same as virtual)";
-    }
-    return "undefined";
-}
-
-std::string translate_out_filter(const t_output_filter o_filter)
-{
-    switch (o_filter) {
-    case OUT_FULL:
-        return "no filter: dump everything (default)";
-    case OUT_NO_DUMPS:
-        return "don't dump the modified PEs, but save the report";
-    case OUT_NO_DIR:
-        return "don't dump any files";
-    }
-    return "undefined";
-}
-
-std::string translate_modules_filter(DWORD m_filter)
-{
-    switch (m_filter) {
-    case LIST_MODULES_DEFAULT:
-        return "no filter (as the scanner)";
-    case LIST_MODULES_32BIT:
-        return "32bit only";
-    case LIST_MODULES_64BIT:
-        return "64bit only";
-    case LIST_MODULES_ALL:
-        return "all accessible (default)";
-    }
-    return "undefined";
-}
-
-std::string translate_imprec_mode(const t_pesieve_imprec_mode imprec_mode)
-{
-    switch (imprec_mode) {
-    case PE_IMPREC_NONE:
-        return "none: do not recover imports (default)";
-    case PE_IMPREC_AUTO:
-        return "try to autodetect the most suitable mode";
-    case PE_IMPREC_UNERASE:
-        return "recover erased parts of the partialy damaged ImportTable";
-    case PE_IMPREC_REBUILD:
-        return "build the ImportTable from the scratch, basing on the found IAT(s)";
-    }
-    return "undefined";
-}
-
-t_pesieve_imprec_mode normalize_imprec_mode(size_t mode_id)
-{
-    if (mode_id > PE_IMPREC_MODES_COUNT) {
-        return PE_IMPREC_NONE;
-    }
-    return (t_pesieve_imprec_mode)mode_id;
-}
-
 void print_logo()
 {
     char logo2[] = ""
@@ -119,7 +55,6 @@ void print_logo()
     set_color(5);
     std::cout << "\n" << logo << std::endl;
 }
-
 
 void print_help()
 {
@@ -156,8 +91,8 @@ void print_help()
     print_in_color(param_color, PARAM_IMP_REC);
     std::cout << " <*imprec_mode>\n\t: Set in which mode the ImportTable should be recovered.\n";;
     std::cout << "*imprec_mode:\n";
-    for (size_t i = 0; i < PE_IMPREC_MODES_COUNT; i++) {
-        t_pesieve_imprec_mode mode = (t_pesieve_imprec_mode)(i);
+    for (size_t i = 0; i < pesieve::PE_IMPREC_MODES_COUNT; i++) {
+        pesieve::t_imprec_mode mode = (pesieve::t_imprec_mode)(i);
         std::cout << "\t" << mode << " - " << translate_imprec_mode(mode) << "\n";
     }
 
@@ -173,8 +108,8 @@ void print_help()
     print_in_color(param_color, PARAM_OUT_FILTER);
     std::cout << " <*ofilter_id>\n\t: Filter the dumped output.\n";
     std::cout << "*ofilter_id:\n";
-    for (size_t i = 0; i < OUT_FILTERS_COUNT; i++) {
-        t_output_filter mode = (t_output_filter)(i);
+    for (size_t i = 0; i < pesieve::OUT_FILTERS_COUNT; i++) {
+        pesieve::t_output_filter mode = (pesieve::t_output_filter)(i);
         std::cout << "\t" << mode << " - " << translate_out_filter(mode) << "\n";
     }
 
@@ -262,7 +197,7 @@ int main(int argc, char *argv[])
             return 0;
         }
         else if (!strcmp(argv[i], PARAM_IMP_REC)) {
-            hh_args.pesieve_args.imprec_mode = PE_IMPREC_AUTO;
+            hh_args.pesieve_args.imprec_mode = pesieve::PE_IMPREC_AUTO;
             if ((i + 1) < argc) {
                 char* mode_num = argv[i + 1];
                 if (isdigit(mode_num[0])) {
@@ -285,11 +220,11 @@ int main(int argc, char *argv[])
             hh_args.pesieve_args.shellcode = true;
         }
         else if (!strcmp(argv[i], PARAM_DUMP_MODE) && (i + 1) < argc) {
-            hh_args.pesieve_args.dump_mode = atoi(argv[i + 1]);
+            hh_args.pesieve_args.dump_mode = normalize_dump_mode(atoi(argv[i + 1]));
             i++;
         }
         else if (!strcmp(argv[i], PARAM_OUT_FILTER) && (i + 1) < argc) {
-            hh_args.pesieve_args.out_filter = static_cast<t_output_filter>(atoi(argv[i + 1]));
+            hh_args.pesieve_args.out_filter = static_cast<pesieve::t_output_filter>(atoi(argv[i + 1]));
             i++;
         }
         else if (!strcmp(argv[i], PARAM_LOG)) {

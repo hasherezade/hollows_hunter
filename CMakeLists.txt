@@ -17,6 +17,7 @@ set (srcs
 	hh_scanner.cpp
 	hh_params.cpp
 	hh_report.cpp
+	params_info/pe_sieve_params_info.cpp
 )
 
 set (hdrs
@@ -25,6 +26,7 @@ set (hdrs
 	hh_scanner.h
 	hh_params.h
 	hh_report.h
+	params_info/pe_sieve_params_info.h
 )
 
 # libs
