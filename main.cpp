@@ -11,7 +11,7 @@
 #include <pe_sieve_types.h>
 #include "params_info/pe_sieve_params_info.h"
 
-#define VERSION "0.2.1"
+#define VERSION "0.2.2"
 
 #define PARAM_SWITCH '/'
 //scan options:
@@ -183,50 +183,62 @@ void print_defaults()
     t_hh_params hh_args;
     hh_args_init(hh_args);
 
-    std::cout << PARAM_PNAME << " : \"" << hh_args.pname << "\"";
+    std::cout << PARAM_PNAME << " : \"" << hh_args.pname << "\"" << "\n";
     if (hh_args.pname.length() == 0) {
-        std::cout << " (all runnig processes will be scanned)";
+        std::cout << "\tall runnig processes will be scanned\n";
     }
     else {
-        std::cout << " (only the process with name: " << hh_args.pname << " will be scanned)";
+        std::cout << "\tonly the process with name: " << hh_args.pname << " will be scanned\n";
     }
-    std::cout << "\n";
 
-    std::cout << PARAM_HOOKS << " : " << is_enabled(!hh_args.pesieve_args.no_hooks);
+    std::cout << PARAM_HOOKS << " : " << is_enabled(!hh_args.pesieve_args.no_hooks) << "\n";
     if (hh_args.pesieve_args.no_hooks) {
-        std::cout << " (do not scan for hooks and patches)";
+        std::cout << "\tdo not scan for hooks and patches";
     }
     else {
-        std::cout << " (include scan for hooks and patches)";
+        std::cout << "\tinclude scan for hooks and patches";
     }
     std::cout << "\n";
-    std::cout << PARAM_SHELLCODE << " : " << is_enabled(hh_args.pesieve_args.shellcode);
+    std::cout << PARAM_SHELLCODE << " : " << is_enabled(hh_args.pesieve_args.shellcode) << "\n";
     if (!hh_args.loop_scanning) {
-        std::cout << " (do not scan for shellcodes)";
+        std::cout << "\t do not scan for shellcodes\n";
     }
-    std::cout << "\n";
-    std::cout << PARAM_LOOP << " : " << is_enabled(hh_args.loop_scanning);
+    std::cout << PARAM_LOOP << " : " << is_enabled(hh_args.loop_scanning) << "\n";
+
     if (!hh_args.loop_scanning) {
-        std::cout << " (single scan)";
+        std::cout << "\tsingle scan";
     }
     std::cout << "\n";
-    std::cout << PARAM_IMP_REC << " : " << translate_imprec_mode(hh_args.pesieve_args.imprec_mode) << "\n";
-    std::cout << PARAM_DUMP_MODE << " : " << translate_dump_mode(hh_args.pesieve_args.dump_mode) << "\n";
-    std::cout << "\n";
-    std::cout << PARAM_OUT_FILTER << " : " << translate_out_filter(hh_args.pesieve_args.out_filter) << "\n";
-    std::cout << PARAM_DIR << " : \"" << hh_args.out_dir << "\"";
+    std::cout << PARAM_IMP_REC << " : " << std::dec << hh_args.pesieve_args.imprec_mode << "\n"
+        << "\t" << translate_imprec_mode(hh_args.pesieve_args.imprec_mode) << "\n";
+
+    std::cout << PARAM_DUMP_MODE << " : " << std::dec << hh_args.pesieve_args.dump_mode << "\n"
+        << "\t" << translate_dump_mode(hh_args.pesieve_args.dump_mode) << "\n";
+
+    std::cout << PARAM_OUT_FILTER << " : " << std::dec << hh_args.pesieve_args.out_filter << "\n"
+        << "\t" << translate_out_filter(hh_args.pesieve_args.out_filter) << "\n";
+
+    std::cout << PARAM_DIR << " : \"" << hh_args.out_dir << "\"\n";
     if (hh_args.out_dir.length() == 0) {
-        std::cout << " (current directory)";
+        std::cout << "\tcurrent directory\n";
     }
-    std::cout << "\n";
-    std::cout << PARAM_UNIQUE_DIR << " : " << is_enabled(hh_args.unique_dir);
+    std::cout << PARAM_UNIQUE_DIR << " : " << is_enabled(hh_args.unique_dir) << "\n";
     if (!hh_args.unique_dir) {
-        std::cout << " (do not create unique directory for the output)";
+        std::cout << " \tdo not create unique directory for the output\n";
+    }
+    std::cout << PARAM_KILL << " : " << is_enabled(hh_args.kill_suspicious) << "\n";
+    if (!hh_args.kill_suspicious) {
+        std::cout << "\tdo not kill suspicious processes";
     }
     std::cout << "\n";
-    std::cout << PARAM_KILL << " : " << is_enabled(hh_args.kill_suspicious) << "\n";
     std::cout << PARAM_QUIET << " : " << is_enabled(hh_args.quiet) << "\n";
+    if (!hh_args.quiet) {
+        std::cout << " \tprint all the information on the screen\n";
+    }
     std::cout << PARAM_LOG << " : " << is_enabled(hh_args.log) << "\n";
+    if (!hh_args.log) {
+        std::cout << " \tdo not add the results of the scan into the log file\n";
+    }
 }
 
 void print_unknown_param(const char *param)
