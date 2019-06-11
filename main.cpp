@@ -166,7 +166,7 @@ void print_version()
 {
     set_color(HILIGHTED_COLOR);
     std::cout << "HollowsHunter v." << VERSION;
-    std::cout << " (build on: " << __DATE__ << " " << __TIME__ << ")\n";
+    std::cout << " (build on: " << __DATE__ << ")\n";
 
     DWORD pesieve_ver = PESieve_version();
     std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver) << "\n";
@@ -346,6 +346,5 @@ int main(int argc, char *argv[])
 
     print_version();
     deploy_scan(hh_args);
-
     return 0;
 }
