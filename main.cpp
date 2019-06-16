@@ -17,6 +17,7 @@
 //scan options:
 #define PARAM_HOOKS "/hooks"
 #define PARAM_SHELLCODE "/shellc"
+#define PARAM_DATA "/data"
 #define PARAM_MODULES_FILTER "/mfilter"
 #define PARAM_PNAME "/pname"
 #define PARAM_LOOP "/loop"
@@ -75,6 +76,9 @@ void print_help()
 
     print_in_color(param_color, PARAM_SHELLCODE);
     std::cout << "\t: Detect shellcode implants. (By default it detects PE only).\n";
+
+    print_in_color(param_color, PARAM_DATA);
+    std::cout << "\t: If DEP is disabled scan also non-executable memory\n\t(which potentially can be executed).\n";
 
 #ifdef _WIN64
     print_in_color(param_color, PARAM_MODULES_FILTER);
@@ -200,11 +204,16 @@ void print_defaults()
     }
     std::cout << "\n";
     std::cout << PARAM_SHELLCODE << " : " << is_enabled(hh_args.pesieve_args.shellcode) << "\n";
-    if (!hh_args.loop_scanning) {
-        std::cout << "\t do not scan for shellcodes\n";
+    if (!hh_args.pesieve_args.shellcode) {
+        std::cout << "\t do not scan for shellcodes";
     }
+    std::cout << "\n";
+    std::cout << PARAM_DATA << " : " << is_enabled(hh_args.pesieve_args.data) << "\n";
+    if (!hh_args.pesieve_args.data) {
+        std::cout << "\t scan only the memory areas that are set as executable";
+    }
+    std::cout << "\n";
     std::cout << PARAM_LOOP << " : " << is_enabled(hh_args.loop_scanning) << "\n";
-
     if (!hh_args.loop_scanning) {
         std::cout << "\tsingle scan";
     }
@@ -304,6 +313,9 @@ int main(int argc, char *argv[])
         }
         else if (!strcmp(argv[i], PARAM_SHELLCODE)) {
             hh_args.pesieve_args.shellcode = true;
+        }
+        else if (!strcmp(argv[i], PARAM_DATA)) {
+            hh_args.pesieve_args.data = true;
         }
         else if (!strcmp(argv[i], PARAM_DUMP_MODE) && (i + 1) < argc) {
             hh_args.pesieve_args.dump_mode = normalize_dump_mode(atoi(argv[i + 1]));
