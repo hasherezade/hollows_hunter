@@ -9,6 +9,7 @@ typedef struct {
     std::string out_dir;
     bool unique_dir;
     bool loop_scanning;
+    bool suspend_suspicious;
     bool kill_suspicious;
     bool quiet;
     bool log;

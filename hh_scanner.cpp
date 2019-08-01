@@ -6,6 +6,8 @@
 #include <sstream>
 #include <time.h>
 
+#include "util\suspend.h"
+
 using namespace pesieve;
 
 std::string join_path(std::string baseDir, std::string subpath)
@@ -62,6 +64,19 @@ bool get_process_name(DWORD processID, CHAR szProcessName[MAX_PATH])
     return is_ok;
 }
 
+size_t suspend_suspicious(std::vector<DWORD> &suspicious_pids)
+{
+    size_t done = 0;
+    std::vector<DWORD>::iterator itr;
+    for (itr = suspicious_pids.begin(); itr != suspicious_pids.end(); itr++) {
+        DWORD pid = *itr;
+        if (!suspend_process(pid)) {
+            std::cerr << "Could not suspend the process. PID = " << pid << std::endl;
+        }
+    }
+    return done;
+}
+
 size_t kill_suspicious(std::vector<DWORD> &suspicious_pids)
 {
     size_t killed = 0;
@@ -76,7 +91,7 @@ size_t kill_suspicious(std::vector<DWORD> &suspicious_pids)
             killed++;
         }
         else {
-            std::cerr << "Could not terminate process. PID = " << pid << std::endl;
+            std::cerr << "Could not terminate the process. PID = " << pid << std::endl;
         }
         CloseHandle(hProcess);
     }
@@ -188,6 +203,9 @@ void HHScanner::summarizeScan(HHScanReport *hh_report)
     }
     if (hh_args.log) {
         write_to_file("hollows_hunter.log", summary_str, true);
+    }
+    if (hh_args.suspend_suspicious) {
+        suspend_suspicious(hh_report->suspicious);
     }
     if (hh_args.kill_suspicious) {
         kill_suspicious(hh_report->suspicious);
