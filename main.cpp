@@ -29,7 +29,7 @@
 //output options:
 #define PARAM_QUIET "/quiet"
 #define PARAM_OUT_FILTER "/ofilter"
-#define PARAM_SUSPEND "/susp"
+#define PARAM_SUSPEND "/suspend"
 #define PARAM_KILL "/kill"
 #define PARAM_UNIQUE_DIR "/uniqd"
 #define PARAM_DIR "/dir"
@@ -128,7 +128,7 @@ void print_help()
         << "\t(Prevents overwriting results from previous scans)\n";
 
     print_in_color(param_color, PARAM_SUSPEND);
-    std::cout << "   : Suspend processes detected as suspicious\n";
+    std::cout << ": Suspend processes detected as suspicious\n";
 
     print_in_color(param_color, PARAM_KILL);
     std::cout << "   : Kill processes detected as suspicious\n";
