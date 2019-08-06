@@ -65,6 +65,8 @@ size_t HHScanReport::reportsToJSON(std::stringstream &stream, size_t level, cons
         stream << "\"" << this->pidToName[pid] << "\",\n";
         OUT_PADDED(stream, level, "\"replaced\" : ");
         stream << std::dec << pidToReport[pid].replaced << ",\n";
+        OUT_PADDED(stream, level, "\"hdr_modified\" : ");
+        stream << std::dec << pidToReport[pid].hdr_mod << ",\n";
         if (!params.pesieve_args.no_hooks) {
             OUT_PADDED(stream, level, "\"patched\" : ");
             stream << std::dec << pidToReport[pid].hooked << ",\n";
