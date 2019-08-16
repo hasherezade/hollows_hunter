@@ -198,7 +198,7 @@ void print_defaults()
 
     std::cout << PARAM_PNAME << " : \"" << hh_args.pname << "\"" << "\n";
     if (hh_args.pname.length() == 0) {
-        std::cout << "\tall runnig processes will be scanned\n";
+        std::cout << "\tall running processes will be scanned\n";
     }
     else {
         std::cout << "\tonly the process with name: " << hh_args.pname << " will be scanned\n";
