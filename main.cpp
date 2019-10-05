@@ -33,6 +33,7 @@
 #define PARAM_KILL "/kill"
 #define PARAM_UNIQUE_DIR "/uniqd"
 #define PARAM_DIR "/dir"
+#define PARAM_MINIDUMP "/minidmp"
 #define PARAM_LOG "/log"
 
 //info:
@@ -126,6 +127,9 @@ void print_help()
     print_in_color(param_color, PARAM_UNIQUE_DIR);
     std::cout << "\t: Make a unique, timestamped directory for the output of each scan.\n"
         << "\t(Prevents overwriting results from previous scans)\n";
+
+    print_in_color(param_color, PARAM_MINIDUMP);
+    std::cout << ": Make a minidump of each detected process.\n";
 
     print_in_color(param_color, PARAM_SUSPEND);
     std::cout << ": Suspend processes detected as suspicious\n";
@@ -240,7 +244,9 @@ void print_defaults()
     if (hh_args.out_dir.length() == 0) {
         std::cout << "\tcurrent directory";
     }
-    std::cout << "\n";
+
+    std::cout << PARAM_MINIDUMP << " : \"" << hh_args.pesieve_args.minidump << "\"\n";
+
     std::cout << PARAM_UNIQUE_DIR << " : " << is_enabled(hh_args.unique_dir) << "\n";
     if (!hh_args.unique_dir) {
         std::cout << " \tdo not create unique directory for the output\n";
@@ -367,6 +373,9 @@ int main(int argc, char *argv[])
         else if (!strcmp(argv[i], PARAM_DIR) && (i + 1) < argc) {
             hh_args.out_dir = argv[i + 1];
             ++i;
+        }
+        else if (!strcmp(argv[i], PARAM_MINIDUMP)) {
+            hh_args.pesieve_args.minidump = true;
         }
         else if (strlen(argv[i]) > 0) {
             print_unknown_param(argv[i]);
