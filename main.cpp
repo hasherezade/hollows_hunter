@@ -179,11 +179,11 @@ void print_version()
     set_color(HILIGHTED_COLOR);
     std::cout << "HollowsHunter v." << VERSION;
 #ifdef _WIN64
-	std::cout << " (x64)" << "\n";
+    std::cout << " (x64)" << "\n";
 #else
-	std::cout << " (x86)" << "\n";
+    std::cout << " (x86)" << "\n";
 #endif
-	std::cout << "Built on: " << __DATE__ << "\n\n";
+    std::cout << "Built on: " << __DATE__ << "\n\n";
 
     DWORD pesieve_ver = PESieve_version();
     std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver) << "\n";
