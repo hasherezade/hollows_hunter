@@ -396,7 +396,7 @@ int main(int argc, char *argv[])
         else if (!strcmp(param, PARAM_QUIET)) {
             hh_args.quiet = true;
         }
-        else if (!strcmp(argv[i], PARAM_UNIQUE_DIR)) {
+        else if (!strcmp(param, PARAM_UNIQUE_DIR)) {
             hh_args.unique_dir = true;
         }
         else if (!strcmp(param, PARAM_DIR) && (i + 1) < argc) {
