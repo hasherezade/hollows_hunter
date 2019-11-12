@@ -13,6 +13,7 @@ typedef struct {
     bool kill_suspicious;
     bool quiet;
     bool log;
+    bool json_output;
     pesieve::t_params pesieve_args; //PE-sieve parameters
 } t_hh_params;
 

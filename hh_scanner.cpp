@@ -190,9 +190,16 @@ bool write_to_file(std::string report_path, std::string summary_str, bool append
 void HHScanner::summarizeScan(HHScanReport *hh_report)
 {
     if (!hh_report) return;
-    
-    std::string summary_str = hh_report->toString();
-    std::cout << summary_str;
+    std::string summary_str;
+
+    if (!this->hh_args.json_output) {
+        summary_str = hh_report->toString();
+        std::cout << summary_str;
+    }
+    else {
+        summary_str = hh_report->toJSON(this->hh_args);
+        std::cout << summary_str;
+    }
 
     if (hh_args.pesieve_args.out_filter != OUT_NO_DIR) {
         //file the same report into the directory with dumps:

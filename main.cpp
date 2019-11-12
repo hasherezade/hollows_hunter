@@ -11,7 +11,7 @@
 #include <pe_sieve_types.h>
 #include "params_info/pe_sieve_params_info.h"
 
-#define VERSION "0.2.2.7"
+#define VERSION "0.2.2.7-a"
 
 #define PARAM_SWITCH1 '/'
 #define PARAM_SWITCH2 '-'
@@ -36,6 +36,7 @@
 #define PARAM_DIR "dir"
 #define PARAM_MINIDUMP "minidmp"
 #define PARAM_LOG "log"
+#define PARAM_JSON "json"
 
 //info:
 #define PARAM_HELP "help"
@@ -162,6 +163,9 @@ void print_help()
 
     print_param_in_color(param_color, PARAM_LOG);
     std::cout << "\t: Append each scan summary to the log.\n";
+
+    print_param_in_color(param_color, PARAM_JSON);
+    std::cout << "\t: Display JSON report as the summary.\n";
 
     print_in_color(hdr_color, "\nInfo: \n");
     print_param_in_color(param_color, PARAM_HELP);
@@ -379,6 +383,9 @@ int main(int argc, char *argv[])
         }
         else if (!strcmp(param, PARAM_LOG)) {
             hh_args.log = true;
+        }
+        else if (!strcmp(param, PARAM_JSON)) {
+            hh_args.json_output = true;
         }
         else if (!strcmp(param, PARAM_LOOP)) {
             hh_args.loop_scanning = true;
