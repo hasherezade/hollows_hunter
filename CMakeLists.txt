@@ -53,6 +53,6 @@ if(HH_BUILD_TESTING)
 	enable_testing()
 
 	# 0) does the application run
-	add_test (TestRuns ${CMAKE_BINARY_DIR}/hollows_hunter)
+	add_test (TestRuns ${CMAKE_BINARY_DIR}/hollows_hunter "/json")
 	set_tests_properties(TestRuns PROPERTIES PASS_REGULAR_EXPRESSION "Total Suspicious: 0")
 endif()
