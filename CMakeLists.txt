@@ -54,5 +54,5 @@ if(HH_BUILD_TESTING)
 
 	# 0) does the application run
 	add_test (TestRuns ${CMAKE_BINARY_DIR}/hollows_hunter)
-	set_tests_properties(TestRuns PROPERTIES PASS_REGULAR_EXPRESSION "[+] Total Suspicious: 0")
+	set_tests_properties(TestRuns PROPERTIES PASS_REGULAR_EXPRESSION "Total Suspicious: 0")
 endif()
