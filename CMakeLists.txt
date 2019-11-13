@@ -51,8 +51,12 @@ INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_BINARY_DIR} COMPONENT ${PRO
 # Setup testing
 if(HH_BUILD_TESTING)
 	enable_testing()
-
+	
 	# 0) does the application run
-	add_test (TestRuns ${CMAKE_BINARY_DIR}/hollows_hunter "/json")
-	set_tests_properties(TestRuns PROPERTIES PASS_REGULAR_EXPRESSION "\"susipcious_count\" : 0")
+	add_test (TestRuns ${CMAKE_BINARY_DIR}/hollows_hunter -?)
+	set_tests_properties(TestRuns PROPERTIES PASS_REGULAR_EXPRESSION "HollowsHunter")
+	
+	# 1) false positives in a clean environment
+	add_test (TestFalsePositives ${CMAKE_BINARY_DIR}/hollows_hunter -json -dir scan_out)
+	set_tests_properties(TestFalsePositives PROPERTIES PASS_REGULAR_EXPRESSION "\"susipcious_count\" : 0")
 endif()
