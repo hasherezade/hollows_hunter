@@ -34,3 +34,9 @@ build_script:
  
 test_script:
   - ctest -V
+  
+on_failure:
+  - dir
+  - 7z a about_failed.zip *
+  - ps: Push-AppveyorArtifact about_failed.zip
+  
