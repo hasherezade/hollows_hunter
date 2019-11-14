@@ -11,7 +11,7 @@
 #include <pe_sieve_types.h>
 #include "params_info/pe_sieve_params_info.h"
 
-#define VERSION "0.2.2.7-a"
+#define VERSION "0.2.2.7-b"
 
 #define PARAM_SWITCH1 '/'
 #define PARAM_SWITCH2 '-'
@@ -92,7 +92,7 @@ void print_help()
     print_in_color(separator_color, "\n---scan options---\n");
 
     print_param_in_color(param_color, PARAM_PNAME);
-    std::cout << " <process_name>\n\t: Scan only processes with given name.\n";
+    std::cout << " <process_name>\n\t: Scan only processes with given names (separated by ';').\n\tExample: iexplore.exe;firefox.exe\n";
 
     print_param_in_color(param_color, PARAM_HOOKS);
     std::cout << "  : Detect hooks and in-memory patches.\n";

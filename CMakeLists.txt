@@ -19,6 +19,7 @@ set (srcs
 	hh_report.cpp
 	params_info/pe_sieve_params_info.cpp
 	util/suspend.cpp
+	util/util.cpp
 )
 
 set (hdrs
@@ -30,6 +31,7 @@ set (hdrs
 	params_info/pe_sieve_params_info.h
 	util/suspend.h
 	util/ntddk.h
+	util/util.h
 )
 
 # libs
