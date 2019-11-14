@@ -124,6 +124,23 @@ void HHScanner::initOutDir(time_t start_time)
     }
 }
 
+std::string list_to_str(std::set<std::string> &list)
+{
+    std::stringstream stream;
+
+    std::set<std::string>::iterator itr;
+    for (itr = list.begin(); itr != list.end(); ) {
+        const std::string &next_str = *itr;
+        stream << next_str;
+        itr++;
+        if (itr != list.end()) {
+            stream << ", ";
+        }
+    }
+    return stream.str();
+}
+
+
 HHScanReport* HHScanner::scan()
 {
     const size_t max_processes = 1024;
@@ -171,7 +188,7 @@ HHScanReport* HHScanner::scan()
     }
     if (!found && hh_args.pname.length() > 0) {
         if (!hh_args.quiet) {
-            std::cout << "[WARNING] Process with the name: " << hh_args.pname << " not found!" << std::endl;
+            std::cout << "[WARNING] No process from the list: {" << list_to_str(names_list) << "} was found!" << std::endl;
         }
     }
     my_report->setEndTick(GetTickCount(), time(NULL));
