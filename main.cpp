@@ -167,7 +167,8 @@ void print_help()
     print_param_in_color(param_color, PARAM_JSON);
     std::cout << "\t: Display JSON report as the summary.\n";
 
-    print_in_color(hdr_color, "\nInfo: \n");
+    print_in_color(hdr_color, "\nInfo: \n\n");
+
     print_param_in_color(param_color, PARAM_HELP);
     std::cout << "    : Print this help.\n";
     print_param_in_color(param_color, PARAM_VERSION);
@@ -268,17 +269,17 @@ void print_defaults()
     if (hh_args.out_dir.length() == 0) {
         std::cout << "\tcurrent directory";
     }
-
+    std::cout << "\n";
     std::cout << PARAM_UNIQUE_DIR << " : " << is_enabled(hh_args.unique_dir) << "\n";
     if (!hh_args.unique_dir) {
-        std::cout << " \tdo not create unique directory for the output\n";
+        std::cout << " \tdo not create unique directory for the output";
     }
-
+    std::cout << "\n";
     std::cout << PARAM_MINIDUMP << " : " << is_enabled(hh_args.pesieve_args.minidump) << "\n";
     if (!hh_args.pesieve_args.minidump) {
-        std::cout << " \tdo not create a minidump of a detected process\n";
+        std::cout << " \tdo not create a minidump of a detected process";
     }
-
+    std::cout << "\n";
     std::cout << PARAM_SUSPEND << " : " << is_enabled(hh_args.suspend_suspicious) << "\n";
     if (!hh_args.suspend_suspicious) {
         std::cout << "\tdo not suspend suspicious processes";
@@ -327,8 +328,13 @@ int main(int argc, char *argv[])
     //Parse parameters
     for (int i = 1; i < argc; i++) {
         if (!is_param(argv[i])) {
+            print_logo();
+            print_version();
+            std::cout << "\n";
             print_unknown_param(argv[i]);
-            continue;
+            print_in_color(HILIGHTED_COLOR, "Available parameters:\n\n");
+            print_help();
+            return 0;
         }
         const char *param = &argv[i][1];
         if (!strcmp(param, PARAM_HELP) || !strcmp(param, PARAM_HELP2)) {
