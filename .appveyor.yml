@@ -23,14 +23,17 @@ environment:
     - env_arch: "x64"
     - env_arch: "x86"
   
-build_script:
+before_build:
   - mkdir build
   - cd build
   - if [%env_arch%]==[x64] (
-      cmake .. -A x64 )
+    cmake .. -A x64 )
   - if [%env_arch%]==[x86] (
-      cmake .. )
-  - cmake --build . --target install
+    cmake .. )
+  
+build_script:
+  - cmake --build . --config %CONFIGURATION% --target install
+
  
 test_script:
   - ctest -V
