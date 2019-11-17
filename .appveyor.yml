@@ -38,8 +38,8 @@ build_script:
   
 after_build:
   - mkdir %artifactName%
-  - cp *.exe %artifactName%
-  - cp *.dll %artifactName%
+  - cp -r %CONFIGURATION%/* %artifactName%
+  - cp -r pe-sieve/%CONFIGURATION%/* %artifactName%
   
 test_script:
   - ctest -V
