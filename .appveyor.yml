@@ -41,9 +41,9 @@ after_build:
   - cp *.dll %artifactName%
   - cp *.exe %artifactName%
   - if [%CONFIGURATION%]==[Debug] (
-    cp -r %CONFIGURATION%/* )
+    cp -r %CONFIGURATION%/* %artifactName% )
   - if [%CONFIGURATION%]==[Debug] (
-    cp -r pe-sieve/%CONFIGURATION%/* )
+    cp -r pe-sieve/%CONFIGURATION%/* %artifactName% )
   
 test_script:
   - ctest -V
