@@ -47,7 +47,7 @@
 
 void print_param_in_color(int color, std::string text)
 {
-	print_in_color(color, PARAM_SWITCH1 + text);
+    print_in_color(color, PARAM_SWITCH1 + text);
 }
 
 bool is_param(const char *str)
@@ -62,7 +62,6 @@ bool is_param(const char *str)
     }
     return false;
 }
-
 
 void print_logo()
 {
