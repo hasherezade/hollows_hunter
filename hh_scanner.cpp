@@ -34,16 +34,17 @@ std::string make_dir_name(std::string baseDir, time_t timestamp)
     return stream.str();
 }
 
-bool set_output_dir(t_params &args, const char *new_dir)
+bool set_output_dir(t_params &args, const std::string &new_dir)
 {
-    if (!new_dir) return false;
+    const size_t new_len = new_dir.length();
+    if (!new_len) return false;
 
-    size_t new_len = strlen(new_dir);
-    size_t buffer_len = sizeof(args.output_dir);
+    const char* new_dir_cstr = new_dir.c_str();
+    size_t buffer_len = sizeof(args.output_dir) - 1; //leave one char for '\0'
     if (new_len > buffer_len) return false;
 
     memset(args.output_dir, 0, buffer_len);
-    memcpy(args.output_dir, new_dir, new_len);
+    memcpy(args.output_dir, new_dir_cstr, new_len);
     return true;
 }
 
@@ -116,11 +117,11 @@ void HHScanner::initOutDir(time_t start_time)
     //set unique path
     if (hh_args.unique_dir) {
         this->outDir = make_dir_name(hh_args.out_dir, start_time);
-        set_output_dir(hh_args.pesieve_args, outDir.c_str());
+        set_output_dir(hh_args.pesieve_args, outDir);
     }
     else {
         this->outDir = hh_args.out_dir;
-        set_output_dir(hh_args.pesieve_args, hh_args.out_dir.c_str());
+        set_output_dir(hh_args.pesieve_args, hh_args.out_dir);
     }
 }
 
@@ -139,7 +140,6 @@ std::string list_to_str(std::set<std::string> &list)
     }
     return stream.str();
 }
-
 
 HHScanReport* HHScanner::scan()
 {
