@@ -41,7 +41,7 @@ bool resume_process(DWORD processId)
 bool is_process_associated(DWORD remote_pid)
 {
     DWORD my_pid = GetCurrentProcessId();
-    bool is_me = remote_pid == my_pid;
+    const bool is_me = remote_pid == my_pid;
     if (is_me) {
         return true;
     }
@@ -53,7 +53,7 @@ bool is_process_associated(DWORD remote_pid)
     bool is_my_parent = my_parent == remote_pid;
     bool is_sibling = my_parent == remote_parent;
 
-    if (!is_me && !is_my_child && !is_my_parent && !is_sibling) {
+    if (!is_my_child && !is_my_parent && !is_sibling) {
         return false;
     }
     return true;
