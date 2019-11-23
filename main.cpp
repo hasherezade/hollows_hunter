@@ -45,7 +45,7 @@
 #define PARAM_DEFAULTS "default"
 
 
-void print_param_in_color(int color, std::string text)
+void print_param_in_color(int color, const std::string &text)
 {
     print_in_color(color, PARAM_SWITCH1 + text);
 }
