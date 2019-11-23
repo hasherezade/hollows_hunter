@@ -6,4 +6,4 @@ void set_color(int color);
 
 void unset_color();
 
-void print_in_color(int color, std::string text);
+void print_in_color(int color, const std::string &text);

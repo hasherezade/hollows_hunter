@@ -11,7 +11,7 @@
 
 using namespace pesieve;
 
-std::string join_path(std::string baseDir, std::string subpath)
+std::string join_path(const std::string &baseDir, const std::string &subpath)
 {
     std::stringstream stream;
     if (baseDir.length() > 0) {
@@ -195,7 +195,7 @@ HHScanReport* HHScanner::scan()
     return my_report;
 }
 
-bool write_to_file(std::string report_path, std::string summary_str, bool append)
+bool write_to_file(const std::string &report_path, const std::string &summary_str, const bool append)
 {
     std::ofstream final_report;
     if (append) {

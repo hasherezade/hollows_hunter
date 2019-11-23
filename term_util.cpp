@@ -19,7 +19,7 @@ void unset_color()
     SetConsoleTextAttribute(hConsole, 7); // back to default color
 }
 
-void print_in_color(int color, std::string text)
+void print_in_color(int color, const std::string &text)
 {
     set_color(color);
     std::cout << text;

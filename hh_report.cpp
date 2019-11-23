@@ -22,7 +22,7 @@ bool is_suspicious_process(pesieve::t_report report)
     return false;
 }
 
-bool HHScanReport::appendReport(pesieve::t_report &scan_report, std::string img_name)
+bool HHScanReport::appendReport(pesieve::t_report &scan_report, const std::string &img_name)
 {
     pidToReport[scan_report.pid] = scan_report;
     pidToName[scan_report.pid] = img_name;

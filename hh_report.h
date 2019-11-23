@@ -34,7 +34,7 @@ public:
         return (this->endTick - this->startTick);
     }
 
-    bool appendReport(pesieve::t_report &scan_report, std::string img_name);
+    bool appendReport(pesieve::t_report &scan_report, const std::string &img_name);
 
     size_t countSuspicious() const
     {
