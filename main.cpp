@@ -11,7 +11,7 @@
 #include <pe_sieve_types.h>
 #include "params_info/pe_sieve_params_info.h"
 
-#define VERSION "0.2.2.7-b"
+#define VERSION "0.2.4"
 
 #define PARAM_SWITCH1 '/'
 #define PARAM_SWITCH2 '-'
