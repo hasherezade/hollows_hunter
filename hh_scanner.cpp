@@ -8,6 +8,7 @@
 
 #include "util\suspend.h"
 #include "util\util.h"
+#include "term_util.h"
 
 using namespace pesieve;
 
@@ -185,6 +186,15 @@ HHScanReport* HHScanner::scan()
         hh_args.pesieve_args.pid = pid;
         pesieve::t_report report = PESieve_scan(hh_args.pesieve_args);
         my_report->appendReport(report, image_buf);
+        if (!hh_args.quiet && report.suspicious) {
+            int color = YELLOW_ON_BLACK;
+            if (report.replaced || report.implanted) {
+                color = RED_ON_BLACK;
+            }
+            set_color(color);
+            std::cout << ">> Detected: " << std::dec << pid << std::endl;
+            unset_color();
+        }
     }
     if (!found && hh_args.pname.length() > 0) {
         if (!hh_args.quiet) {
