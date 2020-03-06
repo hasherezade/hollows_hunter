@@ -53,8 +53,10 @@ bool get_process_name(DWORD processID, CHAR szProcessName[MAX_PATH])
 {
     memset(szProcessName, 0, MAX_PATH);
 
-    HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processID);
-    if (!hProcess) return false;
+    HANDLE hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_VM_READ, FALSE, processID);
+    if (!hProcess) {
+        return false;
+    }
 
     HMODULE hMod = nullptr;
     DWORD cbNeeded = 0;
@@ -186,14 +188,23 @@ HHScanReport* HHScanner::scan()
         hh_args.pesieve_args.pid = pid;
         pesieve::t_report report = PESieve_scan(hh_args.pesieve_args);
         my_report->appendReport(report, image_buf);
-        if (!hh_args.quiet && report.suspicious) {
-            int color = YELLOW_ON_BLACK;
-            if (report.replaced || report.implanted) {
-                color = RED_ON_BLACK;
+        int color = YELLOW;
+        if (!hh_args.quiet) {
+            if (report.scanned == 0) {
+                color = MAKE_COLOR(SILVER, DARK_RED);
+                set_color(color);
+                std::cout << ">> Could not access: " << std::dec << pid;
+                unset_color();
+                std::cout << "\n";
             }
-            set_color(color);
-            std::cout << ">> Detected: " << std::dec << pid << std::endl;
-            unset_color();
+            if (report.suspicious) {
+                if (report.replaced || report.implanted) {
+                    color = RED;
+                }
+                set_color(color);
+                std::cout << ">> Detected: " << std::dec << pid << std::endl;
+                unset_color();
+            }
         }
     }
     if (!found && hh_args.pname.length() > 0) {
