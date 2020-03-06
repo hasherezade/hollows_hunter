@@ -22,6 +22,7 @@
 #define PARAM_MODULES_FILTER "mfilter"
 #define PARAM_MODULES_IGNORE "mignore"
 #define PARAM_PNAME "pname"
+#define PARAM_PID "pid"
 #define PARAM_LOOP "loop"
 
 //dump options:
@@ -100,6 +101,10 @@ void print_help()
 
     print_in_color(hdr_color, "Optional: \n");
     print_in_color(separator_color, "\n---scan options---\n");
+
+    print_param_in_color(param_color, PARAM_PID);
+    std::cout << " <target_pid>\n\t: Scan only processes with given PIDs (dec or hex, separated by '" << PARAM_LIST_SEPARATOR
+        << "').\n\tExample: 5367" << PARAM_LIST_SEPARATOR << "0xa90\n";
 
     print_param_in_color(param_color, PARAM_PNAME);
     std::cout << " <process_name>\n\t: Scan only processes with given names (separated by '" << PARAM_LIST_SEPARATOR 
@@ -240,11 +245,17 @@ void print_defaults()
     hh_args_init(hh_args);
 
     std::cout << PARAM_PNAME << " : \"" << hh_args.pname << "\"" << "\n";
-    if (hh_args.pname.length() == 0) {
+    if (hh_args.pname.length() == 0 && hh_args.pids.length() == 0) {
         std::cout << "\tall running processes will be scanned\n";
     }
     else {
-        std::cout << "\tonly the process with name: " << hh_args.pname << " will be scanned\n";
+
+        std::cout << "\tonly the process with:\n";
+        if (hh_args.pname.length() == 0)
+            std::cout << "+ name(s): " << hh_args.pname << "\n";
+        if (hh_args.pids.length() == 0)
+            std::cout << "+ PID(s): " << hh_args.pids << "\n";
+        std::cout << " will be scanned\n";
     }
 
     std::cout << PARAM_HOOKS << " : " << is_enabled(!hh_args.pesieve_args.no_hooks) << "\n";
@@ -422,6 +433,10 @@ int main(int argc, char *argv[])
         }
         else if (!strcmp(param, PARAM_PNAME) && (i + 1) < argc) {
             hh_args.pname = argv[i + 1];
+            i++;
+        }
+        else if (!strcmp(param, PARAM_PID) && (i + 1) < argc) {
+            hh_args.pids = argv[i + 1];
             i++;
         }
         else if (!strcmp(param, PARAM_QUIET)) {

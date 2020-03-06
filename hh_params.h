@@ -6,6 +6,7 @@
 //HollowsHunter's parameters:
 typedef struct {
     std::string pname;
+    std::string pids;
     std::string out_dir;
     bool unique_dir;
     bool loop_scanning;
