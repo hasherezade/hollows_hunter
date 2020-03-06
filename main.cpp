@@ -20,6 +20,7 @@
 #define PARAM_SHELLCODE "shellc"
 #define PARAM_DATA "data"
 #define PARAM_MODULES_FILTER "mfilter"
+#define PARAM_MODULES_IGNORE "mignore"
 #define PARAM_PNAME "pname"
 #define PARAM_LOOP "loop"
 
@@ -60,6 +61,17 @@ bool is_param(const char *str)
         return true;
     }
     return false;
+}
+
+//from paramkit
+size_t copyToCStr(char *buf, size_t buf_max, const std::string &value)
+{
+    size_t len = value.length() + 1;
+    if (len > buf_max) len = buf_max;
+
+    memcpy(buf, value.c_str(), buf_max);
+    buf[len] = '\0';
+    return len;
 }
 
 void print_logo()
@@ -110,6 +122,9 @@ void print_help()
         std::cout << "\t" << i << " - " << translate_modules_filter(i) << "\n";
     }
 #endif
+    print_param_in_color(param_color, PARAM_MODULES_IGNORE);
+    std::cout << " <module_name>\n\t: Do not scan module/s with given name/s (separated by '" << PARAM_LIST_SEPARATOR << "').\n"
+        "\t  Example: kernel32.dll" << PARAM_LIST_SEPARATOR << "user32.dll\n";
 
     print_param_in_color(param_color, PARAM_LOOP);
     std::cout << "   : Enable continuous scanning.\n";
@@ -367,6 +382,10 @@ int main(int argc, char *argv[])
             if (hh_args.pesieve_args.modules_filter > LIST_MODULES_ALL) {
                 hh_args.pesieve_args.modules_filter = LIST_MODULES_ALL;
             }
+            i++;
+        }
+        else if (!strcmp(param, PARAM_MODULES_IGNORE) && (i + 1) < argc) {
+            copyToCStr(hh_args.pesieve_args.modules_ignored, MAX_MODULE_BUF_LEN, argv[i + 1]);
             i++;
         }
         else if (!strcmp(param, PARAM_HOOKS)) {
