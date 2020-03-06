@@ -158,7 +158,8 @@ HHScanReport* HHScanner::scan()
     }
 
     std::set<std::string> names_list;
-    strip_to_list(hh_args.pname, ";", names_list);
+    std::string delim(1, PARAM_LIST_SEPARATOR);
+    strip_to_list(hh_args.pname, delim, names_list);
 
     time_t start_time = time(NULL);
     initOutDir(start_time);

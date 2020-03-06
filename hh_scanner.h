@@ -9,6 +9,8 @@
 #include "hh_params.h"
 #include "hh_report.h"
 
+#define PARAM_LIST_SEPARATOR ';'
+
 class HHScanner {
 public:
     HHScanner(t_hh_params &_args)

@@ -44,7 +44,6 @@
 #define PARAM_VERSION  "version"
 #define PARAM_DEFAULTS "default"
 
-
 void print_param_in_color(int color, const std::string &text)
 {
     print_in_color(color, PARAM_SWITCH1 + text);
@@ -91,7 +90,8 @@ void print_help()
     print_in_color(separator_color, "\n---scan options---\n");
 
     print_param_in_color(param_color, PARAM_PNAME);
-    std::cout << " <process_name>\n\t: Scan only processes with given names (separated by ';').\n\tExample: iexplore.exe;firefox.exe\n";
+    std::cout << " <process_name>\n\t: Scan only processes with given names (separated by '" << PARAM_LIST_SEPARATOR 
+        << "').\n\tExample: iexplore.exe"<< PARAM_LIST_SEPARATOR<<"firefox.exe\n";
 
     print_param_in_color(param_color, PARAM_HOOKS);
     std::cout << "  : Detect hooks and in-memory patches.\n";
