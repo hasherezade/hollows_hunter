@@ -11,14 +11,17 @@ size_t strip_to_list(IN std::string s, IN std::string delim, OUT std::set<std::s
     {
         std::string next_str = s.substr(start, end - start);
         trim(next_str);
-
-        elements_list.insert(next_str);
+        if (next_str.length() > 0) {
+            elements_list.insert(next_str);
+        }
         start = end + delim.length();
         end = s.find(delim, start);
     }
     std::string next_str = s.substr(start, end);
     trim(next_str);
-    elements_list.insert(next_str);
+    if (next_str.length() > 0) {
+        elements_list.insert(next_str);
+    }
     return elements_list.size();
 }
 
