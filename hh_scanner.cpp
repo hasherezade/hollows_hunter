@@ -194,12 +194,13 @@ HHScanReport* HHScanner::scan()
                 continue;
             }
             found = true;
-            if (!hh_args.quiet) {
-                std::cout << image_buf << " (PID: " << std::dec << pid << ")\n";
-            }
         }
         if (!hh_args.quiet) {
-            std::cout << ">> Scanning PID: " << std::dec << pid << std::endl;
+            std::cout << ">> Scanning PID: " << std::dec << pid;
+            if (strlen(image_buf)) {
+                std::cout << " (" << image_buf << ")";
+            }
+            std::cout << std::endl;
         }
         hh_args.pesieve_args.pid = pid;
         pesieve::t_report report = PESieve_scan(hh_args.pesieve_args);
