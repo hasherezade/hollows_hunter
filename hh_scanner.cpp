@@ -115,7 +115,7 @@ bool is_searched_name(const char* processName, std::set<std::string> &names_list
     return false;
 }
 
-bool is_searched_pid(DWORD pid, std::set<std::string> &pids_list)
+bool is_searched_pid(long pid, std::set<std::string> &pids_list)
 {
     std::set<std::string>::iterator itr;
     for (itr = pids_list.begin(); itr != pids_list.end(); itr++) {
