@@ -16,3 +16,6 @@ Use recursive clone to get the repo together with all the submodules:
 <pre>
 git clone --recursive https://github.com/hasherezade/hollows_hunter.git
 </pre>
+Builds:
+-
+Download the latest [release](https://github.com/hasherezade/hollows_hunter/releases), or [read more](https://github.com/hasherezade/hollows_hunter/wiki#download).
