@@ -32,14 +32,15 @@ before_build:
     cmake .. -A x64 )
   - if [%env_arch%]==[x86] (
     cmake .. )
+  - cmake -DCMAKE_INSTALL_PREFIX:PATH=%APPVEYOR_BUILD_FOLDER%/%APPVEYOR_REPO_COMMIT% ..
   
 build_script:
   - cmake --build . --config %CONFIGURATION% --target install
   
 after_build:
   - mkdir %artifactName%
-  - cp *.dll %artifactName%
-  - cp *.exe %artifactName%
+  - cp %APPVEYOR_BUILD_FOLDER%/%APPVEYOR_REPO_COMMIT%/*.dll %artifactName%
+  - cp %APPVEYOR_BUILD_FOLDER%/%APPVEYOR_REPO_COMMIT%/*.exe %artifactName%
   - if [%CONFIGURATION%]==[Debug] (
     cp -r %CONFIGURATION%/* %artifactName% )
   - if [%CONFIGURATION%]==[Debug] (

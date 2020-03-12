@@ -42,23 +42,23 @@ set ( PESIEVE_LIB $<TARGET_FILE:pe-sieve> CACHE FILE "PE-sieve library path" )
 cmake_policy(SET CMP0015 NEW)
 LINK_DIRECTORIES ( ${PESIEVE_LIB} )
 add_executable ( ${PROJECT_NAME} ${hdrs} ${srcs} main.cpp )
-target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} "psapi.lib")
+target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} "psapi.lib" "ntdll.lib")
 
 # dependencies
 add_dependencies( ${PROJECT_NAME} ${M_PESIEVE} )
 
 #install
-INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_BINARY_DIR} COMPONENT ${PROJECT_NAME} )
+INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX} COMPONENT ${PROJECT_NAME} )
 
 # Setup testing
 if(HH_BUILD_TESTING)
 	enable_testing()
 	
 	# 0) does the application run
-	add_test (TestRuns ${CMAKE_BINARY_DIR}/hollows_hunter -?)
+	add_test (TestRuns ${CMAKE_INSTALL_PREFIX}/hollows_hunter -?)
 	set_tests_properties(TestRuns PROPERTIES PASS_REGULAR_EXPRESSION "HollowsHunter")
 	
 	# 1) false positives in a clean environment
-	add_test (TestFalsePositives ${CMAKE_BINARY_DIR}/hollows_hunter -json -dir scan_out)
+	add_test (TestFalsePositives ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out)
 	set_tests_properties(TestFalsePositives PROPERTIES PASS_REGULAR_EXPRESSION "\"susipcious_count\" : 0")
 endif()
