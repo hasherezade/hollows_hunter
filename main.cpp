@@ -16,6 +16,7 @@
 #define PARAM_SWITCH1 '/'
 #define PARAM_SWITCH2 '-'
 //scan options:
+#define PARAM_IAT "iat"
 #define PARAM_HOOKS "hooks"
 #define PARAM_SHELLCODE "shellc"
 #define PARAM_DATA "data"
@@ -111,7 +112,10 @@ void print_help()
         << "').\n\tExample: iexplore.exe"<< PARAM_LIST_SEPARATOR<<"firefox.exe\n";
 
     print_param_in_color(param_color, PARAM_HOOKS);
-    std::cout << "  : Detect hooks and in-memory patches.\n";
+    std::cout << "  : Detect inline hooks and in-memory patches.\n";
+
+    print_param_in_color(param_color, PARAM_IAT);
+    std::cout << "\t: Detect IAT hooks\n";
 
     print_param_in_color(param_color, PARAM_SHELLCODE);
     std::cout << "\t: Detect shellcode implants. (By default it detects PE only).\n";
@@ -407,6 +411,9 @@ int main(int argc, char *argv[])
         }
         else if (!strcmp(param, PARAM_DATA)) {
             hh_args.pesieve_args.data = true;
+        }
+        else if (!strcmp(param, PARAM_IAT)) {
+            hh_args.pesieve_args.iat = true;
         }
         else if (!strcmp(param, PARAM_DUMP_MODE) && (i + 1) < argc) {
             hh_args.pesieve_args.dump_mode = normalize_dump_mode(atoi(argv[i + 1]));
