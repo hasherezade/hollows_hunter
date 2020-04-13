@@ -45,6 +45,7 @@
 #define PARAM_HELP "help"
 #define PARAM_HELP2  "?"
 #define PARAM_VERSION  "version"
+#define PARAM_VERSION2  "ver"
 #define PARAM_DEFAULTS "default"
 
 void print_param_in_color(int color, const std::string &text)
@@ -377,7 +378,7 @@ int main(int argc, char *argv[])
             print_help();
             return 0;
         }
-        if (!strcmp(param, PARAM_VERSION)) {
+        if (!strcmp(param, PARAM_VERSION) || !strcmp(param, PARAM_VERSION2)) {
             print_version();
             return 0;
         }
