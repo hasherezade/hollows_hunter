@@ -48,6 +48,19 @@ std::string translate_imprec_mode(const pesieve::t_imprec_mode imprec_mode)
 	return "undefined";
 }
 
+std::string translate_iat_scan_mode(const pesieve::t_iat_scan_mode mode)
+{
+    switch (mode) {
+    case pesieve::PE_IATS_NONE:
+        return "none: do scan for IAT Hooks (default)";
+    case pesieve::PE_IATS_FILTERED:
+        return "filtered: scan for IAT Hooks, filter out system hooks";
+    case pesieve::PE_IATS_UNFILTERED:
+        return "unfiltered: scan for IAT Hooks, report all";
+    }
+    return "undefined";
+}
+
 std::string translate_modules_filter(DWORD m_filter)
 {
 	switch (m_filter) {

@@ -115,7 +115,11 @@ void print_help()
     std::cout << "  : Detect inline hooks and in-memory patches.\n";
 
     print_param_in_color(param_color, PARAM_IAT);
-    std::cout << "\t: Detect IAT hooks\n";
+    std::cout << " <*scan_mode>\n\t: Scan for IAT hooks.\n";
+    std::cout << "*scan_mode:\n";
+    for (size_t i = 0; i < pesieve::PE_IATS_MODES_COUNT; i++) {
+        std::cout << "\t" << i << " - " << translate_iat_scan_mode((pesieve::t_iat_scan_mode) i) << "\n";
+    }
 
     print_param_in_color(param_color, PARAM_SHELLCODE);
     std::cout << "\t: Detect shellcode implants. (By default it detects PE only).\n";
@@ -413,7 +417,14 @@ int main(int argc, char *argv[])
             hh_args.pesieve_args.data = true;
         }
         else if (!strcmp(param, PARAM_IAT)) {
-            hh_args.pesieve_args.iat = true;
+            hh_args.pesieve_args.iat = pesieve::PE_IATS_FILTERED;
+            if ((i + 1) < argc) {
+                char* mode_num = argv[i + 1];
+                if (isdigit(mode_num[0])) {
+                    hh_args.pesieve_args.iat = (pesieve::t_iat_scan_mode)atoi(mode_num);
+                    ++i;
+                }
+            }
         }
         else if (!strcmp(param, PARAM_DUMP_MODE) && (i + 1) < argc) {
             hh_args.pesieve_args.dump_mode = normalize_dump_mode(atoi(argv[i + 1]));

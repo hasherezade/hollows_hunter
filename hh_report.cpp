@@ -71,7 +71,7 @@ size_t HHScanReport::reportsToJSON(std::stringstream &stream, size_t level, cons
             OUT_PADDED(stream, level, "\"patched\" : ");
             stream << std::dec << pidToReport[pid].patched << ",\n";
         }
-        if (params.pesieve_args.iat) {
+        if (params.pesieve_args.iat != pesieve::PE_IATS_NONE) {
             OUT_PADDED(stream, level, "\"iat_hooked\" : ");
             stream << std::dec << pidToReport[pid].iat_hooked << ",\n";
         }
