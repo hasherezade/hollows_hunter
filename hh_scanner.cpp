@@ -272,7 +272,8 @@ void HHScanner::summarizeScan(HHScanReport *hh_report)
         }
     }
     if (hh_args.log) {
-        write_to_file("hollows_hunter.log", summary_str, true);
+        std::string report_path = join_path(this->outDir, "hollows_hunter.log");
+        write_to_file(report_path, summary_str, true);
     }
     if (hh_args.suspend_suspicious) {
         suspend_suspicious(hh_report->suspicious);
