@@ -20,6 +20,7 @@ set (srcs
 	params_info/pe_sieve_params_info.cpp
 	util/suspend.cpp
 	util/util.cpp
+	util/process_privilege.cpp
 )
 
 set (hdrs
@@ -32,6 +33,7 @@ set (hdrs
 	util/suspend.h
 	util/ntddk.h
 	util/util.h
+	util/process_privilege.h
 )
 
 # libs

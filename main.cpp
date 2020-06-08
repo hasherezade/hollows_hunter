@@ -10,8 +10,9 @@
 #include "hh_scanner.h"
 #include <pe_sieve_types.h>
 #include "params_info/pe_sieve_params_info.h"
+#include "util/process_privilege.h"
 
-#define VERSION "0.2.6"
+#define VERSION "0.2.6.2"
 
 #define PARAM_SWITCH1 '/'
 #define PARAM_SWITCH2 '-'
@@ -344,6 +345,7 @@ void print_unknown_param(const char *param)
 
 void deploy_scan(t_hh_params &hh_args)
 {
+    hhunter::util::set_debug_privilege();
     do {
         HHScanner hhunter(hh_args);
         HHScanReport *report = hhunter.scan();
