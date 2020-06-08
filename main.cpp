@@ -26,6 +26,7 @@
 #define PARAM_PNAME "pname"
 #define PARAM_PID "pid"
 #define PARAM_LOOP "loop"
+#define PARAM_REFLECTION "refl"
 
 //dump options:
 #define PARAM_IMP_REC "imp"
@@ -143,6 +144,9 @@ void print_help()
 
     print_param_in_color(param_color, PARAM_LOOP);
     std::cout << "   : Enable continuous scanning.\n";
+
+    print_param_in_color(param_color, PARAM_REFLECTION);
+    std::cout << "\t: Make a process reflection before scan.\n";
 
     print_in_color(separator_color, "\n---dump options---\n");
 
@@ -472,6 +476,9 @@ int main(int argc, char *argv[])
         }
         else if (!strcmp(param, PARAM_MINIDUMP)) {
             hh_args.pesieve_args.minidump = true;
+        }
+        else if (!strcmp(param, PARAM_REFLECTION)) {
+            hh_args.pesieve_args.make_reflection = true;
         }
         else if (strlen(argv[i]) > 0) {
             print_unknown_param(argv[i]);
