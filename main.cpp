@@ -12,7 +12,7 @@
 #include "params_info/pe_sieve_params_info.h"
 #include "util/process_privilege.h"
 
-#define VERSION "0.2.6.3"
+#define VERSION "0.2.7"
 
 #define PARAM_SWITCH1 '/'
 #define PARAM_SWITCH2 '-'
