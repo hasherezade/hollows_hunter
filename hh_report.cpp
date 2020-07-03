@@ -63,6 +63,8 @@ size_t HHScanReport::reportsToJSON(std::stringstream &stream, size_t level, cons
         stream << std::dec << pid << ",\n";
         OUT_PADDED(stream, level, "\"name\" : ");
         stream << "\"" << this->pidToName[pid] << "\",\n";
+        OUT_PADDED(stream, level, "\"is_managed\" : ");
+        stream << std::dec << pidToReport[pid].is_managed << ",\n";
         OUT_PADDED(stream, level, "\"replaced\" : ");
         stream << std::dec << pidToReport[pid].replaced << ",\n";
         OUT_PADDED(stream, level, "\"hdr_modified\" : ");
