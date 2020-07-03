@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <windows.h>
 
 #define BLACK 0
 #define DARK_BLUE 1
@@ -24,8 +25,8 @@
 #define YELLOW_ON_BLACK MAKE_COLOR(YELLOW, BLACK)
 #define RED_ON_BLACK MAKE_COLOR(RED, BLACK)
 
-void set_color(int color);
 
-void unset_color();
+WORD set_color(WORD color);
 
-void print_in_color(int color, const std::string &text);
+// sets a color and returns the previous color:
+void print_in_color(WORD color, const std::string &text);

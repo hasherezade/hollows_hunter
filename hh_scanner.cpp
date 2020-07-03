@@ -209,18 +209,18 @@ HHScanReport* HHScanner::scan()
         if (!hh_args.quiet) {
             if (report.scanned == 0) {
                 color = MAKE_COLOR(SILVER, DARK_RED);
-                set_color(color);
+                WORD old_color = set_color(color);
                 std::cout << ">> Could not access: " << std::dec << pid;
-                unset_color();
+                set_color(old_color);
                 std::cout << "\n";
             }
             if (report.suspicious) {
                 if (report.replaced || report.implanted) {
                     color = RED;
                 }
-                set_color(color);
+                WORD old_color = set_color(color);
                 std::cout << ">> Detected: " << std::dec << pid << std::endl;
-                unset_color();
+                set_color(old_color);
             }
         }
     }

@@ -5,23 +5,32 @@
 #include <iostream>
 #include <string>
 
-void set_color(int color)
+bool get_current_color(int descriptor, WORD &color)
 {
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    if (!GetConsoleScreenBufferInfo(GetStdHandle(descriptor), &info))
+        return false;
+    color = info.wAttributes;
+    return true;
+}
+
+WORD set_color(WORD color)
+{
+    WORD old_color = 7;
+    get_current_color(STD_OUTPUT_HANDLE, old_color);
+
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     FlushConsoleInputBuffer(hConsole);
     SetConsoleTextAttribute(hConsole, color);
-}
-
-void unset_color()
-{
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     FlushConsoleInputBuffer(hConsole);
-    SetConsoleTextAttribute(hConsole, 7); // back to default color
+
+    return old_color;
 }
 
-void print_in_color(int color, const std::string &text)
+void print_in_color(WORD color, const std::string &text)
 {
-    set_color(color);
+    WORD old_color = set_color(color);
     std::cout << text;
-    unset_color();
+    std::cout.flush();
+    set_color(old_color);
 }

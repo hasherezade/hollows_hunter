@@ -234,7 +234,7 @@ std::string is_enabled(bool param)
 
 void print_version()
 {
-    set_color(HILIGHTED_COLOR);
+    WORD old_color = set_color(HILIGHTED_COLOR);
     std::cout << "HollowsHunter v." << VERSION;
 #ifdef _WIN64
     std::cout << " (x64)" << "\n";
@@ -245,7 +245,7 @@ void print_version()
 
     DWORD pesieve_ver = PESieve_version();
     std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver) << "\n";
-    unset_color();
+    set_color(old_color);
 }
 
 void print_defaults()
