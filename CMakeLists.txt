@@ -18,6 +18,7 @@ set (srcs
 	hh_params.cpp
 	hh_report.cpp
 	params_info/pe_sieve_params_info.cpp
+	params_info/pe_sieve_params_print.cpp
 	util/suspend.cpp
 	util/util.cpp
 	util/process_privilege.cpp
@@ -29,7 +30,9 @@ set (hdrs
 	hh_scanner.h
 	hh_params.h
 	hh_report.h
+	params_info/param_base.h
 	params_info/pe_sieve_params_info.h
+	params_info/pe_sieve_params_print.h
 	util/suspend.h
 	util/ntddk.h
 	util/util.h

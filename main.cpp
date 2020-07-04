@@ -5,69 +5,14 @@
 
 #include <sstream>
 
-#include "term_util.h"
 #include "color_scheme.h"
 #include "hh_scanner.h"
 #include <pe_sieve_types.h>
-#include "params_info/pe_sieve_params_info.h"
+#include "params_info/pe_sieve_params_print.h"
+#include "params_info/param_base.h"
 #include "util/process_privilege.h"
 
 #define VERSION "0.2.7.1"
-
-#define PARAM_SWITCH1 '/'
-#define PARAM_SWITCH2 '-'
-//scan options:
-#define PARAM_IAT "iat"
-#define PARAM_HOOKS "hooks"
-#define PARAM_SHELLCODE "shellc"
-#define PARAM_DATA "data"
-#define PARAM_MODULES_FILTER "mfilter"
-#define PARAM_MODULES_IGNORE "mignore"
-#define PARAM_PNAME "pname"
-#define PARAM_PID "pid"
-#define PARAM_LOOP "loop"
-#define PARAM_REFLECTION "refl"
-#define PARAM_DOTNET_POLICY "dnet"
-
-//dump options:
-#define PARAM_IMP_REC "imp"
-#define PARAM_DUMP_MODE "dmode"
-
-//output options:
-#define PARAM_QUIET "quiet"
-#define PARAM_OUT_FILTER "ofilter"
-#define PARAM_SUSPEND "suspend"
-#define PARAM_KILL "kill"
-#define PARAM_UNIQUE_DIR "uniqd"
-#define PARAM_DIR "dir"
-#define PARAM_MINIDUMP "minidmp"
-#define PARAM_LOG "log"
-#define PARAM_JSON "json"
-
-//info:
-#define PARAM_HELP "help"
-#define PARAM_HELP2  "?"
-#define PARAM_VERSION  "version"
-#define PARAM_VERSION2  "ver"
-#define PARAM_DEFAULTS "default"
-
-void print_param_in_color(int color, const std::string &text)
-{
-    print_in_color(color, PARAM_SWITCH1 + text);
-}
-
-bool is_param(const char *str)
-{
-    if (!str) return false;
-
-    const size_t len = strlen(str);
-    if (len < 2) return false;
-
-    if (str[0] == PARAM_SWITCH1 || str[0] == PARAM_SWITCH2) {
-        return true;
-    }
-    return false;
-}
 
 //from paramkit
 size_t copyToCStr(char *buf, size_t buf_max, const std::string &value)
@@ -78,17 +23,6 @@ size_t copyToCStr(char *buf, size_t buf_max, const std::string &value)
     memcpy(buf, value.c_str(), len);
     buf[len] = '\0';
     return len;
-}
-
-void print_dnet_param(int param_color)
-{
-    print_param_in_color(param_color, PARAM_DOTNET_POLICY);
-    std::cout << " <*dotnet_policy>\n\t: Set the policy for scanning managed processes (.NET).\n";;
-    std::cout << "*dotnet_policy:\n";
-    for (size_t i = 0; i < pesieve::PE_DNET_COUNT; i++) {
-        pesieve::t_dotnet_policy mode = (pesieve::t_dotnet_policy)(i);
-        std::cout << "\t" << mode << " - " << translate_dotnet_policy(mode) << "\n";
-    }
 }
 
 void print_logo()
@@ -130,65 +64,33 @@ void print_help()
     print_param_in_color(param_color, PARAM_HOOKS);
     std::cout << "  : Detect inline hooks and in-memory patches.\n";
 
-    print_param_in_color(param_color, PARAM_IAT);
-    std::cout << " <*scan_mode>\n\t: Scan for IAT hooks.\n";
-    std::cout << "*scan_mode:\n";
-    for (size_t i = 0; i < pesieve::PE_IATS_MODES_COUNT; i++) {
-        std::cout << "\t" << i << " - " << translate_iat_scan_mode((pesieve::t_iat_scan_mode) i) << "\n";
-    }
+    print_iat_param(param_color);
 
-    print_param_in_color(param_color, PARAM_SHELLCODE);
-    std::cout << "\t: Detect shellcode implants. (By default it detects PE only).\n";
+    print_shellc_param(param_color);
 
     print_param_in_color(param_color, PARAM_DATA);
     std::cout << "\t: If DEP is disabled scan also non-executable memory\n\t(which potentially can be executed).\n";
 
 #ifdef _WIN64
-    print_param_in_color(param_color, PARAM_MODULES_FILTER);
-    std::cout << " <*mfilter_id>\n\t: Filter the scanned modules.\n";
-    std::cout << "*mfilter_id:\n";
-    for (size_t i = 0; i <= LIST_MODULES_ALL; i++) {
-        std::cout << "\t" << i << " - " << translate_modules_filter(i) << "\n";
-    }
+    print_module_filter_param(param_color);
 #endif
-    print_param_in_color(param_color, PARAM_MODULES_IGNORE);
-    std::cout << " <module_name>\n\t: Do not scan module/s with given name/s (separated by '" << PARAM_LIST_SEPARATOR << "').\n"
-        "\t  Example: kernel32.dll" << PARAM_LIST_SEPARATOR << "user32.dll\n";
+
+    print_mignore_param(param_color);
 
     print_param_in_color(param_color, PARAM_LOOP);
     std::cout << "   : Enable continuous scanning.\n";
 
-    print_param_in_color(param_color, PARAM_REFLECTION);
-    std::cout << "\t: Make a process reflection before scan.\n";
-
+    print_refl_param(param_color);
     print_dnet_param(param_color);
 
     print_in_color(separator_color, "\n---dump options---\n");
 
-    print_param_in_color(param_color, PARAM_IMP_REC);
-    std::cout << " <*imprec_mode>\n\t: Set in which mode the ImportTable should be recovered.\n";;
-    std::cout << "*imprec_mode:\n";
-    for (size_t i = 0; i < pesieve::PE_IMPREC_MODES_COUNT; i++) {
-        pesieve::t_imprec_mode mode = (pesieve::t_imprec_mode)(i);
-        std::cout << "\t" << mode << " - " << translate_imprec_mode(mode) << "\n";
-    }
-
-    print_param_in_color(param_color, PARAM_DUMP_MODE);
-    std::cout << " <*dump_mode>\n\t: Set in which mode the detected PE files should be dumped.\n";
-    std::cout << "*dump_mode:\n";
-    for (size_t i = 0; i < 4; i++) {
-        std::cout << "\t" << i << " - " << translate_dump_mode(i) << "\n";
-    }
+    print_imprec_param(param_color);
+    print_dmode_param(param_color);
 
     print_in_color(separator_color, "\n---output options---\n");
 
-    print_param_in_color(param_color, PARAM_OUT_FILTER);
-    std::cout << " <*ofilter_id>\n\t: Filter the dumped output.\n";
-    std::cout << "*ofilter_id:\n";
-    for (size_t i = 0; i < pesieve::OUT_FILTERS_COUNT; i++) {
-        pesieve::t_output_filter mode = (pesieve::t_output_filter)(i);
-        std::cout << "\t" << mode << " - " << translate_out_filter(mode) << "\n";
-    }
+    print_out_filter_param(param_color);
 
     print_param_in_color(param_color, PARAM_DIR);
     std::cout << " <output_dir>\n\t: Set a root directory for the output (default: current directory).\n";
