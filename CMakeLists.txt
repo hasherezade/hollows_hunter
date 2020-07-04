@@ -31,6 +31,7 @@ set (hdrs
 	hh_params.h
 	hh_report.h
 	params_info/param_base.h
+	params_info/params_list.h
 	params_info/pe_sieve_params_info.h
 	params_info/pe_sieve_params_print.h
 	util/suspend.h

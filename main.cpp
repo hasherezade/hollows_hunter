@@ -300,7 +300,6 @@ int main(int argc, char *argv[])
             print_defaults();
             return 0;
         }
-
         if (get_param(argc, argv, param, i, 
             PARAM_IMP_REC,
             hh_args.pesieve_args.imprec_mode, 
@@ -375,6 +374,15 @@ int main(int argc, char *argv[])
         {
             continue;
         }
+        else if (get_param(argc, argv, param, i,
+            PARAM_REFLECTION,
+            hh_args.pesieve_args.make_reflection,
+            true,
+            info_req,
+            print_refl_param))
+        {
+            continue;
+        }
         else if (!strcmp(param, PARAM_LOG)) {
             hh_args.log = true;
         }
@@ -410,9 +418,6 @@ int main(int argc, char *argv[])
         }
         else if (!strcmp(param, PARAM_MINIDUMP)) {
             hh_args.pesieve_args.minidump = true;
-        }
-        else if (!strcmp(param, PARAM_REFLECTION)) {
-            hh_args.pesieve_args.make_reflection = true;
         }
         else if (!info_req && strlen(argv[i]) > 0) {
             print_unknown_param(argv[i]);
