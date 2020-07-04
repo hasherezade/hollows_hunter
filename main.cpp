@@ -14,6 +14,20 @@
 
 #define VERSION "0.2.7.2"
 
+void print_pid_param(int param_color)
+{
+    print_param_in_color(param_color, PARAM_PID);
+    std::cout << " <target_pid>\n\t: Scan only processes with given PIDs (dec or hex, separated by '" << PARAM_LIST_SEPARATOR
+        << "').\n\tExample: 5367" << PARAM_LIST_SEPARATOR << "0xa90\n";
+}
+
+void print_pname_param(int param_color)
+{
+    print_param_in_color(param_color, PARAM_PNAME);
+    std::cout << " <process_name>\n\t: Scan only processes with given names (separated by '" << PARAM_LIST_SEPARATOR
+        << "').\n\tExample: iexplore.exe" << PARAM_LIST_SEPARATOR << "firefox.exe\n";
+}
+
 void print_logo()
 {
     char logo2[] = ""
@@ -42,13 +56,8 @@ void print_help()
     print_in_color(hdr_color, "Optional: \n");
     print_in_color(separator_color, "\n---scan options---\n");
 
-    print_param_in_color(param_color, PARAM_PID);
-    std::cout << " <target_pid>\n\t: Scan only processes with given PIDs (dec or hex, separated by '" << PARAM_LIST_SEPARATOR
-        << "').\n\tExample: 5367" << PARAM_LIST_SEPARATOR << "0xa90\n";
-
-    print_param_in_color(param_color, PARAM_PNAME);
-    std::cout << " <process_name>\n\t: Scan only processes with given names (separated by '" << PARAM_LIST_SEPARATOR 
-        << "').\n\tExample: iexplore.exe"<< PARAM_LIST_SEPARATOR<<"firefox.exe\n";
+    print_pid_param(param_color);
+    print_pname_param(param_color);
 
     print_param_in_color(param_color, PARAM_HOOKS);
     std::cout << "  : Detect inline hooks and in-memory patches.\n";
@@ -300,7 +309,7 @@ int main(int argc, char *argv[])
             print_defaults();
             return 0;
         }
-        if (get_param(argc, argv, param, i, 
+        if (get_int_param(argc, argv, param, i, 
             PARAM_IMP_REC,
             hh_args.pesieve_args.imprec_mode, 
             pesieve::PE_IMPREC_AUTO, 
@@ -309,7 +318,7 @@ int main(int argc, char *argv[])
         {
             continue;
         }
-        else if (get_param<DWORD>(argc, argv, param, i,
+        else if (get_int_param<DWORD>(argc, argv, param, i,
             PARAM_MODULES_FILTER,
             hh_args.pesieve_args.modules_filter,
             LIST_MODULES_ALL,
@@ -318,9 +327,14 @@ int main(int argc, char *argv[])
         {
             continue;
         }
-        else if (!strcmp(param, PARAM_MODULES_IGNORE) && (i + 1) < argc) {
-            copyToCStr(hh_args.pesieve_args.modules_ignored, MAX_MODULE_BUF_LEN, argv[i + 1]);
-            i++;
+        else if (get_cstr_param(argc, argv, param, i,
+            PARAM_MODULES_IGNORE,
+            hh_args.pesieve_args.modules_ignored,
+            MAX_MODULE_BUF_LEN,
+            info_req,
+            print_mignore_param))
+        {
+            continue;
         }
         else if (!strcmp(param, PARAM_HOOKS)) {
             hh_args.pesieve_args.no_hooks = false;
@@ -328,7 +342,7 @@ int main(int argc, char *argv[])
         else if (!strcmp(param, PARAM_DATA)) {
             hh_args.pesieve_args.data = true;
         }
-        else if (get_param(argc, argv, param, i,
+        else if (get_int_param(argc, argv, param, i,
             PARAM_SHELLCODE,
             hh_args.pesieve_args.shellcode,
             true,
@@ -337,7 +351,7 @@ int main(int argc, char *argv[])
         {
             continue;
         }
-        else if (get_param(argc, argv, param, i,
+        else if (get_int_param(argc, argv, param, i,
             PARAM_IAT,
             hh_args.pesieve_args.iat,
             pesieve::PE_IATS_FILTERED,
@@ -346,7 +360,7 @@ int main(int argc, char *argv[])
         {
             continue;
         }
-        else if (get_param(argc, argv, param, i,
+        else if (get_int_param(argc, argv, param, i,
             PARAM_DOTNET_POLICY,
             hh_args.pesieve_args.dotnet_policy,
             pesieve::PE_DNET_SKIP_SHC,
@@ -355,7 +369,7 @@ int main(int argc, char *argv[])
         {
             continue;
         }
-        else if (get_param(argc, argv, param, i,
+        else if (get_int_param(argc, argv, param, i,
             PARAM_DUMP_MODE,
             hh_args.pesieve_args.dump_mode,
             pesieve::PE_DUMP_AUTO,
@@ -365,7 +379,7 @@ int main(int argc, char *argv[])
             hh_args.pesieve_args.dump_mode = normalize_dump_mode(hh_args.pesieve_args.dump_mode);
             continue;
         }
-        else if (get_param(argc, argv, param, i,
+        else if (get_int_param(argc, argv, param, i,
             PARAM_OUT_FILTER,
             hh_args.pesieve_args.out_filter,
             pesieve::OUT_FULL,
@@ -374,7 +388,7 @@ int main(int argc, char *argv[])
         {
             continue;
         }
-        else if (get_param(argc, argv, param, i,
+        else if (get_int_param(argc, argv, param, i,
             PARAM_REFLECTION,
             hh_args.pesieve_args.make_reflection,
             true,
@@ -398,13 +412,21 @@ int main(int argc, char *argv[])
         else if (!strcmp(param, PARAM_KILL)) {
             hh_args.kill_suspicious = true;
         }
-        else if (!strcmp(param, PARAM_PNAME) && (i + 1) < argc) {
-            hh_args.pname = argv[i + 1];
-            i++;
+        else if (get_string_param(argc, argv, param, i,
+            PARAM_PNAME,
+            hh_args.pname,
+            info_req,
+            print_pname_param))
+        {
+            continue;
         }
-        else if (!strcmp(param, PARAM_PID) && (i + 1) < argc) {
-            hh_args.pids = argv[i + 1];
-            i++;
+        else if (get_string_param(argc, argv, param, i,
+            PARAM_PID,
+            hh_args.pids,
+            info_req,
+            print_pid_param))
+        {
+            continue;
         }
         else if (!strcmp(param, PARAM_QUIET)) {
             hh_args.quiet = true;
