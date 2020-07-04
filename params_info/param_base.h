@@ -39,22 +39,22 @@ bool get_param(int argc, char *argv[], const char *param, int &param_i,
     const char *param_id, PARAM_T &out_val, const PARAM_T default_set, 
     bool &info_req, void(*callback)(int))
 {
-    if (!strcmp(param, param_id)) {
-        out_val = default_set;
-        if ((param_i + 1) < argc && !is_param(argv[param_i + 1])) {
-            char* mode_num = argv[param_i + 1];
-            if (isdigit(mode_num[0])) {
-                out_val = (PARAM_T)atoi(mode_num);
-            }
-            else {
-                if (callback) {
-                    callback(ERROR_COLOR);
-                }
-                info_req = true;
-            }
-            ++param_i;
-        }
-        return true;
+    if (strcmp(param, param_id) != 0) {
+        return false;
     }
-    return false;
+    out_val = default_set;
+    if ((param_i + 1) < argc && !is_param(argv[param_i + 1])) {
+        char* mode_num = argv[param_i + 1];
+        if (isdigit(mode_num[0])) {
+            out_val = (PARAM_T)atoi(mode_num);
+        }
+        else {
+            if (callback) {
+                callback(ERROR_COLOR);
+            }
+            info_req = true;
+        }
+        ++param_i;
+    }
+    return true;
 }
