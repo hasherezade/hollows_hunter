@@ -93,8 +93,9 @@ void print_logo()
         "       !!:  !!! !!:  !!! !!:  !!!   !!:   !!:      !!: :!!        \n"
         "        :   : :  :.:: :  ::    :     :    : :: ::   :   : :       \n";
     char *logo = logo2;
-    set_color(5);
+    WORD old_color = set_color(5);
     std::cout << "\n" << logo << std::endl;
+    set_color(old_color);
 }
 
 void print_help()
