@@ -14,17 +14,6 @@
 
 #define VERSION "0.2.7.1"
 
-//from paramkit
-size_t copyToCStr(char *buf, size_t buf_max, const std::string &value)
-{
-    size_t len = value.length() + 1;
-    if (len > buf_max) len = buf_max;
-
-    memcpy(buf, value.c_str(), len);
-    buf[len] = '\0';
-    return len;
-}
-
 void print_logo()
 {
     char logo2[] = ""
@@ -281,10 +270,11 @@ int main(int argc, char *argv[])
 {
     t_hh_params hh_args;
     hh_args_init(hh_args);
+    bool info_req = false;
 
     //Parse parameters
     for (int i = 1; i < argc; i++) {
-        if (!is_param(argv[i])) {
+        if (!info_req && !is_param(argv[i])) {
             print_logo();
             print_version();
             std::cout << "\n";
@@ -310,22 +300,24 @@ int main(int argc, char *argv[])
             print_defaults();
             return 0;
         }
-        else if (!strcmp(param, PARAM_IMP_REC)) {
-            hh_args.pesieve_args.imprec_mode = pesieve::PE_IMPREC_AUTO;
-            if ((i + 1) < argc) {
-                char* mode_num = argv[i + 1];
-                if (isdigit(mode_num[0])) {
-                    hh_args.pesieve_args.imprec_mode = normalize_imprec_mode(atoi(mode_num));
-                    ++i;
-                }
-            }
+
+        if (get_param(argc, argv, param, i, 
+            PARAM_IMP_REC,
+            hh_args.pesieve_args.imprec_mode, 
+            pesieve::PE_IMPREC_AUTO, 
+            info_req, 
+            print_imprec_param))
+        {
+            continue;
         }
-        else if (!strcmp(param, PARAM_MODULES_FILTER) && (i + 1) < argc) {
-            hh_args.pesieve_args.modules_filter = atoi(argv[i + 1]);
-            if (hh_args.pesieve_args.modules_filter > LIST_MODULES_ALL) {
-                hh_args.pesieve_args.modules_filter = LIST_MODULES_ALL;
-            }
-            i++;
+        else if (get_param<DWORD>(argc, argv, param, i,
+            PARAM_MODULES_FILTER,
+            hh_args.pesieve_args.modules_filter,
+            LIST_MODULES_ALL,
+            info_req,
+            print_module_filter_param))
+        {
+            continue;
         }
         else if (!strcmp(param, PARAM_MODULES_IGNORE) && (i + 1) < argc) {
             copyToCStr(hh_args.pesieve_args.modules_ignored, MAX_MODULE_BUF_LEN, argv[i + 1]);
@@ -334,39 +326,54 @@ int main(int argc, char *argv[])
         else if (!strcmp(param, PARAM_HOOKS)) {
             hh_args.pesieve_args.no_hooks = false;
         }
-        else if (!strcmp(param, PARAM_SHELLCODE)) {
-            hh_args.pesieve_args.shellcode = true;
-        }
         else if (!strcmp(param, PARAM_DATA)) {
             hh_args.pesieve_args.data = true;
         }
-        else if (!strcmp(param, PARAM_IAT)) {
-            hh_args.pesieve_args.iat = pesieve::PE_IATS_FILTERED;
-            if ((i + 1) < argc) {
-                char* mode_num = argv[i + 1];
-                if (isdigit(mode_num[0])) {
-                    hh_args.pesieve_args.iat = (pesieve::t_iat_scan_mode)atoi(mode_num);
-                    ++i;
-                }
-            }
+        else if (get_param(argc, argv, param, i,
+            PARAM_SHELLCODE,
+            hh_args.pesieve_args.shellcode,
+            true,
+            info_req,
+            print_shellc_param))
+        {
+            continue;
         }
-        else if (!strcmp(param, PARAM_DOTNET_POLICY)) {
-            hh_args.pesieve_args.dotnet_policy = pesieve::PE_DNET_SKIP_SHC;
-            if ((i + 1) < argc) {
-                char* mode_num = argv[i + 1];
-                if (isdigit(mode_num[0])) {
-                    hh_args.pesieve_args.dotnet_policy = (pesieve::t_dotnet_policy)atoi(mode_num);
-                }
-                ++i;
-            }
+        else if (get_param(argc, argv, param, i,
+            PARAM_IAT,
+            hh_args.pesieve_args.iat,
+            pesieve::PE_IATS_FILTERED,
+            info_req,
+            print_iat_param))
+        {
+            continue;
         }
-        else if (!strcmp(param, PARAM_DUMP_MODE) && (i + 1) < argc) {
-            hh_args.pesieve_args.dump_mode = normalize_dump_mode(atoi(argv[i + 1]));
-            i++;
+        else if (get_param(argc, argv, param, i,
+            PARAM_DOTNET_POLICY,
+            hh_args.pesieve_args.dotnet_policy,
+            pesieve::PE_DNET_SKIP_SHC,
+            info_req,
+            print_dnet_param))
+        {
+            continue;
         }
-        else if (!strcmp(param, PARAM_OUT_FILTER) && (i + 1) < argc) {
-            hh_args.pesieve_args.out_filter = static_cast<pesieve::t_output_filter>(atoi(argv[i + 1]));
-            i++;
+        else if (get_param(argc, argv, param, i,
+            PARAM_DUMP_MODE,
+            hh_args.pesieve_args.dump_mode,
+            pesieve::PE_DUMP_AUTO,
+            info_req,
+            print_dmode_param))
+        {
+            hh_args.pesieve_args.dump_mode = normalize_dump_mode(hh_args.pesieve_args.dump_mode);
+            continue;
+        }
+        else if (get_param(argc, argv, param, i,
+            PARAM_OUT_FILTER,
+            hh_args.pesieve_args.out_filter,
+            pesieve::OUT_FULL,
+            info_req,
+            print_out_filter_param))
+        {
+            continue;
         }
         else if (!strcmp(param, PARAM_LOG)) {
             hh_args.log = true;
@@ -407,14 +414,16 @@ int main(int argc, char *argv[])
         else if (!strcmp(param, PARAM_REFLECTION)) {
             hh_args.pesieve_args.make_reflection = true;
         }
-        else if (strlen(argv[i]) > 0) {
+        else if (!info_req && strlen(argv[i]) > 0) {
             print_unknown_param(argv[i]);
             print_in_color(HILIGHTED_COLOR, "Available parameters:\n\n");
             print_help();
             return 0;
         }
     }
-
+    if (info_req) {
+        return 0;
+    }
     print_version();
     deploy_scan(hh_args);
     return 0;

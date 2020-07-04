@@ -1,5 +1,6 @@
 #pragma once
 
+#define ERROR_COLOR 0x0c
 #define WARNING_COLOR 0x0c
 #define HILIGHTED_COLOR 0x0f
 
