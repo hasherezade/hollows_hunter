@@ -27,6 +27,7 @@
 #define PARAM_PID "pid"
 #define PARAM_LOOP "loop"
 #define PARAM_REFLECTION "refl"
+#define PARAM_DOTNET_POLICY "dnet"
 
 //dump options:
 #define PARAM_IMP_REC "imp"
@@ -77,6 +78,17 @@ size_t copyToCStr(char *buf, size_t buf_max, const std::string &value)
     memcpy(buf, value.c_str(), len);
     buf[len] = '\0';
     return len;
+}
+
+void print_dnet_param(int param_color)
+{
+    print_param_in_color(param_color, PARAM_DOTNET_POLICY);
+    std::cout << " <*dotnet_policy>\n\t: Set the policy for scanning managed processes (.NET).\n";;
+    std::cout << "*dotnet_policy:\n";
+    for (size_t i = 0; i < pesieve::PE_DNET_COUNT; i++) {
+        pesieve::t_dotnet_policy mode = (pesieve::t_dotnet_policy)(i);
+        std::cout << "\t" << mode << " - " << translate_dotnet_policy(mode) << "\n";
+    }
 }
 
 void print_logo()
@@ -148,6 +160,8 @@ void print_help()
 
     print_param_in_color(param_color, PARAM_REFLECTION);
     std::cout << "\t: Make a process reflection before scan.\n";
+
+    print_dnet_param(param_color);
 
     print_in_color(separator_color, "\n---dump options---\n");
 
@@ -432,6 +446,16 @@ int main(int argc, char *argv[])
                     hh_args.pesieve_args.iat = (pesieve::t_iat_scan_mode)atoi(mode_num);
                     ++i;
                 }
+            }
+        }
+        else if (!strcmp(param, PARAM_DOTNET_POLICY)) {
+            hh_args.pesieve_args.dotnet_policy = pesieve::PE_DNET_SKIP_SHC;
+            if ((i + 1) < argc) {
+                char* mode_num = argv[i + 1];
+                if (isdigit(mode_num[0])) {
+                    hh_args.pesieve_args.dotnet_policy = (pesieve::t_dotnet_policy)atoi(mode_num);
+                }
+                ++i;
             }
         }
         else if (!strcmp(param, PARAM_DUMP_MODE) && (i + 1) < argc) {
