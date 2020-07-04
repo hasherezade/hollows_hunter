@@ -258,7 +258,7 @@ void print_version()
 #endif
     std::cout << "Built on: " << __DATE__ << "\n\n";
 
-    DWORD pesieve_ver = PESieve_version();
+    DWORD pesieve_ver = PESieve_version;
     std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver) << "\n";
     set_color(old_color);
 }
