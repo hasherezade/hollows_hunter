@@ -66,8 +66,7 @@ void print_help()
 
     print_shellc_param(param_color);
 
-    print_param_in_color(param_color, PARAM_DATA);
-    std::cout << "\t: If DEP is disabled scan also non-executable memory\n\t(which potentially can be executed).\n";
+    print_data_param(param_color);
 
 #ifdef _WIN64
     print_module_filter_param(param_color);
@@ -339,8 +338,14 @@ int main(int argc, char *argv[])
         else if (!strcmp(param, PARAM_HOOKS)) {
             hh_args.pesieve_args.no_hooks = false;
         }
-        else if (!strcmp(param, PARAM_DATA)) {
-            hh_args.pesieve_args.data = true;
+        else if (get_int_param(argc, argv, param, i,
+            PARAM_DATA,
+            hh_args.pesieve_args.data,
+            pesieve::PE_DATA_SCAN_NO_DEP,
+            info_req,
+            print_data_param))
+        {
+            continue;
         }
         else if (get_int_param(argc, argv, param, i,
             PARAM_SHELLCODE,

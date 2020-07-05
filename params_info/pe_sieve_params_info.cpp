@@ -78,32 +78,44 @@ std::string translate_dotnet_policy(const pesieve::t_dotnet_policy &mode)
 
 std::string translate_modules_filter(DWORD m_filter)
 {
-	switch (m_filter) {
-	case LIST_MODULES_DEFAULT:
-		return "no filter (as the scanner)";
-	case LIST_MODULES_32BIT:
-		return "32bit only";
-	case LIST_MODULES_64BIT:
-		return "64bit only";
-	case LIST_MODULES_ALL:
-		return "all accessible (default)";
-	}
-	return "undefined";
+    switch (m_filter) {
+    case LIST_MODULES_DEFAULT:
+        return "no filter (as the scanner)";
+    case LIST_MODULES_32BIT:
+        return "32bit only";
+    case LIST_MODULES_64BIT:
+        return "64bit only";
+    case LIST_MODULES_ALL:
+        return "all accessible (default)";
+    }
+    return "undefined";
 }
 
 pesieve::t_imprec_mode normalize_imprec_mode(size_t mode_id)
 {
-	if (mode_id > pesieve::PE_IMPREC_MODES_COUNT) {
-		return pesieve::PE_IMPREC_NONE;
-	}
-	return (t_imprec_mode)mode_id;
+    if (mode_id > pesieve::PE_IMPREC_MODES_COUNT) {
+        return pesieve::PE_IMPREC_NONE;
+    }
+    return (t_imprec_mode)mode_id;
 }
 
 pesieve::t_dump_mode normalize_dump_mode(size_t mode_id)
 {
-	if (mode_id > pesieve::PE_DUMP_MODES_COUNT) {
-		return pesieve::PE_DUMP_AUTO;
-	}
-	return (pesieve::t_dump_mode) mode_id;
+    if (mode_id > pesieve::PE_DUMP_MODES_COUNT) {
+        return pesieve::PE_DUMP_AUTO;
+    }
+    return (pesieve::t_dump_mode) mode_id;
 }
 
+std::string translate_data_mode(const pesieve::t_data_scan_mode &mode)
+{
+    switch (mode) {
+    case pesieve::PE_DATA_NO_SCAN:
+        return "none: do not scan non-executable pages";
+    case pesieve::PE_DATA_SCAN_NO_DEP:
+        return "if no DEP: scan non-executable if DEP is disabled";
+    case pesieve::PE_DNET_SCAN_ALWAYS:
+        return "always: scan non-executable pages unconditionally";
+    }
+    return "undefined";
+}

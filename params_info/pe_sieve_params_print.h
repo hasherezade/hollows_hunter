@@ -24,3 +24,4 @@ void print_mignore_param(int param_color);
 
 void print_refl_param(int param_color);
 
+void print_data_param(int param_color);

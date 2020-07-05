@@ -13,3 +13,4 @@ std::string translate_dotnet_policy(const pesieve::t_dotnet_policy &mode);
 pesieve::t_imprec_mode normalize_imprec_mode(size_t mode_id);
 pesieve::t_dump_mode normalize_dump_mode(size_t mode_id);
 
+std::string translate_data_mode(const pesieve::t_data_scan_mode &mode);
