@@ -42,7 +42,16 @@ void print_logo()
         "       !!:  !!! !!:  !!! !!:  !!!   !!:   !!:      !!: :!!        \n"
         "        :   : :  :.:: :  ::    :     :    : :: ::   :   : :       \n";
     char *logo = logo2;
-    WORD old_color = set_color(5);
+    WORD logo_color = DARK_MAGENTA;
+
+    WORD curr_color = 0;
+    if (get_current_color(STD_OUTPUT_HANDLE, curr_color)) {
+        WORD current_bg = GET_BG_COLOR(curr_color);
+        if (current_bg == logo_color) {
+            logo_color = MAKE_COLOR(CYAN, current_bg);
+        }
+    }
+    WORD old_color = set_color(logo_color);
     std::cout << "\n" << logo << std::endl;
     set_color(old_color);
 }

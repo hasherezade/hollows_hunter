@@ -21,10 +21,12 @@
 #define WHITE 0xF
 
 #define MAKE_COLOR(fg_color, bg_color) (fg_color | (bg_color << 4))
+#define GET_BG_COLOR(color) (color >> 4)
 
 #define YELLOW_ON_BLACK MAKE_COLOR(YELLOW, BLACK)
 #define RED_ON_BLACK MAKE_COLOR(RED, BLACK)
 
+bool get_current_color(int descriptor, WORD& color);
 
 WORD set_color(WORD color);
 
