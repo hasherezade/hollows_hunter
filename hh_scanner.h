@@ -13,6 +13,9 @@
 
 class HHScanner {
 public:
+    // is the scanner best suited for the OS bitness
+    static bool isScannerCompatibile();
+
     HHScanner(t_hh_params &_args)
         : hh_args(_args)
     {

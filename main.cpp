@@ -14,6 +14,12 @@
 
 #define VERSION "0.2.7.2"
 
+
+void compatibility_alert()
+{
+    print_in_color(WARNING_COLOR, "[!] Scanner mismatch! For a 64-bit OS, use the 64-bit version of the scanner!\n");
+}
+
 void print_pid_param(int param_color)
 {
     print_param_in_color(param_color, PARAM_PID);
@@ -26,34 +32,6 @@ void print_pname_param(int param_color)
     print_param_in_color(param_color, PARAM_PNAME);
     std::cout << " <process_name>\n\t: Scan only processes with given names (separated by '" << PARAM_LIST_SEPARATOR
         << "').\n\tExample: iexplore.exe" << PARAM_LIST_SEPARATOR << "firefox.exe\n";
-}
-
-bool is_wow_64()
-{
-    FARPROC procPtr = GetProcAddress(GetModuleHandleA("kernel32"), "IsWow64Process");
-    if (!procPtr) {
-        //this system does not have a function IsWow64Process
-        return false;
-    }
-    BOOL(WINAPI * is_process_wow64)(IN HANDLE, OUT PBOOL)
-        = (BOOL(WINAPI * )(IN HANDLE, OUT PBOOL))procPtr;
-
-    BOOL isCurrWow64 = FALSE;
-    if (!is_process_wow64(GetCurrentProcess(), &isCurrWow64)) {
-        return false;
-    }
-    return isCurrWow64 ? true : false;
-}
-
-bool check_compatibility()
-{
-#ifndef _WIN64
-    if (is_wow_64()) {
-        print_in_color(WARNING_COLOR, "[!] Scanner mismatch! Use the 64bit version of the scanner!\n");
-        return false;
-    }
-#endif
-    return true;
 }
 
 void print_logo()
@@ -160,7 +138,9 @@ void print_help()
     print_param_in_color(param_color, PARAM_DEFAULTS);
     std::cout << " : Print information about the default settings.\n";
     std::cout << "---" << std::endl;
-    check_compatibility();
+    if (!HHScanner::isScannerCompatibile()) {
+        compatibility_alert();
+    }
 }
 
 std::string version_to_str(DWORD version)
@@ -309,7 +289,9 @@ void deploy_scan(t_hh_params &hh_args)
             hhunter.summarizeScan(report);
             delete report;
         }
-        check_compatibility();
+        if (!HHScanner::isScannerCompatibile()) {
+            compatibility_alert();
+        }
     } while (hh_args.loop_scanning);
 }
 
