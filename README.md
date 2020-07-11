@@ -7,15 +7,18 @@
 
 Scans all running processes. Recognizes and dumps a variety of potentially malicious implants (replaced/implanted PEs, shellcodes, hooks, in-memory patches).
 
-Uses [PE-sieve](https://github.com/hasherezade/pe-sieve.git) ([DLL version](https://github.com/hasherezade/pe-sieve/wiki/2.-How-to-build)).
+📦 Uses library: [PE-sieve](https://github.com/hasherezade/pe-sieve.git) (the [DLL version](https://github.com/hasherezade/pe-sieve/wiki/2.-How-to-build)).
 
 📖 [Read Wiki](https://github.com/hasherezade/hollows_hunter/wiki)
 
-## Clone
+Clone
+-
 Use recursive clone to get the repo together with all the submodules:
-<pre>
+
+```console
 git clone --recursive https://github.com/hasherezade/hollows_hunter.git
-</pre>
+```
+
 Builds:
 -
 Download the latest [release](https://github.com/hasherezade/hollows_hunter/releases), or [read more](https://github.com/hasherezade/hollows_hunter/wiki#download).
