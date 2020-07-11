@@ -98,3 +98,27 @@ void print_data_param(int param_color)
         std::cout << "\t" << i << " - " << translate_data_mode((pesieve::t_data_scan_mode) i) << "\n";
     }
 }
+
+void print_json_param(int param_color)
+{
+    print_param_in_color(param_color, PARAM_JSON);
+    std::cout << "\t: Print the JSON report as the summary.\n";
+}
+
+void print_quiet_param(int param_color)
+{
+    print_param_in_color(param_color, PARAM_QUIET);
+    std::cout << "\t: Print only the summary. Do not log on stdout during the scan.\n";
+}
+
+void print_minidump_param(int param_color)
+{
+    print_param_in_color(param_color, PARAM_MINIDUMP);
+    std::cout << ": Create a minidump of the full suspicious process.\n";
+}
+
+void print_output_dir_param(int param_color)
+{
+    print_param_in_color(param_color, PARAM_DIR);
+    std::cout << " <output_dir>\n\t: Set a root directory for the output (default: current directory).\n";
+}

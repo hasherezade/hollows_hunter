@@ -34,6 +34,43 @@ void print_pname_param(int param_color)
         << "').\n\tExample: iexplore.exe" << PARAM_LIST_SEPARATOR << "firefox.exe\n";
 }
 
+void print_hooks_param(int param_color)
+{
+    print_param_in_color(param_color, PARAM_HOOKS);
+    std::cout << "  : Detect inline hooks and in-memory patches.\n";
+}
+
+void print_uniqd_param(int param_color)
+{
+    print_param_in_color(param_color, PARAM_UNIQUE_DIR);
+    std::cout << "\t: Make a unique, timestamped directory for the output of each scan.\n"
+        << "\t(Prevents overwriting results from previous scans)\n";
+}
+
+void print_suspend_param(int param_color)
+{
+    print_param_in_color(param_color, PARAM_SUSPEND);
+    std::cout << ": Suspend processes detected as suspicious\n";
+}
+
+void print_kill_param(int param_color)
+{
+    print_param_in_color(param_color, PARAM_KILL);
+    std::cout << "   : Kill processes detected as suspicious\n";
+}
+
+void print_log_param(int param_color)
+{
+    print_param_in_color(param_color, PARAM_LOG);
+    std::cout << "\t: Append each scan summary to the log.\n";
+}
+
+void print_loop_param(int param_color)
+{
+    print_param_in_color(param_color, PARAM_LOOP);
+    std::cout << "   : Enable continuous scanning.\n";
+}
+
 void print_logo()
 {
     char logo2[] = ""
@@ -73,14 +110,9 @@ void print_help()
 
     print_pid_param(param_color);
     print_pname_param(param_color);
-
-    print_param_in_color(param_color, PARAM_HOOKS);
-    std::cout << "  : Detect inline hooks and in-memory patches.\n";
-
+    print_hooks_param(param_color);
     print_iat_param(param_color);
-
     print_shellc_param(param_color);
-
     print_data_param(param_color);
 
 #ifdef _WIN64
@@ -88,9 +120,7 @@ void print_help()
 #endif
 
     print_mignore_param(param_color);
-
-    print_param_in_color(param_color, PARAM_LOOP);
-    std::cout << "   : Enable continuous scanning.\n";
+    print_loop_param(param_color);
 
     print_refl_param(param_color);
     print_dnet_param(param_color);
@@ -103,31 +133,17 @@ void print_help()
     print_in_color(separator_color, "\n---output options---\n");
 
     print_out_filter_param(param_color);
+    print_output_dir_param(param_color);
+    print_uniqd_param(param_color);
+    print_minidump_param(param_color);
 
-    print_param_in_color(param_color, PARAM_DIR);
-    std::cout << " <output_dir>\n\t: Set a root directory for the output (default: current directory).\n";
+    print_suspend_param(param_color);
+    print_kill_param(param_color);
 
-    print_param_in_color(param_color, PARAM_UNIQUE_DIR);
-    std::cout << "\t: Make a unique, timestamped directory for the output of each scan.\n"
-        << "\t(Prevents overwriting results from previous scans)\n";
+    print_quiet_param(param_color);
+    print_log_param(param_color);
 
-    print_param_in_color(param_color, PARAM_MINIDUMP);
-    std::cout << ": Make a minidump of each detected process.\n";
-
-    print_param_in_color(param_color, PARAM_SUSPEND);
-    std::cout << ": Suspend processes detected as suspicious\n";
-
-    print_param_in_color(param_color, PARAM_KILL);
-    std::cout << "   : Kill processes detected as suspicious\n";
-
-    print_param_in_color(param_color, PARAM_QUIET);
-    std::cout << "\t: Display only the summary and minimalistic info.\n";
-
-    print_param_in_color(param_color, PARAM_LOG);
-    std::cout << "\t: Append each scan summary to the log.\n";
-
-    print_param_in_color(param_color, PARAM_JSON);
-    std::cout << "\t: Display JSON report as the summary.\n";
+    print_json_param(param_color);
 
     print_in_color(hdr_color, "\nInfo: \n\n");
 
@@ -356,8 +372,16 @@ int main(int argc, char *argv[])
         {
             continue;
         }
-        else if (!strcmp(param, PARAM_HOOKS)) {
-            hh_args.pesieve_args.no_hooks = false;
+        else if (get_int_param(argc, argv, param, i,
+            PARAM_HOOKS,
+            hh_args.pesieve_args.no_hooks,
+            true,
+            info_req,
+            print_hooks_param))
+        {
+            //the HH argument is "hooks" and the PE-sieve param is "no_hooks", so we need to negate what we've got
+            hh_args.pesieve_args.no_hooks = !hh_args.pesieve_args.no_hooks;
+            continue;
         }
         else if (get_int_param(argc, argv, param, i,
             PARAM_DATA,
@@ -423,20 +447,50 @@ int main(int argc, char *argv[])
         {
             continue;
         }
-        else if (!strcmp(param, PARAM_LOG)) {
-            hh_args.log = true;
+        else if (get_int_param(argc, argv, param, i,
+            PARAM_LOG,
+            hh_args.log,
+            true,
+            info_req,
+            print_log_param))
+        {
+            continue;
         }
-        else if (!strcmp(param, PARAM_JSON)) {
-            hh_args.json_output = true;
+        else if (get_int_param(argc, argv, param, i,
+            PARAM_JSON,
+            hh_args.json_output,
+            true,
+            info_req,
+            print_json_param))
+        {
+            continue;
         }
-        else if (!strcmp(param, PARAM_LOOP)) {
-            hh_args.loop_scanning = true;
+        else if (get_int_param(argc, argv, param, i,
+            PARAM_LOOP,
+            hh_args.loop_scanning,
+            true,
+            info_req,
+            print_loop_param))
+        {
+            continue;
         }
-        else if (!strcmp(param, PARAM_SUSPEND)) {
-            hh_args.suspend_suspicious = true;
+        else if (get_int_param(argc, argv, param, i,
+            PARAM_SUSPEND,
+            hh_args.suspend_suspicious,
+            true,
+            info_req,
+            print_suspend_param))
+        {
+            continue;
         }
-        else if (!strcmp(param, PARAM_KILL)) {
-            hh_args.kill_suspicious = true;
+        else if (get_int_param(argc, argv, param, i,
+            PARAM_KILL,
+            hh_args.kill_suspicious,
+            true,
+            info_req,
+            print_kill_param))
+        {
+            continue;
         }
         else if (get_string_param(argc, argv, param, i,
             PARAM_PNAME,
@@ -454,18 +508,41 @@ int main(int argc, char *argv[])
         {
             continue;
         }
-        else if (!strcmp(param, PARAM_QUIET)) {
-            hh_args.quiet = true;
+        else if (get_int_param(argc, argv, param, i,
+            PARAM_QUIET,
+            hh_args.quiet,
+            true,
+            info_req,
+            print_quiet_param))
+        {
+            continue;
         }
-        else if (!strcmp(param, PARAM_UNIQUE_DIR)) {
-            hh_args.unique_dir = true;
+        else if (get_int_param(argc, argv, param, i,
+            PARAM_UNIQUE_DIR,
+            hh_args.unique_dir,
+            true,
+            info_req,
+            print_uniqd_param))
+        {
+            continue;
         }
-        else if (!strcmp(param, PARAM_DIR) && (i + 1) < argc) {
-            hh_args.out_dir = argv[i + 1];
-            ++i;
+        else if (get_string_param(argc, argv, param, i,
+            PARAM_DIR,
+            hh_args.out_dir,
+            info_req,
+            print_output_dir_param))
+        {
+            continue;
         }
-        else if (!strcmp(param, PARAM_MINIDUMP)) {
-            hh_args.pesieve_args.minidump = true;
+        //get_string_param
+        else if (get_int_param(argc, argv, param, i,
+            PARAM_MINIDUMP,
+            hh_args.pesieve_args.minidump,
+            true,
+            info_req,
+            print_minidump_param))
+        {
+            continue;
         }
         else if (!info_req && strlen(argv[i]) > 0) {
             print_unknown_param(argv[i]);
