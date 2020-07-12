@@ -39,7 +39,7 @@ size_t HHScanReport::reportsToString(std::stringstream &stream)
     size_t printed = 0;
     size_t counter = 0;
     const size_t max_len = size_t(std::floor(std::log10(double(suspicious.size() - 1))) + 1);
-    for (itr = this->suspicious.begin(); itr != suspicious.end(); itr++) {
+    for (itr = this->suspicious.begin(); itr != suspicious.end(); ++itr) {
         DWORD pid = *itr;
         stream << "[" << std::setw(max_len) << counter++ << "]: PID: " << std::dec << pid << ", ";
         stream << "Name: " << this->pidToName[pid] << "\n";

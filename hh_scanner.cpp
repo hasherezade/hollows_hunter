@@ -91,7 +91,7 @@ size_t suspend_suspicious(std::vector<DWORD> &suspicious_pids)
 {
     size_t done = 0;
     std::vector<DWORD>::iterator itr;
-    for (itr = suspicious_pids.begin(); itr != suspicious_pids.end(); itr++) {
+    for (itr = suspicious_pids.begin(); itr != suspicious_pids.end(); ++itr) {
         DWORD pid = *itr;
         if (!suspend_process(pid)) {
             std::cerr << "Could not suspend the process. PID = " << pid << std::endl;
@@ -124,7 +124,7 @@ size_t kill_suspicious(std::vector<DWORD> &suspicious_pids)
 bool is_searched_name(const char* processName, std::set<std::string> &names_list)
 {
     std::set<std::string>::iterator itr;
-    for (itr = names_list.begin(); itr != names_list.end(); itr++) {
+    for (itr = names_list.begin(); itr != names_list.end(); ++itr) {
         const char* searchedName = itr->c_str();
         if (_stricmp(processName, searchedName) == 0) {
             return true;
@@ -136,7 +136,7 @@ bool is_searched_name(const char* processName, std::set<std::string> &names_list
 bool is_searched_pid(long pid, std::set<std::string> &pids_list)
 {
     std::set<std::string>::iterator itr;
-    for (itr = pids_list.begin(); itr != pids_list.end(); itr++) {
+    for (itr = pids_list.begin(); itr != pids_list.end(); ++itr) {
         const char* sPid = itr->c_str();
         long number = get_number(sPid);
         if (pid == number) {
@@ -177,7 +177,7 @@ std::string list_to_str(std::set<std::string> &list)
     for (itr = list.begin(); itr != list.end(); ) {
         const std::string &next_str = *itr;
         stream << next_str;
-        itr++;
+        ++itr;
         if (itr != list.end()) {
             stream << ", ";
         }
