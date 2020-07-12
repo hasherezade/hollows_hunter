@@ -1,6 +1,7 @@
 #pragma once
 #include "../term_util.h"
 #include "../color_scheme.h"
+#include <string>
 
 #define PARAM_SWITCH1 '/'
 #define PARAM_SWITCH2 '-'
