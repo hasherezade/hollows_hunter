@@ -232,7 +232,7 @@ HHScanReport* HHScanner::scan()
                 std::cout << " : " << image_buf;
             }
             if (is_process_wow64) {
-                std::cout << " : 32" ;
+                std::cout << " : 32b" ;
             }
             std::cout << std::endl;
         }
@@ -247,7 +247,7 @@ HHScanReport* HHScanner::scan()
                     std::cout << "[!] Could not access: " << std::dec << pid;
 #ifndef _WIN64
                     if (isScannerWow64 != is_process_wow64) {
-                        std::cout << ", use 64-bit scanner";
+                        std::cout << " : 64b";
                     }
 #endif
                 }
@@ -256,10 +256,9 @@ HHScanReport* HHScanner::scan()
                 continue;
             }
 #ifndef _WIN64
-            // this situation should be prevented by PE-sieve
             if (report.is_64bit) {
-                WORD old_color = set_color(MAKE_COLOR(SILVER, DARK_RED));
-                std::cout << "[!] Partial scan: " << std::dec << pid << ", the target is " << (report.is_64bit ? 64 : 32) << "-bit";
+                WORD old_color = set_color(MAKE_COLOR(SILVER, DARK_MAGENTA));
+                std::cout << "[!] Partial scan: " << std::dec << pid << " : " << (report.is_64bit ? 64 : 32) << "b";
                 set_color(old_color);
                 std::cout << std::endl;
             }
