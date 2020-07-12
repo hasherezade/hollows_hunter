@@ -54,7 +54,7 @@ size_t HHScanReport::reportsToJSON(std::stringstream &stream, size_t level, cons
     OUT_PADDED(stream, level, "\"suspicious\" : [\n");
     level++;
     size_t printed = 0;
-    for (itr = this->suspicious.begin(); itr != suspicious.end(); itr++) {
+    for (itr = this->suspicious.begin(); itr != suspicious.end(); ++itr) {
         DWORD pid = *itr;
         OUT_PADDED(stream, level, "{\n");
         level++;

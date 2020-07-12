@@ -104,7 +104,7 @@ size_t kill_suspicious(std::vector<DWORD> &suspicious_pids)
 {
     size_t killed = 0;
     std::vector<DWORD>::iterator itr;
-    for (itr = suspicious_pids.begin(); itr != suspicious_pids.end(); itr++) {
+    for (itr = suspicious_pids.begin(); itr != suspicious_pids.end(); ++itr) {
         DWORD pid = *itr;
         HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, pid);
         if (!hProcess) {
