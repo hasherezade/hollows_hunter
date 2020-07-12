@@ -197,10 +197,9 @@ HHScanReport* HHScanner::scan()
     if (cProcesses == 0) {
         return NULL;
     }
-    bool isScanner64b = false;
-#ifdef _WIN64
-    isScanner64b = true;
-#endif
+
+    bool isScannerWow64 = is_wow_64(GetCurrentProcess());
+
     std::set<std::string> names_list;
     std::set<std::string> pids_list;
     std::string delim(1, PARAM_LIST_SEPARATOR);
@@ -246,17 +245,25 @@ HHScanReport* HHScanner::scan()
                 WORD old_color = set_color(MAKE_COLOR(SILVER, DARK_RED));
                 if (report.errors == pesieve::ERROR_SCAN_FAILURE) {
                     std::cout << "[!] Could not access: " << std::dec << pid;
+#ifndef _WIN64
+                    if (isScannerWow64 != is_process_wow64) {
+                        std::cout << ", use 64-bit scanner";
+                    }
+#endif
                 }
                 set_color(old_color);
                 std::cout << std::endl;
                 continue;
             }
-            if (!isScanner64b && report.is_64bit) {
+#ifndef _WIN64
+            // this situation should be prevented by PE-sieve
+            if (report.is_64bit) {
                 WORD old_color = set_color(MAKE_COLOR(SILVER, DARK_RED));
                 std::cout << "[!] Partial scan: " << std::dec << pid << ", the target is " << (report.is_64bit ? 64 : 32) << "-bit";
                 set_color(old_color);
                 std::cout << std::endl;
             }
+#endif
             if (report.suspicious) {
                 int color = YELLOW;
                 if (report.replaced || report.implanted) {
