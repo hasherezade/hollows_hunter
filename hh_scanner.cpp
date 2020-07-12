@@ -240,7 +240,7 @@ HHScanReport* HHScanner::scan()
         hh_args.pesieve_args.pid = pid;
         pesieve::t_report report = PESieve_scan(hh_args.pesieve_args);
         my_report->appendReport(report, image_buf);
-        int color = YELLOW;
+        
         if (!hh_args.quiet) {
             if (report.errors == pesieve::ERROR_SCAN_FAILURE) {
                 WORD old_color = set_color(MAKE_COLOR(SILVER, DARK_RED));
@@ -258,6 +258,7 @@ HHScanReport* HHScanner::scan()
                 std::cout << std::endl;
             }
             if (report.suspicious) {
+                int color = YELLOW;
                 if (report.replaced || report.implanted) {
                     color = RED;
                 }
