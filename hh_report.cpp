@@ -81,8 +81,8 @@ size_t HHScanReport::reportsToJSON(std::stringstream &stream, size_t level, cons
         stream << std::dec << pidToReport[pid].implanted_pe << ",\n";
         OUT_PADDED(stream, level, "\"implanted_shc\" : ");
         stream << std::dec << pidToReport[pid].implanted_shc << ",\n";
-        OUT_PADDED(stream, level, "\"detached\" : ");
-        stream << std::dec << pidToReport[pid].detached << ",\n";
+        OUT_PADDED(stream, level, "\"unreachable_file\" : ");
+        stream << std::dec << pidToReport[pid].unreachable_file << ",\n";
         OUT_PADDED(stream, level, "\"other\" : ");
         stream << std::dec << pidToReport[pid].other << "\n";
         level--;

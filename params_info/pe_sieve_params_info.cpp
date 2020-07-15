@@ -64,14 +64,14 @@ std::string translate_iat_scan_mode(const pesieve::t_iat_scan_mode mode)
 std::string translate_dotnet_policy(const pesieve::t_dotnet_policy &mode)
 {
     switch (mode) {
-    case pesieve::PE_DNET_AUTO:
+    case pesieve::PE_DNET_NONE:
         return "none: treat managed processes same as native";
     case pesieve::PE_DNET_SKIP_MAPPING:
-        return "skip mapping scan";
+        return "skip mapping mismatch (in .NET modules only)";
     case pesieve::PE_DNET_SKIP_SHC:
-        return "skip shellcodes";
+        return "skip shellcodes (in all modules within the managed process)";
     case pesieve::PE_DNET_SKIP_HOOKS:
-        return "skip hooked modules";
+        return "skip hooked modules (in all modules within the managed process)";
     case pesieve::PE_DNET_SKIP_ALL:
         return "skip all the above (mapping, shellcodes, hooks)";
     }

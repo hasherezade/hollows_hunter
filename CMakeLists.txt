@@ -46,7 +46,7 @@ if (NOT PESIEVE_AS_STATIC_LIB)
 endif()
 
 add_subdirectory (pe-sieve)
-set ( PESIEVE_LIB $<TARGET_FILE:pe-sieve> CACHE FILE "PE-sieve library path" )
+set ( PESIEVE_LIB $<TARGET_FILE:pe-sieve> CACHE PATH "PE-sieve library path" )
 
 cmake_policy(SET CMP0015 NEW)
 LINK_DIRECTORIES ( ${PESIEVE_LIB} )
