@@ -12,7 +12,7 @@
 #include "params_info/param_base.h"
 #include "util/process_privilege.h"
 
-#define VERSION "0.2.8.3"
+#define VERSION "0.2.8.4"
 
 
 void compatibility_alert()
