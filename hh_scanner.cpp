@@ -6,8 +6,8 @@
 #include <sstream>
 #include <time.h>
 
-#include "util\suspend.h"
-#include "util\util.h"
+#include "util/suspend.h"
+#include "util/util.h"
 #include "term_util.h"
 
 using namespace pesieve;

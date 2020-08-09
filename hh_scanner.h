@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Windows.h>
-#include <Psapi.h>
+#include <windows.h>
+#include <psapi.h>
 #pragma comment(lib,"psapi.lib")
 
 #include <vector>
