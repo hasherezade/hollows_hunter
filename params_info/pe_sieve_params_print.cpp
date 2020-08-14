@@ -3,7 +3,7 @@
 #include "../term_util.h"
 
 #include <string>
-#include <Psapi.h>
+#include <psapi.h>
 
 using namespace pesieve;
 

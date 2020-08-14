@@ -2,7 +2,7 @@
 
 #include <time.h>
 
-#include <Windows.h>
+#include <windows.h>
 #include <pe_sieve_api.h>
 #include <map>
 #include <vector>

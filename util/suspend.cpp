@@ -1,6 +1,6 @@
 #include "suspend.h"
 #include <iostream>
-#include <Psapi.h>
+#include <psapi.h>
 
 #include "ntddk.h"
 
