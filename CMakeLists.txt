@@ -4,6 +4,19 @@ option(HH_BUILD_TESTING "enable testing for peconv" ON)
 
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
 
+# static linking for GNU compilers
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+
+	if(LINK_STATICALLY)
+		add_link_options(
+			-static
+			-static-libgcc
+			-static-libstdc++
+		)
+	endif()
+
+endif()
+
 # modules:
 set ( M_PESIEVE "pe-sieve" )
 
