@@ -3,8 +3,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0c149fcd62084f96ac0c131e4473dbdf)](https://www.codacy.com/manual/hasherezade/hollows_hunter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hasherezade/hollows_hunter&amp;utm_campaign=Badge_Grade)
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-blue.svg)](https://opensource.org/licenses/BSD-2-Clause)
 [![GitHub release](https://img.shields.io/github/release/hasherezade/hollows_hunter.svg)](https://github.com/hasherezade/hollows_hunter/releases)
-[![Github All Releases](https://img.shields.io/github/downloads/hasherezade/hollows_hunter/total.svg)](http://www.somsubhra.com/github-release-stats/?username=hasherezade&repository=hollows_hunter)
-[![Github Latest Release](https://img.shields.io/github/downloads/hasherezade/hollows_hunter/latest/total.svg)](http://www.somsubhra.com/github-release-stats/?username=hasherezade&repository=hollows_hunter)
+[![Github All Releases](https://img.shields.io/github/downloads/hasherezade/hollows_hunter/total.svg)](https://github.com/hasherezade/hollows_hunter/releases)
+[![Github Latest Release](https://img.shields.io/github/downloads/hasherezade/hollows_hunter/latest/total.svg)](https://github.com/hasherezade/hollows_hunter/releases)
 
 Scans all running processes. Recognizes and dumps a variety of potentially malicious implants (replaced/implanted PEs, shellcodes, hooks, in-memory patches).
 
