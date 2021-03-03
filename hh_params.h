@@ -15,6 +15,7 @@ typedef struct {
     bool quiet;
     bool log;
     bool json_output;
+    long ptimes;
     pesieve::t_params pesieve_args; //PE-sieve parameters
 } t_hh_params;
 

@@ -8,9 +8,11 @@
 
 #include "util/suspend.h"
 #include "util/util.h"
+#include "util/time_util.h"
 #include "term_util.h"
 
 using namespace pesieve;
+
 
 bool is_wow_64(HANDLE process)
 {
@@ -198,7 +200,7 @@ HHScanReport* HHScanner::scan()
         return NULL;
     }
 
-    bool isScannerWow64 = is_wow_64(GetCurrentProcess());
+    const bool isScannerWow64 = is_wow_64(GetCurrentProcess());
 
     std::set<std::string> names_list;
     std::set<std::string> pids_list;
@@ -218,7 +220,18 @@ HHScanReport* HHScanner::scan()
         char image_buf[MAX_PATH] = { 0 };
         bool is_process_wow64 = false;
         get_process_info(pid, image_buf, is_process_wow64);
-        
+
+        // filter by the time
+        const time_t process_time = util::process_start_time(pid);
+        time_t time_diff = 0;
+        if (hh_args.ptimes) {
+            if (process_time == INVALID_TIME) continue; //skip process if cannot retrieve the time
+            time_diff = start_time - process_time;
+            if (start_time > process_time) {
+                if (time_diff > hh_args.ptimes) continue; // skip process created before the supplied time
+            }
+        }
+        //filter by the names/PIDs
         if (names_list.size() || pids_list.size()) {
             if (!is_searched_name(image_buf, names_list) && !is_searched_pid(pid, pids_list)) {
                 //it is not the searched process, so skip it
@@ -233,6 +246,9 @@ HHScanReport* HHScanner::scan()
             }
             if (is_process_wow64) {
                 std::cout << " : 32b" ;
+            }
+            if (hh_args.ptimes) {
+                std::cout << " : " << time_diff << "s";
             }
             std::cout << std::endl;
         }

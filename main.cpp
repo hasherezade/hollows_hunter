@@ -12,8 +12,7 @@
 #include "params_info/param_base.h"
 #include "util/process_privilege.h"
 
-#define VERSION "0.2.9"
-
+#define VERSION "0.2.9.1"
 
 void compatibility_alert()
 {
@@ -124,6 +123,7 @@ void print_help()
 
     print_refl_param(param_color);
     print_dnet_param(param_color);
+    print_ptimes_param(param_color);
 
     print_in_color(separator_color, "\n---dump options---\n");
 
@@ -444,6 +444,15 @@ int main(int argc, char *argv[])
             true,
             info_req,
             print_refl_param))
+        {
+            continue;
+        }
+        else if (get_int_param(argc, argv, param, i,
+            PARAM_PTIMES,
+            hh_args.ptimes,
+            0L,
+            info_req,
+            print_ptimes_param))
         {
             continue;
         }

@@ -35,6 +35,7 @@ set (srcs
 	util/suspend.cpp
 	util/util.cpp
 	util/process_privilege.cpp
+	util/time_util.cpp
 )
 
 set (hdrs
@@ -51,6 +52,7 @@ set (hdrs
 	util/ntddk.h
 	util/util.h
 	util/process_privilege.h
+	util/time_util.h
 )
 
 # libs

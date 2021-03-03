@@ -12,6 +12,7 @@
 #define PARAM_LOOP "loop"
 #define PARAM_REFLECTION "refl"
 #define PARAM_DOTNET_POLICY "dnet"
+#define PARAM_PTIMES "ptimes"
 
 //dump options:
 #define PARAM_IMP_REC "imp"

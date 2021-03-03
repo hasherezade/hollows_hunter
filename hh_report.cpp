@@ -5,8 +5,9 @@
 
 #include <iostream>
 #include <iomanip>
-#include <ctime>
 #include <cmath>
+
+#include "util/time_util.h"
 
 #define OUT_PADDED(stream, field_size, str) \
 std::cout.fill(' '); \
@@ -123,24 +124,13 @@ std::string HHScanReport::toJSON(const t_hh_params &params)
     return stream.str();
 }
 
-std::string strtime(const time_t t)
-{
-    struct tm time_info;
-    if (localtime_s(&time_info, &t) == 0) {
-        std::stringstream str;
-        str << std::put_time(&time_info, "%c");
-        return str.str();
-    }
-    return "";
-}
-
 std::string HHScanReport::toString()
 {
     std::stringstream stream;
     //summary:
     stream << "--------" << std::endl;
     stream << "SUMMARY:\n";
-    stream << "Scan at: " << strtime(this->startTime) << " (" << std::dec << startTime << ")\n";
+    stream << "Scan at: " << util::strtime(this->startTime) << " (" << std::dec << startTime << ")\n";
     stream << "Finished scan in: " << std::dec << getScanTime() << " milliseconds\n";
     stream << "[+] Total Suspicious: " << std::dec << countSuspicious() << "\n";
     if (countSuspicious() > 0) {
