@@ -41,8 +41,12 @@ public:
         return suspicious.size();
     }
 
+    size_t countTotal() const
+    {
+        return pidToReport.size();
+    }
+
     std::string toString();
-    
 
 protected:
     size_t reportsToString(std::stringstream &stream);

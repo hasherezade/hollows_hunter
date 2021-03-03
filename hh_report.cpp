@@ -110,6 +110,8 @@ std::string HHScanReport::toJSON(const t_hh_params &params)
     stream << std::dec << startTime << ",\n";
     OUT_PADDED(stream, level, "\"scan_time_ms\" : ");
     stream << std::dec << getScanTime() << ",\n";
+    OUT_PADDED(stream, level, "\"scanned_count\" : ");
+    stream << std::dec << countTotal() << ",\n";
     OUT_PADDED(stream, level, "\"susipcious_count\" : ");
     stream << std::dec << countSuspicious();
     if (countSuspicious() > 0) {
@@ -132,7 +134,8 @@ std::string HHScanReport::toString()
     stream << "SUMMARY:\n";
     stream << "Scan at: " << util::strtime(this->startTime) << " (" << std::dec << startTime << ")\n";
     stream << "Finished scan in: " << std::dec << getScanTime() << " milliseconds\n";
-    stream << "[+] Total Suspicious: " << std::dec << countSuspicious() << "\n";
+    stream << "[*] Total scanned: " << std::dec << countTotal() << "\n";
+    stream << "[*] Total suspicious: " << std::dec << countSuspicious() << "\n";
     if (countSuspicious() > 0) {
         stream << "[+] List of suspicious: \n";
         reportsToString(stream);
