@@ -222,9 +222,9 @@ HHScanReport* HHScanner::scan()
         get_process_info(pid, image_buf, is_process_wow64);
 
         // filter by the time
-        const time_t process_time = util::process_start_time(pid);
         time_t time_diff = 0;
         if (hh_args.ptimes) {
+            const time_t process_time = util::process_start_time(pid);
             if (process_time == INVALID_TIME) continue; //skip process if cannot retrieve the time
             time_diff = start_time - process_time;
             if (start_time > process_time) {
