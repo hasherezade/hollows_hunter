@@ -21,4 +21,5 @@ void hh_args_init(t_hh_params &hh_args)
     hh_args.quiet = false;
     hh_args.log = false;
     hh_args.json_output = false;
+    hh_args.ptimes = 0;
 }
