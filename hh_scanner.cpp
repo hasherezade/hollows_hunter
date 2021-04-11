@@ -13,7 +13,6 @@
 
 using namespace pesieve;
 
-
 bool is_wow_64(HANDLE process)
 {
     FARPROC procPtr = GetProcAddress(GetModuleHandleA("kernel32"), "IsWow64Process");
@@ -148,6 +147,15 @@ bool is_searched_pid(long pid, std::set<std::string> &pids_list)
     return false;
 }
 
+//----
+
+HHScanner::HHScanner(t_hh_params &_args)
+    : hh_args(_args)
+{
+    initTime = time(NULL);
+    isScannerWow64 = is_wow_64(GetCurrentProcess());
+}
+
 bool HHScanner::isScannerCompatibile()
 {
 #ifndef _WIN64
@@ -158,16 +166,16 @@ bool HHScanner::isScannerCompatibile()
     return true;
 }
 
-void HHScanner::initOutDir(time_t start_time)
+void HHScanner::initOutDir(time_t scan_time, pesieve::t_params &pesieve_args)
 {
     //set unique path
     if (hh_args.unique_dir) {
-        this->outDir = make_dir_name(hh_args.out_dir, start_time);
-        set_output_dir(hh_args.pesieve_args, outDir);
+        this->outDir = make_dir_name(hh_args.out_dir, scan_time);
+        set_output_dir(pesieve_args, outDir);
     }
     else {
         this->outDir = hh_args.out_dir;
-        set_output_dir(hh_args.pesieve_args, hh_args.out_dir);
+        set_output_dir(pesieve_args, hh_args.out_dir);
     }
 }
 
@@ -200,17 +208,22 @@ HHScanReport* HHScanner::scan()
         return NULL;
     }
 
-    const bool isScannerWow64 = is_wow_64(GetCurrentProcess());
-
     std::set<std::string> names_list;
     std::set<std::string> pids_list;
     std::string delim(1, PARAM_LIST_SEPARATOR);
     strip_to_list(hh_args.pname, delim, names_list);
     strip_to_list(hh_args.pids, delim, pids_list);
 
-    time_t start_time = time(NULL);
-    initOutDir(start_time);
-    HHScanReport *my_report = new HHScanReport(GetTickCount(), start_time);
+    const bool check_time = (hh_args.ptimes != TIME_UNDEFINED) ? true : false;
+    if (check_time) {
+        std::cout << "Init Time: " << std::hex << this->initTime << std::endl;
+    }
+
+    const time_t scan_start = time(NULL); //start time of the current scan
+    pesieve::t_params &pesieve_args = this->hh_args.pesieve_args;
+    initOutDir(scan_start, pesieve_args);
+
+    HHScanReport *my_report = new HHScanReport(GetTickCount(), scan_start);
 
     bool found = false;
     for (size_t i = 0; i < cProcesses; i++) {
@@ -223,11 +236,13 @@ HHScanReport* HHScanner::scan()
 
         // filter by the time
         time_t time_diff = 0;
-        if (hh_args.ptimes) {
+        if (check_time) { // if the parameter was set
             const time_t process_time = util::process_start_time(pid);
             if (process_time == INVALID_TIME) continue; //skip process if cannot retrieve the time
-            time_diff = start_time - process_time;
-            if (start_time > process_time) {
+
+            // if HH was started after the process
+            if (this->initTime > process_time) {
+                time_diff = this->initTime - process_time;
                 if (time_diff > hh_args.ptimes) continue; // skip process created before the supplied time
             }
         }
@@ -247,13 +262,13 @@ HHScanReport* HHScanner::scan()
             if (is_process_wow64) {
                 std::cout << " : 32b" ;
             }
-            if (hh_args.ptimes) {
+            if (check_time) {
                 std::cout << " : " << time_diff << "s";
             }
             std::cout << std::endl;
         }
-        hh_args.pesieve_args.pid = pid;
-        pesieve::t_report report = PESieve_scan(hh_args.pesieve_args);
+        pesieve_args.pid = pid;
+        pesieve::t_report report = PESieve_scan(pesieve_args);
         my_report->appendReport(report, image_buf);
         
         if (!hh_args.quiet) {
@@ -262,7 +277,7 @@ HHScanReport* HHScanner::scan()
                 if (report.errors == pesieve::ERROR_SCAN_FAILURE) {
                     std::cout << "[!] Could not access: " << std::dec << pid;
 #ifndef _WIN64
-                    if (isScannerWow64 != is_process_wow64) {
+                    if (this->isScannerWow64 != is_process_wow64) {
                         std::cout << " : 64b";
                     }
 #endif
@@ -322,6 +337,7 @@ bool write_to_file(const std::string &report_path, const std::string &summary_st
     }
     return false;
 }
+
 
 void HHScanner::summarizeScan(HHScanReport *hh_report)
 {

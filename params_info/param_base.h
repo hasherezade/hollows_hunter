@@ -1,4 +1,5 @@
 #pragma once
+#include "../util/util.h"
 #include "../term_util.h"
 #include "../color_scheme.h"
 #include <string>
@@ -48,8 +49,9 @@ bool get_int_param(int argc, char *argv[], const char *param, int &param_i,
     out_val = default_set;
     if ((param_i + 1) < argc && !is_param(argv[param_i + 1])) {
         char* mode_num = argv[param_i + 1];
-        if (isdigit(mode_num[0])) {
-            out_val = (PARAM_T)atol(mode_num);
+        const size_t len = strlen(mode_num);
+        if (is_dec(mode_num, len)) {
+            out_val = (PARAM_T)atoll(mode_num);
         }
         else {
             if (callback) {
@@ -64,25 +66,25 @@ bool get_int_param(int argc, char *argv[], const char *param, int &param_i,
 
 //TODO: this will be replaced when params will be refactored to use ParamKit
 inline bool get_cstr_param(int argc, char *argv[], const char *param, int &param_i,
-	const char *param_id, char* out_buf, const size_t out_buf_max,
-	bool &info_req, void(*callback)(int))
+    const char *param_id, char* out_buf, const size_t out_buf_max,
+    bool &info_req, void(*callback)(int))
 {
-	if (strcmp(param, param_id) != 0) {
-		return false;
-	}
-	bool fetched = false;
-	if ((param_i + 1) < argc && !is_param(argv[param_i + 1])) {
-		if (argv[param_i + 1][0] != PARAM_HELP2[0]) {
-			copyToCStr(out_buf, out_buf_max, argv[param_i + 1]);
-			fetched = true;
-		}
-		++param_i;
-	}
-	if (!fetched) {
-		callback(ERROR_COLOR);
-		info_req = true;
-	}
-	return true;
+    if (strcmp(param, param_id) != 0) {
+        return false;
+    }
+    bool fetched = false;
+    if ((param_i + 1) < argc && !is_param(argv[param_i + 1])) {
+        if (argv[param_i + 1][0] != PARAM_HELP2[0]) {
+            copyToCStr(out_buf, out_buf_max, argv[param_i + 1]);
+            fetched = true;
+        }
+        ++param_i;
+    }
+    if (!fetched) {
+        callback(ERROR_COLOR);
+        info_req = true;
+    }
+    return true;
 }
 
 //TODO: this will be replaced when params will be refactored to use ParamKit

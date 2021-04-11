@@ -3,6 +3,8 @@
 #include <pe_sieve_api.h>
 #include <string>
 
+#define TIME_UNDEFINED LONGLONG(-1)
+
 //HollowsHunter's parameters:
 typedef struct {
     std::string pname;
@@ -15,7 +17,7 @@ typedef struct {
     bool quiet;
     bool log;
     bool json_output;
-    long ptimes;
+    LONGLONG ptimes;
     pesieve::t_params pesieve_args; //PE-sieve parameters
 } t_hh_params;
 

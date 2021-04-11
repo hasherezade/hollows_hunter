@@ -298,8 +298,8 @@ void print_unknown_param(const char *param)
 void deploy_scan(t_hh_params &hh_args)
 {
     hhunter::util::set_debug_privilege();
+    HHScanner hhunter(hh_args);
     do {
-        HHScanner hhunter(hh_args);
         HHScanReport *report = hhunter.scan();
         if (report) {
             hhunter.summarizeScan(report);
@@ -450,7 +450,7 @@ int main(int argc, char *argv[])
         else if (get_int_param(argc, argv, param, i,
             PARAM_PTIMES,
             hh_args.ptimes,
-            0L,
+            TIME_UNDEFINED,
             info_req,
             print_ptimes_param))
         {

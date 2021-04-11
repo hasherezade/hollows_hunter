@@ -16,18 +16,19 @@ public:
     // is the scanner best suited for the OS bitness
     static bool isScannerCompatibile();
 
-    HHScanner(t_hh_params &_args)
-        : hh_args(_args)
-    {
-    }
+    HHScanner(t_hh_params &_args);
 
     HHScanReport* scan();
     void summarizeScan(HHScanReport *hh_report);
 
 protected:
-    void initOutDir(time_t start_time);
+    void initOutDir(time_t scan_time, pesieve::t_params &pesieve_args);
 
     t_hh_params &hh_args;
     std::string outDir;
+
+    // time when HollowsHunter was initialized
+    time_t initTime;
+    bool isScannerWow64;
 };
 
