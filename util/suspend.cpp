@@ -12,7 +12,9 @@ bool suspend_process(DWORD processId)
 
     NtSuspendProcess pfnNtSuspendProcess = (NtSuspendProcess)GetProcAddress(
         GetModuleHandleA("ntdll"), "NtSuspendProcess");
-
+    if (!pfnNtSuspendProcess) {
+        return false;
+    }
     LONG res = pfnNtSuspendProcess(processHandle);
     CloseHandle(processHandle);
     if (res == S_OK) {
@@ -29,7 +31,9 @@ bool resume_process(DWORD processId)
 
     NtResumeProcess pfnNtResumeProcess = (NtResumeProcess)GetProcAddress(
         GetModuleHandleA("ntdll"), "NtResumeProcess");
-
+    if (!pfnNtResumeProcess) {
+        return false;
+    }
     LONG res = pfnNtResumeProcess(processHandle);
     CloseHandle(processHandle);
     if (res == S_OK) {
