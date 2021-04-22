@@ -215,10 +215,11 @@ HHScanReport* HHScanner::scan()
     strip_to_list(hh_args.pids, delim, pids_list);
 
     const bool check_time = (hh_args.ptimes != TIME_UNDEFINED) ? true : false;
+#ifdef _DEBUG
     if (check_time) {
         std::cout << "Init Time: " << std::hex << this->initTime << std::endl;
     }
-
+#endif
     const time_t scan_start = time(NULL); //start time of the current scan
     pesieve::t_params &pesieve_args = this->hh_args.pesieve_args;
     initOutDir(scan_start, pesieve_args);
