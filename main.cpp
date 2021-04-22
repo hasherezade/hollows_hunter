@@ -99,22 +99,37 @@ void print_logo()
     set_color(old_color);
 }
 
-void print_params_block(std::string block_name, std::map<std::string, void(*)(int)> params_block)
+void print_params_block(std::string block_name, std::map<std::string, void(*)(int)> params_block, const std::string &filter)
 {
     const int hdr_color = HEADER_COLOR;
     const int param_color = HILIGHTED_COLOR;
     const int separator_color = SEPARATOR_COLOR;
 
+    WORD curr_color = 0;
+    get_current_color(STD_OUTPUT_HANDLE, curr_color);
+    WORD current_bg = GET_BG_COLOR(curr_color);
+    int greyed_color = MAKE_COLOR(GRAY, current_bg);
+
+    int p_color = param_color;
     print_in_color(separator_color, "\n---" + block_name +"---\n");
     std::map<std::string, void(*)(int)>::iterator itr;
     for (itr = params_block.begin(); itr != params_block.end();itr++) {
+        const std::string &param = itr->first;
+        if (filter.length() > 0) {
+            bool has_keyword = (param.find(filter) != std::string::npos) || (filter.find(param) != std::string::npos);
+            p_color = (has_keyword) ? param_color : GRAY;
+            if (!has_keyword) continue;
+        }
         void(*info)(int) = itr->second;
         if (!info) continue;
-        info(param_color);
+        info(p_color);
+    }
+    if (filter.length() > 0) {
+        print_in_color(greyed_color, "\n[...]\n");
     }
 }
 
-void print_help()
+void print_help(std::string filter="")
 {
     const int hdr_color = HEADER_COLOR;
     const int param_color = HILIGHTED_COLOR;
@@ -148,21 +163,21 @@ void print_help()
     scanner_params[PARAM_REFLECTION] = print_refl_param;
     scanner_params[PARAM_QUIET] = print_quiet_param;
 
-    print_params_block("scan targets", scan_target_params);
-    print_params_block("scanner settings", scanner_params);
-    print_params_block("scan exclusions", scan_exclusions);
-    print_params_block("scan options", scan_params);
+    print_params_block("scan targets", scan_target_params, filter);
+    print_params_block("scanner settings", scanner_params, filter);
+    print_params_block("scan exclusions", scan_exclusions, filter);
+    print_params_block("scan options", scan_params, filter);
 
     std::map<std::string, void(*)(int)> dump_params;
     dump_params[PARAM_IMP_REC] = print_imprec_param;
     dump_params[PARAM_DUMP_MODE] = print_dmode_param;
     dump_params[PARAM_MINIDUMP] = print_minidump_param;
-    print_params_block("dump options", dump_params);
+    print_params_block("dump options", dump_params, filter);
 
     std::map<std::string, void(*)(int)> post_scan_params;
     post_scan_params[PARAM_SUSPEND] = print_suspend_param;
     post_scan_params[PARAM_KILL] = print_kill_param;
-    print_params_block("post-scan actions", post_scan_params);
+    print_params_block("post-scan actions", post_scan_params, filter);
 
     std::map<std::string, void(*)(int)> out_params;
     out_params[PARAM_OUT_FILTER] = print_out_filter_param;
@@ -170,7 +185,7 @@ void print_help()
     out_params[PARAM_UNIQUE_DIR] = print_uniqd_param;
     out_params[PARAM_LOG] = print_log_param;
     out_params[PARAM_JSON] = print_json_param;
-    print_params_block("output options", out_params);
+    print_params_block("output options", out_params, filter);
 
     print_in_color(hdr_color, "\nInfo: \n\n");
 
@@ -351,8 +366,8 @@ int main(int argc, char *argv[])
             print_version();
             std::cout << "\n";
             print_unknown_param(argv[i]);
-            print_in_color(HILIGHTED_COLOR, "Available parameters:\n\n");
-            print_help();
+            print_in_color(HILIGHTED_COLOR, "Similar parameters:\n\n");
+            print_help(argv[i]);
             return 0;
         }
         const char *param = &argv[i][1];
@@ -582,8 +597,8 @@ int main(int argc, char *argv[])
         }
         else if (!info_req && strlen(argv[i]) > 0) {
             print_unknown_param(argv[i]);
-            print_in_color(HILIGHTED_COLOR, "Available parameters:\n\n");
-            print_help();
+            print_in_color(HILIGHTED_COLOR, "Similar parameters:\n\n");
+            print_help(param);
             return 0;
         }
     }
