@@ -151,7 +151,7 @@ void print_help(std::string filter="")
     scan_params[PARAM_DATA] = print_data_param;
     
 #ifdef _WIN64
-    params_list[PARAM_MODULES_FILTER] = print_module_filter_param;
+    scan_exclusions[PARAM_MODULES_FILTER] = print_module_filter_param;
 #endif
 
     scan_exclusions[PARAM_MODULES_IGNORE] = print_mignore_param;
