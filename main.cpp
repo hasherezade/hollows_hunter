@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include <string>
+#include <map>
 #include <vector>
 
 #include <sstream>
@@ -12,7 +13,7 @@
 #include "params_info/param_base.h"
 #include "util/process_privilege.h"
 
-#define VERSION "0.2.9.1"
+#define VERSION "0.2.9.2"
 
 void compatibility_alert()
 {
@@ -98,6 +99,21 @@ void print_logo()
     set_color(old_color);
 }
 
+void print_params_block(std::string block_name, std::map<std::string, void(*)(int)> params_block)
+{
+    const int hdr_color = HEADER_COLOR;
+    const int param_color = HILIGHTED_COLOR;
+    const int separator_color = SEPARATOR_COLOR;
+
+    print_in_color(separator_color, "\n---" + block_name +"---\n");
+    std::map<std::string, void(*)(int)>::iterator itr;
+    for (itr = params_block.begin(); itr != params_block.end();itr++) {
+        void(*info)(int) = itr->second;
+        if (!info) continue;
+        info(param_color);
+    }
+}
+
 void print_help()
 {
     const int hdr_color = HEADER_COLOR;
@@ -105,45 +121,56 @@ void print_help()
     const int separator_color = SEPARATOR_COLOR;
 
     print_in_color(hdr_color, "Optional: \n");
-    print_in_color(separator_color, "\n---scan options---\n");
 
-    print_pid_param(param_color);
-    print_pname_param(param_color);
-    print_hooks_param(param_color);
-    print_iat_param(param_color);
-    print_shellc_param(param_color);
-    print_data_param(param_color);
+    std::map<std::string, void(*)(int)> scan_params;
+    std::map<std::string, void(*)(int)> scan_target_params;
+    std::map<std::string, void(*)(int)> scanner_params;
+    std::map<std::string, void(*)(int)> scan_exclusions;
 
+    scan_target_params[PARAM_PID] = print_pid_param;
+    scan_target_params[PARAM_PNAME] = print_pname_param;
+    scan_params[PARAM_HOOKS] = print_hooks_param;
+
+    scan_params[PARAM_IAT] = print_iat_param;
+    scan_params[PARAM_SHELLCODE] = print_shellc_param;
+    scan_params[PARAM_DATA] = print_data_param;
+    
 #ifdef _WIN64
-    print_module_filter_param(param_color);
+    params_list[PARAM_MODULES_FILTER] = print_module_filter_param;
 #endif
 
-    print_mignore_param(param_color);
-    print_loop_param(param_color);
+    scan_exclusions[PARAM_MODULES_IGNORE] = print_mignore_param;
 
-    print_refl_param(param_color);
-    print_dnet_param(param_color);
-    print_ptimes_param(param_color);
+    scan_exclusions[PARAM_DOTNET_POLICY] = print_dnet_param;
+    scan_target_params[PARAM_PTIMES] = print_ptimes_param;
 
-    print_in_color(separator_color, "\n---dump options---\n");
+    scanner_params[PARAM_LOOP] = print_loop_param;
+    scanner_params[PARAM_REFLECTION] = print_refl_param;
+    scanner_params[PARAM_QUIET] = print_quiet_param;
 
-    print_imprec_param(param_color);
-    print_dmode_param(param_color);
+    print_params_block("scan targets", scan_target_params);
+    print_params_block("scanner settings", scanner_params);
+    print_params_block("scan exclusions", scan_exclusions);
+    print_params_block("scan options", scan_params);
 
-    print_in_color(separator_color, "\n---output options---\n");
+    std::map<std::string, void(*)(int)> dump_params;
+    dump_params[PARAM_IMP_REC] = print_imprec_param;
+    dump_params[PARAM_DUMP_MODE] = print_dmode_param;
+    dump_params[PARAM_MINIDUMP] = print_minidump_param;
+    print_params_block("dump options", dump_params);
 
-    print_out_filter_param(param_color);
-    print_output_dir_param(param_color);
-    print_uniqd_param(param_color);
-    print_minidump_param(param_color);
+    std::map<std::string, void(*)(int)> post_scan_params;
+    post_scan_params[PARAM_SUSPEND] = print_suspend_param;
+    post_scan_params[PARAM_KILL] = print_kill_param;
+    print_params_block("post-scan actions", post_scan_params);
 
-    print_suspend_param(param_color);
-    print_kill_param(param_color);
-
-    print_quiet_param(param_color);
-    print_log_param(param_color);
-
-    print_json_param(param_color);
+    std::map<std::string, void(*)(int)> out_params;
+    out_params[PARAM_OUT_FILTER] = print_out_filter_param;
+    out_params[PARAM_DIR] = print_output_dir_param;
+    out_params[PARAM_UNIQUE_DIR] = print_uniqd_param;
+    out_params[PARAM_LOG] = print_log_param;
+    out_params[PARAM_JSON] = print_json_param;
+    print_params_block("output options", out_params);
 
     print_in_color(hdr_color, "\nInfo: \n\n");
 
