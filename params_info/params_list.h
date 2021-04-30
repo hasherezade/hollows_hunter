@@ -28,6 +28,7 @@
 #define PARAM_MINIDUMP "minidmp"
 #define PARAM_LOG "log"
 #define PARAM_JSON "json"
+#define PARAM_JSON_LVL "jlvl"
 
 //info:
 #define PARAM_HELP "help"

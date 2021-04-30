@@ -14,7 +14,7 @@
 #include "util/process_privilege.h"
 #include "util/strings_util.h"
 
-#define VERSION "0.2.9.2"
+#define VERSION "0.2.9.5"
 
 using namespace hhunter::util;
 
@@ -204,6 +204,7 @@ void print_help(std::string filter="")
     out_params[PARAM_UNIQUE_DIR] = print_uniqd_param;
     out_params[PARAM_LOG] = print_log_param;
     out_params[PARAM_JSON] = print_json_param;
+    out_params[PARAM_JSON_LVL] = print_json_level_param;
     cntr += print_params_block("output options", out_params, filter);
     if (cntr == 0) {
         print_in_color(INACTIVE_COLOR, "\n[...]\n");
@@ -614,6 +615,16 @@ int main(int argc, char *argv[])
             info_req,
             print_minidump_param))
         {
+            continue;
+        }
+        else if (get_int_param(argc, argv, param, i,
+            PARAM_JSON_LVL,
+            hh_args.pesieve_args.json_lvl,
+            pesieve::JSON_BASIC,
+            info_req,
+            print_json_level_param))
+        {
+            hh_args.pesieve_args.json_lvl = normalize_json_level(hh_args.pesieve_args.json_lvl);
             continue;
         }
         else if (!info_req && strlen(argv[i]) > 0) {

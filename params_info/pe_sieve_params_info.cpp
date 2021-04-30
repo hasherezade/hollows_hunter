@@ -93,6 +93,19 @@ std::string translate_modules_filter(DWORD m_filter)
     return "undefined";
 }
 
+std::string translate_json_level(const pesieve::t_json_level &mode)
+{
+    switch (mode) {
+    case pesieve::JSON_BASIC:
+        return "basic";
+    case pesieve::JSON_DETAILS:
+        return "details #1 (list patches)";
+    case pesieve::JSON_DETAILS2:
+        return "details #2 (list patches: extended)";
+    }
+    return "undefined";
+}
+
 pesieve::t_imprec_mode normalize_imprec_mode(size_t mode_id)
 {
     if (mode_id > pesieve::PE_IMPREC_MODES_COUNT) {
@@ -123,3 +136,12 @@ std::string translate_data_mode(const pesieve::t_data_scan_mode& mode)
     }
     return "undefined";
 }
+
+pesieve::t_json_level normalize_json_level(size_t mode_id)
+{
+    if (mode_id > pesieve::JSON_LVL_COUNT) {
+        return pesieve::JSON_DETAILS;
+    }
+    return (pesieve::t_json_level) mode_id;
+}
+

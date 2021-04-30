@@ -30,6 +30,8 @@ void print_data_param(int param_color);
 
 void print_json_param(int param_color);
 
+void print_json_level_param(int param_color);
+
 void print_quiet_param(int param_color);
 
 void print_minidump_param(int param_color);

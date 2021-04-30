@@ -111,6 +111,16 @@ void print_json_param(int param_color)
     std::cout << "\t: Print the JSON report as the summary.\n";
 }
 
+void print_json_level_param(int param_color)
+{
+    print_param_in_color(param_color, PARAM_JSON_LVL);
+    std::cout << " <*json_lvl>\n\t: Level of details of the JSON scan_report.\n";
+    std::cout << "*json_lvl:\n";
+    for (DWORD i = 0; i < pesieve::JSON_LVL_COUNT; i++) {
+        std::cout << "\t" << i << " - " << translate_json_level((pesieve::t_json_level) i) << "\n";
+    }
+}
+
 void print_quiet_param(int param_color)
 {
     print_param_in_color(param_color, PARAM_QUIET);
