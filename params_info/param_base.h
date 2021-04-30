@@ -51,7 +51,7 @@ bool get_int_param(int argc, char *argv[], const char *param, int &param_i,
         char* mode_num = argv[param_i + 1];
         const size_t len = strlen(mode_num);
         if (is_dec(mode_num, len)) {
-            out_val = (PARAM_T)atoll(mode_num);
+            out_val = (PARAM_T)get_number(mode_num);
         }
         else {
             if (callback) {

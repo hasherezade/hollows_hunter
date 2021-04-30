@@ -43,8 +43,12 @@ LONGLONG util::process_start_time(DWORD processID)
     if (!hProcess) {
         return INVALID_TIME;
     }
-    FILETIME creationTime, exitTime, kernelTime, userTime;
-    creationTime = exitTime = kernelTime = userTime = { 0 };
+
+    FILETIME creationTime = { 0 };
+    FILETIME exitTime = { 0 };
+    FILETIME kernelTime = { 0 };
+    FILETIME userTime = { 0 };
+
     BOOL isOk = GetProcessTimes(
         hProcess,
         &creationTime, &exitTime, &kernelTime, &userTime
