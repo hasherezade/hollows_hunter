@@ -6,3 +6,4 @@
 
 #define HEADER_COLOR 14
 #define SEPARATOR_COLOR 6
+#define INACTIVE_COLOR 8

@@ -4,6 +4,10 @@
 #include <cctype>
 #include <sstream>
 
+#include "strings_util.h"
+
+using namespace hhunter::util;
+
 size_t strip_to_list(IN std::string s, IN std::string delim, OUT std::set<std::string> &elements_list)
 {
     size_t start = 0;
@@ -42,17 +46,6 @@ bool is_dec(const char *buf, size_t len)
     for (size_t i = 0; i < len; i++) {
         if (buf[i] >= '0' && buf[i] <= '9') continue;
         return false;
-    }
-    return true;
-}
-
-bool is_cstr_equal(char const *a, char const *b, const size_t max_len)
-{
-    for (size_t i = 0; i < max_len; ++i) {
-        if (tolower(a[i]) != tolower(b[i])) {
-            return false;
-        }
-        if (tolower(a[i]) == '\0') break;
     }
     return true;
 }
