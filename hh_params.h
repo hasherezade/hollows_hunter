@@ -18,6 +18,7 @@ typedef struct {
     bool log;
     bool json_output;
     LONGLONG ptimes;
+    std::string pnames_ignored;
     pesieve::t_params pesieve_args; //PE-sieve parameters
 } t_hh_params;
 

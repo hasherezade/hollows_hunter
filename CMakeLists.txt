@@ -2,6 +2,7 @@ cmake_minimum_required (VERSION 2.8)
 project (hollows_hunter)
 
 option(HH_BUILD_TESTING "Enable testing for HollowsHunter" ON)
+option (PECONV_LIB_INSTALL OFF)
 
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
 

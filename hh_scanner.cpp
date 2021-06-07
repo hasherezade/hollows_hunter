@@ -210,9 +210,12 @@ HHScanReport* HHScanner::scan()
 
     std::set<std::string> names_list;
     std::set<std::string> pids_list;
+    std::set<std::string> ignored_names_list;
+
     std::string delim(1, PARAM_LIST_SEPARATOR);
     strip_to_list(hh_args.pname, delim, names_list);
     strip_to_list(hh_args.pids, delim, pids_list);
+    strip_to_list(hh_args.pnames_ignored, delim, ignored_names_list);
 
     const bool check_time = (hh_args.ptimes != TIME_UNDEFINED) ? true : false;
 #ifdef _DEBUG
@@ -227,6 +230,7 @@ HHScanReport* HHScanner::scan()
     HHScanReport *my_report = new HHScanReport(GetTickCount(), scan_start);
 
     bool found = false;
+    size_t ignored_count = 0;
     for (size_t i = 0; i < cProcesses; i++) {
         if (aProcesses[i] == 0) continue;
 
@@ -254,6 +258,13 @@ HHScanReport* HHScanner::scan()
                 continue;
             }
             found = true;
+        }
+        if (!found && ignored_names_list.size()) {
+            if (is_searched_name(image_buf, ignored_names_list)) {
+                //it is ignored name
+                ignored_count++;
+                continue;
+            }
         }
         if (!hh_args.quiet) {
             std::cout << ">> Scanning PID: " << std::dec << pid;
@@ -313,9 +324,17 @@ HHScanReport* HHScanner::scan()
             }
         }
     }
+
     if (!found && hh_args.pname.length() > 0) {
         if (!hh_args.quiet) {
             std::cout << "[WARNING] No process from the list: {" << list_to_str(names_list) << "} was found!" << std::endl;
+        }
+    }
+    if (ignored_count > 0) {
+        if (!hh_args.quiet) {
+            std::string info1 = (ignored_count > 1) ? "processes" : "process";
+            std::string info2 = (ignored_count > 1) ? "were" : "was";
+            std::cout << "[INFO] " << std::dec << ignored_count << " "<< info1 << " from the list : {" << list_to_str(ignored_names_list) << "} "<< info2 << " ignored!" << std::endl;
         }
     }
     my_report->setEndTick(GetTickCount(), time(NULL));

@@ -89,12 +89,6 @@ void print_refl_param(int param_color)
     std::cout << "\t: Make a process reflection before scan.\n";
 }
 
-void print_ptimes_param(int param_color)
-{
-    print_param_in_color(param_color, PARAM_PTIMES);
-    std::cout << " <N seconds>\n\t: Scan only processes created N seconds before HH, or later.\n";
-}
-
 void print_data_param(int param_color)
 {
     print_param_in_color(param_color, PARAM_DATA);
