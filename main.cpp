@@ -181,10 +181,6 @@ void print_help(std::string filter="")
     scan_params[PARAM_IAT] = print_iat_param;
     scan_params[PARAM_SHELLCODE] = print_shellc_param;
     scan_params[PARAM_DATA] = print_data_param;
-    
-#ifdef _WIN64
-    scan_exclusions[PARAM_MODULES_FILTER] = print_module_filter_param;
-#endif
 
     scan_exclusions[PARAM_MODULES_IGNORE] = print_mignore_param;
     scan_exclusions[PARAM_PROCESSES_IGNORE] = print_pignore_param;
@@ -428,15 +424,6 @@ int main(int argc, char *argv[])
             pesieve::PE_IMPREC_AUTO, 
             info_req, 
             print_imprec_param))
-        {
-            continue;
-        }
-        else if (get_int_param<DWORD>(argc, argv, param, i,
-            PARAM_MODULES_FILTER,
-            hh_args.pesieve_args.modules_filter,
-            LIST_MODULES_ALL,
-            info_req,
-            print_module_filter_param))
         {
             continue;
         }

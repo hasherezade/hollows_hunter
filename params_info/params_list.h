@@ -5,7 +5,6 @@
 #define PARAM_HOOKS "hooks"
 #define PARAM_SHELLCODE "shellc"
 #define PARAM_DATA "data"
-#define PARAM_MODULES_FILTER "mfilter"
 #define PARAM_MODULES_IGNORE "mignore"
 #define PARAM_PROCESSES_IGNORE "pignore"
 #define PARAM_PNAME "pname"
