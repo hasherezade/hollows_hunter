@@ -522,7 +522,7 @@ int main(int argc, char *argv[])
         else if (get_int_param(argc, argv, param, i,
             PARAM_PTIMES,
             hh_args.ptimes,
-            TIME_UNDEFINED,
+            0LL,
             info_req,
             print_ptimes_param))
         {
