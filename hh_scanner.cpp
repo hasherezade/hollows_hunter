@@ -215,7 +215,7 @@ void HHScanner::initScanData()
 bool HHScanner::isScannerCompatibile()
 {
 #ifndef _WIN64
-    if (is_wow_64(GetCurrentProcess())) {
+    if (process_util::is_wow_64(GetCurrentProcess())) {
         return false;
     }
 #endif
@@ -297,11 +297,6 @@ void HHScanner::printSingleReport(pesieve::t_report& report)
         WORD old_color = set_color(MAKE_COLOR(SILVER, DARK_RED));
         if (report.errors == pesieve::ERROR_SCAN_FAILURE) {
             std::cout << "[!] Could not access: " << std::dec << report.pid;
-#ifndef _WIN64
-            if (this->isScannerWow64 != is_process_wow64) {
-                std::cout << " : 64b";
-            }
-#endif
         }
         set_color(old_color);
         std::cout << std::endl;
@@ -310,7 +305,7 @@ void HHScanner::printSingleReport(pesieve::t_report& report)
 #ifndef _WIN64
     if (report.is_64bit) {
         WORD old_color = set_color(MAKE_COLOR(SILVER, DARK_MAGENTA));
-        std::cout << "[!] Partial scan: " << std::dec << pid << " : " << (report.is_64bit ? 64 : 32) << "b";
+        std::cout << "[!] Partial scan: " << std::dec << report.pid << " : " << (report.is_64bit ? 64 : 32) << "b";
         set_color(old_color);
         std::cout << std::endl;
     }
