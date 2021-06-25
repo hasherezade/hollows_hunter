@@ -4,8 +4,6 @@
 #include <psapi.h>
 #pragma comment(lib,"psapi.lib")
 
-#include<TlHelp32.h>
-
 #include <string>
 #include <vector>
 #include <set>

@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <time.h>
+#include <tlhelp32.h>
 
 #include "util/suspend.h"
 #include "util/util.h"
