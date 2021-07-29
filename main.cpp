@@ -476,7 +476,7 @@ int main(int argc, char *argv[])
         else if (get_int_param(argc, argv, param, i,
             PARAM_IAT,
             hh_args.pesieve_args.iat,
-            pesieve::PE_IATS_FILTERED,
+            pesieve::PE_IATS_CLEAN_SYS_FILTERED,
             info_req,
             print_iat_param))
         {
