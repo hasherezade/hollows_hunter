@@ -76,7 +76,7 @@ void print_mignore_param(int param_color)
 void print_refl_param(int param_color)
 {
     print_param_in_color(param_color, PARAM_REFLECTION);
-    std::cout << "\t: Make a process reflection before scan.\n";
+    std::cout << "\t: Make a process reflection before scan.\n\t  This allows i.e. to force-read inaccessible pages.\n";
 }
 
 void print_data_param(int param_color)
