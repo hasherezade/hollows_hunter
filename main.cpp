@@ -253,9 +253,9 @@ std::string is_enabled(bool param)
     return "Disabled";
 }
 
-void print_version()
+void print_version(WORD info_color = HILIGHTED_COLOR)
 {
-    WORD old_color = set_color(HILIGHTED_COLOR);
+    WORD old_color = set_color(info_color);
     std::cout << "HollowsHunter v." << VERSION;
     DWORD pesieve_ver = PESieve_version;
 #ifdef _WIN64
@@ -264,8 +264,9 @@ void print_version()
     std::cout << " (x86)" << "\n";
 #endif
     std::cout << "Built on: " << __DATE__ << "\n\n";
-    std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver) << "\n\n";
+    std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver);
     set_color(old_color);
+    std::cout << "\n" << std::endl;
 }
 
 void print_defaults()
