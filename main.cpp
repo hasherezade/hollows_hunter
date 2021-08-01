@@ -257,15 +257,14 @@ void print_version()
 {
     WORD old_color = set_color(HILIGHTED_COLOR);
     std::cout << "HollowsHunter v." << VERSION;
+    DWORD pesieve_ver = PESieve_version;
 #ifdef _WIN64
     std::cout << " (x64)" << "\n";
 #else
     std::cout << " (x86)" << "\n";
 #endif
     std::cout << "Built on: " << __DATE__ << "\n\n";
-
-    DWORD pesieve_ver = PESieve_version;
-    std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver) << "\n";
+    std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver) << "\n\n";
     set_color(old_color);
 }
 
@@ -370,6 +369,9 @@ void print_unknown_param(const char *param)
 
 void deploy_scan(t_hh_params &hh_args)
 {
+    if (hh_args.pesieve_args.data >= pesieve::PE_DATA_SCAN_INACCESSIBLE && hh_args.pesieve_args.make_reflection == false) {
+        print_in_color(RED, "[WARNING] Scanning of inaccessible pages is enabled only in the reflection mode!\n");
+    }
     hhunter::util::set_debug_privilege();
     HHScanner hhunter(hh_args);
     do {
