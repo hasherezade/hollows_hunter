@@ -16,7 +16,6 @@ stream << str;
 
 bool is_suspicious_process(pesieve::t_report report)
 {
-    if (report.errors) return false;
     if (report.suspicious) {
         return true;
     }
