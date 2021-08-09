@@ -58,6 +58,10 @@ set (hdrs
 	util/time_util.h
 	util/strings_util.h
 )
+set (rsrc
+	resources.h
+	resources.rc
+)
 
 # libs
 if (NOT PESIEVE_AS_STATIC_LIB)
@@ -69,7 +73,7 @@ set ( PESIEVE_LIB $<TARGET_FILE:pe-sieve> CACHE PATH "PE-sieve library path" )
 
 cmake_policy(SET CMP0015 NEW)
 LINK_DIRECTORIES ( ${PESIEVE_LIB} )
-add_executable ( ${PROJECT_NAME} ${hdrs} ${srcs} main.cpp )
+add_executable ( ${PROJECT_NAME} ${hdrs} ${srcs} ${rsrc} main.cpp )
 target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} "psapi.lib" "ntdll.lib")
 
 # dependencies
