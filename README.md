@@ -1,4 +1,6 @@
 # hollows_hunter
+![](./logo/logo2_128.png)
+
 [![Build status](https://ci.appveyor.com/api/projects/status/nsc2eux5986y1shq?svg=true)](https://ci.appveyor.com/project/hasherezade/hollows-hunter)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0c149fcd62084f96ac0c131e4473dbdf)](https://www.codacy.com/manual/hasherezade/hollows_hunter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hasherezade/hollows_hunter&amp;utm_campaign=Badge_Grade)
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-blue.svg)](https://opensource.org/licenses/BSD-2-Clause)
