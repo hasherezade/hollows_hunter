@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['separator_5fcolor_490',['SEPARATOR_COLOR',['../color__scheme_8h.html#a1bba3b9a5308d50da5c0dc45dec7b932',1,'color_scheme.h']]],
-  ['silver_491',['SILVER',['../term__util_8h.html#a7e76a14a479114a4b9b20782bb00e69a',1,'term_util.h']]]
+  ['separator_5fcolor_0',['SEPARATOR_COLOR',['../color__scheme_8h.html#a1bba3b9a5308d50da5c0dc45dec7b932',1,'color_scheme.h']]],
+  ['silver_1',['SILVER',['../term__util_8h.html#a7e76a14a479114a4b9b20782bb00e69a',1,'term_util.h']]]
 ];
