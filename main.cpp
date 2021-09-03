@@ -266,7 +266,7 @@ void print_version(WORD info_color = HILIGHTED_COLOR)
     std::cout << "Built on: " << __DATE__ << "\n\n";
     std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver);
     set_color(old_color);
-    std::cout << "\n" << std::endl;
+    std::cout << std::endl;
 }
 
 void print_defaults()
@@ -649,6 +649,7 @@ int main(int argc, char *argv[])
         return 0;
     }
     print_version();
+    std::cout << std::endl;
     deploy_scan(hh_args);
     return 0;
 }
