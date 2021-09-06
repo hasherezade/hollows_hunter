@@ -10,7 +10,8 @@
 using namespace paramkit;
 using namespace pesieve;
 
-//scan options:
+#define HH_URL "https://github.com/hasherezade/hollows_hunter"
+
 //scan options:
 #define PARAM_IAT "iat"
 #define PARAM_HOOKS "hooks"
@@ -41,8 +42,6 @@ using namespace pesieve;
 #define PARAM_JSON "json"
 #define PARAM_JSON_LVL "jlvl"
 
-//info:
-#define PARAM_DEFAULTS "default"
 
 #define INFO_SPACER "\t   "
 
@@ -310,6 +309,9 @@ public:
         std::cout << "\n" << logo << std::endl;
         set_color(old_color);
         print_version(this->versionStr);
+        std::cout << std::endl;
+        std::cout << "Scans running processes. Recognizes and dumps a variety of in-memory implants:\nreplaced/implanted PEs, shellcodes, hooks, patches, etc.\n";
+        std::cout << "URL: " << HH_URL << std::endl;
     }
 
     void fillStruct(t_hh_params &ps)
