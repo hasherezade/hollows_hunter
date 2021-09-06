@@ -46,6 +46,35 @@ using namespace pesieve;
 
 #define INFO_SPACER "\t   "
 
+std::string version_to_str(DWORD version)
+{
+    BYTE *chunks = (BYTE*)&version;
+    std::stringstream stream;
+    stream << std::hex <<
+        (int)chunks[3] << "." <<
+        (int)chunks[2] << "." <<
+        (int)chunks[1] << "." <<
+        (int)chunks[0];
+
+    return stream.str();
+}
+
+void print_version(const std::string &version , WORD info_color = HILIGHTED_COLOR)
+{
+    WORD old_color = set_color(info_color);
+    std::cout << "HollowsHunter v." << version;
+    DWORD pesieve_ver = PESieve_version;
+#ifdef _WIN64
+    std::cout << " (x64)" << "\n";
+#else
+    std::cout << " (x86)" << "\n";
+#endif
+    std::cout << "Built on: " << __DATE__ << "\n\n";
+    std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver);
+    set_color(old_color);
+    std::cout << std::endl;
+}
+
 class HHParams : public Params
 {
 public:
@@ -280,6 +309,7 @@ public:
         WORD old_color = set_color(logo_color);
         std::cout << "\n" << logo << std::endl;
         set_color(old_color);
+        print_version(this->versionStr);
     }
 
     void fillStruct(t_hh_params &ps)
