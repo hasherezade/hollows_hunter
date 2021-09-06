@@ -277,7 +277,7 @@ public:
         this->addParamToGroup(PARAM_PNAME, str_group);
         this->addParamToGroup(PARAM_PTIMES, str_group);
 
-        str_group = "6. post-scan options";
+        str_group = "6. post-scan actions";
         this->addGroup(new ParamGroup(str_group));
         this->addParamToGroup(PARAM_KILL, str_group);
         this->addParamToGroup(PARAM_SUSPEND, str_group);
