@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['separator_5fcolor_0',['SEPARATOR_COLOR',['../color__scheme_8h.html#a1bba3b9a5308d50da5c0dc45dec7b932',1,'color_scheme.h']]],
-  ['silver_1',['SILVER',['../term__util_8h.html#a7e76a14a479114a4b9b20782bb00e69a',1,'term_util.h']]]
+  ['time_5fundefined_0',['TIME_UNDEFINED',['../hh__params_8h.html#a6144407ab3bcb041574c2367ac1e455f',1,'hh_params.h']]]
 ];

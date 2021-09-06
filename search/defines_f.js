@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['warning_5fcolor_0',['WARNING_COLOR',['../color__scheme_8h.html#a3a8113b2321abda8238e8e1f41c6896b',1,'color_scheme.h']]],
-  ['white_1',['WHITE',['../term__util_8h.html#a87b537f5fa5c109d3c05c13d6b18f382',1,'term_util.h']]]
+  ['yellow_0',['YELLOW',['../term__util_8h.html#abf681265909adf3d3e8116c93c0ba179',1,'term_util.h']]],
+  ['yellow_5fon_5fblack_1',['YELLOW_ON_BLACK',['../term__util_8h.html#a51f81624c8a900209617c4b7a0e97d50',1,'term_util.h']]]
 ];

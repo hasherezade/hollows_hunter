@@ -75,11 +75,11 @@ $(function() {
 <code>#include &lt;map&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;sstream&gt;</code><br />
-<code>#include &quot;<a class="el" href="color__scheme_8h_source.html">color_scheme.h</a>&quot;</code><br />
+<code>#include &quot;color_scheme.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="hh__scanner_8h_source.html">hh_scanner.h</a>&quot;</code><br />
 <code>#include &lt;pe_sieve_types.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="pe__sieve__params__print_8h_source.html">params_info/pe_sieve_params_print.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="param__base_8h_source.html">params_info/param_base.h</a>&quot;</code><br />
+<code>#include &lt;pe_sieve_return_codes.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="params_8h_source.html">params_info/params.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="process__privilege_8h_source.html">util/process_privilege.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="strings__util_8h_source.html">util/strings_util.h</a>&quot;</code><br />
 </div>
@@ -87,55 +87,37 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a1c6d5de492ac61ad29aec7aa9a436bbf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a1c6d5de492ac61ad29aec7aa9a436bbf">VERSION</a>&#160;&#160;&#160;&quot;0.3.0&quot;</td></tr>
+<tr class="memitem:a1c6d5de492ac61ad29aec7aa9a436bbf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a1c6d5de492ac61ad29aec7aa9a436bbf">VERSION</a>&#160;&#160;&#160;&quot;0.3.0.1&quot;</td></tr>
 <tr class="separator:a1c6d5de492ac61ad29aec7aa9a436bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfa217dfe8496b2a2df4a636ac56db65"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#adfa217dfe8496b2a2df4a636ac56db65">HH_INFO</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:adfa217dfe8496b2a2df4a636ac56db65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:acc7fb66118f2be1211cc8dd7931e07dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#acc7fb66118f2be1211cc8dd7931e07dd">compatibility_alert</a> ()</td></tr>
 <tr class="separator:acc7fb66118f2be1211cc8dd7931e07dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99666472a3a026844cc32485e9ce8f20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a99666472a3a026844cc32485e9ce8f20">print_pid_param</a> (int param_color)</td></tr>
-<tr class="separator:a99666472a3a026844cc32485e9ce8f20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a764893c484fbfb309a503a6bf8ea9db7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a764893c484fbfb309a503a6bf8ea9db7">print_pname_param</a> (int param_color)</td></tr>
-<tr class="separator:a764893c484fbfb309a503a6bf8ea9db7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8abc0969aa7a2d6fa744a2435b7f1d81"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a8abc0969aa7a2d6fa744a2435b7f1d81">print_hooks_param</a> (int param_color)</td></tr>
-<tr class="separator:a8abc0969aa7a2d6fa744a2435b7f1d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2f8320711bd3bf73a644e9a1422fb52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ac2f8320711bd3bf73a644e9a1422fb52">print_uniqd_param</a> (int param_color)</td></tr>
-<tr class="separator:ac2f8320711bd3bf73a644e9a1422fb52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81f421f8c4b7d558aa2ff0535ba49554"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a81f421f8c4b7d558aa2ff0535ba49554">print_suspend_param</a> (int param_color)</td></tr>
-<tr class="separator:a81f421f8c4b7d558aa2ff0535ba49554"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d3da0624f745304932a79431caea92a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a0d3da0624f745304932a79431caea92a">print_kill_param</a> (int param_color)</td></tr>
-<tr class="separator:a0d3da0624f745304932a79431caea92a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92199ea2643dea1e2ac599a99dd628c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a92199ea2643dea1e2ac599a99dd628c8">print_log_param</a> (int param_color)</td></tr>
-<tr class="separator:a92199ea2643dea1e2ac599a99dd628c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7cb472dee965fd3ddfa8a653bddbca3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a7cb472dee965fd3ddfa8a653bddbca3d">print_loop_param</a> (int param_color)</td></tr>
-<tr class="separator:a7cb472dee965fd3ddfa8a653bddbca3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a803168b03c4c715c367191232769c436"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a803168b03c4c715c367191232769c436">print_ptimes_param</a> (int param_color)</td></tr>
-<tr class="separator:a803168b03c4c715c367191232769c436"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a477fe0054b6e4d05de9bf57951b3969c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a477fe0054b6e4d05de9bf57951b3969c">print_pignore_param</a> (int param_color)</td></tr>
-<tr class="separator:a477fe0054b6e4d05de9bf57951b3969c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8c09f3eb701bb9ef3587d6704a1d277"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ae8c09f3eb701bb9ef3587d6704a1d277">print_logo</a> ()</td></tr>
-<tr class="separator:ae8c09f3eb701bb9ef3587d6704a1d277"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60efddc0c4c4baca3927dc71787034b8"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a60efddc0c4c4baca3927dc71787034b8">print_params_block</a> (std::string block_name, std::map&lt; std::string, void(*)(int)&gt; params_block, const std::string &amp;filter)</td></tr>
-<tr class="separator:a60efddc0c4c4baca3927dc71787034b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af389776457bfeb917efee496fb97a30a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#af389776457bfeb917efee496fb97a30a">print_help</a> (std::string filter=&quot;&quot;)</td></tr>
-<tr class="separator:af389776457bfeb917efee496fb97a30a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26eb7bcb930d268f4e18105473fd17fc"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a26eb7bcb930d268f4e18105473fd17fc">version_to_str</a> (DWORD version)</td></tr>
-<tr class="separator:a26eb7bcb930d268f4e18105473fd17fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53f1d627462f220a4777d78c3e0bc129"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a53f1d627462f220a4777d78c3e0bc129">is_enabled</a> (bool param)</td></tr>
-<tr class="separator:a53f1d627462f220a4777d78c3e0bc129"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a5fb2d734af699290f7cc175dbdd1c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a6a5fb2d734af699290f7cc175dbdd1c0">print_version</a> (WORD info_color=<a class="el" href="color__scheme_8h.html#afb6800061050ee2482f17c28ed97604f">HILIGHTED_COLOR</a>)</td></tr>
-<tr class="separator:a6a5fb2d734af699290f7cc175dbdd1c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfcaaa7044f35478e1f684276834c6ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#abfcaaa7044f35478e1f684276834c6ff">print_defaults</a> ()</td></tr>
-<tr class="separator:abfcaaa7044f35478e1f684276834c6ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79c84175903da9050cc0d0867eadd4f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a79c84175903da9050cc0d0867eadd4f0">print_unknown_param</a> (const char *param)</td></tr>
-<tr class="separator:a79c84175903da9050cc0d0867eadd4f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51ee715e3d17acb3bbd3fcfe37220a19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a51ee715e3d17acb3bbd3fcfe37220a19">deploy_scan</a> (<a class="el" href="structt__hh__params.html">t_hh_params</a> &amp;hh_args)</td></tr>
 <tr class="separator:a51ee715e3d17acb3bbd3fcfe37220a19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="adfa217dfe8496b2a2df4a636ac56db65" name="adfa217dfe8496b2a2df4a636ac56db65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfa217dfe8496b2a2df4a636ac56db65">&#9670;&nbsp;</a></span>HH_INFO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HH_INFO&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00024">24</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a1c6d5de492ac61ad29aec7aa9a436bbf" name="a1c6d5de492ac61ad29aec7aa9a436bbf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1c6d5de492ac61ad29aec7aa9a436bbf">&#9670;&nbsp;</a></span>VERSION</h2>
 
@@ -143,12 +125,12 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define VERSION&#160;&#160;&#160;&quot;0.3.0&quot;</td>
+          <td class="memname">#define VERSION&#160;&#160;&#160;&quot;0.3.0.1&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00017">17</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00020">20</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -168,7 +150,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00021">21</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00026">26</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -199,7 +181,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00371">371</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00032">32</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -216,26 +198,6 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="namespacehhunter_1_1util.html#a0a7f83c9acd615ee401364757a03341e" title=" " alt="" coords="444,158,556,199"/>
 </map>
 </div>
-
-</div>
-</div>
-<a id="a53f1d627462f220a4777d78c3e0bc129" name="a53f1d627462f220a4777d78c3e0bc129"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53f1d627462f220a4777d78c3e0bc129">&#9670;&nbsp;</a></span>is_enabled()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string is_enabled </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>param</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00248">248</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>
@@ -265,647 +227,30 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00390">390</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00051">51</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp_a0ddf1224851353fc92bfbff6f499fa97_cgraph.png" border="0" usemap="#amain_8cpp_a0ddf1224851353fc92bfbff6f499fa97_cgraph" alt=""/></div>
 <map name="amain_8cpp_a0ddf1224851353fc92bfbff6f499fa97_cgraph" id="amain_8cpp_a0ddf1224851353fc92bfbff6f499fa97_cgraph">
-<area shape="rect" title=" " alt="" coords="5,1161,56,1187"/>
-<area shape="rect" href="main_8cpp.html#a51ee715e3d17acb3bbd3fcfe37220a19" title=" " alt="" coords="134,122,229,149"/>
-<area shape="rect" href="term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="783,578,881,605"/>
-<area shape="rect" href="param__base_8h.html#a8dded21b4287a83bb5c95c4ce47cc961" title=" " alt="" coords="125,1769,237,1795"/>
-<area shape="rect" href="param__base_8h.html#a66c1fa8bee4c10046460355a82d42342" title=" " alt="" coords="381,1895,455,1922"/>
-<area shape="rect" href="param__base_8h.html#ac3577f480a056022b6d3aa24a88470d2" title=" " alt="" coords="129,1921,233,1947"/>
-<area shape="rect" href="param__base_8h.html#a5a63719e6fb569328545fde0a7a4a425" title=" " alt="" coords="120,1870,243,1897"/>
-<area shape="rect" href="hh__params_8cpp.html#ac6edc4939761c76f668b573fe1a428cd" title=" " alt="" coords="372,1591,464,1618"/>
-<area shape="rect" href="pe__sieve__params__info_8cpp.html#a57a513a215931a7d2d6fd2a06e645153" title=" " alt="" coords="104,1971,259,1998"/>
-<area shape="rect" href="pe__sieve__params__info_8cpp.html#a00b4355b2e1d83fb0061eeeb123ee48f" title=" " alt="" coords="110,2022,253,2049"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#aec5331c21ba4e46c56abf7062f739c70" title=" " alt="" coords="357,1389,479,1415"/>
-<area shape="rect" href="main_8cpp.html#abfcaaa7044f35478e1f684276834c6ff" title=" " alt="" coords="131,1642,231,1669"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a24db0399cc8a29ff8f506b9ca686296d" title=" " alt="" coords="350,1439,486,1466"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#ad8f1f8eeb7bf0e5736109551945cb73d" title=" " alt="" coords="357,679,479,706"/>
-<area shape="rect" href="main_8cpp.html#af389776457bfeb917efee496fb97a30a" title=" " alt="" coords="142,831,221,858"/>
-<area shape="rect" href="main_8cpp.html#a8abc0969aa7a2d6fa744a2435b7f1d81" title=" " alt="" coords="352,730,484,757"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a1cdb31e2dd3b841dc59550fa34d0a59b" title=" " alt="" coords="363,781,473,807"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#ac686c57f5c6d01e0074f91ee6be6fa19" title=" " alt="" coords="350,1490,486,1517"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a2a88391c79551eca1325d63e32b954f4" title=" " alt="" coords="341,882,495,909"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a2bf19740858a8e9e4d3f972e082f6198" title=" " alt="" coords="357,223,479,250"/>
-<area shape="rect" href="main_8cpp.html#a0d3da0624f745304932a79431caea92a" title=" " alt="" coords="361,933,475,959"/>
-<area shape="rect" href="main_8cpp.html#a92199ea2643dea1e2ac599a99dd628c8" title=" " alt="" coords="361,983,475,1010"/>
-<area shape="rect" href="main_8cpp.html#a7cb472dee965fd3ddfa8a653bddbca3d" title=" " alt="" coords="357,1034,479,1061"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a6dddc48ab36b0f1fbd76b5370cce92d4" title=" " alt="" coords="347,578,489,605"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a31928b44053e4d0793e10faecd67a783" title=" " alt="" coords="341,1135,495,1162"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a29f9794e3540cdb1d3a095d12e7c6d71" title=" " alt="" coords="345,1186,491,1213"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#aa1e0e102331aed60edc9fb6b780b0cd9" title=" " alt="" coords="341,1237,495,1263"/>
-<area shape="rect" href="main_8cpp.html#a99666472a3a026844cc32485e9ce8f20" title=" " alt="" coords="361,1287,475,1314"/>
-<area shape="rect" href="main_8cpp.html#a477fe0054b6e4d05de9bf57951b3969c" title=" " alt="" coords="349,1338,487,1365"/>
-<area shape="rect" href="main_8cpp.html#a764893c484fbfb309a503a6bf8ea9db7" title=" " alt="" coords="350,274,486,301"/>
-<area shape="rect" href="main_8cpp.html#a803168b03c4c715c367191232769c436" title=" " alt="" coords="350,375,486,402"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#af9ed28efcc155a1b77594da7eb542def" title=" " alt="" coords="355,426,481,453"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a809467ec45bf1e24ffeb76b84da87d0b" title=" " alt="" coords="361,477,475,503"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a07913c35f02c94f523cff0ae6870414c" title=" " alt="" coords="353,527,483,554"/>
-<area shape="rect" href="main_8cpp.html#a81f421f8c4b7d558aa2ff0535ba49554" title=" " alt="" coords="345,629,491,655"/>
-<area shape="rect" href="main_8cpp.html#ac2f8320711bd3bf73a644e9a1422fb52" title=" " alt="" coords="354,1085,482,1111"/>
-<area shape="rect" href="main_8cpp.html#ae8c09f3eb701bb9ef3587d6704a1d277" title=" " alt="" coords="142,2073,221,2099"/>
-<area shape="rect" href="main_8cpp.html#a79c84175903da9050cc0d0867eadd4f0" title=" " alt="" coords="581,1541,731,1567"/>
-<area shape="rect" href="main_8cpp.html#a6a5fb2d734af699290f7cc175dbdd1c0" title=" " alt="" coords="133,2123,229,2150"/>
-<area shape="rect" href="main_8cpp.html#acc7fb66118f2be1211cc8dd7931e07dd" title=" " alt="" coords="355,122,481,149"/>
-<area shape="rect" href="class_h_h_scanner.html#adec367c7541ba8e334c7f674e57f429a" title=" " alt="" coords="307,173,529,199"/>
-<area shape="rect" href="namespacehhunter_1_1util.html#a71c3879cac544c11cb2391e6c030c347" title=" " alt="" coords="359,5,477,47"/>
-<area shape="rect" href="param__base_8h.html#ad1337f979927e53961882e4cac0f635f" title=" " alt="" coords="373,1845,463,1871"/>
-<area shape="rect" href="util_8cpp.html#a2ef8c1ef354dcc36bb6336a65b932741" title=" " alt="" coords="373,1997,463,2023"/>
-<area shape="rect" href="util_8cpp.html#a85c919250f909082d2850ae6cc37f249" title=" " alt="" coords="626,1971,686,1998"/>
-<area shape="rect" href="param__base_8h.html#a1f529b9102222a0fc24782351982162e" title=" " alt="" coords="585,857,727,883"/>
-<area shape="rect" href="pe__sieve__params__info_8cpp.html#a8f2ef3c1ae7b4ace160c2cad049a7a65" title=" " alt="" coords="585,1389,727,1415"/>
-<area shape="rect" href="main_8cpp.html#a53f1d627462f220a4777d78c3e0bc129" title=" " alt="" coords="376,1743,460,1770"/>
-<area shape="rect" href="pe__sieve__params__info_8cpp.html#a4daaf5c8b84ae20286f652bebca7aad1" title=" " alt="" coords="581,1439,731,1466"/>
-<area shape="rect" href="pe__sieve__params__info_8cpp.html#a09ede7fcf2b80f2aac01d868bc8992ed" title=" " alt="" coords="577,1490,735,1517"/>
+<area shape="rect" title=" " alt="" coords="5,157,56,184"/>
+<area shape="rect" href="main_8cpp.html#a51ee715e3d17acb3bbd3fcfe37220a19" title=" " alt="" coords="127,157,221,184"/>
+<area shape="rect" href="class_h_h_params.html#ae1bf54e6b2f8dc2e16f0e325d937f96c" title=" " alt="" coords="104,208,244,235"/>
+<area shape="rect" href="hh__params_8cpp.html#ac6edc4939761c76f668b573fe1a428cd" title=" " alt="" coords="128,259,220,285"/>
+<area shape="rect" href="params_8h.html#aae813382de1d726483950947bc2da569" title=" " alt="" coords="596,5,692,32"/>
+<area shape="rect" href="class_h_h_params.html#ad3c3e5a7250906720808df84f8c9c477" title=" " alt="" coords="324,56,483,83"/>
+<area shape="rect" href="main_8cpp.html#acc7fb66118f2be1211cc8dd7931e07dd" title=" " alt="" coords="340,157,467,184"/>
+<area shape="rect" href="term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="595,157,693,184"/>
+<area shape="rect" href="class_h_h_scanner.html#adec367c7541ba8e334c7f674e57f429a" title=" " alt="" coords="292,275,515,301"/>
+<area shape="rect" href="namespacehhunter_1_1util.html#a71c3879cac544c11cb2391e6c030c347" title=" " alt="" coords="344,209,463,250"/>
+<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="788,107,863,133"/>
+<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="925,81,1048,108"/>
+<area shape="rect" href="namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01" title=" " alt="" coords="563,275,725,301"/>
+<area shape="rect" href="namespacehhunter_1_1util.html#a0a7f83c9acd615ee401364757a03341e" title=" " alt="" coords="588,209,700,250"/>
+<area shape="rect" href="class_h_h_params.html#af9c459d9b85e95a45920eef39bc4ba63" title=" " alt="" coords="309,325,497,352"/>
+<area shape="rect" href="params_8h.html#a26eb7bcb930d268f4e18105473fd17fc" title=" " alt="" coords="773,5,877,32"/>
 </map>
 </div>
-
-</div>
-</div>
-<a id="abfcaaa7044f35478e1f684276834c6ff" name="abfcaaa7044f35478e1f684276834c6ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfcaaa7044f35478e1f684276834c6ff">&#9670;&nbsp;</a></span>print_defaults()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_defaults </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00272">272</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_abfcaaa7044f35478e1f684276834c6ff_cgraph.png" border="0" usemap="#amain_8cpp_abfcaaa7044f35478e1f684276834c6ff_cgraph" alt=""/></div>
-<map name="amain_8cpp_abfcaaa7044f35478e1f684276834c6ff_cgraph" id="amain_8cpp_abfcaaa7044f35478e1f684276834c6ff_cgraph">
-<area shape="rect" title=" " alt="" coords="5,107,105,133"/>
-<area shape="rect" href="hh__params_8cpp.html#ac6edc4939761c76f668b573fe1a428cd" title=" " alt="" coords="186,5,278,32"/>
-<area shape="rect" href="main_8cpp.html#a53f1d627462f220a4777d78c3e0bc129" title=" " alt="" coords="190,56,274,83"/>
-<area shape="rect" href="pe__sieve__params__info_8cpp.html#a4daaf5c8b84ae20286f652bebca7aad1" title=" " alt="" coords="157,107,307,133"/>
-<area shape="rect" href="pe__sieve__params__info_8cpp.html#a09ede7fcf2b80f2aac01d868bc8992ed" title=" " alt="" coords="153,157,311,184"/>
-<area shape="rect" href="pe__sieve__params__info_8cpp.html#a2981e9ef5691a38d4412b31f3d57361f" title=" " alt="" coords="168,208,296,235"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="af389776457bfeb917efee496fb97a30a" name="af389776457bfeb917efee496fb97a30a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af389776457bfeb917efee496fb97a30a">&#9670;&nbsp;</a></span>print_help()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_help </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>filter</em> = <code>&quot;&quot;</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00163">163</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_af389776457bfeb917efee496fb97a30a_cgraph.png" border="0" usemap="#amain_8cpp_af389776457bfeb917efee496fb97a30a_cgraph" alt=""/></div>
-<map name="amain_8cpp_af389776457bfeb917efee496fb97a30a_cgraph" id="amain_8cpp_af389776457bfeb917efee496fb97a30a_cgraph">
-<area shape="rect" title=" " alt="" coords="5,764,84,790"/>
-<area shape="rect" href="main_8cpp.html#acc7fb66118f2be1211cc8dd7931e07dd" title=" " alt="" coords="423,105,549,132"/>
-<area shape="rect" href="term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="648,409,747,436"/>
-<area shape="rect" href="class_h_h_scanner.html#adec367c7541ba8e334c7f674e57f429a" title=" " alt="" coords="132,1477,355,1504"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#aec5331c21ba4e46c56abf7062f739c70" title=" " alt="" coords="182,156,305,182"/>
-<area shape="rect" href="param__base_8h.html#a1f529b9102222a0fc24782351982162e" title=" " alt="" coords="415,738,557,765"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a24db0399cc8a29ff8f506b9ca686296d" title=" " alt="" coords="175,206,311,233"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#ad8f1f8eeb7bf0e5736109551945cb73d" title=" " alt="" coords="182,257,305,284"/>
-<area shape="rect" href="main_8cpp.html#a8abc0969aa7a2d6fa744a2435b7f1d81" title=" " alt="" coords="177,460,309,486"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a1cdb31e2dd3b841dc59550fa34d0a59b" title=" " alt="" coords="188,308,299,334"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#ac686c57f5c6d01e0074f91ee6be6fa19" title=" " alt="" coords="175,358,311,385"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a2a88391c79551eca1325d63e32b954f4" title=" " alt="" coords="166,1321,321,1348"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a2bf19740858a8e9e4d3f972e082f6198" title=" " alt="" coords="183,510,304,537"/>
-<area shape="rect" href="main_8cpp.html#a0d3da0624f745304932a79431caea92a" title=" " alt="" coords="187,561,300,588"/>
-<area shape="rect" href="main_8cpp.html#a92199ea2643dea1e2ac599a99dd628c8" title=" " alt="" coords="186,612,301,638"/>
-<area shape="rect" href="main_8cpp.html#a7cb472dee965fd3ddfa8a653bddbca3d" title=" " alt="" coords="183,662,304,689"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a6dddc48ab36b0f1fbd76b5370cce92d4" title=" " alt="" coords="172,713,315,740"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a31928b44053e4d0793e10faecd67a783" title=" " alt="" coords="167,764,320,790"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a29f9794e3540cdb1d3a095d12e7c6d71" title=" " alt="" coords="170,1372,317,1398"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#aa1e0e102331aed60edc9fb6b780b0cd9" title=" " alt="" coords="166,814,321,841"/>
-<area shape="rect" href="main_8cpp.html#a60efddc0c4c4baca3927dc71787034b8" title=" " alt="" coords="176,1422,311,1449"/>
-<area shape="rect" href="main_8cpp.html#a99666472a3a026844cc32485e9ce8f20" title=" " alt="" coords="186,865,301,892"/>
-<area shape="rect" href="main_8cpp.html#a477fe0054b6e4d05de9bf57951b3969c" title=" " alt="" coords="174,916,313,942"/>
-<area shape="rect" href="main_8cpp.html#a764893c484fbfb309a503a6bf8ea9db7" title=" " alt="" coords="175,966,311,993"/>
-<area shape="rect" href="main_8cpp.html#a803168b03c4c715c367191232769c436" title=" " alt="" coords="175,1017,311,1044"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#af9ed28efcc155a1b77594da7eb542def" title=" " alt="" coords="181,1068,306,1094"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a809467ec45bf1e24ffeb76b84da87d0b" title=" " alt="" coords="186,1118,301,1145"/>
-<area shape="rect" href="pe__sieve__params__print_8cpp.html#a07913c35f02c94f523cff0ae6870414c" title=" " alt="" coords="178,1169,309,1196"/>
-<area shape="rect" href="main_8cpp.html#a81f421f8c4b7d558aa2ff0535ba49554" title=" " alt="" coords="170,1220,317,1246"/>
-<area shape="rect" href="main_8cpp.html#ac2f8320711bd3bf73a644e9a1422fb52" title=" " alt="" coords="179,1270,307,1297"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="825,409,900,436"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="948,409,1071,436"/>
-<area shape="rect" href="namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01" title=" " alt="" coords="405,1510,567,1537"/>
-<area shape="rect" href="pe__sieve__params__info_8cpp.html#a8f2ef3c1ae7b4ace160c2cad049a7a65" title=" " alt="" coords="415,156,557,182"/>
-<area shape="rect" href="pe__sieve__params__info_8cpp.html#a4daaf5c8b84ae20286f652bebca7aad1" title=" " alt="" coords="411,206,561,233"/>
-<area shape="rect" href="pe__sieve__params__info_8cpp.html#ac320c6766dbe31dbfe917d3f9ae22f07" title=" " alt="" coords="409,257,563,284"/>
-<area shape="rect" href="pe__sieve__params__info_8cpp.html#a7b69203960ec3f7d872ee691aedf8962" title=" " alt="" coords="403,308,569,334"/>
-<area shape="rect" href="pe__sieve__params__info_8cpp.html#a09ede7fcf2b80f2aac01d868bc8992ed" title=" " alt="" coords="407,358,565,385"/>
-<area shape="rect" href="pe__sieve__params__info_8cpp.html#a9484503aa20e01d78bd4c72e8c4eedcd" title=" " alt="" coords="417,1292,555,1318"/>
-<area shape="rect" href="pe__sieve__params__info_8cpp.html#a2981e9ef5691a38d4412b31f3d57361f" title=" " alt="" coords="422,1342,550,1369"/>
-<area shape="rect" href="namespacehhunter_1_1util.html#a7a7446ea8ee879e8552808e83017f81a" title=" " alt="" coords="415,1444,557,1486"/>
-<area shape="rect" href="namespacehhunter_1_1util.html#a48183ed17d49191649fbac64927b6f28" title=" " alt="" coords="617,1411,777,1452"/>
-<area shape="rect" href="namespacehhunter_1_1util.html#a0ec1bb29952cdc467b9936fb2495ccf9" title=" " alt="" coords="643,1476,752,1518"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a8abc0969aa7a2d6fa744a2435b7f1d81" name="a8abc0969aa7a2d6fa744a2435b7f1d81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8abc0969aa7a2d6fa744a2435b7f1d81">&#9670;&nbsp;</a></span>print_hooks_param()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_hooks_param </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>param_color</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00040">40</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_a8abc0969aa7a2d6fa744a2435b7f1d81_cgraph.png" border="0" usemap="#amain_8cpp_a8abc0969aa7a2d6fa744a2435b7f1d81_cgraph" alt=""/></div>
-<map name="amain_8cpp_a8abc0969aa7a2d6fa744a2435b7f1d81_cgraph" id="amain_8cpp_a8abc0969aa7a2d6fa744a2435b7f1d81_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,137,32"/>
-<area shape="rect" href="param__base_8h.html#a1f529b9102222a0fc24782351982162e" title=" " alt="" coords="185,5,328,32"/>
-<area shape="rect" href="term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="376,5,475,32"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="523,5,597,32"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="645,5,768,32"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a0d3da0624f745304932a79431caea92a" name="a0d3da0624f745304932a79431caea92a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d3da0624f745304932a79431caea92a">&#9670;&nbsp;</a></span>print_kill_param()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_kill_param </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>param_color</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00059">59</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_a0d3da0624f745304932a79431caea92a_cgraph.png" border="0" usemap="#amain_8cpp_a0d3da0624f745304932a79431caea92a_cgraph" alt=""/></div>
-<map name="amain_8cpp_a0d3da0624f745304932a79431caea92a_cgraph" id="amain_8cpp_a0d3da0624f745304932a79431caea92a_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,119,32"/>
-<area shape="rect" href="param__base_8h.html#a1f529b9102222a0fc24782351982162e" title=" " alt="" coords="167,5,309,32"/>
-<area shape="rect" href="term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="357,5,456,32"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="504,5,579,32"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="627,5,749,32"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a92199ea2643dea1e2ac599a99dd628c8" name="a92199ea2643dea1e2ac599a99dd628c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92199ea2643dea1e2ac599a99dd628c8">&#9670;&nbsp;</a></span>print_log_param()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_log_param </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>param_color</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00065">65</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_a92199ea2643dea1e2ac599a99dd628c8_cgraph.png" border="0" usemap="#amain_8cpp_a92199ea2643dea1e2ac599a99dd628c8_cgraph" alt=""/></div>
-<map name="amain_8cpp_a92199ea2643dea1e2ac599a99dd628c8_cgraph" id="amain_8cpp_a92199ea2643dea1e2ac599a99dd628c8_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,120,32"/>
-<area shape="rect" href="param__base_8h.html#a1f529b9102222a0fc24782351982162e" title=" " alt="" coords="168,5,311,32"/>
-<area shape="rect" href="term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="359,5,457,32"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="505,5,580,32"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="628,5,751,32"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="ae8c09f3eb701bb9ef3587d6704a1d277" name="ae8c09f3eb701bb9ef3587d6704a1d277"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8c09f3eb701bb9ef3587d6704a1d277">&#9670;&nbsp;</a></span>print_logo()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_logo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00090">90</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_ae8c09f3eb701bb9ef3587d6704a1d277_cgraph.png" border="0" usemap="#amain_8cpp_ae8c09f3eb701bb9ef3587d6704a1d277_cgraph" alt=""/></div>
-<map name="amain_8cpp_ae8c09f3eb701bb9ef3587d6704a1d277_cgraph" id="amain_8cpp_ae8c09f3eb701bb9ef3587d6704a1d277_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,84,32"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="255,5,377,32"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="132,31,207,57"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a7cb472dee965fd3ddfa8a653bddbca3d" name="a7cb472dee965fd3ddfa8a653bddbca3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7cb472dee965fd3ddfa8a653bddbca3d">&#9670;&nbsp;</a></span>print_loop_param()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_loop_param </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>param_color</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00071">71</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_a7cb472dee965fd3ddfa8a653bddbca3d_cgraph.png" border="0" usemap="#amain_8cpp_a7cb472dee965fd3ddfa8a653bddbca3d_cgraph" alt=""/></div>
-<map name="amain_8cpp_a7cb472dee965fd3ddfa8a653bddbca3d_cgraph" id="amain_8cpp_a7cb472dee965fd3ddfa8a653bddbca3d_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,127,32"/>
-<area shape="rect" href="param__base_8h.html#a1f529b9102222a0fc24782351982162e" title=" " alt="" coords="175,5,317,32"/>
-<area shape="rect" href="term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="365,5,464,32"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="512,5,587,32"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="635,5,757,32"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a60efddc0c4c4baca3927dc71787034b8" name="a60efddc0c4c4baca3927dc71787034b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a60efddc0c4c4baca3927dc71787034b8">&#9670;&nbsp;</a></span>print_params_block()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t print_params_block </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>block_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::map&lt; std::string, void(*)(int)&gt;&#160;</td>
-          <td class="paramname"><em>params_block</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>filter</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00118">118</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_a60efddc0c4c4baca3927dc71787034b8_cgraph.png" border="0" usemap="#amain_8cpp_a60efddc0c4c4baca3927dc71787034b8_cgraph" alt=""/></div>
-<map name="amain_8cpp_a60efddc0c4c4baca3927dc71787034b8_cgraph" id="amain_8cpp_a60efddc0c4c4baca3927dc71787034b8_cgraph">
-<area shape="rect" title=" " alt="" coords="5,107,140,134"/>
-<area shape="rect" href="namespacehhunter_1_1util.html#a7a7446ea8ee879e8552808e83017f81a" title=" " alt="" coords="188,71,331,112"/>
-<area shape="rect" href="term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="210,137,309,163"/>
-<area shape="rect" href="namespacehhunter_1_1util.html#a48183ed17d49191649fbac64927b6f28" title=" " alt="" coords="379,5,539,47"/>
-<area shape="rect" href="namespacehhunter_1_1util.html#a0ec1bb29952cdc467b9936fb2495ccf9" title=" " alt="" coords="404,71,513,112"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="421,137,496,163"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="587,137,709,163"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a99666472a3a026844cc32485e9ce8f20" name="a99666472a3a026844cc32485e9ce8f20"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99666472a3a026844cc32485e9ce8f20">&#9670;&nbsp;</a></span>print_pid_param()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_pid_param </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>param_color</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00026">26</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_a99666472a3a026844cc32485e9ce8f20_cgraph.png" border="0" usemap="#amain_8cpp_a99666472a3a026844cc32485e9ce8f20_cgraph" alt=""/></div>
-<map name="amain_8cpp_a99666472a3a026844cc32485e9ce8f20_cgraph" id="amain_8cpp_a99666472a3a026844cc32485e9ce8f20_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,120,32"/>
-<area shape="rect" href="param__base_8h.html#a1f529b9102222a0fc24782351982162e" title=" " alt="" coords="168,5,311,32"/>
-<area shape="rect" href="term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="359,5,457,32"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="505,5,580,32"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="628,5,751,32"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a477fe0054b6e4d05de9bf57951b3969c" name="a477fe0054b6e4d05de9bf57951b3969c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a477fe0054b6e4d05de9bf57951b3969c">&#9670;&nbsp;</a></span>print_pignore_param()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_pignore_param </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>param_color</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00083">83</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_a477fe0054b6e4d05de9bf57951b3969c_cgraph.png" border="0" usemap="#amain_8cpp_a477fe0054b6e4d05de9bf57951b3969c_cgraph" alt=""/></div>
-<map name="amain_8cpp_a477fe0054b6e4d05de9bf57951b3969c_cgraph" id="amain_8cpp_a477fe0054b6e4d05de9bf57951b3969c_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,144,32"/>
-<area shape="rect" href="param__base_8h.html#a1f529b9102222a0fc24782351982162e" title=" " alt="" coords="192,5,335,32"/>
-<area shape="rect" href="term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="383,5,481,32"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="529,5,604,32"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="652,5,775,32"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a764893c484fbfb309a503a6bf8ea9db7" name="a764893c484fbfb309a503a6bf8ea9db7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a764893c484fbfb309a503a6bf8ea9db7">&#9670;&nbsp;</a></span>print_pname_param()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_pname_param </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>param_color</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00033">33</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_a764893c484fbfb309a503a6bf8ea9db7_cgraph.png" border="0" usemap="#amain_8cpp_a764893c484fbfb309a503a6bf8ea9db7_cgraph" alt=""/></div>
-<map name="amain_8cpp_a764893c484fbfb309a503a6bf8ea9db7_cgraph" id="amain_8cpp_a764893c484fbfb309a503a6bf8ea9db7_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,141,32"/>
-<area shape="rect" href="param__base_8h.html#a1f529b9102222a0fc24782351982162e" title=" " alt="" coords="189,5,332,32"/>
-<area shape="rect" href="term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="380,5,479,32"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="527,5,601,32"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="649,5,772,32"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a803168b03c4c715c367191232769c436" name="a803168b03c4c715c367191232769c436"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a803168b03c4c715c367191232769c436">&#9670;&nbsp;</a></span>print_ptimes_param()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_ptimes_param </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>param_color</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00077">77</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_a803168b03c4c715c367191232769c436_cgraph.png" border="0" usemap="#amain_8cpp_a803168b03c4c715c367191232769c436_cgraph" alt=""/></div>
-<map name="amain_8cpp_a803168b03c4c715c367191232769c436_cgraph" id="amain_8cpp_a803168b03c4c715c367191232769c436_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,141,32"/>
-<area shape="rect" href="param__base_8h.html#a1f529b9102222a0fc24782351982162e" title=" " alt="" coords="189,5,332,32"/>
-<area shape="rect" href="term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="380,5,479,32"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="527,5,601,32"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="649,5,772,32"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a81f421f8c4b7d558aa2ff0535ba49554" name="a81f421f8c4b7d558aa2ff0535ba49554"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81f421f8c4b7d558aa2ff0535ba49554">&#9670;&nbsp;</a></span>print_suspend_param()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_suspend_param </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>param_color</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00053">53</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_a81f421f8c4b7d558aa2ff0535ba49554_cgraph.png" border="0" usemap="#amain_8cpp_a81f421f8c4b7d558aa2ff0535ba49554_cgraph" alt=""/></div>
-<map name="amain_8cpp_a81f421f8c4b7d558aa2ff0535ba49554_cgraph" id="amain_8cpp_a81f421f8c4b7d558aa2ff0535ba49554_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,152,32"/>
-<area shape="rect" href="param__base_8h.html#a1f529b9102222a0fc24782351982162e" title=" " alt="" coords="200,5,343,32"/>
-<area shape="rect" href="term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="391,5,489,32"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="537,5,612,32"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="660,5,783,32"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="ac2f8320711bd3bf73a644e9a1422fb52" name="ac2f8320711bd3bf73a644e9a1422fb52"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2f8320711bd3bf73a644e9a1422fb52">&#9670;&nbsp;</a></span>print_uniqd_param()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_uniqd_param </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>param_color</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00046">46</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_ac2f8320711bd3bf73a644e9a1422fb52_cgraph.png" border="0" usemap="#amain_8cpp_ac2f8320711bd3bf73a644e9a1422fb52_cgraph" alt=""/></div>
-<map name="amain_8cpp_ac2f8320711bd3bf73a644e9a1422fb52_cgraph" id="amain_8cpp_ac2f8320711bd3bf73a644e9a1422fb52_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,133,32"/>
-<area shape="rect" href="param__base_8h.html#a1f529b9102222a0fc24782351982162e" title=" " alt="" coords="181,5,324,32"/>
-<area shape="rect" href="term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="372,5,471,32"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="519,5,593,32"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="641,5,764,32"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a79c84175903da9050cc0d0867eadd4f0" name="a79c84175903da9050cc0d0867eadd4f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79c84175903da9050cc0d0867eadd4f0">&#9670;&nbsp;</a></span>print_unknown_param()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_unknown_param </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>param</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00365">365</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_a79c84175903da9050cc0d0867eadd4f0_cgraph.png" border="0" usemap="#amain_8cpp_a79c84175903da9050cc0d0867eadd4f0_cgraph" alt=""/></div>
-<map name="amain_8cpp_a79c84175903da9050cc0d0867eadd4f0_cgraph" id="amain_8cpp_a79c84175903da9050cc0d0867eadd4f0_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,155,32"/>
-<area shape="rect" href="term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="203,5,301,32"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="349,5,424,32"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="472,5,595,32"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a6a5fb2d734af699290f7cc175dbdd1c0" name="a6a5fb2d734af699290f7cc175dbdd1c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a5fb2d734af699290f7cc175dbdd1c0">&#9670;&nbsp;</a></span>print_version()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_version </td>
-          <td>(</td>
-          <td class="paramtype">WORD&#160;</td>
-          <td class="paramname"><em>info_color</em> = <code><a class="el" href="color__scheme_8h.html#afb6800061050ee2482f17c28ed97604f">HILIGHTED_COLOR</a></code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00256">256</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="main_8cpp_a6a5fb2d734af699290f7cc175dbdd1c0_cgraph.png" border="0" usemap="#amain_8cpp_a6a5fb2d734af699290f7cc175dbdd1c0_cgraph" alt=""/></div>
-<map name="amain_8cpp_a6a5fb2d734af699290f7cc175dbdd1c0_cgraph" id="amain_8cpp_a6a5fb2d734af699290f7cc175dbdd1c0_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,101,57"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="164,5,239,32"/>
-<area shape="rect" href="main_8cpp.html#a26eb7bcb930d268f4e18105473fd17fc" title=" " alt="" coords="149,56,253,83"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="301,5,424,32"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a26eb7bcb930d268f4e18105473fd17fc" name="a26eb7bcb930d268f4e18105473fd17fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26eb7bcb930d268f4e18105473fd17fc">&#9670;&nbsp;</a></span>version_to_str()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string version_to_str </td>
-          <td>(</td>
-          <td class="paramtype">DWORD&#160;</td>
-          <td class="paramname"><em>version</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00235">235</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 
 </div>
 </div>

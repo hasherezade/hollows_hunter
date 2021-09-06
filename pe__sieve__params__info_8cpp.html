@@ -75,7 +75,6 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="pe__sieve__params__info_8h_source.html">pe_sieve_params_info.h</a>&quot;</code><br />
 <code>#include &lt;windows.h&gt;</code><br />
-<code>#include &lt;psapi.h&gt;</code><br />
 </div>
 <p><a href="pe__sieve__params__info_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -91,77 +90,53 @@ Functions</h2></td></tr>
 <tr class="separator:a7b69203960ec3f7d872ee691aedf8962"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac320c6766dbe31dbfe917d3f9ae22f07"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pe__sieve__params__info_8cpp.html#ac320c6766dbe31dbfe917d3f9ae22f07">translate_dotnet_policy</a> (const pesieve::t_dotnet_policy &amp;mode)</td></tr>
 <tr class="separator:ac320c6766dbe31dbfe917d3f9ae22f07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f366a8fa609cf7bd492f67bd02dd1ba"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pe__sieve__params__info_8cpp.html#a8f366a8fa609cf7bd492f67bd02dd1ba">translate_modules_filter</a> (DWORD m_filter)</td></tr>
-<tr class="separator:a8f366a8fa609cf7bd492f67bd02dd1ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9484503aa20e01d78bd4c72e8c4eedcd"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pe__sieve__params__info_8cpp.html#a9484503aa20e01d78bd4c72e8c4eedcd">translate_json_level</a> (const pesieve::t_json_level &amp;mode)</td></tr>
 <tr class="separator:a9484503aa20e01d78bd4c72e8c4eedcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a262c6315db42f8ed2d636b0603ac74ee"><td class="memItemLeft" align="right" valign="top">pesieve::t_imprec_mode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pe__sieve__params__info_8cpp.html#a262c6315db42f8ed2d636b0603ac74ee">normalize_imprec_mode</a> (size_t mode_id)</td></tr>
-<tr class="separator:a262c6315db42f8ed2d636b0603ac74ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57a513a215931a7d2d6fd2a06e645153"><td class="memItemLeft" align="right" valign="top">pesieve::t_dump_mode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pe__sieve__params__info_8cpp.html#a57a513a215931a7d2d6fd2a06e645153">normalize_dump_mode</a> (size_t mode_id)</td></tr>
-<tr class="separator:a57a513a215931a7d2d6fd2a06e645153"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f2ef3c1ae7b4ace160c2cad049a7a65"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pe__sieve__params__info_8cpp.html#a8f2ef3c1ae7b4ace160c2cad049a7a65">translate_data_mode</a> (const pesieve::t_data_scan_mode &amp;mode)</td></tr>
 <tr class="separator:a8f2ef3c1ae7b4ace160c2cad049a7a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00b4355b2e1d83fb0061eeeb123ee48f"><td class="memItemLeft" align="right" valign="top">pesieve::t_json_level&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pe__sieve__params__info_8cpp.html#a00b4355b2e1d83fb0061eeeb123ee48f">normalize_json_level</a> (size_t mode_id)</td></tr>
-<tr class="separator:a00b4355b2e1d83fb0061eeeb123ee48f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedf93b385432b0be8af1d00a5f20d634"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pe__sieve__params__info_8cpp.html#aedf93b385432b0be8af1d00a5f20d634">dump_mode_to_id</a> (const DWORD dump_mode)</td></tr>
+<tr class="separator:aedf93b385432b0be8af1d00a5f20d634"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbc76e0010c455cf5a2da3aaa2755c2f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pe__sieve__params__info_8cpp.html#acbc76e0010c455cf5a2da3aaa2755c2f">imprec_mode_to_id</a> (const pesieve::t_imprec_mode imprec_mode)</td></tr>
+<tr class="separator:acbc76e0010c455cf5a2da3aaa2755c2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a57a513a215931a7d2d6fd2a06e645153" name="a57a513a215931a7d2d6fd2a06e645153"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57a513a215931a7d2d6fd2a06e645153">&#9670;&nbsp;</a></span>normalize_dump_mode()</h2>
+<a id="aedf93b385432b0be8af1d00a5f20d634" name="aedf93b385432b0be8af1d00a5f20d634"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedf93b385432b0be8af1d00a5f20d634">&#9670;&nbsp;</a></span>dump_mode_to_id()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pesieve::t_dump_mode normalize_dump_mode </td>
+          <td class="memname">std::string dump_mode_to_id </td>
           <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>mode_id</em></td><td>)</td>
+          <td class="paramtype">const DWORD&#160;</td>
+          <td class="paramname"><em>dump_mode</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00119">119</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00112">112</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a262c6315db42f8ed2d636b0603ac74ee" name="a262c6315db42f8ed2d636b0603ac74ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a262c6315db42f8ed2d636b0603ac74ee">&#9670;&nbsp;</a></span>normalize_imprec_mode()</h2>
+<a id="acbc76e0010c455cf5a2da3aaa2755c2f" name="acbc76e0010c455cf5a2da3aaa2755c2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbc76e0010c455cf5a2da3aaa2755c2f">&#9670;&nbsp;</a></span>imprec_mode_to_id()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pesieve::t_imprec_mode normalize_imprec_mode </td>
+          <td class="memname">std::string imprec_mode_to_id </td>
           <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>mode_id</em></td><td>)</td>
+          <td class="paramtype">const pesieve::t_imprec_mode&#160;</td>
+          <td class="paramname"><em>imprec_mode</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00111">111</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a00b4355b2e1d83fb0061eeeb123ee48f" name="a00b4355b2e1d83fb0061eeeb123ee48f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00b4355b2e1d83fb0061eeeb123ee48f">&#9670;&nbsp;</a></span>normalize_json_level()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">pesieve::t_json_level normalize_json_level </td>
-          <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>mode_id</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00146">146</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00127">127</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
 
 </div>
 </div>
@@ -181,7 +156,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00127">127</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00093">93</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
 
 </div>
 </div>
@@ -201,7 +176,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00066">66</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00063">63</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
 
 </div>
 </div>
@@ -221,7 +196,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00008">8</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00005">5</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
 
 </div>
 </div>
@@ -241,7 +216,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00051">51</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00048">48</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
 
 </div>
 </div>
@@ -261,7 +236,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00036">36</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00033">33</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
 
 </div>
 </div>
@@ -281,27 +256,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00098">98</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a8f366a8fa609cf7bd492f67bd02dd1ba" name="a8f366a8fa609cf7bd492f67bd02dd1ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f366a8fa609cf7bd492f67bd02dd1ba">&#9670;&nbsp;</a></span>translate_modules_filter()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string translate_modules_filter </td>
-          <td>(</td>
-          <td class="paramtype">DWORD&#160;</td>
-          <td class="paramname"><em>m_filter</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00083">83</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00080">80</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
 
 </div>
 </div>
@@ -321,7 +276,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00023">23</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pe__sieve__params__info_8cpp_source.html#l00020">20</a> of file <a class="el" href="pe__sieve__params__info_8cpp_source.html">pe_sieve_params_info.cpp</a>.</p>
 
 </div>
 </div>
