@@ -21,10 +21,14 @@ endif()
 
 # modules:
 set ( M_PESIEVE "pe-sieve" )
+set ( M_PARAMKIT "paramkit" )
 
 # modules paths:
 set (PESIEVE_DIR "${PROJECT_SOURCE_DIR}/${M_PESIEVE}" CACHE PATH "PE-sieve main path")
 include_directories ( ${PESIEVE_DIR}/include )
+
+set (PARAMKIT_DIR "${CMAKE_SOURCE_DIR}/${M_PARAMKIT}/${M_PARAMKIT}" CACHE PATH "ParamKit main path" )
+include_directories ( ${PARAMKIT_DIR}/include )
 
 set (srcs
 	main.cpp
@@ -33,7 +37,7 @@ set (srcs
 	hh_params.cpp
 	hh_report.cpp
 	params_info/pe_sieve_params_info.cpp
-	params_info/pe_sieve_params_print.cpp
+	#params_info/pe_sieve_params_print.cpp
 	util/suspend.cpp
 	util/util.cpp
 	util/process_privilege.cpp
@@ -43,14 +47,15 @@ set (srcs
 
 set (hdrs
 	term_util.h
-	color_scheme.h
+	#color_scheme.h
 	hh_scanner.h
 	hh_params.h
 	hh_report.h
-	params_info/param_base.h
-	params_info/params_list.h
+	params_info/params.h
+	#params_info/param_base.h
+	#params_info/params_list.h
 	params_info/pe_sieve_params_info.h
-	params_info/pe_sieve_params_print.h
+	#params_info/pe_sieve_params_print.h
 	util/suspend.h
 	util/ntddk.h
 	util/util.h
@@ -68,16 +73,20 @@ if (NOT PESIEVE_AS_STATIC_LIB)
 	set ( PESIEVE_AS_DLL ON CACHE BOOL "Enable building PE-sieve as a DLL" FORCE)
 endif()
 
-add_subdirectory (pe-sieve)
+add_subdirectory ( ${PESIEVE_DIR} )
 set ( PESIEVE_LIB $<TARGET_FILE:pe-sieve> CACHE PATH "PE-sieve library path" )
+
+add_subdirectory ( ${PARAMKIT_DIR} )
+set ( PARAMKIT_LIB $<TARGET_FILE:paramkit> CACHE PATH "ParamKit library path" )
+
 
 cmake_policy(SET CMP0015 NEW)
 LINK_DIRECTORIES ( ${PESIEVE_LIB} )
 add_executable ( ${PROJECT_NAME} ${hdrs} ${srcs} ${rsrc} main.cpp )
-target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} "psapi.lib" "ntdll.lib")
+target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} ${M_PARAMKIT} "psapi.lib" "ntdll.lib")
 
 # dependencies
-add_dependencies( ${PROJECT_NAME} ${M_PESIEVE} )
+add_dependencies( ${PROJECT_NAME} ${M_PESIEVE} ${M_PARAMKIT} )
 
 #install
 INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX} COMPONENT ${PROJECT_NAME} )

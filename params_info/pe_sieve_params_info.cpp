@@ -1,9 +1,6 @@
 #include "pe_sieve_params_info.h"
 
 #include <windows.h>
-#include <psapi.h>
-
-using namespace pesieve;
 
 std::string translate_dump_mode(const DWORD dump_mode)
 {
@@ -43,7 +40,7 @@ std::string translate_imprec_mode(const pesieve::t_imprec_mode imprec_mode)
     case pesieve::PE_IMPREC_UNERASE:
         return "recover erased parts of the partialy damaged ImportTable";
     case pesieve::PE_IMPREC_REBUILD:
-        return "build the ImportTable from the scratch, basing on the found IAT(s)";
+        return "build the ImportTable from scratch, basing on the found IATs";
     }
     return "undefined";
 }
@@ -80,21 +77,6 @@ std::string translate_dotnet_policy(const pesieve::t_dotnet_policy &mode)
     return "undefined";
 }
 
-std::string translate_modules_filter(DWORD m_filter)
-{
-    switch (m_filter) {
-    case LIST_MODULES_DEFAULT:
-        return "no filter (as the scanner)";
-    case LIST_MODULES_32BIT:
-        return "32bit only";
-    case LIST_MODULES_64BIT:
-        return "64bit only";
-    case LIST_MODULES_ALL:
-        return "all accessible (default)";
-    }
-    return "undefined";
-}
-
 std::string translate_json_level(const pesieve::t_json_level &mode)
 {
     switch (mode) {
@@ -106,22 +88,6 @@ std::string translate_json_level(const pesieve::t_json_level &mode)
         return "details #2 (list patches: extended)";
     }
     return "undefined";
-}
-
-pesieve::t_imprec_mode normalize_imprec_mode(size_t mode_id)
-{
-    if (mode_id > pesieve::PE_IMPREC_MODES_COUNT) {
-        return pesieve::PE_IMPREC_NONE;
-    }
-    return (t_imprec_mode)mode_id;
-}
-
-pesieve::t_dump_mode normalize_dump_mode(size_t mode_id)
-{
-    if (mode_id > pesieve::PE_DUMP_MODES_COUNT) {
-        return pesieve::PE_DUMP_AUTO;
-    }
-    return (pesieve::t_dump_mode) mode_id;
 }
 
 std::string translate_data_mode(const pesieve::t_data_scan_mode& mode)
@@ -143,11 +109,33 @@ std::string translate_data_mode(const pesieve::t_data_scan_mode& mode)
     return "undefined";
 }
 
-pesieve::t_json_level normalize_json_level(size_t mode_id)
+std::string dump_mode_to_id(const DWORD dump_mode)
 {
-    if (mode_id > pesieve::JSON_LVL_COUNT) {
-        return pesieve::JSON_DETAILS;
+    switch (dump_mode) {
+    case pesieve::PE_DUMP_AUTO:
+        return "A";
+    case pesieve::PE_DUMP_VIRTUAL:
+        return "V";
+    case pesieve::PE_DUMP_UNMAP:
+        return "U";
+    case pesieve::PE_DUMP_REALIGN:
+        return "R";
     }
-    return (pesieve::t_json_level) mode_id;
+    return "N";
+}
+
+std::string imprec_mode_to_id(const pesieve::t_imprec_mode imprec_mode)
+{
+    switch (imprec_mode) {
+    case pesieve::PE_IMPREC_NONE:
+        return "N";
+    case pesieve::PE_IMPREC_AUTO:
+        return "A";
+    case pesieve::PE_IMPREC_UNERASE:
+        return "U";
+    case pesieve::PE_IMPREC_REBUILD:
+        return "R";
+    }
+    return "N";
 }
 
