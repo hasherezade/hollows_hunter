@@ -21,16 +21,14 @@
 
 using namespace hhunter::util;
 
-#define HH_INFO 0
-
 void compatibility_alert()
 {
     print_in_color(WARNING_COLOR, "[!] Scanner mismatch! For a 64-bit OS, use the 64-bit version of the scanner!\n");
 }
 
-
-void deploy_scan(t_hh_params &hh_args)
+t_pesieve_res deploy_scan(t_hh_params &hh_args)
 {
+    t_pesieve_res scan_res = PESIEVE_NOT_DETECTED;
     if (hh_args.pesieve_args.data >= pesieve::PE_DATA_SCAN_INACCESSIBLE && hh_args.pesieve_args.make_reflection == false) {
         print_in_color(RED, "[WARNING] Scanning of inaccessible pages is enabled only in the reflection mode!\n");
     }
@@ -40,12 +38,17 @@ void deploy_scan(t_hh_params &hh_args)
         HHScanReport *report = hhunter.scan();
         if (report) {
             hhunter.summarizeScan(report);
+            if (report->countSuspicious() > 0) {
+                scan_res = PESIEVE_DETECTED;
+            }
             delete report;
         }
         if (!HHScanner::isScannerCompatibile()) {
             compatibility_alert();
         }
     } while (hh_args.loop_scanning);
+
+    return scan_res;
 }
 
 int main(int argc, char *argv[])
@@ -55,19 +58,16 @@ int main(int argc, char *argv[])
 
     bool info_req = false;
     HHParams uParams(VERSION);
-    if (argc < 2) {
-        uParams.printBanner();
-        uParams.info(false, "", false);
-        system("pause");
-        return PESIEVE_INFO;
-    }
+
     if (!uParams.parse(argc, argv)) {
         return PESIEVE_INFO;
     }
     uParams.fillStruct(hh_args);
-
     print_version(VERSION);
     std::cout << std::endl;
-    deploy_scan(hh_args);
-    return 0;
+    if (argc < 2) {
+        print_in_color(WHITE, "Default scan deployed.");
+        std::cout << std::endl;
+    }
+    return deploy_scan(hh_args);
 }
