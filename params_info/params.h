@@ -333,6 +333,7 @@ public:
         copyVal<BoolParam>(PARAM_LOOP, ps.loop_scanning);
         copyVal<BoolParam>(PARAM_LOG, ps.log);
         copyVal<IntParam>(PARAM_PTIMES, ps.ptimes);
+        copyVal<BoolParam>(PARAM_JSON, ps.json_output);
     }
 
     protected:
@@ -344,8 +345,6 @@ public:
             copyCStr<StringParam>(PARAM_MODULES_IGNORE, ps.modules_ignored, _countof(ps.modules_ignored));
 
             copyVal<BoolParam>(PARAM_QUIET, ps.quiet);
-            copyVal<BoolParam>(PARAM_JSON, ps.json_output);
-
             copyVal<EnumParam>(PARAM_JSON_LVL, ps.json_lvl);
 
             copyVal<BoolParam>(PARAM_MINIDUMP, ps.minidump);
