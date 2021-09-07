@@ -43,8 +43,6 @@ using namespace pesieve;
 #define PARAM_JSON_LVL "jlvl"
 
 
-#define INFO_SPACER "\t   "
-
 std::string version_to_str(DWORD version)
 {
     BYTE *chunks = (BYTE*)&version;
