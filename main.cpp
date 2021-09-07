@@ -17,7 +17,7 @@
 #include "util/process_privilege.h"
 #include "util/strings_util.h"
 
-#define VERSION "0.3.0.1"
+#define VERSION "0.3.1"
 
 using namespace hhunter::util;
 
