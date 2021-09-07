@@ -202,15 +202,6 @@ HHScanner::HHScanner(t_hh_params &_args)
 {
     initTime = time(NULL);
     isScannerWow64 = process_util::is_wow_64(GetCurrentProcess());
-    initScanData();
-}
-
-void HHScanner::initScanData()
-{
-    std::string delim(1, PARAM_LIST_SEPARATOR);
-    paramkit::strip_to_list(hh_args.pname, delim, names_list);
-    paramkit::strip_to_list(hh_args.pids, delim, pids_list);
-    paramkit::strip_to_list(hh_args.pnames_ignored, delim, ignored_names_list);
 }
 
 bool HHScanner::isScannerCompatibile()
@@ -238,16 +229,16 @@ void HHScanner::initOutDir(time_t scan_time, pesieve::t_params &pesieve_args)
 
 void HHScanner::printScanRoundStats(size_t found, size_t ignored_count)
 {
-    if (!found && hh_args.pname.length() > 0) {
+    if (!found && hh_args.names_list.size() > 0) {
         if (!hh_args.quiet) {
-            std::cout << "[WARNING] No process from the list: {" << util::list_to_str(names_list) << "} was found!" << std::endl;
+            std::cout << "[WARNING] No process from the list: {" << util::list_to_str(hh_args.names_list) << "} was found!" << std::endl;
         }
     }
     if (ignored_count > 0) {
         if (!hh_args.quiet) {
             std::string info1 = (ignored_count > 1) ? "processes" : "process";
             std::string info2 = (ignored_count > 1) ? "were" : "was";
-            std::cout << "[INFO] " << std::dec << ignored_count << " " << info1 << " from the list : {" << util::list_to_str(ignored_names_list) << "} " << info2 << " ignored!" << std::endl;
+            std::cout << "[INFO] " << std::dec << ignored_count << " " << info1 << " from the list : {" << util::list_to_str(hh_args.ignored_names_list) << "} " << info2 << " ignored!" << std::endl;
         }
     }
 }
@@ -355,15 +346,15 @@ t_single_scan_status HHScanner::scanNextProcess(DWORD pid, char* exe_file, HHSca
         }
     }
     //filter by the names/PIDs
-    if (names_list.size() || pids_list.size()) {
-        if (!util::is_searched_name(exe_file, names_list) && !util::is_searched_pid(pid, pids_list)) {
+    if (hh_args.names_list.size() || hh_args.pids_list.size()) {
+        if (!util::is_searched_name(exe_file, hh_args.names_list) && !util::is_searched_pid(pid, hh_args.pids_list)) {
             //it is not the searched process, so skip it
             return SSCAN_NOT_MATCH;
         }
         found = true;
     }
-    if (!found && ignored_names_list.size()) {
-        if (util::is_searched_name(exe_file, ignored_names_list)) {
+    if (!found && hh_args.ignored_names_list.size()) {
+        if (util::is_searched_name(exe_file, hh_args.ignored_names_list)) {
             return SSCAN_IGNORED;
         }
     }

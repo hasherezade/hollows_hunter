@@ -82,18 +82,18 @@ public:
     {
         {
             std::stringstream ss1;
-            ss1 << "Scan only processes with given PIDs (dec or hex, separated by '" << PARAM_LIST_SEPARATOR << "').";
+            ss1 << "Scan only processes with given PIDs";
             std::stringstream ss2;
             ss2 << INFO_SPACER << "Example: 5367" << PARAM_LIST_SEPARATOR << "0xa90";
-            this->addParam(new StringParam(PARAM_PID, false));
+            this->addParam(new IntListParam(PARAM_PID, false, PARAM_LIST_SEPARATOR));
             this->setInfo(PARAM_PID, ss1.str(), ss2.str());
         }
         {
             std::stringstream ss1;
-            ss1 << "Scan only processes with given names (separated by '" << PARAM_LIST_SEPARATOR << "').";
+            ss1 << "Scan only processes with given names.";
             std::stringstream ss2;
             ss2 << INFO_SPACER << "Example: iexplore.exe" << PARAM_LIST_SEPARATOR << "firefox.exe";
-            this->addParam(new StringParam(PARAM_PNAME, false));
+            this->addParam(new StringListParam(PARAM_PNAME, false, PARAM_LIST_SEPARATOR));
             this->setInfo(PARAM_PNAME, ss1.str(), ss2.str());
         }
         {
@@ -106,10 +106,10 @@ public:
         }
         {
             std::stringstream ss1;
-            ss1 << "Do not scan process/es with given name/s (separated by '" << PARAM_LIST_SEPARATOR << "').";
+            ss1 << "Do not scan process/es with given name/s.";
             std::stringstream ss2;
             ss2 << INFO_SPACER << "Example: explorer.exe" << PARAM_LIST_SEPARATOR << "conhost.exe";
-            this->addParam(new StringParam(PARAM_PROCESSES_IGNORE, false));
+            this->addParam(new StringListParam(PARAM_PROCESSES_IGNORE, false, PARAM_LIST_SEPARATOR));
             this->setInfo(PARAM_PROCESSES_IGNORE, ss1.str(), ss2.str());
         }
 
@@ -151,10 +151,10 @@ public:
             }
         }
 
-        this->addParam(new StringParam(PARAM_MODULES_IGNORE, false));
+        this->addParam(new StringListParam(PARAM_MODULES_IGNORE, false, PARAM_LIST_SEPARATOR));
         {
             std::stringstream ss1;
-            ss1 << "Do not scan module/s with given name/s (separated by '" << PARAM_LIST_SEPARATOR << "').";
+            ss1 << "Do not scan module/s with given name/s.";
             std::stringstream ss2;
             ss2 << "\t   Example: kernel32.dll" << PARAM_LIST_SEPARATOR << "user32.dll";
             this->setInfo(PARAM_MODULES_IGNORE, ss1.str(), ss2.str());
@@ -321,10 +321,6 @@ public:
         copyVal<BoolParam>(PARAM_HOOKS, hooks);
         ps.pesieve_args.no_hooks = hooks ? false : true;
 
-        copyVal<StringParam>(PARAM_PID, ps.pids);
-        copyVal<StringParam>(PARAM_PNAME, ps.pname);
-        copyVal<StringParam>(PARAM_PROCESSES_IGNORE, ps.pnames_ignored);
-
         copyVal<StringParam>(PARAM_DIR, ps.out_dir);
         copyVal<BoolParam>(PARAM_UNIQUE_DIR, ps.unique_dir);
         copyVal<BoolParam>(PARAM_SUSPEND, ps.suspend_suspicious);
@@ -334,6 +330,21 @@ public:
         copyVal<BoolParam>(PARAM_LOG, ps.log);
         copyVal<IntParam>(PARAM_PTIMES, ps.ptimes);
         copyVal<BoolParam>(PARAM_JSON, ps.json_output);
+
+        StringListParam* myParam = dynamic_cast<StringListParam*>(this->getParam(PARAM_PNAME));
+        if (myParam && myParam->isSet()) {
+            myParam->stripToElements(ps.names_list);
+        }
+
+        myParam = dynamic_cast<StringListParam*>(this->getParam(PARAM_PID));
+        if (myParam && myParam->isSet()) {
+            myParam->stripToElements(ps.pids_list);
+        }
+
+        myParam = dynamic_cast<StringListParam*>(this->getParam(PARAM_PROCESSES_IGNORE));
+        if (myParam && myParam->isSet()) {
+            myParam->stripToElements(ps.ignored_names_list);
+        }
     }
 
     protected:

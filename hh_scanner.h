@@ -11,7 +11,6 @@
 #include "hh_params.h"
 #include "hh_report.h"
 
-#define PARAM_LIST_SEPARATOR ';'
 
 typedef enum single_status {
     SSCAN_ERROR1 = (-2),
@@ -38,7 +37,6 @@ protected:
 
     t_single_scan_status scanNextProcess(DWORD pid, char* image_buf, HHScanReport &report);
     void initOutDir(time_t scan_time, pesieve::t_params &pesieve_args);
-    void initScanData();
 
     t_hh_params &hh_args;
     std::string outDir;
@@ -46,10 +44,5 @@ protected:
     // time when HollowsHunter was initialized
     time_t initTime;
     bool isScannerWow64;
-
-    // data
-    std::set<std::string> names_list;
-    std::set<std::string> pids_list;
-    std::set<std::string> ignored_names_list;
 };
 
