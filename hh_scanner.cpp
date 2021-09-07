@@ -163,12 +163,11 @@ namespace util {
         return false;
     }
 
-    bool is_searched_pid(long pid, std::set<std::string> &pids_list)
+    bool is_searched_pid(long pid, std::set<long> &pids_list)
     {
-        std::set<std::string>::iterator itr;
+        std::set<long>::iterator itr;
         for (itr = pids_list.begin(); itr != pids_list.end(); ++itr) {
-            const char* sPid = itr->c_str();
-            long number = paramkit::get_number(sPid);
+            long number = *itr;
             if (pid == number) {
                 return true;
             }

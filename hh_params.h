@@ -18,7 +18,7 @@ typedef struct {
     bool json_output;
     LONGLONG ptimes;
     std::set<std::string> names_list;
-    std::set<std::string> pids_list;
+    std::set<long> pids_list;
     std::set<std::string> ignored_names_list;
     pesieve::t_params pesieve_args; //PE-sieve parameters
 } t_hh_params;

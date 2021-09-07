@@ -336,14 +336,14 @@ public:
             myParam->stripToElements(ps.names_list);
         }
 
-        myParam = dynamic_cast<StringListParam*>(this->getParam(PARAM_PID));
-        if (myParam && myParam->isSet()) {
-            myParam->stripToElements(ps.pids_list);
-        }
-
         myParam = dynamic_cast<StringListParam*>(this->getParam(PARAM_PROCESSES_IGNORE));
         if (myParam && myParam->isSet()) {
             myParam->stripToElements(ps.ignored_names_list);
+        }
+
+        IntListParam *myIntParam = dynamic_cast<IntListParam*>(this->getParam(PARAM_PID));
+        if (myIntParam && myIntParam->isSet()) {
+            myIntParam->stripToIntElements(ps.pids_list);
         }
     }
 
