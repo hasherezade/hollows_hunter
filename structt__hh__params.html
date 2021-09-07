@@ -75,10 +75,6 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a57d627298093c56a063a14c38e3cb097"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__hh__params.html#a57d627298093c56a063a14c38e3cb097">pname</a></td></tr>
-<tr class="separator:a57d627298093c56a063a14c38e3cb097"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3460ccb6f86524b7ee5a7458ab45edb"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__hh__params.html#af3460ccb6f86524b7ee5a7458ab45edb">pids</a></td></tr>
-<tr class="separator:af3460ccb6f86524b7ee5a7458ab45edb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab07a2cb4eae0dc58bfce165470878144"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__hh__params.html#ab07a2cb4eae0dc58bfce165470878144">out_dir</a></td></tr>
 <tr class="separator:ab07a2cb4eae0dc58bfce165470878144"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa83dab4f901388bd3d809b92977a946f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__hh__params.html#aa83dab4f901388bd3d809b92977a946f">unique_dir</a></td></tr>
@@ -97,15 +93,35 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ad25b3cfb998534bcbe0e0ffc814a5da5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f2fb874d04169ea8578dde2f7341e90"><td class="memItemLeft" align="right" valign="top">LONGLONG&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__hh__params.html#a2f2fb874d04169ea8578dde2f7341e90">ptimes</a></td></tr>
 <tr class="separator:a2f2fb874d04169ea8578dde2f7341e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d6c269aa028740cb219b6125f92c7c7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__hh__params.html#a5d6c269aa028740cb219b6125f92c7c7">pnames_ignored</a></td></tr>
-<tr class="separator:a5d6c269aa028740cb219b6125f92c7c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0e353313e18136920e74dfbb33a937b"><td class="memItemLeft" align="right" valign="top">std::set&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__hh__params.html#ac0e353313e18136920e74dfbb33a937b">names_list</a></td></tr>
+<tr class="separator:ac0e353313e18136920e74dfbb33a937b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cdcdd13e245c3ddba0ee30e23653257"><td class="memItemLeft" align="right" valign="top">std::set&lt; long &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__hh__params.html#a6cdcdd13e245c3ddba0ee30e23653257">pids_list</a></td></tr>
+<tr class="separator:a6cdcdd13e245c3ddba0ee30e23653257"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22f29fed0ce6936fde292559172c338b"><td class="memItemLeft" align="right" valign="top">std::set&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__hh__params.html#a22f29fed0ce6936fde292559172c338b">ignored_names_list</a></td></tr>
+<tr class="separator:a22f29fed0ce6936fde292559172c338b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d866df34826f2db1cb9f76269887007"><td class="memItemLeft" align="right" valign="top">pesieve::t_params&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__hh__params.html#a6d866df34826f2db1cb9f76269887007">pesieve_args</a></td></tr>
 <tr class="separator:a6d866df34826f2db1cb9f76269887007"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00009">9</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00010">10</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a22f29fed0ce6936fde292559172c338b" name="a22f29fed0ce6936fde292559172c338b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22f29fed0ce6936fde292559172c338b">&#9670;&nbsp;</a></span>ignored_names_list</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::set&lt;std::string&gt; t_hh_params::ignored_names_list</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00022">22</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
+
+</div>
+</div>
 <a id="ad25b3cfb998534bcbe0e0ffc814a5da5" name="ad25b3cfb998534bcbe0e0ffc814a5da5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad25b3cfb998534bcbe0e0ffc814a5da5">&#9670;&nbsp;</a></span>json_output</h2>
 
@@ -118,7 +134,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00019">19</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00018">18</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
 
 </div>
 </div>
@@ -134,7 +150,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00016">16</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00015">15</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
 
 </div>
 </div>
@@ -150,7 +166,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00018">18</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00017">17</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
 
 </div>
 </div>
@@ -166,7 +182,23 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00014">14</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00013">13</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
+
+</div>
+</div>
+<a id="ac0e353313e18136920e74dfbb33a937b" name="ac0e353313e18136920e74dfbb33a937b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0e353313e18136920e74dfbb33a937b">&#9670;&nbsp;</a></span>names_list</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::set&lt;std::string&gt; t_hh_params::names_list</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00020">20</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
 
 </div>
 </div>
@@ -182,7 +214,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00012">12</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00011">11</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
 
 </div>
 </div>
@@ -198,50 +230,18 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00022">22</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00023">23</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
 
 </div>
 </div>
-<a id="af3460ccb6f86524b7ee5a7458ab45edb" name="af3460ccb6f86524b7ee5a7458ab45edb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3460ccb6f86524b7ee5a7458ab45edb">&#9670;&nbsp;</a></span>pids</h2>
+<a id="a6cdcdd13e245c3ddba0ee30e23653257" name="a6cdcdd13e245c3ddba0ee30e23653257"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cdcdd13e245c3ddba0ee30e23653257">&#9670;&nbsp;</a></span>pids_list</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string t_hh_params::pids</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00011">11</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
-
-</div>
-</div>
-<a id="a57d627298093c56a063a14c38e3cb097" name="a57d627298093c56a063a14c38e3cb097"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57d627298093c56a063a14c38e3cb097">&#9670;&nbsp;</a></span>pname</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string t_hh_params::pname</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00010">10</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
-
-</div>
-</div>
-<a id="a5d6c269aa028740cb219b6125f92c7c7" name="a5d6c269aa028740cb219b6125f92c7c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d6c269aa028740cb219b6125f92c7c7">&#9670;&nbsp;</a></span>pnames_ignored</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string t_hh_params::pnames_ignored</td>
+          <td class="memname">std::set&lt;long&gt; t_hh_params::pids_list</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -262,7 +262,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00020">20</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00019">19</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
 
 </div>
 </div>
@@ -278,7 +278,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00017">17</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00016">16</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
 
 </div>
 </div>
@@ -294,7 +294,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00015">15</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00014">14</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
 
 </div>
 </div>
@@ -310,7 +310,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00013">13</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__params_8h_source.html#l00012">12</a> of file <a class="el" href="hh__params_8h_source.html">hh_params.h</a>.</p>
 
 </div>
 </div>
