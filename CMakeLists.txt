@@ -37,9 +37,7 @@ set (srcs
 	hh_params.cpp
 	hh_report.cpp
 	params_info/pe_sieve_params_info.cpp
-	#params_info/pe_sieve_params_print.cpp
 	util/suspend.cpp
-	util/util.cpp
 	util/process_privilege.cpp
 	util/time_util.cpp
 	util/strings_util.cpp
@@ -47,18 +45,13 @@ set (srcs
 
 set (hdrs
 	term_util.h
-	#color_scheme.h
 	hh_scanner.h
 	hh_params.h
 	hh_report.h
 	params_info/params.h
-	#params_info/param_base.h
-	#params_info/params_list.h
 	params_info/pe_sieve_params_info.h
-	#params_info/pe_sieve_params_print.h
 	util/suspend.h
 	util/ntddk.h
-	util/util.h
 	util/process_privilege.h
 	util/time_util.h
 	util/strings_util.h
