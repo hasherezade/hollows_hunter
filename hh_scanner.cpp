@@ -1,9 +1,10 @@
 #include "hh_scanner.h"
 
 #include <iostream>
-
 #include <fstream>
 #include <sstream>
+#include <iomanip>
+
 #include <time.h>
 #include <tlhelp32.h>
 
@@ -12,6 +13,8 @@
 #include "term_util.h"
 
 #include <paramkit.h>
+
+#define PID_FIELD_SIZE 4
 
 using namespace pesieve;
 
@@ -358,7 +361,7 @@ t_single_scan_status HHScanner::scanNextProcess(DWORD pid, char* exe_file, HHSca
         }
     }
     if (!hh_args.quiet) {
-        std::cout << ">> Scanning PID: " << std::dec << pid;
+        std::cout << ">> Scanning PID: " << std::setw(PID_FIELD_SIZE) << std::dec << pid;
         std::cout << " : " << exe_file;
 
         if (is_process_wow64) {
