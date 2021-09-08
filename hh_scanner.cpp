@@ -178,14 +178,14 @@ namespace util {
         return false;
     }
 
-    std::string list_to_str(std::set<std::string> &list)
+    template <typename TYPE_T>
+    std::string list_to_str(std::set<TYPE_T> &list)
     {
         std::stringstream stream;
 
-        std::set<std::string>::iterator itr;
+        std::set<TYPE_T>::iterator itr;
         for (itr = list.begin(); itr != list.end(); ) {
-            const std::string &next_str = *itr;
-            stream << next_str;
+            stream << *itr;
             ++itr;
             if (itr != list.end()) {
                 stream << ", ";
@@ -193,7 +193,6 @@ namespace util {
         }
         return stream.str();
     }
-
 
 }; //namespace util
 
@@ -234,6 +233,11 @@ void HHScanner::printScanRoundStats(size_t found, size_t ignored_count)
     if (!found && hh_args.names_list.size() > 0) {
         if (!hh_args.quiet) {
             std::cout << "[WARNING] No process from the list: {" << util::list_to_str(hh_args.names_list) << "} was found!" << std::endl;
+        }
+    }
+    if (!found && hh_args.pids_list.size() > 0) {
+        if (!hh_args.quiet) {
+            std::cout << "[WARNING] No process from the list: {" << util::list_to_str(hh_args.pids_list) << "} was found!" << std::endl;
         }
     }
     if (ignored_count > 0) {
