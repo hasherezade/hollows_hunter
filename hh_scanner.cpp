@@ -168,12 +168,9 @@ namespace util {
 
     bool is_searched_pid(long pid, std::set<long> &pids_list)
     {
-        std::set<long>::iterator itr;
-        for (itr = pids_list.begin(); itr != pids_list.end(); ++itr) {
-            long number = *itr;
-            if (pid == number) {
-                return true;
-            }
+        std::set<long>::iterator found = pids_list.find(pid);
+        if (found != pids_list.end()) {
+            return true;
         }
         return false;
     }
