@@ -27,3 +27,5 @@ git clone --recursive https://github.com/hasherezade/hollows_hunter.git
 ## Builds
 
 Download the latest [release](https://github.com/hasherezade/hollows_hunter/releases), or [read more](https://github.com/hasherezade/hollows_hunter/wiki#download).
+
+![](https://community.chocolatey.org/favicon.ico) Available also via [Chocolatey](https://community.chocolatey.org/packages/hollowshunter)
