@@ -58,11 +58,19 @@ int main(int argc, char *argv[])
 
     bool info_req = false;
     HHParams uParams(VERSION);
-
     if (!uParams.parse(argc, argv)) {
         return PESIEVE_INFO;
     }
     uParams.fillStruct(hh_args);
+
+    // if scanning of inaccessible pages was requested, auto-enable reflection mode:
+    if (hh_args.pesieve_args.data == pesieve::PE_DATA_SCAN_INACCESSIBLE || hh_args.pesieve_args.data == pesieve::PE_DATA_SCAN_INACCESSIBLE_ONLY) {
+        if (!hh_args.pesieve_args.make_reflection) {
+            hh_args.pesieve_args.make_reflection = true;
+            print_in_color(RED, "[WARNING] Scanning of inaccessible pages requested: auto-enabled reflection mode!\n");
+        }
+    }
+
     print_version(VERSION);
     std::cout << std::endl;
     if (argc < 2) {
