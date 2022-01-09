@@ -111,7 +111,7 @@ std::string HHScanReport::toJSON(const t_hh_params &params)
     stream << std::dec << getScanTime() << ",\n";
     OUT_PADDED(stream, level, "\"scanned_count\" : ");
     stream << std::dec << countTotal() << ",\n";
-    OUT_PADDED(stream, level, "\"susipcious_count\" : ");
+    OUT_PADDED(stream, level, "\"suspicious_count\" : ");
     stream << std::dec << countSuspicious();
     if (countSuspicious() > 0) {
         stream << ",\n";
