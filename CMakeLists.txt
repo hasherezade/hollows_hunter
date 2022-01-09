@@ -95,4 +95,8 @@ if(HH_BUILD_TESTING)
 	# 1) false positives in a clean environment
 	add_test (TestFalsePositives ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out)
 	set_tests_properties(TestFalsePositives PROPERTIES PASS_REGULAR_EXPRESSION "\"susipcious_count\" : 0")
+
+	# 2) test scan with caching
+	add_test (TestCaching ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out -cache)
+	set_tests_properties(TestCaching PROPERTIES PASS_REGULAR_EXPRESSION "\"susipcious_count\" : 0")
 endif()
