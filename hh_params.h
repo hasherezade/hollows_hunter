@@ -5,6 +5,7 @@
 #include <set>
 
 #define TIME_UNDEFINED LONGLONG(-1)
+#define HH_DEFAULT_DIR "hollows_hunter.dumps"
 
 //HollowsHunter's parameters:
 typedef struct {

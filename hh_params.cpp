@@ -6,7 +6,7 @@ void hh_args_init(t_hh_params &hh_args)
     memset(&hh_args.pesieve_args, 0, sizeof(pesieve::t_params));
 
     //reset output path:
-    hh_args.out_dir = "";
+    hh_args.out_dir = HH_DEFAULT_DIR;
 
     hh_args.pesieve_args.quiet = true;
     hh_args.pesieve_args.no_hooks = true;

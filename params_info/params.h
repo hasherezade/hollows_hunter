@@ -236,7 +236,7 @@ public:
         }
         //PARAM_DIR
         this->addParam(new StringParam(PARAM_DIR, false));
-        this->setInfo(PARAM_DIR, "Set a root directory for the output (default: current directory).");
+        this->setInfo(PARAM_DIR, "Set a root directory for the output (default: \""+ std::string(HH_DEFAULT_DIR) + "\").");
 
         //optional: group parameters
         std::string str_group = "7. output options";
