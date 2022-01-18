@@ -99,4 +99,8 @@ if(HH_BUILD_TESTING)
 	# 2) test scan with caching
 	add_test (TestCaching ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out -cache)
 	set_tests_properties(TestCaching PROPERTIES PASS_REGULAR_EXPRESSION "\"suspicious_count\" : 0")
+
+	# 3) test scan IAT with caching
+	add_test (TestIatScan ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out -cache -iat 1)
+	set_tests_properties(TestIatScan PROPERTIES PASS_REGULAR_EXPRESSION "\"suspicious_count\" : ")
 endif()
