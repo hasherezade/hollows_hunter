@@ -3,9 +3,11 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/nsc2eux5986y1shq?svg=true)](https://ci.appveyor.com/project/hasherezade/hollows-hunter)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0c149fcd62084f96ac0c131e4473dbdf)](https://www.codacy.com/manual/hasherezade/hollows_hunter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hasherezade/hollows_hunter&amp;utm_campaign=Badge_Grade)
+[![Commit activity](https://img.shields.io/github/commit-activity/m/hasherezade/hollows_hunter)](https://github.com/hasherezade/hollows_hunter/commits)
 [![Last Commit](https://img.shields.io/github/last-commit/hasherezade/hollows_hunter/master)](https://github.com/hasherezade/hollows_hunter/commits)
 
 [![GitHub release](https://img.shields.io/github/release/hasherezade/hollows_hunter.svg)](https://github.com/hasherezade/hollows_hunter/releases)
+[![GitHub release date](https://img.shields.io/github/release-date/hasherezade/hollows_hunter?color=blue)](https://github.com/hasherezade/hollows_hunter/releases)
 [![Github All Releases](https://img.shields.io/github/downloads/hasherezade/hollows_hunter/total.svg)](https://github.com/hasherezade/hollows_hunter/releases)
 [![Github Latest Release](https://img.shields.io/github/downloads/hasherezade/hollows_hunter/latest/total.svg)](https://github.com/hasherezade/hollows_hunter/releases)
 
