@@ -12,7 +12,7 @@ var searchData=
   ['hh_5furl_9',['HH_URL',['../params_8h.html#a7676e471935d5124ba49c1781dca5589',1,'params.h']]],
   ['hhparams_10',['HHParams',['../class_h_h_params.html',1,'HHParams'],['../class_h_h_params.html#a0f0ccaf07a74a2332bdc15ddf439296b',1,'HHParams::HHParams()']]],
   ['hhscanner_11',['HHScanner',['../class_h_h_scanner.html',1,'HHScanner'],['../class_h_h_scanner.html#abae28bb490b101cb3d1136eb76a5df33',1,'HHScanner::HHScanner()'],['../class_h_h_scan_report.html#a5e267708c5945d665038b0f79627b24b',1,'HHScanReport::HHScanner()']]],
-  ['hhscanreport_12',['HHScanReport',['../class_h_h_scan_report.html#ad77a79167ffaa20d804ceeec1e19f21c',1,'HHScanReport::HHScanReport()'],['../class_h_h_scan_report.html',1,'HHScanReport']]],
+  ['hhscanreport_12',['HHScanReport',['../class_h_h_scan_report.html#a026b205d178fe4cf8493e2b5ca4df150',1,'HHScanReport::HHScanReport()'],['../class_h_h_scan_report.html',1,'HHScanReport']]],
   ['hhunter_13',['hhunter',['../namespacehhunter.html',1,'']]],
   ['hollows_5fhunter_14',['hollows_hunter',['../index.html',1,'']]],
   ['util_15',['util',['../namespacehhunter_1_1util.html',1,'hhunter']]]

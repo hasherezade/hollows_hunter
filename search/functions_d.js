@@ -7,7 +7,7 @@ var searchData=
   ['set_5fdebug_5fprivilege_4',['set_debug_privilege',['../namespacehhunter_1_1util.html#a71c3879cac544c11cb2391e6c030c347',1,'hhunter::util']]],
   ['set_5foutput_5fdir_5',['set_output_dir',['../namespacefiles__util.html#abab65a3cbe43de11dd5d25ed5e4d47e5',1,'files_util']]],
   ['set_5fprivilege_6',['set_privilege',['../namespacehhunter_1_1util.html#a0a7f83c9acd615ee401364757a03341e',1,'hhunter::util']]],
-  ['setendtick_7',['setEndTick',['../class_h_h_scan_report.html#a15b2afc2c28036efa8e034a2ecf3ff0c',1,'HHScanReport']]],
+  ['setendtick_7',['setEndTick',['../class_h_h_scan_report.html#a2b4fc256954b36abb0669f24d9e20c03',1,'HHScanReport']]],
   ['str_5fhist_5fdiffrence_8',['str_hist_diffrence',['../namespacehhunter_1_1util.html#a0ec1bb29952cdc467b9936fb2495ccf9',1,'hhunter::util']]],
   ['strtime_9',['strtime',['../namespaceutil.html#a56602cb663aeabec567ee3c4d67169a4',1,'util']]],
   ['summarizescan_10',['summarizeScan',['../class_h_h_scanner.html#a6c20de8e1a13034173c42c2e87267af3',1,'HHScanner']]],
