@@ -105,6 +105,10 @@ std::string HHScanReport::toJSON(const t_hh_params &params)
     OUT_PADDED(stream, level, "{\n");
     level++;
     //summary:
+    const size_t suspicious_count = countSuspicious();
+
+    OUT_PADDED(stream, level, "\"scan_date_time\" : ");
+    stream << std::dec << "\"" << util::strtime(this->startTime) << "\"" << ",\n";
     OUT_PADDED(stream, level, "\"scan_timestamp\" : ");
     stream << std::dec << startTime << ",\n";
     OUT_PADDED(stream, level, "\"scan_time_ms\" : ");
@@ -112,8 +116,8 @@ std::string HHScanReport::toJSON(const t_hh_params &params)
     OUT_PADDED(stream, level, "\"scanned_count\" : ");
     stream << std::dec << countTotal() << ",\n";
     OUT_PADDED(stream, level, "\"suspicious_count\" : ");
-    stream << std::dec << countSuspicious();
-    if (countSuspicious() > 0) {
+    stream << std::dec << suspicious_count;
+    if (suspicious_count > 0) {
         stream << ",\n";
         reportsToJSON(stream, level, params);
     }
