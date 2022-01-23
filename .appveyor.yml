@@ -39,8 +39,7 @@ build_script:
   
 after_build:
   - mkdir %artifactName%
-  - cp %APPVEYOR_BUILD_FOLDER%/%APPVEYOR_REPO_COMMIT%/*.dll %artifactName%
-  - cp %APPVEYOR_BUILD_FOLDER%/%APPVEYOR_REPO_COMMIT%/*.exe %artifactName%
+  - cp %APPVEYOR_BUILD_FOLDER%/%APPVEYOR_REPO_COMMIT%/*.* %artifactName%
   - if [%CONFIGURATION%]==[Debug] (
     cp -r %CONFIGURATION%/* %artifactName% )
   - if [%CONFIGURATION%]==[Debug] (
