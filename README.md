@@ -11,7 +11,7 @@
 [![Github All Releases](https://img.shields.io/github/downloads/hasherezade/hollows_hunter/total.svg)](https://github.com/hasherezade/hollows_hunter/releases)
 [![Github Latest Release](https://img.shields.io/github/downloads/hasherezade/hollows_hunter/latest/total.svg)](https://github.com/hasherezade/hollows_hunter/releases)
 
-[![License](https://img.shields.io/badge/License-BSD%202--Clause-blue.svg)](https://opensource.org/licenses/BSD-2-Clause)
+[![License](https://img.shields.io/badge/License-BSD%202--Clause-blue.svg)](https://github.com/hasherezade/hollows_hunter/blob/master/LICENSE)
 [![Platform Badge](https://img.shields.io/badge/Windows-0078D6?logo=windows)](https://github.com/hasherezade/hollows_hunter)
 
 Scans all running processes. Recognizes and dumps a variety of potentially malicious implants (replaced/implanted PEs, shellcodes, hooks, in-memory patches).
