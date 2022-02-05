@@ -51,6 +51,11 @@ t_pesieve_res deploy_scan(t_hh_params &hh_args)
     return scan_res;
 }
 
+void free_params(t_params& args)
+{
+    free_strparam(args.modules_ignored);
+}
+
 int main(int argc, char *argv[])
 {
     t_hh_params hh_args;
@@ -77,5 +82,7 @@ int main(int argc, char *argv[])
         print_in_color(WHITE, "Default scan deployed.");
         std::cout << std::endl;
     }
-    return deploy_scan(hh_args);
+    const t_pesieve_res  res = deploy_scan(hh_args);
+    free_params(hh_args.pesieve_args);
+    return res;
 }

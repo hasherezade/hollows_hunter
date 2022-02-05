@@ -73,6 +73,27 @@ void print_version(const std::string &version , WORD info_color = HILIGHTED_COLO
     std::cout << std::endl;
 }
 
+bool alloc_strparam(PARAM_STRING& strparam, ULONG len)
+{
+    if (strparam.buffer != nullptr) { // already allocated
+        return false;
+    }
+    strparam.buffer = (char*)calloc(len + 1, sizeof(char));
+    if (strparam.buffer) {
+        strparam.length = len;
+        return true;
+    }
+    return false;
+}
+
+void free_strparam(PARAM_STRING& strparam)
+{
+    free(strparam.buffer);
+    strparam.buffer = nullptr;
+    strparam.length = 0;
+}
+
+
 class HHParams : public Params
 {
 public:
@@ -351,13 +372,32 @@ public:
         }
     }
 
+    bool fillStringParam(const std::string& paramId, PARAM_STRING& strparam)
+    {
+        StringParam* myStr = dynamic_cast<StringParam*>(this->getParam(paramId));
+        if (!myStr || !myStr->isSet()) {
+            return false;
+        }
+        std::string val = myStr->valToString();
+        const size_t len = val.length();
+        if (!len) {
+            return false;
+        }
+        alloc_strparam(strparam, len);
+        bool is_copied = false;
+        if (strparam.buffer) {
+            is_copied = copyCStr<StringParam>(paramId, strparam.buffer, strparam.length);
+        }
+        return is_copied;
+    }
+
     protected:
         void fillPEsieveStruct(t_params &ps)
         {
             copyVal<EnumParam>(PARAM_IMP_REC, ps.imprec_mode);
             copyVal<EnumParam>(PARAM_OUT_FILTER, ps.out_filter);
 
-            copyCStr<StringParam>(PARAM_MODULES_IGNORE, ps.modules_ignored, _countof(ps.modules_ignored));
+            fillStringParam(PARAM_MODULES_IGNORE, ps.modules_ignored);
 
             copyVal<BoolParam>(PARAM_QUIET, ps.quiet);
             copyVal<EnumParam>(PARAM_JSON_LVL, ps.json_lvl);
