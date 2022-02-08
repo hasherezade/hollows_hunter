@@ -16,6 +16,7 @@ using namespace pesieve;
 #define PARAM_IAT "iat"
 #define PARAM_HOOKS "hooks"
 #define PARAM_SHELLCODE "shellc"
+#define PARAM_THREADS "threads"
 #define PARAM_DATA "data"
 #define PARAM_MODULES_IGNORE "mignore"
 #define PARAM_PROCESSES_IGNORE "pignore"
@@ -204,6 +205,10 @@ public:
         this->addParam(new BoolParam(PARAM_SHELLCODE, false));
         this->setInfo(PARAM_SHELLCODE, "Detect shellcode implants. (By default it detects PE only).");
 
+        //PARAM_THREADS
+        this->addParam(new BoolParam(PARAM_THREADS, false));
+        this->setInfo(PARAM_THREADS, "Scan also threads.");
+
         //PARAM_REFLECTION
         this->addParam(new BoolParam(PARAM_REFLECTION, false));
         this->setInfo(PARAM_REFLECTION, "Make a process reflection before scan.", "\t   This allows i.e. to force-read inaccessible pages.");
@@ -281,6 +286,7 @@ public:
         this->addParamToGroup(PARAM_DATA, str_group);
         this->addParamToGroup(PARAM_IAT, str_group);
         this->addParamToGroup(PARAM_SHELLCODE, str_group);
+        this->addParamToGroup(PARAM_THREADS, str_group);
         this->addParamToGroup(PARAM_HOOKS, str_group);
 
         str_group = "5. dump options";
@@ -404,6 +410,7 @@ public:
 
             copyVal<BoolParam>(PARAM_MINIDUMP, ps.minidump);
             copyVal<BoolParam>(PARAM_SHELLCODE, ps.shellcode);
+            copyVal<BoolParam>(PARAM_THREADS, ps.threads);
             copyVal<BoolParam>(PARAM_REFLECTION, ps.make_reflection);
             copyVal<BoolParam>(PARAM_CACHE, ps.use_cache);
 
