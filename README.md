@@ -18,7 +18,10 @@ Scans all running processes. Recognizes and dumps a variety of potentially malic
 
 📦 Uses library: [PE-sieve](https://github.com/hasherezade/pe-sieve.git) (the [library version](https://github.com/hasherezade/pe-sieve/wiki/2.-How-to-build)).
 
+❓ [FAQ - Frequently Asked Questions](https://github.com/hasherezade/pe-sieve/wiki/1.-FAQ)
+
 📖 [Read Wiki](https://github.com/hasherezade/hollows_hunter/wiki)
+
 
 ## Clone
 
