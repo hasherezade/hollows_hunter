@@ -16,7 +16,7 @@
 
 Scans all running processes. Recognizes and dumps a variety of potentially malicious implants (replaced/implanted PEs, shellcodes, hooks, in-memory patches).
 
-📦 Uses library: [PE-sieve](https://github.com/hasherezade/pe-sieve.git) (the [library version](https://github.com/hasherezade/pe-sieve/wiki/2.-How-to-build)).
+📦 Uses: [PE-sieve](https://github.com/hasherezade/pe-sieve.git) (the [library version](https://github.com/hasherezade/pe-sieve/wiki/2.-How-to-build)).
 
 ❓ [PE-sieve FAQ - Frequently Asked Questions](https://github.com/hasherezade/pe-sieve/wiki/1.-FAQ)
 
