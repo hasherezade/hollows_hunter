@@ -12,13 +12,13 @@
 class HHScanReport
 {
 public:
-    HHScanReport(ULONGLONG start_tick, time_t start_time)
+    HHScanReport(DWORD start_tick, time_t start_time)
         : startTick(start_tick), endTick(0),
         startTime(start_time), endTime(0)
     {
     }
 
-    bool setEndTick(ULONGLONG end_tick, time_t end_time)
+    bool setEndTick(DWORD end_tick, time_t end_time)
     {
         if (end_tick < this->startTick) {
             return false;
@@ -28,7 +28,7 @@ public:
         return true;
     }
 
-    ULONGLONG getScanTime() const
+    DWORD getScanTime() const
     {
         if (startTick == 0 || endTick == 0) return 0;
         return (this->endTick - this->startTick);
@@ -57,8 +57,8 @@ protected:
     time_t startTime;
     time_t endTime;
 
-    ULONGLONG startTick;
-    ULONGLONG endTick;
+    DWORD startTick;
+    DWORD endTick;
 
     std::map<DWORD, pesieve::t_report> pidToReport;
     std::map<DWORD, std::string> pidToName;

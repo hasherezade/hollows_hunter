@@ -393,10 +393,10 @@ HHScanReport* HHScanner::scan()
     pesieve::t_params &pesieve_args = this->hh_args.pesieve_args;
     initOutDir(scan_start, pesieve_args);
 
-    HHScanReport *my_report = new HHScanReport(GetTickCount64(), scan_start);
+    HHScanReport *my_report = new HHScanReport(GetTickCount(), scan_start);
     scanProcesses(*my_report);
 
-    my_report->setEndTick(GetTickCount64(), time(NULL));
+    my_report->setEndTick(GetTickCount(), time(NULL));
     return my_report;
 }
 
