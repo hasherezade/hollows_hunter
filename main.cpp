@@ -16,8 +16,7 @@
 
 #include "util/process_privilege.h"
 #include "util/strings_util.h"
-
-#define VERSION "0.3.4"
+#include "hh_ver_short.h"
 
 using namespace hhunter::util;
 
@@ -62,7 +61,7 @@ int main(int argc, char *argv[])
     hh_args_init(hh_args);
 
     bool info_req = false;
-    HHParams uParams(VERSION);
+    HHParams uParams(HH_VERSION_STR);
     if (!uParams.parse(argc, argv)) {
         return PESIEVE_INFO;
     }
@@ -76,7 +75,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    print_version(VERSION);
+    print_version(HH_VERSION_STR);
     std::cout << std::endl;
     if (argc < 2) {
         print_in_color(WHITE, "Default scan deployed.");

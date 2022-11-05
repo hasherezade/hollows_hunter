@@ -58,7 +58,8 @@ set (hdrs
 )
 set (rsrc
 	resources.h
-	resources.rc
+	hh_res.rc
+	hh_ver_short.h
 )
 
 # libs

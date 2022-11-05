@@ -1,0 +1,33 @@
+#include "hh_ver_short.h"
+#include "resources.h"
+#include <windows.h>
+
+#define VER_COMPANYNAME_STR         "Hashereware (hashereware.com)"
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEOS                  VOS_NT_WINDOWS32
+#define VER_FILEDESCRIPTION_STR     "Hollows Hunter: scans running processes, recognizes and dumps a variety of potentially malicious implants."
+#define VER_INTERNALNAME_STR        "hollows_hunter.exe"
+#define VER_ORIGINALFILENAME_STR    "hollows_hunter.exe"
+#define VER_LEGALCOPYRIGHT_STR      "Copyright © 2018-2022 Hasherezade"
+#define VER_PRODUCTNAME_STR         "Hollows Hunter"
+#define VER_FILEVERSION             HH_MAJOR_VERSION,HH_MINOR_VERSION,HH_MICRO_VERSION,HH_PATCH_VERSION
+#define VER_PRODUCTVERSION_STR      HH_VERSION_STR
+
+#define VER_FILEFLAGSMASK (VS_FF_DEBUG | VS_FF_PRERELEASE)
+#ifdef DEBUG
+    #define VER_FILEFLAGS (VS_FF_DEBUG)
+#else
+    #define VER_FILEFLAGS (0)
+#endif
+
+#include "common.ver"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "logo/favicon.ico"
