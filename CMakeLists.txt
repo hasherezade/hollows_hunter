@@ -1,9 +1,8 @@
-cmake_minimum_required (VERSION 3.12.4)
+cmake_minimum_required (VERSION 3.0)
 project (hollows_hunter)
 
 option(HH_BUILD_TESTING "Enable testing for HollowsHunter" ON)
 option (PECONV_LIB_INSTALL OFF)
-
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
 
 # static linking for GNU compilers
