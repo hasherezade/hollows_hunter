@@ -24,7 +24,7 @@ using namespace pesieve;
 #define PARAM_PID "pid"
 #define PARAM_LOOP "loop"
 #define PARAM_REFLECTION "refl"
-#define PARAM_CACHE "cache"
+#define PARAM_NOCACHE "nocache"
 #define PARAM_DOTNET_POLICY "dnet"
 #define PARAM_PTIMES "ptimes"
 
@@ -213,9 +213,9 @@ public:
         this->addParam(new BoolParam(PARAM_REFLECTION, false));
         this->setInfo(PARAM_REFLECTION, "Make a process reflection before scan.", "\t   This allows i.e. to force-read inaccessible pages.");
 
-        //PARAM_CACHE
-        this->addParam(new BoolParam(PARAM_CACHE, false));
-        this->setInfo(PARAM_CACHE, "Use modules caching.", "\t   This can speed up the scan (on the cost of memory consumption).");
+        //PARAM_NOCACHE
+        this->addParam(new BoolParam(PARAM_NOCACHE, false));
+        this->setInfo(PARAM_NOCACHE, "Disable modules caching (which is enabled by default).", "\t   Cache can speed up the scan (on the cost of memory consumption).");
 
         //PARAM_IAT
         enumParam = new EnumParam(PARAM_IAT, "iat_scan_mode", false);
@@ -278,7 +278,7 @@ public:
         this->addGroup(new ParamGroup(str_group));
         this->addParamToGroup(PARAM_QUIET, str_group);
         this->addParamToGroup(PARAM_REFLECTION, str_group);
-        this->addParamToGroup(PARAM_CACHE, str_group);
+        this->addParamToGroup(PARAM_NOCACHE, str_group);
         this->addParamToGroup(PARAM_LOOP, str_group);
 
         str_group = "4. scan options";
@@ -412,7 +412,10 @@ public:
             copyVal<BoolParam>(PARAM_SHELLCODE, ps.shellcode);
             copyVal<BoolParam>(PARAM_THREADS, ps.threads);
             copyVal<BoolParam>(PARAM_REFLECTION, ps.make_reflection);
-            copyVal<BoolParam>(PARAM_CACHE, ps.use_cache);
+
+            bool no_cache = false;
+            copyVal<BoolParam>(PARAM_NOCACHE, no_cache);
+            ps.use_cache = no_cache ? false : true;
 
             copyVal<EnumParam>(PARAM_IAT, ps.iat);
             copyVal<EnumParam>(PARAM_DOTNET_POLICY, ps.dotnet_policy);
