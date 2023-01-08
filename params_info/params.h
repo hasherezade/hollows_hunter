@@ -23,6 +23,7 @@ using namespace pesieve;
 #define PARAM_PNAME "pname"
 #define PARAM_PID "pid"
 #define PARAM_LOOP "loop"
+#define PARAM_STAT "stats"
 #define PARAM_REFLECTION "refl"
 #define PARAM_CACHE "cache"
 #define PARAM_DOTNET_POLICY "dnet"
@@ -152,6 +153,9 @@ public:
         this->addParam(new BoolParam(PARAM_LOOP, false));
         this->setInfo(PARAM_LOOP, "Enable continuous scanning.");
 
+        this->addParam(new BoolParam(PARAM_STAT, false));
+        this->setInfo(PARAM_STAT, "Use statistics for memory analysis.");
+
         EnumParam *enumParam = new EnumParam(PARAM_IMP_REC, "imprec_mode", false);
         if (enumParam) {
             this->addParam(enumParam);
@@ -280,6 +284,7 @@ public:
         this->addParamToGroup(PARAM_REFLECTION, str_group);
         this->addParamToGroup(PARAM_CACHE, str_group);
         this->addParamToGroup(PARAM_LOOP, str_group);
+        this->addParamToGroup(PARAM_STAT, str_group);
 
         str_group = "4. scan options";
         this->addGroup(new ParamGroup(str_group));
@@ -413,6 +418,7 @@ public:
             copyVal<BoolParam>(PARAM_THREADS, ps.threads);
             copyVal<BoolParam>(PARAM_REFLECTION, ps.make_reflection);
             copyVal<BoolParam>(PARAM_CACHE, ps.use_cache);
+            copyVal<BoolParam>(PARAM_STAT, ps.stats);
 
             copyVal<EnumParam>(PARAM_IAT, ps.iat);
             copyVal<EnumParam>(PARAM_DOTNET_POLICY, ps.dotnet_policy);
