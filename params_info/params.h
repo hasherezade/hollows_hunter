@@ -359,6 +359,7 @@ public:
 
         copyVal<BoolParam>(PARAM_LOOP, ps.loop_scanning);
         copyVal<BoolParam>(PARAM_LOG, ps.log);
+        copyVal<BoolParam>(PARAM_QUIET, ps.quiet);
         copyVal<IntParam>(PARAM_PTIMES, ps.ptimes);
         copyVal<BoolParam>(PARAM_JSON, ps.json_output);
 
