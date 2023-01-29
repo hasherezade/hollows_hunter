@@ -49,6 +49,23 @@ std::string translate_imprec_mode(const pesieve::t_imprec_mode imprec_mode)
     return "undefined";
 }
 
+std::string translate_stat_rules(const pesieve::t_stat_rules stat_rule)
+{
+    switch (stat_rule) {
+    case pesieve::STATS_NONE:
+        return "none: do not use stats";
+    case pesieve::STATS_CODE:
+        return "use stats for code detection";
+    case pesieve::STATS_OBFUSCATED:
+        return "use stats for obfuscated areas detection";
+    case pesieve::STATS_ENCRYPTED:
+        return "use stats for encrypted areas detection";
+    case pesieve::STATS_ALL:
+        return "use stats to detect: code, obfuscated, and encrypted areas";
+    }
+    return "undefined";
+}
+
 std::string translate_iat_scan_mode(const pesieve::t_iat_scan_mode mode)
 {
     switch (mode) {
@@ -147,3 +164,17 @@ std::string imprec_mode_to_id(const pesieve::t_imprec_mode imprec_mode)
     return "N";
 }
 
+std::string stat_rules_to_id(const pesieve::t_stat_rules stat_rules)
+{
+    switch (stat_rules) {
+    case pesieve::STATS_CODE:
+        return "C";
+    case pesieve::STATS_OBFUSCATED:
+        return "O";
+    case pesieve::STATS_ENCRYPTED:
+        return "E";
+    case pesieve::STATS_ALL:
+        return "A";
+    }
+    return "N";
+}

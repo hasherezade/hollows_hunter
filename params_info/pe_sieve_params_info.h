@@ -14,3 +14,5 @@ std::string translate_data_mode(const pesieve::t_data_scan_mode &mode);
 
 std::string dump_mode_to_id(const DWORD dump_mode);
 std::string imprec_mode_to_id(const pesieve::t_imprec_mode imprec_mode);
+std::string stat_rules_to_id(const pesieve::t_stat_rules stat_rules);
+std::string translate_stat_rules(const pesieve::t_stat_rules stat_rule);

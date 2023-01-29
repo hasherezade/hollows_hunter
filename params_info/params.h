@@ -153,10 +153,16 @@ public:
         this->addParam(new BoolParam(PARAM_LOOP, false));
         this->setInfo(PARAM_LOOP, "Enable continuous scanning.");
 
-        this->addParam(new BoolParam(PARAM_STAT, false));
-        this->setInfo(PARAM_STAT, "Use statistics for memory analysis.");
-
-        EnumParam *enumParam = new EnumParam(PARAM_IMP_REC, "imprec_mode", false);
+        EnumParam* enumParam = new EnumParam(PARAM_STAT, "stat_rules", false);
+        if (enumParam) {
+            this->addParam(enumParam);
+            this->setInfo(PARAM_STAT, "Use statistics for memory analysis.");
+            for (size_t i = 0; i <= t_stat_rules::STATS_ALL; i++) {
+                t_stat_rules mode = (t_stat_rules)(i);
+                enumParam->addEnumValue(mode, stat_rules_to_id(mode), translate_stat_rules(mode));
+            }
+        }
+        enumParam = new EnumParam(PARAM_IMP_REC, "imprec_mode", false);
         if (enumParam) {
             this->addParam(enumParam);
             this->setInfo(PARAM_IMP_REC, "Set in which mode the ImportTable should be recovered");
@@ -418,7 +424,7 @@ public:
             copyVal<BoolParam>(PARAM_THREADS, ps.threads);
             copyVal<BoolParam>(PARAM_REFLECTION, ps.make_reflection);
             copyVal<BoolParam>(PARAM_CACHE, ps.use_cache);
-            copyVal<BoolParam>(PARAM_STAT, ps.stats);
+            copyVal<EnumParam>(PARAM_STAT, ps.stats);
 
             copyVal<EnumParam>(PARAM_IAT, ps.iat);
             copyVal<EnumParam>(PARAM_DOTNET_POLICY, ps.dotnet_policy);
