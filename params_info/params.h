@@ -24,6 +24,7 @@ using namespace pesieve;
 #define PARAM_PID "pid"
 #define PARAM_LOOP "loop"
 #define PARAM_STAT "stats"
+#define PARAM_DETECTION_FILTER "dfilter"
 #define PARAM_REFLECTION "refl"
 #define PARAM_CACHE "cache"
 #define PARAM_DOTNET_POLICY "dnet"
@@ -162,6 +163,15 @@ public:
                 enumParam->addEnumValue(mode, stat_rules_to_id(mode), translate_stat_rules(mode));
             }
         }
+        enumParam = new EnumParam(PARAM_DETECTION_FILTER, "detection_filter", false);
+        if (enumParam) {
+            this->addParam(enumParam);
+            this->setInfo(PARAM_DETECTION_FILTER, "Define what type of a shellcode detection should be used or excluded (patterns/stats)");
+            for (size_t i = 0; i <= t_detection_filter::DF_BOTH_ONLY; i++) {
+                t_detection_filter mode = (t_detection_filter)(i);
+                enumParam->addEnumValue(mode, translate_exclusion_mode(mode));
+            }
+        }
         enumParam = new EnumParam(PARAM_IMP_REC, "imprec_mode", false);
         if (enumParam) {
             this->addParam(enumParam);
@@ -291,6 +301,7 @@ public:
         this->addParamToGroup(PARAM_CACHE, str_group);
         this->addParamToGroup(PARAM_LOOP, str_group);
         this->addParamToGroup(PARAM_STAT, str_group);
+        this->addParamToGroup(PARAM_DETECTION_FILTER, str_group);
 
         str_group = "4. scan options";
         this->addGroup(new ParamGroup(str_group));
@@ -425,6 +436,7 @@ public:
             copyVal<BoolParam>(PARAM_REFLECTION, ps.make_reflection);
             copyVal<BoolParam>(PARAM_CACHE, ps.use_cache);
             copyVal<EnumParam>(PARAM_STAT, ps.stats);
+            copyVal<EnumParam>(PARAM_DETECTION_FILTER, ps.detecton_filter);
 
             copyVal<EnumParam>(PARAM_IAT, ps.iat);
             copyVal<EnumParam>(PARAM_DOTNET_POLICY, ps.dotnet_policy);

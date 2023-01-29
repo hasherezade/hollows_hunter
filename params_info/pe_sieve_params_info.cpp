@@ -66,6 +66,22 @@ std::string translate_stat_rules(const pesieve::t_stat_rules stat_rule)
     return "undefined";
 }
 
+std::string translate_exclusion_mode(const pesieve::t_detection_filter stat_rule)
+{
+    switch (stat_rule) {
+    case pesieve::DF_NONE:
+        return "no filter: default";
+    case pesieve::DF_PATTERNS_ONLY:
+        return "shellcode detected by patterns, not detected by stats";
+    case pesieve::DF_STATS_ONLY:
+        return "shellcode detected by stats, not detected by patterns";
+    case pesieve::DF_BOTH_ONLY:
+        return "shellcode detected by both stats and patterns simultanously";
+    }
+    return "undefined";
+}
+
+
 std::string translate_iat_scan_mode(const pesieve::t_iat_scan_mode mode)
 {
     switch (mode) {
