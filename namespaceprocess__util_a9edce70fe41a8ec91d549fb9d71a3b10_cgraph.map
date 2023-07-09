@@ -1,4 +1,5 @@
 <map id="process_util::suspend_suspicious" name="process_util::suspend_suspicious">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,152,46"/>
-<area shape="rect" id="node2" href="$suspend_8cpp.html#a3c63f252433e6e7532e441ed5cacca9d" title=" " alt="" coords="200,13,323,39"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,152,46"/>
+<area shape="rect" id="Node000002" href="$suspend_8cpp.html#a3c63f252433e6e7532e441ed5cacca9d" title=" " alt="" coords="200,13,323,39"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="152,23,185,23,185,28,152,28"/>
 </map>

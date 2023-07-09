@@ -1,4 +1,5 @@
 <map id="set_color" name="set_color">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,80,31"/>
-<area shape="rect" id="node2" href="$term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="128,5,249,31"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,80,31"/>
+<area shape="rect" id="Node000002" href="$term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="128,5,249,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="80,16,113,16,113,21,80,21"/>
 </map>

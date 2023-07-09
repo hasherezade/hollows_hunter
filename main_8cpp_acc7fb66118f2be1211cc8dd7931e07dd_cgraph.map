@@ -1,6 +1,9 @@
 <map id="compatibility_alert" name="compatibility_alert">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,131,31"/>
-<area shape="rect" id="node2" href="$term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="179,5,277,31"/>
-<area shape="rect" id="node3" href="$term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="325,5,399,31"/>
-<area shape="rect" id="node4" href="$term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="447,5,569,31"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,131,31"/>
+<area shape="rect" id="Node000002" href="$term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095" title=" " alt="" coords="179,5,277,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,16,164,16,164,21,131,21"/>
+<area shape="rect" id="Node000003" href="$term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="325,5,399,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="277,16,310,16,310,21,277,21"/>
+<area shape="rect" id="Node000004" href="$term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="447,5,569,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="400,16,433,16,433,21,400,21"/>
 </map>
