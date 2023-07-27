@@ -180,8 +180,7 @@ namespace util {
     {
         std::stringstream stream;
 
-        std::set<TYPE_T>::iterator itr;
-        for (itr = list.begin(); itr != list.end(); ) {
+        for (auto itr = list.begin(); itr != list.end(); ) {
             stream << *itr;
             ++itr;
             if (itr != list.end()) {
