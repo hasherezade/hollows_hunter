@@ -305,6 +305,7 @@ public:
         this->addParamToGroup(PARAM_DATA, str_group);
         this->addParamToGroup(PARAM_IAT, str_group);
         this->addParamToGroup(PARAM_SHELLCODE, str_group);
+        this->addParamToGroup(PARAM_OBFUSCATED, str_group);  
         this->addParamToGroup(PARAM_THREADS, str_group);
         this->addParamToGroup(PARAM_HOOKS, str_group);
 
