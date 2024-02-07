@@ -35,7 +35,7 @@ var searchData=
   ['pids_5flist_32',['pids_list',['../structt__hh__params.html#a6cdcdd13e245c3ddba0ee30e23653257',1,'t_hh_params']]],
   ['pidtoname_33',['pidToName',['../class_h_h_scan_report.html#a11dc7a2a71e9d16ba9c7f95ad6a4baaf',1,'HHScanReport']]],
   ['pidtoreport_34',['pidToReport',['../class_h_h_scan_report.html#a74077d56483e55918ec3420b528a3994',1,'HHScanReport']]],
-  ['print_5fin_5fcolor_35',['print_in_color',['../term__util_8h.html#a0547053c3ed0d110bcb9477d83a32095',1,'print_in_color(WORD color, const std::string &amp;text):&#160;term_util.cpp'],['../term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095',1,'print_in_color(WORD color, const std::string &amp;text):&#160;term_util.cpp']]],
+  ['print_5fin_5fcolor_35',['print_in_color',['../term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095',1,'print_in_color(WORD color, const std::string &amp;text):&#160;term_util.cpp'],['../term__util_8h.html#a0547053c3ed0d110bcb9477d83a32095',1,'print_in_color(WORD color, const std::string &amp;text):&#160;term_util.cpp']]],
   ['print_5fversion_36',['print_version',['../params_8h.html#aae813382de1d726483950947bc2da569',1,'params.h']]],
   ['printbanner_37',['printBanner',['../class_h_h_params.html#ad3c3e5a7250906720808df84f8c9c477',1,'HHParams']]],
   ['printscanroundstats_38',['printScanRoundStats',['../class_h_h_scanner.html#a6700be392afaa57e77ddc4c649e718f1',1,'HHScanner']]],

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['hh_5fargs_0',['hh_args',['../class_h_h_scanner.html#aa9841ff29a663251372cf65e2db3cbef',1,'HHScanner']]],
-  ['hh_5fargs_5finit_1',['hh_args_init',['../hh__params_8h.html#a405ebf46d40831f9c1d01b367f25aed8',1,'hh_args_init(t_hh_params &amp;args):&#160;hh_params.cpp'],['../hh__params_8cpp.html#ac6edc4939761c76f668b573fe1a428cd',1,'hh_args_init(t_hh_params &amp;hh_args):&#160;hh_params.cpp']]],
+  ['hh_5fargs_5finit_1',['hh_args_init',['../hh__params_8cpp.html#ac6edc4939761c76f668b573fe1a428cd',1,'hh_args_init(t_hh_params &amp;hh_args):&#160;hh_params.cpp'],['../hh__params_8h.html#a405ebf46d40831f9c1d01b367f25aed8',1,'hh_args_init(t_hh_params &amp;args):&#160;hh_params.cpp']]],
   ['hh_5fdefault_5fdir_2',['HH_DEFAULT_DIR',['../hh__params_8h.html#a2d98bcdd623b59c233a1350aebbb1b54',1,'hh_params.h']]],
   ['hh_5fmajor_5fversion_3',['HH_MAJOR_VERSION',['../hh__ver__short_8h.html#a0dcf389e770defe2c2ace005b33d394a',1,'hh_ver_short.h']]],
   ['hh_5fmicro_5fversion_4',['HH_MICRO_VERSION',['../hh__ver__short_8h.html#acf3863b36b86506a78d1c01f83d17844',1,'hh_ver_short.h']]],
@@ -16,9 +16,9 @@ var searchData=
   ['hh_5furl_13',['HH_URL',['../params_8h.html#a7676e471935d5124ba49c1781dca5589',1,'params.h']]],
   ['hh_5fver_5fshort_2eh_14',['hh_ver_short.h',['../hh__ver__short_8h.html',1,'']]],
   ['hh_5fversion_5fstr_15',['HH_VERSION_STR',['../hh__ver__short_8h.html#aa395b9afd70775101cf543627fd27b95',1,'hh_ver_short.h']]],
-  ['hhparams_16',['hhparams',['../class_h_h_params.html#a0f0ccaf07a74a2332bdc15ddf439296b',1,'HHParams::HHParams()'],['../class_h_h_params.html',1,'HHParams']]],
-  ['hhscanner_17',['hhscanner',['../class_h_h_scanner.html',1,'HHScanner'],['../class_h_h_scanner.html#abae28bb490b101cb3d1136eb76a5df33',1,'HHScanner::HHScanner()'],['../class_h_h_scan_report.html#a5e267708c5945d665038b0f79627b24b',1,'HHScanReport::HHScanner']]],
-  ['hhscanreport_18',['hhscanreport',['../class_h_h_scan_report.html#ad77a79167ffaa20d804ceeec1e19f21c',1,'HHScanReport::HHScanReport()'],['../class_h_h_scan_report.html',1,'HHScanReport']]],
+  ['hhparams_16',['HHParams',['../class_h_h_params.html',1,'HHParams'],['../class_h_h_params.html#a0f0ccaf07a74a2332bdc15ddf439296b',1,'HHParams::HHParams()']]],
+  ['hhscanner_17',['HHScanner',['../class_h_h_scanner.html',1,'HHScanner'],['../class_h_h_scan_report.html#a5e267708c5945d665038b0f79627b24b',1,'HHScanReport::HHScanner'],['../class_h_h_scanner.html#abae28bb490b101cb3d1136eb76a5df33',1,'HHScanner::HHScanner()']]],
+  ['hhscanreport_18',['HHScanReport',['../class_h_h_scan_report.html',1,'HHScanReport'],['../class_h_h_scan_report.html#ad77a79167ffaa20d804ceeec1e19f21c',1,'HHScanReport::HHScanReport()']]],
   ['hhunter_19',['hhunter',['../namespacehhunter.html',1,'']]],
   ['hhunter_3a_3autil_20',['util',['../namespacehhunter_1_1util.html',1,'hhunter']]],
   ['hollows_5fhunter_21',['hollows_hunter',['../index.html',1,'']]]
