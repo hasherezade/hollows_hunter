@@ -129,6 +129,20 @@ std::string HHScanReport::toJSON(const t_hh_params &params)
     return stream.str();
 }
 
+
+void print_scantime(std::stringstream &stream, size_t timeInMs)
+{
+    float seconds = ((float)timeInMs / 1000);
+    float minutes = ((float)timeInMs / 60000);
+    stream << std::dec << timeInMs << " ms.";
+    if (seconds > 0.5) {
+        stream << " = " << seconds << " sec.";
+    }
+    if (minutes > 0.5) {
+        stream << " = " << minutes << " min.";
+    }
+}
+
 std::string HHScanReport::toString()
 {
     std::stringstream stream;
@@ -136,7 +150,9 @@ std::string HHScanReport::toString()
     stream << "--------" << std::endl;
     stream << "SUMMARY:\n";
     stream << "Scan at: " << util::strtime(this->startTime) << " (" << std::dec << startTime << ")\n";
-    stream << "Finished scan in: " << std::dec << getScanTime() << " milliseconds\n";
+    stream << "Finished scan in: ";
+    print_scantime(stream, getScanTime());
+    stream << "\n";
     stream << "[*] Total scanned: " << std::dec << countTotal() << "\n";
     stream << "[*] Total suspicious: " << std::dec << countSuspicious() << "\n";
     if (countSuspicious() > 0) {
