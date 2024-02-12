@@ -36,13 +36,14 @@ var searchData=
   ['pidtoname_33',['pidToName',['../class_h_h_scan_report.html#a11dc7a2a71e9d16ba9c7f95ad6a4baaf',1,'HHScanReport']]],
   ['pidtoreport_34',['pidToReport',['../class_h_h_scan_report.html#a74077d56483e55918ec3420b528a3994',1,'HHScanReport']]],
   ['print_5fin_5fcolor_35',['print_in_color',['../term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095',1,'print_in_color(WORD color, const std::string &amp;text):&#160;term_util.cpp'],['../term__util_8h.html#a0547053c3ed0d110bcb9477d83a32095',1,'print_in_color(WORD color, const std::string &amp;text):&#160;term_util.cpp']]],
-  ['print_5fversion_36',['print_version',['../params_8h.html#aae813382de1d726483950947bc2da569',1,'params.h']]],
-  ['printbanner_37',['printBanner',['../class_h_h_params.html#ad3c3e5a7250906720808df84f8c9c477',1,'HHParams']]],
-  ['printscanroundstats_38',['printScanRoundStats',['../class_h_h_scanner.html#a6700be392afaa57e77ddc4c649e718f1',1,'HHScanner']]],
-  ['printsinglereport_39',['printSingleReport',['../class_h_h_scanner.html#af1a026170edfe507268e6e21c5052bbb',1,'HHScanner']]],
-  ['process_5fprivilege_2ecpp_40',['process_privilege.cpp',['../process__privilege_8cpp.html',1,'']]],
-  ['process_5fprivilege_2eh_41',['process_privilege.h',['../process__privilege_8h.html',1,'']]],
-  ['process_5fstart_5ftime_42',['process_start_time',['../namespaceutil.html#a1b58bbd7118af7892e3926017211542b',1,'util']]],
-  ['process_5futil_43',['process_util',['../namespaceprocess__util.html',1,'']]],
-  ['ptimes_44',['ptimes',['../structt__hh__params.html#a2f2fb874d04169ea8578dde2f7341e90',1,'t_hh_params']]]
+  ['print_5fscantime_36',['print_scantime',['../hh__report_8cpp.html#a7da95fdc0fd230a1a203045782d07a9c',1,'hh_report.cpp']]],
+  ['print_5fversion_37',['print_version',['../params_8h.html#aae813382de1d726483950947bc2da569',1,'params.h']]],
+  ['printbanner_38',['printBanner',['../class_h_h_params.html#ad3c3e5a7250906720808df84f8c9c477',1,'HHParams']]],
+  ['printscanroundstats_39',['printScanRoundStats',['../class_h_h_scanner.html#a6700be392afaa57e77ddc4c649e718f1',1,'HHScanner']]],
+  ['printsinglereport_40',['printSingleReport',['../class_h_h_scanner.html#af1a026170edfe507268e6e21c5052bbb',1,'HHScanner']]],
+  ['process_5fprivilege_2ecpp_41',['process_privilege.cpp',['../process__privilege_8cpp.html',1,'']]],
+  ['process_5fprivilege_2eh_42',['process_privilege.h',['../process__privilege_8h.html',1,'']]],
+  ['process_5fstart_5ftime_43',['process_start_time',['../namespaceutil.html#a1b58bbd7118af7892e3926017211542b',1,'util']]],
+  ['process_5futil_44',['process_util',['../namespaceprocess__util.html',1,'']]],
+  ['ptimes_45',['ptimes',['../structt__hh__params.html#a2f2fb874d04169ea8578dde2f7341e90',1,'t_hh_params']]]
 ];
