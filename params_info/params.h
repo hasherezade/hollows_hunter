@@ -40,6 +40,7 @@ using namespace pesieve;
 #define PARAM_KILL "kill"
 #define PARAM_UNIQUE_DIR "uniqd"
 #define PARAM_DIR "dir"
+#define PARAM_PATTERN "pattern"
 #define PARAM_MINIDUMP "minidmp"
 #define PARAM_LOG "log"
 #define PARAM_JSON "json"
@@ -247,6 +248,9 @@ public:
             }
         }
 
+        this->addParam(new StringParam(PARAM_PATTERN, false));
+        this->setInfo(PARAM_PATTERN, "Set additional shellcode patterns (file in the SIG format).");
+
         //PARAM_DOTNET_POLICY
         enumParam = new EnumParam(PARAM_DOTNET_POLICY, "dotnet_policy", false);
         if (enumParam) {
@@ -308,7 +312,8 @@ public:
         this->addParamToGroup(PARAM_OBFUSCATED, str_group);  
         this->addParamToGroup(PARAM_THREADS, str_group);
         this->addParamToGroup(PARAM_HOOKS, str_group);
-
+        this->addParamToGroup(PARAM_PATTERN, str_group);
+        
         str_group = "5. dump options";
         this->addGroup(new ParamGroup(str_group));
         this->addParamToGroup(PARAM_MINIDUMP, str_group);
@@ -372,7 +377,6 @@ public:
         copyVal<BoolParam>(PARAM_HOOKS, hooks);
         ps.pesieve_args.no_hooks = hooks ? false : true;
 
-        copyVal<StringParam>(PARAM_DIR, ps.out_dir);
         copyVal<BoolParam>(PARAM_UNIQUE_DIR, ps.unique_dir);
         copyVal<BoolParam>(PARAM_SUSPEND, ps.suspend_suspicious);
         copyVal<BoolParam>(PARAM_KILL, ps.kill_suspicious);
@@ -440,5 +444,7 @@ public:
             copyVal<EnumParam>(PARAM_DOTNET_POLICY, ps.dotnet_policy);
             copyVal<EnumParam>(PARAM_DATA, ps.data);
             copyVal<EnumParam>(PARAM_DUMP_MODE, ps.dump_mode);
+
+            fillStringParam(PARAM_PATTERN, ps.pattern_file);
         }
 };
