@@ -53,6 +53,7 @@ t_pesieve_res deploy_scan(t_hh_params &hh_args)
 void free_params(t_params& args)
 {
     free_strparam(args.modules_ignored);
+    free_strparam(args.pattern_file);
 }
 
 int main(int argc, char *argv[])
