@@ -386,6 +386,7 @@ public:
         copyVal<BoolParam>(PARAM_QUIET, ps.quiet);
         copyVal<IntParam>(PARAM_PTIMES, ps.ptimes);
         copyVal<BoolParam>(PARAM_JSON, ps.json_output);
+        copyVal<StringParam>(PARAM_DIR, ps.out_dir);
 
         StringListParam* myParam = dynamic_cast<StringListParam*>(this->getParam(PARAM_PNAME));
         if (myParam && myParam->isSet()) {
