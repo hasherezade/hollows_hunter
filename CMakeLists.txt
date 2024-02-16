@@ -117,6 +117,6 @@ if(HH_BUILD_TESTING)
 	set_tests_properties(TestThreadsScan PROPERTIES PASS_REGULAR_EXPRESSION "\"suspicious_count\" : ")
 
 	# 6) test scan code patterns with caching
-	add_test (TestCodeScanNoDump ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out -cache -code P -ofilter 2)
+	add_test (TestCodeScanNoDump ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out -cache -shellc P -ofilter 2)
 	set_tests_properties(TestCodeScanNoDump PROPERTIES PASS_REGULAR_EXPRESSION "\"suspicious_count\" : ")
 endif()
