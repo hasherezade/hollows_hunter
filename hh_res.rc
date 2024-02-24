@@ -9,7 +9,7 @@
 #define VER_FILEDESCRIPTION_STR     "Hollows Hunter: scans running processes, recognizes and dumps a variety of potentially malicious implants."
 #define VER_INTERNALNAME_STR        "hollows_hunter.exe"
 #define VER_ORIGINALFILENAME_STR    "hollows_hunter.exe"
-#define VER_LEGALCOPYRIGHT_STR      "Copyright © 2018-2023 Hasherezade"
+#define VER_LEGALCOPYRIGHT_STR      "Copyright © 2018-2024 Hasherezade"
 #define VER_PRODUCTNAME_STR         "Hollows Hunter"
 #define VER_FILEVERSION             HH_MAJOR_VERSION,HH_MINOR_VERSION,HH_MICRO_VERSION,HH_PATCH_VERSION
 #define VER_PRODUCTVERSION_STR      HH_VERSION_STR
