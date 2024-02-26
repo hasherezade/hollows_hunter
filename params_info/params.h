@@ -76,27 +76,6 @@ void print_version(const std::string &version , WORD info_color = HILIGHTED_COLO
     std::cout << std::endl;
 }
 
-bool alloc_strparam(PARAM_STRING& strparam, ULONG len)
-{
-    if (strparam.buffer != nullptr) { // already allocated
-        return false;
-    }
-    strparam.buffer = (char*)calloc(len + 1, sizeof(char));
-    if (strparam.buffer) {
-        strparam.length = len;
-        return true;
-    }
-    return false;
-}
-
-void free_strparam(PARAM_STRING& strparam)
-{
-    free(strparam.buffer);
-    strparam.buffer = nullptr;
-    strparam.length = 0;
-}
-
-
 class HHParams : public Params
 {
 public:
@@ -370,7 +349,7 @@ public:
         std::cout << "URL: " << HH_URL << std::endl;
     }
 
-    void fillStruct(t_hh_params &ps)
+    void fillStruct(t_hh_params& ps)
     {
         fillPEsieveStruct(ps.pesieve_args);
         bool hooks = false;
@@ -392,16 +371,46 @@ public:
         if (myParam && myParam->isSet()) {
             myParam->stripToElements(ps.names_list);
         }
-
         myParam = dynamic_cast<StringListParam*>(this->getParam(PARAM_PROCESSES_IGNORE));
         if (myParam && myParam->isSet()) {
             myParam->stripToElements(ps.ignored_names_list);
         }
-
-        IntListParam *myIntParam = dynamic_cast<IntListParam*>(this->getParam(PARAM_PID));
+        IntListParam* myIntParam = dynamic_cast<IntListParam*>(this->getParam(PARAM_PID));
         if (myIntParam && myIntParam->isSet()) {
             myIntParam->stripToIntElements(ps.pids_list);
         }
+    }
+
+    void freeStruct(t_hh_params& ps)
+    {
+        free_strparam(ps.pesieve_args.modules_ignored);
+        free_strparam(ps.pesieve_args.pattern_file);
+    }
+
+protected:
+
+    // Fill PE-sieve params
+
+    bool alloc_strparam(PARAM_STRING& strparam, size_t len)
+    {
+        if (strparam.buffer != nullptr) { // already allocated
+            return false;
+        }
+        strparam.buffer = (char*)calloc(len + 1, sizeof(char));
+        if (strparam.buffer) {
+            strparam.length = len;
+            return true;
+        }
+        return false;
+    }
+
+    void free_strparam(pesieve::PARAM_STRING& strparam)
+    {
+        if (strparam.buffer) {
+            free(strparam.buffer);
+        }
+        strparam.buffer = nullptr;
+        strparam.length = 0;
     }
 
     bool fillStringParam(const std::string& paramId, PARAM_STRING& strparam)
@@ -423,29 +432,29 @@ public:
         return is_copied;
     }
 
-    protected:
-        void fillPEsieveStruct(t_params &ps)
-        {
-            copyVal<EnumParam>(PARAM_IMP_REC, ps.imprec_mode);
-            copyVal<EnumParam>(PARAM_OUT_FILTER, ps.out_filter);
+    void fillPEsieveStruct(t_params& ps)
+    {
+        copyVal<EnumParam>(PARAM_IMP_REC, ps.imprec_mode);
+        copyVal<EnumParam>(PARAM_OUT_FILTER, ps.out_filter);
 
-            fillStringParam(PARAM_MODULES_IGNORE, ps.modules_ignored);
+        fillStringParam(PARAM_MODULES_IGNORE, ps.modules_ignored);
 
-            copyVal<BoolParam>(PARAM_QUIET, ps.quiet);
-            copyVal<EnumParam>(PARAM_JSON_LVL, ps.json_lvl);
+        copyVal<BoolParam>(PARAM_QUIET, ps.quiet);
+        copyVal<EnumParam>(PARAM_JSON_LVL, ps.json_lvl);
 
-            copyVal<BoolParam>(PARAM_MINIDUMP, ps.minidump);
-            copyVal<EnumParam>(PARAM_SHELLCODE, ps.shellcode);
-            copyVal<EnumParam>(PARAM_OBFUSCATED, ps.obfuscated);
-            copyVal<BoolParam>(PARAM_THREADS, ps.threads);
-            copyVal<BoolParam>(PARAM_REFLECTION, ps.make_reflection);
-            copyVal<BoolParam>(PARAM_CACHE, ps.use_cache);
+        copyVal<BoolParam>(PARAM_MINIDUMP, ps.minidump);
+        copyVal<EnumParam>(PARAM_SHELLCODE, ps.shellcode);
+        copyVal<EnumParam>(PARAM_OBFUSCATED, ps.obfuscated);
+        copyVal<BoolParam>(PARAM_THREADS, ps.threads);
+        copyVal<BoolParam>(PARAM_REFLECTION, ps.make_reflection);
+        copyVal<BoolParam>(PARAM_CACHE, ps.use_cache);
 
-            copyVal<EnumParam>(PARAM_IAT, ps.iat);
-            copyVal<EnumParam>(PARAM_DOTNET_POLICY, ps.dotnet_policy);
-            copyVal<EnumParam>(PARAM_DATA, ps.data);
-            copyVal<EnumParam>(PARAM_DUMP_MODE, ps.dump_mode);
+        copyVal<EnumParam>(PARAM_IAT, ps.iat);
+        copyVal<EnumParam>(PARAM_DOTNET_POLICY, ps.dotnet_policy);
+        copyVal<EnumParam>(PARAM_DATA, ps.data);
+        copyVal<EnumParam>(PARAM_DUMP_MODE, ps.dump_mode);
 
-            fillStringParam(PARAM_PATTERN, ps.pattern_file);
-        }
+        fillStringParam(PARAM_PATTERN, ps.pattern_file);
+    }
+
 };

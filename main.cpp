@@ -50,12 +50,6 @@ t_pesieve_res deploy_scan(t_hh_params &hh_args)
     return scan_res;
 }
 
-void free_params(t_params& args)
-{
-    free_strparam(args.modules_ignored);
-    free_strparam(args.pattern_file);
-}
-
 int main(int argc, char *argv[])
 {
     t_hh_params hh_args;
@@ -83,6 +77,6 @@ int main(int argc, char *argv[])
         std::cout << std::endl;
     }
     const t_pesieve_res  res = deploy_scan(hh_args);
-    free_params(hh_args.pesieve_args);
+    uParams.freeStruct(hh_args);
     return res;
 }
