@@ -5,6 +5,7 @@ option(HH_BUILD_TESTING "Enable testing for HollowsHunter" ON)
 option (PECONV_LIB_INSTALL OFF)
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
 set (KRABS_DIR "${CMAKE_SOURCE_DIR}/krabs_lib" CACHE PATH "KrabsETW main path" )
+#FYI Krabs need to be built as a static lib which is not the default from the submodule 
 #if (BUILD_32)
 #	set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS
 #	"-m32" LINK_FLAGS "-m32")
@@ -92,7 +93,6 @@ set ( PESIEVE_LIB $<TARGET_FILE:pe-sieve> CACHE PATH "PE-sieve library path" )
 
 add_subdirectory ( ${PARAMKIT_DIR} )
 set ( PARAMKIT_LIB $<TARGET_FILE:paramkit> CACHE PATH "ParamKit library path" )
-set ( KRABS_LIB "${CMAKE_SOURCE_DIR}/krabsetw/krabs/x64/Release/net462" )
 
 cmake_policy(SET CMP0015 NEW)
 LINK_DIRECTORIES ( ${PESIEVE_LIB} ${KRABS_LIB})
