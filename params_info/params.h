@@ -1,5 +1,7 @@
 #pragma once
 #include <sstream>
+#include <codecvt>
+#include <locale>
 
 #include <pe_sieve_types.h>
 #include <paramkit.h>
@@ -24,6 +26,7 @@ using namespace pesieve;
 #define PARAM_PNAME "pname"
 #define PARAM_PID "pid"
 #define PARAM_LOOP "loop"
+#define PARAM_ETW "etw"
 #define PARAM_REFLECTION "refl"
 #define PARAM_CACHE "cache"
 #define PARAM_DOTNET_POLICY "dnet"
@@ -132,6 +135,9 @@ public:
 
         this->addParam(new BoolParam(PARAM_LOOP, false));
         this->setInfo(PARAM_LOOP, "Enable continuous scanning.");
+
+        this->addParam(new BoolParam(PARAM_ETW, false));
+        this->setInfo(PARAM_ETW, "Use ETW.");
 
         EnumParam *enumParam = new EnumParam(PARAM_IMP_REC, "imprec_mode", false);
         if (enumParam) {
@@ -292,6 +298,7 @@ public:
         this->addParamToGroup(PARAM_THREADS, str_group);
         this->addParamToGroup(PARAM_HOOKS, str_group);
         this->addParamToGroup(PARAM_PATTERN, str_group);
+        this->addParamToGroup(PARAM_ETW, str_group);
         
         str_group = "5. dump options";
         this->addGroup(new ParamGroup(str_group));
@@ -360,6 +367,7 @@ public:
         copyVal<BoolParam>(PARAM_SUSPEND, ps.suspend_suspicious);
         copyVal<BoolParam>(PARAM_KILL, ps.kill_suspicious);
 
+        copyVal<BoolParam>(PARAM_ETW, ps.etw_scan);
         copyVal<BoolParam>(PARAM_LOOP, ps.loop_scanning);
         copyVal<BoolParam>(PARAM_LOG, ps.log);
         copyVal<BoolParam>(PARAM_QUIET, ps.quiet);
@@ -369,11 +377,23 @@ public:
 
         StringListParam* myParam = dynamic_cast<StringListParam*>(this->getParam(PARAM_PNAME));
         if (myParam && myParam->isSet()) {
-            myParam->stripToElements(ps.names_list);
+            std::set<std::string> names_list;
+            std::set<std::wstring>::iterator itr;
+            for (itr = ps.names_list.begin(); itr != ps.names_list.end(); itr++)
+            {
+                names_list.insert(std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(*itr));
+            }
+            myParam->stripToElements(names_list);
         }
         myParam = dynamic_cast<StringListParam*>(this->getParam(PARAM_PROCESSES_IGNORE));
         if (myParam && myParam->isSet()) {
-            myParam->stripToElements(ps.ignored_names_list);
+            std::set<std::string> ignored_names_list;
+            std::set<std::wstring>::iterator itr;
+            for (itr = ps.ignored_names_list.begin(); itr != ps.ignored_names_list.end(); itr++)
+            {
+                ignored_names_list.insert(std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(*itr));
+            }
+            myParam->stripToElements(ignored_names_list);
         }
         IntListParam* myIntParam = dynamic_cast<IntListParam*>(this->getParam(PARAM_PID));
         if (myIntParam && myIntParam->isSet()) {

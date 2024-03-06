@@ -1,0 +1,3243 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        "Microsoft.O365.Security.Native.ETW"
+    </assembly>
+    <members>
+        <member name="M:Microsoft.O365.Security.ETW.Testing.Proxy.PushEvent(Microsoft.O365.Security.ETW.Testing.SynthRecord)">
+            <summary>
+Pushes an event through the proxied trace instance.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Testing.Proxy.#ctor(Microsoft.O365.Security.ETW.EventFilter)">
+            <summary>
+Constructs a proxy for an event filter.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Testing.Proxy.#ctor(Microsoft.O365.Security.ETW.KernelTrace)">
+            <summary>
+Constructs a proxy for the given kernel trace.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Testing.Proxy.#ctor(Microsoft.O365.Security.ETW.UserTrace)">
+            <summary>
+Constructs a proxy for the given user trace.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Testing.Proxy">
+            <summary>
+Serves as a stand-in for the trace class for testing purposes. It acts
+as a liason for the actual trace instance and allows for forced event
+testing.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Testing.RecordBuilder.AddContainerId(System.Guid)">
+            <summary>
+Adds a container ID extended data item
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Testing.RecordBuilder.AddUnicodeString(System.String,System.String)">
+            <summary>
+Adds a property with a unicode string to the record.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Testing.RecordBuilder.AddAnsiString(System.String,System.String)">
+            <summary>
+Adds a property with an ANSI string to the record.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.Testing.RecordBuilder.Header">
+            <summary>
+Provides access to the EventHeader that will be packed into the
+faked record.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Testing.RecordBuilder.PackIncomplete">
+            <summary>
+Packs the event properties into an EVENT_RECORD, but doesn't throw
+when the properties are not completely filled (i.g., when not all
+properties are supplied)
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Testing.RecordBuilder.Pack">
+            <summary>
+Packs the event properties into an EVENT_RECORD
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Testing.RecordBuilder">
+            <summary>
+Enables creation of synthetic events in order to test client code.
+</summary>
+            <remarks />
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.Testing.EventHeader.Flags">
+            <summary>
+Provides access to the Flags field of the EventHeader.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Testing.EventHeader">
+            <summary>
+Provides access to the EVENT_HEADER element of a synthetic
+event record.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.ObjectManagerProvider">
+            <summary>A provider that enables Object Manager events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.VirtualAllocProvider">
+            <summary>A provider that enables VirtualAlloc and VirtualFree events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.VaMapProvider">
+            <summary>A provider that enables file map and unmap (excluding images) events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.ThreadProvider">
+            <summary>A provider that enables thread start and stop events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.SystemCallProvider">
+            <summary>A provider that enables system call events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.SplitIoProvider">
+            <summary>A provider that enables split I/O events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.RegistryProvider">
+            <summary>A provider that enables registry events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.ProfileProvider">
+            <summary>A provider that enables profiling events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.ProcessCounterProvider">
+            <summary>A provider that enables process counter events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.ProcessProvider">
+            <summary>A provider that enables process events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.NetworkTcpipProvider">
+            <summary>A provider that enables network tcp/ip events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.MemoryPageFaultProvider">
+            <summary>A provider that enables memory page fault events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.MemoryHardFaultProvider">
+            <summary>A provider that enables memory hard fault events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.InterruptProvider">
+            <summary>A provider that enables interrupt events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.ImageLoadProvider">
+            <summary>A provider that enables image load events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.DriverProvider">
+            <summary>A provider that enables driver events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.DpcProvider">
+            <summary>A provider that enables device deferred procedure call events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.ThreadDispatchProvider">
+            <summary>A provider that enables thread dispatch events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.FileInitIoProvider">
+            <summary>A provider that enables file I/O events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.FileIoProvider">
+            <summary>A provider that enables file I/O completion events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.DiskInitIoProvider">
+            <summary>A provider that enables beginning of disk I/O events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.DiskIoProvider">
+            <summary>A provider that enables disk I/O completion events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.DiskFileIoProvider">
+            <summary>A provider that enables file I/O name events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.DebugPrintProvider">
+            <summary>A provider that enables debug print events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.ContextSwitchProvider">
+            <summary>A provider that enables context switch events.</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Kernel.AlpcProvider">
+            <summary>A provider that enables ALPC events.</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Kernel.FromGuid(_GUID!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>Converts a GUID to a Guid</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.KernelTrace.SetDefaultEventCallback(Microsoft.O365.Security.ETW.IEventRecordDelegate)">
+            <summary>
+Adds a function to call when an event is fired which has no corresponding provider.
+</summary>
+            <param name="callback">the function to call into</param>
+            <example>
+    KernelTrace trace = new KernelTrace();
+    trace.SetDefaultEventCallback((record) =&gt; { ... });
+</example>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.KernelTrace.QueryStats">
+            <summary>
+Get stats about events handled by this trace
+</summary>
+            <returns>a <see cref="T:Microsoft.O365.Security.ETW.TraceStats" /> object representing the stats of the current trace</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.KernelTrace.Stop">
+            <summary>
+Stops listening for events.
+</summary>
+            <example>
+    KernelTrace trace = new KernelTrace();
+    // ...
+    trace.Start();
+    trace.Stop();
+</example>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.KernelTrace.Start">
+            <summary>
+Starts listening for events from the enabled providers.
+</summary>
+            <example>
+    KernelTrace trace = new KernelTrace();
+    // ...
+    trace.Start();
+</example>
+            <remarks>
+This function is a blocking call. Whichever thread calls Start() is effectively
+donating itself to the ETW subsystem as the processing thread for events.
+
+A side effect of this is that it is expected that Stop() will be called on
+a different thread.
+</remarks>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.KernelTrace.Open">
+            <summary>
+Opens a trace session.
+</summary>
+            <example>
+    var trace = new KernelTrace();
+    // ...
+    trace.Open();
+    // ...
+    trace.Start();
+</example>
+            <remarks>
+This is an optional call before Start() if you need the trace
+registered with the ETW subsystem before you start processing events.
+</remarks>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.KernelTrace.SetTraceProperties(Microsoft.O365.Security.ETW.EventTraceProperties)">
+            <summary>
+Sets the trace properties for a session.
+Must be called before Open()/Start().
+See https://docs.microsoft.com/en-us/windows/win32/etw/event-trace-properties
+for important details and restrictions.
+
+Configurable properties are -&gt;
+ - BufferSize. In KB. The maximum buffer size is 1024 KB.
+ - MinimumBuffers. Minimum number of buffers is two per processor* .
+ - MaximumBuffers.
+ - FlushTimer. How often, in seconds, the trace buffers are forcibly flushed.
+ - LogFileMode. EVENT_TRACE_NO_PER_PROCESSOR_BUFFERING simulates a *single* sequential processor.
+</summary>
+            <param name="properties">the <see cref="T:Microsoft.O365.Security.ETW.EventTraceProperties" /> to set on the trace</param>
+            <example>
+    var trace = new KernelTrace();
+    var properties = new EventTraceProperties
+    {
+        BufferSize = 256,
+        LogFileMode = (uint)LogFileModeFlags.FLAG_EVENT_TRACE_REAL_TIME_MODE
+    };
+    trace.SetTraceProperties(properties);
+    // ...
+    trace.Start();
+</example>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.KernelTrace.Enable(Microsoft.O365.Security.ETW.KernelProvider)">
+            <summary>
+Enables a provider for the given trace.
+</summary>
+            <param name="provider">
+the <see cref="T:Microsoft.O365.Security.ETW.KernelProvider" /> to
+register with the current trace object
+</param>
+            <example>
+    KernelTrace trace = new KernelTrace();
+    KernelProvider provider = new Kernel.NetworkTcpipProvider()
+    trace.Enable(provider);
+</example>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.KernelTrace.#ctor(System.String)">
+            <summary>
+Constructs a named kernel trace session, where the name can be
+any arbitrary, unique string. On pre-Win8 machines, the trace name
+will be the required kernel trace name and not the given one.
+</summary>
+            <param name="name">the name to use for the trace</param>
+            <example>
+    KernelTrace trace = new KernelTrace("Purdy kitty");
+</example>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.KernelTrace.Dispose">
+            <summary>
+Stops the trace when disposed.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.KernelTrace.#ctor">
+            <summary>
+Constructs a kernel trace session with a generated name (or the
+required kernel trace name on pre-Win8 machines)
+</summary>
+            <example>
+    KernelTrace trace = new KernelTrace();
+</example>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.KernelTrace">
+            <summary>
+Represents an owned user trace.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.CountedString.IEndsWith(System.String,System.String)">
+            <summary>
+Accept event if counted string property ends with (case invariant) the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value ends with (case invariant) the specified string</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.CountedString.EndsWith(System.String,System.String)">
+            <summary>
+Accept event if counted string property ends with the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value ends with the specified string</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.CountedString.IStartsWith(System.String,System.String)">
+            <summary>
+Accept event if counted string property starts with (case invariant) the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value starts with (case invariant) the specified string</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.CountedString.StartsWith(System.String,System.String)">
+            <summary>
+Accept event if counted string property starts with the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value starts with the specified string</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.CountedString.IContains(System.String,System.String)">
+            <summary>
+Accept event if counted string property contains (case invariant) the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value contains (case invariant) the specified string</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.CountedString.Contains(System.String,System.String)">
+            <summary>
+Accept event if counted string property contains the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value contains the specified string</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.CountedString.IEquals(System.String,System.String)">
+            <summary>
+Accept event if counted string property equals (case invariant) the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value matches (case invariant) the specified string</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.CountedString.Is(System.String,System.String)">
+            <summary>
+Accept event if counted string property equals the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value matches the specified string</returns>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.CountedString">
+            <summary>
+Fluent filters for ANSI String properties
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.AnsiString.IEndsWith(System.String,System.String)">
+            <summary>
+Accept event if ANSI string property ends with (case invariant) the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value ends with (case invariant) the specified string</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.AnsiString.EndsWith(System.String,System.String)">
+            <summary>
+Accept event if ANSI string property ends with the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value ends with the specified string</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.AnsiString.IStartsWith(System.String,System.String)">
+            <summary>
+Accept event if ANSI string property starts with (case invariant) the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value starts with (case invariant) the specified string</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.AnsiString.StartsWith(System.String,System.String)">
+            <summary>
+Accept event if ANSI string property starts with the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value starts with the specified string</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.AnsiString.IContains(System.String,System.String)">
+            <summary>
+Accept event if ANSI string property contains (case invariant) the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value contains (case invariant) the specified string</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.AnsiString.Contains(System.String,System.String)">
+            <summary>
+Accept event if ANSI string property contains the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value contains the specified string</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.AnsiString.IEquals(System.String,System.String)">
+            <summary>
+Accept event if ANSI string property equals (case invariant) the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value matches (case invariant) the specified string</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.AnsiString.Is(System.String,System.String)">
+            <summary>
+Accept event if ANSI string property equals the specified string
+</summary>
+            <param name="name">represents the property name</param>
+            <param name="value">represents the value to match on</param>
+            <returns>a predicate that accepts an event if the value matches the specified string</returns>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.AnsiString">
+            <summary>
+Fluent filters for ANSI String properties
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UnicodeString.IEndsWith(System.String,System.String)">
+            <summary>
+Accept event if unicode string property ends with (case invariant) the specified string
+</summary>
+            <param name="name">name of the property to match against</param>
+            <param name="value">the value to match against</param>
+            <returns>a predicate representing that the named property ends with (case invariant) the specified value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UnicodeString.EndsWith(System.String,System.String)">
+            <summary>
+Accept event if unicode string property ends with the specified string
+</summary>
+            <param name="name">name of the property to match against</param>
+            <param name="value">the value to match against</param>
+            <returns>a predicate representing that the named property ends with the specified value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UnicodeString.IStartsWith(System.String,System.String)">
+            <summary>
+Accept event if unicode string property starts with (case invariant) the specified string
+</summary>
+            <param name="name">name of the property to match against</param>
+            <param name="value">the value to match against</param>
+            <returns>a predicate representing that the named property starts with (case invariant) the specified value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UnicodeString.StartsWith(System.String,System.String)">
+            <summary>
+Accept event if unicode string property starts with the specified string
+</summary>
+            <param name="name">name of the property to match against</param>
+            <param name="value">the value to match against</param>
+            <returns>a predicate representing that the named property starts with the specified value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UnicodeString.IContains(System.String,System.String)">
+            <summary>
+Accept event if unicode string property contains (case invariant) the specified string
+</summary>
+            <param name="name">name of the property to match against</param>
+            <param name="value">the value to match against</param>
+            <returns>a predicate representing that the named property contains (case invariant) the specified value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UnicodeString.Contains(System.String,System.String)">
+            <summary>
+Accept event if unicode string property contains the specified string
+</summary>
+            <param name="name">name of the property to match against</param>
+            <param name="value">the value to match against</param>
+            <returns>a predicate representing that the named property contains the specified value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UnicodeString.IEquals(System.String,System.String)">
+            <summary>
+Accept event if unicode string property equals (case invariant) the specified string
+</summary>
+            <param name="name">name of the property to match against</param>
+            <param name="value">the value to match against</param>
+            <returns>a predicate representing that the named property equals (case invariant) the specified value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UnicodeString.Is(System.String,System.String)">
+            <summary>
+Accept event if unicode string property equals the specified string
+</summary>
+            <param name="name">name of the property to match against</param>
+            <param name="value">the value to match against</param>
+            <returns>a predicate representing that the named property equals the specified value</returns>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.UnicodeString">
+            <summary>
+Fluent filters for ANSI String properties
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Filter.IsUInt32(System.String,System.UInt32)">
+            <summary>
+Used to verify that an event was emitted with a specific UInt32 property.
+</summary>
+            <param name="propertyName">the name of the property to match on</param>
+            <param name="value">the value of the property to match on</param>
+            <returns>a predicate that matches events of the specified UInt32 property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Filter.ProcessIdIs(System.Int32)">
+            <summary>
+Used to verify that an event was emitted by a specific PID.
+</summary>
+            <param name="processId">the PID to match on</param>
+            <returns>a predicate that matches events of the specified PID</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Filter.EventVersionIs(System.Int32)">
+            <summary>
+Used to verify that an event version is the given version.
+</summary>
+            <param name="version">the version to match on</param>
+            <returns>a predicate that matches events of the specified version</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Filter.EventIdIs(System.Int32)">
+            <summary>
+Used to verify that an event matches the given id.
+</summary>
+            <param name="id">the event id to match on</param>
+            <returns>a predicate that will match an event with the provided id</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Filter.EventOpcodeIs(System.Int32)">
+            <summary>
+Used to verify that an event opcode matches the expected value
+</summary>
+            <param name="opcode">event opcode to verify</param>
+            <returns>predicate that verifies an event's opcode</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Filter.AnyEvent">
+            <summary>
+Accepts any events.
+</summary>
+            <returns>a predicate that accepts any event</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Filter.Not(Microsoft.O365.Security.ETW.Predicate)">
+            <summary>
+Used to negate the result of the predicate argument.
+</summary>
+            <param name="other">the predicate to negate</param>
+            <returns>negated form of the predicate passed in</returns>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Filter">
+            <summary>
+Enables a more convenient mechanism to specify filters in
+managed C++/C#.
+</summary>
+            <remarks>
+The idea here is that chains of complicated filters are built
+iteratively, using the methods on this class. These chains are passed
+into the native layer a single time, where they are used to do
+filtering before they are bubbled up to the managed layer.
+</remarks>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UserTrace.QueryStats">
+            <summary>
+Get stats about events handled by this trace
+</summary>
+            <returns>the <see cref="T:Microsoft.O365.Security.ETW.TraceStats" /> for the current trace object</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UserTrace.Stop">
+            <summary>
+Stops listening for events.
+</summary>
+            <example>
+    UserTrace trace = new UserTrace();
+    // ...
+    trace.Start();
+    trace.Stop();
+</example>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UserTrace.Start">
+            <summary>
+Starts listening for events from the enabled providers.
+</summary>
+            <example>
+    UserTrace trace = new UserTrace();
+    // ...
+    trace.Start();
+</example>
+            <remarks>
+This function is a blocking call. Whichever thread calls Start() is effectively
+donating itself to the ETW subsystem as the processing thread for events.
+
+A side effect of this is that it is expected that Stop() will be called on
+a different thread.
+</remarks>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UserTrace.Open">
+            <summary>
+Opens a trace session.
+</summary>
+            <example>
+    var trace = new UserTrace();
+    // ...
+    trace.Open();
+    // ...
+    trace.Start();
+</example>
+            <remarks>
+This is an optional call before Start() if you need the trace
+registered with the ETW subsystem before you start processing events.
+</remarks>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UserTrace.SetTraceProperties(Microsoft.O365.Security.ETW.EventTraceProperties)">
+            <summary>
+Sets the trace properties for a session.
+Must be called before Open()/Start().
+See https://docs.microsoft.com/en-us/windows/win32/etw/event-trace-properties
+for important details and restrictions.
+
+Configurable properties are -&gt;
+ - BufferSize. In KB. The maximum buffer size is 1024 KB.
+ - MinimumBuffers. Minimum number of buffers is two per processor* .
+ - MaximumBuffers.
+ - FlushTimer. How often, in seconds, the trace buffers are forcibly flushed.
+ - LogFileMode. EVENT_TRACE_NO_PER_PROCESSOR_BUFFERING simulates a *single* sequential processor.
+</summary>
+            <param name="properties">the <see cref="T:Microsoft.O365.Security.ETW.EventTraceProperties" /> to set on the trace</param>
+            <example>
+    var trace = new UserTrace();
+    var properties = new EventTraceProperties
+    {
+        BufferSize = 256,
+        LogFileMode = (uint)LogFileModeFlags.FLAG_EVENT_TRACE_REAL_TIME_MODE
+    };
+    trace.SetTraceProperties(properties);
+    // ...
+    trace.Start();
+</example>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UserTrace.Enable(Microsoft.O365.Security.ETW.RawProvider)">
+            <summary>
+Enables a raw provider for the given user trace.
+</summary>
+            <param name="provider">the <see cref="T:Microsoft.O365.Security.ETW.RawProvider" /> to enable on the trace</param>
+            <example>
+    UserTrace trace = new UserTrace();
+    System.Guid powershell = System.Guid.Parse("{...}")
+    Provider provider = new RawProvider(powershell);
+    trace.Enable(provider);
+</example>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UserTrace.Enable(Microsoft.O365.Security.ETW.Provider)">
+            <summary>
+Enables a provider for the given user trace.
+</summary>
+            <param name="provider">the <see cref="T:Microsoft.O365.Security.ETW.Provider" /> to enable on the trace</param>
+            <example>
+    UserTrace trace = new UserTrace();
+    System.Guid powershell = System.Guid.Parse("{...}")
+    Provider provider = new Provider(powershell);
+    trace.Enable(provider);
+</example>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UserTrace.#ctor(System.String)">
+            <summary>
+Constructs a named user trace session, where the name can be
+any arbitrary, unique string.
+</summary>
+            <param name="name">the name to assign to the UserTrace object</param>
+            <example>
+    var trace = new UserTrace("Purdy kitty");
+</example>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UserTrace.Dispose">
+            <summary>
+Stops the user trace when disposed.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UserTrace.#ctor">
+            <summary>
+Constructs a user trace session with a generated name.
+</summary>
+            <example>
+    var UserTrace trace = new UserTrace();
+</example>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.UserTrace">
+            <summary>
+Represents an owned user trace.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IKernelTrace.Enable(Microsoft.O365.Security.ETW.KernelProvider)">
+            <summary>
+Enables a provider for the given trace.
+</summary>
+            <param name="provider">The <see cref="T:Microsoft.O365.Security.ETW.KernelProvider" /> to enable.</param>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.IKernelTrace">
+            <summary>
+Kernel ETW trace specific interface of <see cref="T:Microsoft.O365.Security.ETW.ITrace" /></summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IUserTrace.Enable(Microsoft.O365.Security.ETW.RawProvider)">
+            <summary>
+Enables a raw provider for the given user trace.
+</summary>
+            <param name="provider">The <see cref="T:Microsoft.O365.Security.ETW.RawProvider" /> to enable.</param>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IUserTrace.Enable(Microsoft.O365.Security.ETW.Provider)">
+            <summary>
+Enables a provider for the given user trace.
+</summary>
+            <param name="provider">The <see cref="T:Microsoft.O365.Security.ETW.Provider" /> to enable.</param>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.IUserTrace">
+            <summary>
+User ETW trace specific interface of <see cref="T:Microsoft.O365.Security.ETW.ITrace" /></summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.ITrace.QueryStats">
+            <summary>
+Get stats about events handled by this trace.
+</summary>
+            <returns>a <see cref="T:Microsoft.O365.Security.ETW.TraceStats" /> object representing the stats of the current trace</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.ITrace.Stop">
+            <summary>
+Stops listening for events.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.ITrace.Start">
+            <summary>
+Starts listening for events from the enabled providers.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.ITrace.SetTraceProperties(Microsoft.O365.Security.ETW.EventTraceProperties)">
+            <summary>
+Sets the trace properties for a session.
+Must be called before Open()/Start().
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.ITrace">
+            <summary>
+Represents a instance of an ETW trace session.
+</summary>
+        </member>
+        <member name="F:Microsoft.O365.Security.ETW.TraceStats.EventsLost">
+            <summary>count of events lost</summary>
+        </member>
+        <member name="F:Microsoft.O365.Security.ETW.TraceStats.EventsHandled">
+            <summary>count of events handled</summary>
+        </member>
+        <member name="F:Microsoft.O365.Security.ETW.TraceStats.EventsTotal">
+            <summary>count of total events</summary>
+        </member>
+        <member name="F:Microsoft.O365.Security.ETW.TraceStats.BuffersLost">
+            <summary>count of buffers lost</summary>
+        </member>
+        <member name="F:Microsoft.O365.Security.ETW.TraceStats.BuffersWritten">
+            <summary>count of buffers written</summary>
+        </member>
+        <member name="F:Microsoft.O365.Security.ETW.TraceStats.BuffersFree">
+            <summary>count of free buffers</summary>
+        </member>
+        <member name="F:Microsoft.O365.Security.ETW.TraceStats.BuffersCount">
+            <summary>count of trace buffers</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.TraceStats">
+            <summary>
+Selected statistics about an ETW trace
+</summary>
+        </member>
+        <member name="E:Microsoft.O365.Security.ETW.RawProvider.OnEvent">
+            <summary>
+An event that is invoked when an ETW event is fired in this
+provider.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.RawProvider.TraceFlags">
+            <summary>
+Represents the "EnabledProperty" value on the provider's options.
+Values are documented here:
+https://docs.microsoft.com/en-us/windows/win32/api/evntrace/ns-evntrace-enable_trace_parameters
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.RawProvider.Level">
+            <summary>
+Represents the "level" value on the provider's options, where
+"level" determines events in what categories are 
+enabled for notification.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.RawProvider.All">
+            <summary>
+Represents the "all" value on the provider's options, where
+"all" is typically used to request notification if all of the
+keyword types are matched.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.RawProvider.Any">
+            <summary>
+Represents the "any" value on the provider's options, where
+"any" is typically used to request notification if any of the
+matching event types fire.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.RawProvider.Dispose">
+            <summary>
+Destructs a RawProvider.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.RawProvider.#ctor(System.String)">
+            <summary>
+Constructs a RawProvider that is identified by the provider name.
+</summary>
+            <param name="providerName">the friendly name of the provider to enable</param>
+            <seealso cref="T:Microsoft.O365.Security.ETW.Provider" />
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.RawProvider.#ctor(System.Guid)">
+            <summary>
+Constructs a RawProvider that is identified by its GUID.
+</summary>
+            <param name="id">the Guid of the provider to enable</param>
+            <seealso cref="T:Microsoft.O365.Security.ETW.Provider" />
+        </member>
+        <member name="F:Microsoft.O365.Security.ETW.RawProvider.AllBitsSet">
+            <summary>
+Specifies a reasonable default to catch all the events with a
+bitmask with all bits set.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.RawProvider">
+            <summary>
+Represents a raw user trace provider and its configuration.
+This provider emits IEventRecordMetadata instead of IEventRecord
+so it can be used to access events without a registered schema.
+</summary>
+            <seealso cref="T:Microsoft.O365.Security.ETW.Provider" />
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.IEventRecordMetadataDelegate">
+            <summary>
+Delegate called when a new ETW <see cref="T:Microsoft.O365.Security.ETW.EventRecordMetadata" /> is received.
+</summary>
+        </member>
+        <member name="E:Microsoft.O365.Security.ETW.Provider.OnError">
+            <summary>
+An event that is invoked when an ETW event is received
+but an error occurs handling the record.
+</summary>
+        </member>
+        <member name="E:Microsoft.O365.Security.ETW.Provider.OnEvent">
+            <summary>
+An event that is invoked when an ETW event is fired in this
+provider.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Provider.AddFilter(Microsoft.O365.Security.ETW.EventFilter)">
+            <summary>
+Adds a new EventFilter to the provider.
+</summary>
+            <param name="filter">the <see cref="T:Microsoft.O365.Security.ETW.EventFilter" /> to add</param>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Provider.EnableRundownEvents">
+            <summary>
+Requests that the provider log its state information. See:
+  https://docs.microsoft.com/en-us/windows/win32/api/evntrace/nf-evntrace-enabletraceex2
+</summary>
+            <example>
+var provider = new Provider("Microsoft-Windows-Kernel-Process");
+provider.Any = 0x10;  // WINEVENT_KEYWORD_PROCESS
+provider.EnableRundownEvents();
+</example>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.Provider.TraceFlags">
+            <summary>
+Represents the "EnabledProperty" value on the provider's options.
+Values are documented here:
+https://docs.microsoft.com/en-us/windows/win32/api/evntrace/ns-evntrace-enable_trace_parameters
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.Provider.Level">
+            <summary>
+Represents the "level" value on the provider's options, where
+"level" determines events in what categories are 
+enabled for notification.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.Provider.All">
+            <summary>
+Represents the "all" value on the provider's options, where
+"all" is typically used to request notification if all of the
+keyword types are matched.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.Provider.Any">
+            <summary>
+Represents the "any" value on the provider's options, where
+"any" is typically used to request notification if any of the
+matching event types fire.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Provider.Dispose">
+            <summary>
+Destructs a Provider.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Provider.#ctor(System.String)">
+            <summary>
+Constructs a Provider that is identified by the provider name.
+</summary>
+            <param name="providerName">the name of the provider to construct</param>
+            <example>
+var provider = new Provider("Microsoft-Windows-PowerShell");
+</example>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Provider.#ctor(System.Guid)">
+            <summary>
+Constructs a Provider that is identified by its GUID.
+</summary>
+            <param name="id">the Guid of the provider to construct</param>
+            <example>
+var provider = new Provider(Guid.Parse("{A0C1853B-5C40-4B15-8766-3CF1C58F985A}"));
+</example>
+        </member>
+        <member name="F:Microsoft.O365.Security.ETW.Provider.AllBitsSet">
+            <summary>
+Specifies a reasonable default to catch all the events with a
+bitmask with all bits set.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Provider">
+            <summary>
+Represents a user trace provider and its configuration.
+</summary>
+            <remarks>
+The easiest way to identify providers that you can enable
+is to use the Message Analyzer tool: <see href="https://blogs.technet.microsoft.com/messageanalyzer/" /></remarks>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.KernelProvider.Id">
+            <summary>
+Retrieves the GUID associated with this provider
+</summary>
+            <returns>returns the GUID associated with this provider object</returns>
+        </member>
+        <member name="E:Microsoft.O365.Security.ETW.KernelProvider.OnError">
+            <summary>
+An event that is invoked when an ETW event is received
+but an error occurs handling the record.
+</summary>
+        </member>
+        <member name="E:Microsoft.O365.Security.ETW.KernelProvider.OnEvent">
+            <summary>
+An event that is invoked when an ETW event is fired in this
+provider.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.KernelProvider.AddFilter(Microsoft.O365.Security.ETW.EventFilter)">
+            <summary>
+Adds a new EventFilter to the provider.
+</summary>
+            <param name="filter">
+the <see cref="T:Microsoft.O365.Security.ETW.EventFilter" /> to
+filter incoming events with
+</param>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.KernelProvider.Dispose">
+            <summary>
+Destructs a KernelProvider.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.KernelProvider.#ctor(System.Guid,System.UInt32!System.Runtime.CompilerServices.IsLong)">
+            <summary>
+Constructs a KernelProvider that is identified by its GUID.
+</summary>
+            <param name="id">the guid of the kernel trace</param>
+            <param name="mask">the group mask to set</param>
+            <remarks>
+Only supported on Windows 8 and newer.
+More information about group masks can be found here:
+<see href="https://www.geoffchappell.com/studies/windows/km/ntoskrnl/api/etw/tracesup/perfinfo_groupmask.htm" /></remarks>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.KernelProvider.#ctor(System.UInt32,System.Guid)">
+            <summary>
+Constructs a KernelProvider that is identified by its GUID.
+</summary>
+            <param name="flags">the trace flags to set</param>
+            <param name="id">the guid of the kernel trace</param>
+            <remarks>
+More information about trace flags can be found on MSDN:
+<see href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa363784(v=vs.85).aspx" /></remarks>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.KernelProvider">
+            <summary>
+Represents a kernel trace provider and its configuration.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventFilter.op_Implicit~krabs.event_filter*!System.Runtime.CompilerServices.IsImplicitlyDereferenced">
+            <summary>
+Allows implicit conversion to a krabs::event_filter.
+</summary>
+            <returns>the native representation of an EventFilter</returns>
+        </member>
+        <member name="E:Microsoft.O365.Security.ETW.EventFilter.OnError">
+            <summary>
+An event that is invoked when an ETW event is received
+but an error occurs handling the record.
+</summary>
+        </member>
+        <member name="E:Microsoft.O365.Security.ETW.EventFilter.OnEvent">
+            <summary>
+An event that is invoked when an ETW event is fired on this
+filter and the event meets the given predicate.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventFilter.Dispose">
+            <summary>
+Destructs an EventFilter.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventFilter.#ctor(System.Collections.Generic.List`1{System.UInt16},Microsoft.O365.Security.ETW.Predicate)">
+            <summary>
+Constructs an EventFilter with the given event IDs and Predicate.
+</summary>
+            <param name="eventIds">the event IDs to filter using provider-based filtering</param>
+            <param name="predicate">the predicate to use to filter an event</param>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventFilter.#ctor(System.Collections.Generic.List`1{System.UInt16})">
+            <summary>
+Constructs an EventFilter with the given event IDs.
+</summary>
+            <param name="eventIds">the event IDs to filter using provider-based filtering</param>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventFilter.#ctor(System.UInt16,Microsoft.O365.Security.ETW.Predicate)">
+            <summary>
+Constructs an EventFilter with the given event ID and Predicate.
+</summary>
+            <param name="eventId">the event ID to filter using provider-based filtering</param>
+            <param name="predicate">the predicate to use to filter an event</param>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventFilter.#ctor(System.UInt16)">
+            <summary>
+Constructs an EventFilter with the given event ID.
+</summary>
+            <param name="eventId">the event ID to filter using provider-based filtering</param>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventFilter.#ctor(Microsoft.O365.Security.ETW.Predicate)">
+            <summary>
+Constructs an EventFilter with the given Predicate.
+</summary>
+            <param name="predicate">the predicate to use to filter an event</param>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.EventFilter">
+            <summary>
+Allows for filtering an event in the native layer before it bubbles
+up to callbacks.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.EventRecordErrorDelegate">
+            <summary>
+Delegate called on errors when processing an <see cref="T:Microsoft.O365.Security.ETW.EventRecord" />.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.IEventRecordDelegate">
+            <summary>
+Delegate called when a new ETW <see cref="T:Microsoft.O365.Security.ETW.EventRecord" /> is received.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Predicate.Test(Microsoft.O365.Security.ETW.Testing.SynthRecord)">
+            <summary>
+Used to test a <see cref="T:Microsoft.O365.Security.ETW.Testing.SynthRecord" />
+against a created Predicate.
+</summary>
+            <param name="record">the SynthRecord to match against</param>
+            <returns>true if the SynthRecord matches the Predicate, false otherwise</returns>
+            <remarks>
+This is for testing scenarios.
+</remarks>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Predicate.Or(Microsoft.O365.Security.ETW.Predicate)">
+            <summary>
+Creates a new <see cref="T:Microsoft.O365.Security.ETW.Predicate" /> representing
+the logical or of the current predicate and another predicate.
+</summary>
+            <param name="other">the predicate to perform the logical or against</param>
+            <returns>the resulting <see cref="T:Microsoft.O365.Security.ETW.Predicate" /> object</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Predicate.And(Microsoft.O365.Security.ETW.Predicate)">
+            <summary>
+Creates a new <see cref="T:Microsoft.O365.Security.ETW.Predicate" /> representing
+the logical and of the current predicate and another predicate.
+</summary>
+            <param name="other">the predicate to perform the logical and against</param>
+            <returns>the resulting <see cref="T:Microsoft.O365.Security.ETW.Predicate" /> object</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Predicate.op_LogicalNot">
+            <summary>
+Creates a new <see cref="T:Microsoft.O365.Security.ETW.Predicate" /> representing
+the logical not of the current predicate.
+</summary>
+            <returns>the resulting negated <see cref="T:Microsoft.O365.Security.ETW.Predicate" /> object</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Predicate.op_LogicalOr(Microsoft.O365.Security.ETW.Predicate)">
+            <summary>
+Creates a new <see cref="T:Microsoft.O365.Security.ETW.Predicate" /> representing
+the logical or of the current predicate and another predicate.
+</summary>
+            <param name="other">the predicate to perform the logical or against</param>
+            <returns>the resulting <see cref="T:Microsoft.O365.Security.ETW.Predicate" /> object</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Predicate.op_LogicalAnd(Microsoft.O365.Security.ETW.Predicate)">
+            <summary>
+Creates a new <see cref="T:Microsoft.O365.Security.ETW.Predicate" /> representing
+the logical and of the current predicate and another predicate.
+</summary>
+            <param name="other">the predicate to perform the logical and against</param>
+            <returns>the resulting <see cref="T:Microsoft.O365.Security.ETW.Predicate" /> object</returns>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Predicate">
+            <summary>
+An object representing a condition to match against for use in
+EventFilter.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Testing.SynthRecord.Underlying">
+            <summary>
+Direct access to the underlying EVENT_RECORD so it can
+be tampered with for unit testing.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.Testing.SynthRecord.Flags">
+            <summary>
+Direct access to the underlying EVENT_RECORD's Flags
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.Testing.SynthRecord.Opcode">
+            <summary>
+Direct access to the underlying EVENT_RECORD's Opcode
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.Testing.SynthRecord.Version">
+            <summary>
+Direct access to the underlying EVENT_RECORD's Version
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.Testing.SynthRecord.Id">
+            <summary>
+Direct access to the underlying EVENT_RECORD's Id
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.Testing.SynthRecord.ProviderId">
+            <summary>
+Direct access to the underlying EVENT_RECORD's ProviderId
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Testing.SynthRecord.#ctor(krabs.testing.synth_record*)">
+            <summary>
+Constructs a synthetic property, given a partially filled EventRecord
+and a packed sequence of bytes that represent the event's user data.
+</summary>
+            <remarks>
+Use a RecordBuilder to get an instance of this.
+</remarks>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Testing.SynthRecord">
+            <summary>
+Represents a property that is faked -- one that is built by hand for
+the purpose of testing event reaction code.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecordError.Record">
+            <summary>
+Returns an object representing metadata about the
+record that was being processed when the error was
+encountered.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecordError.Message">
+            <summary>
+Returns a string representing a message about the
+error that was encountered in the EventRecord.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.EventRecordError">
+            <summary>
+Item passed to OnError handlers when an error is encountered
+handling an event on the worker thread.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecordError.Record">
+            <summary>
+Returns an object representing metadata about the
+record that was being processed when the error was
+encountered.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecordError.Message">
+            <summary>
+Returns a string representing a message about the
+error that was encountered in the EventRecord.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.IEventRecordError">
+            <summary>
+Item passed to OnError handlers when an error is encountered
+handling an event on the worker thread.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetStackTrace">
+            <summary>
+Retrieves the call stack associated with the record, if enabled.
+</summary>
+            <returns>a list of return addresses</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetBinary(System.String,System.Byte[]@)">
+            <summary>
+Attempt to get a binary field with the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting byte array</param>
+            <returns>true if fetching the data succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetBinary(System.String)">
+            <summary>
+Get a binary field with the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the byte array value associated with the specified property</returns>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecord.Properties">
+            <summary>
+Gets an IEnumerable of <see cref="T:Microsoft.O365.Security.ETW.Property" />
+representing the properties available on the EventRecord.
+</summary>
+            <returns>IEnumerable of Property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetUInt64(System.String,System.UInt64@)">
+            <summary>
+Attempt to get an UInt64 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting UInt64</param>
+            <returns>true if fetching the UInt64 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetUInt64(System.String,System.UInt64)">
+            <summary>
+Get an UInt64 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the UInt64 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetUInt64(System.String)">
+            <summary>
+Get an UInt64 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the UInt64 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetInt64(System.String,System.Int64@)">
+            <summary>
+Attempt to get an Int64 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting Int64</param>
+            <returns>true if fetching the Int64 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetInt64(System.String,System.Int64)">
+            <summary>
+Get an Int64 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the Int64 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetInt64(System.String)">
+            <summary>
+Get an Int64 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the Int64 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetUInt32(System.String,System.UInt32@)">
+            <summary>
+Attempt to get an UInt32 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting UInt32</param>
+            <returns>true if fetching the UInt32 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetUInt32(System.String,System.UInt32)">
+            <summary>
+Get an UInt32 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the UInt32 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetUInt32(System.String)">
+            <summary>
+Get an UInt32 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the UInt32 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetInt32(System.String,System.Int32@)">
+            <summary>
+Attempt to get an Int32 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting Int32</param>
+            <returns>true if fetching the Int32 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetInt32(System.String,System.Int32)">
+            <summary>
+Get an Int32 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the Int32 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetInt32(System.String)">
+            <summary>
+Get an Int32 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the Int32 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetUInt16(System.String,System.UInt16@)">
+            <summary>
+Attempt to get an UInt16 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting UInt16</param>
+            <returns>true if fetching the UInt16 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetUInt16(System.String,System.UInt16)">
+            <summary>
+Get an UInt16 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the UInt16 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetUInt16(System.String)">
+            <summary>
+Get an UInt16 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the UInt16 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetInt16(System.String,System.Int16@)">
+            <summary>
+Attempt to get an Int16 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting Int16</param>
+            <returns>true if fetching the Int16 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetInt16(System.String,System.Int16)">
+            <summary>
+Get an Int16 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the Int16 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetInt16(System.String)">
+            <summary>
+Get an Int16 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the Int16 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetUInt8(System.String,System.Byte@)">
+            <summary>
+Attempt to get an UInt8 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting UInt8</param>
+            <returns>true if fetching the UInt8 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetUInt8(System.String,System.Byte)">
+            <summary>
+Get an UInt8 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the UInt8 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetUInt8(System.String)">
+            <summary>
+Get an UInt8 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the UInt8 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetInt8(System.String,System.SByte@)">
+            <summary>
+Attempt to get an Int8 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting Int8</param>
+            <returns>true if fetching the Int8 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetInt8(System.String,System.SByte)">
+            <summary>
+Get an Int8 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the Int8 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetInt8(System.String)">
+            <summary>
+Get an Int8 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the Int8 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetDateTime(System.String,System.ValueType!System.DateTime!System.Runtime.CompilerServices.IsBoxed@)">
+            <summary>
+Attempt to get an DateTime from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting DateTime</param>
+            <returns>true if fetching the DateTime succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetDateTime(System.String,System.ValueType!System.DateTime!System.Runtime.CompilerServices.IsBoxed)">
+            <summary>
+Get an DateTime from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the DateTime value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetDateTime(System.String)">
+            <summary>
+Get a DateTime from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the DateTime value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetPointer(System.String,System.ValueType!System.IntPtr!System.Runtime.CompilerServices.IsBoxed@)">
+            <summary>
+Attempt to get a Pointer from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting IntPtr</param>
+            <returns>true if fetching the IntPtr succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetPointer(System.String,System.ValueType!System.IntPtr!System.Runtime.CompilerServices.IsBoxed)">
+            <summary>
+Get a Pointer from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the IntPtr value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetPointer(System.String)">
+            <summary>
+Get a Pointer type from the from the specified property name
+</summary>
+            <param name="name">property name</param>
+            <returns>The IntPtr associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetSecurityIdentifier(System.String,System.Security.Principal.SecurityIdentifier@)">
+            <summary>
+Attempt to get a Security Identifier (SID) from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting SocketAddress</param>
+            <returns>true if fetching the SocketAddress succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetSecurityIdentifier(System.String,System.Security.Principal.SecurityIdentifier)">
+            <summary>
+Get a Security Identifier (SID) from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the SocketAddress value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetSecurityIdentifier(System.String)">
+            <summary>
+Get a Security Identifier (SID) from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the SID value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetSocketAddress(System.String,System.Net.SocketAddress@)">
+            <summary>
+Attempt to get an SocketAddress from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting SocketAddress</param>
+            <returns>true if fetching the SocketAddress succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetSocketAddress(System.String,System.Net.SocketAddress)">
+            <summary>
+Get an SocketAddress from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the SocketAddress value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetSocketAddress(System.String)">
+            <summary>
+Get an SocketAddress from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the SocketAddress value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetIPAddress(System.String,System.Net.IPAddress@)">
+            <summary>
+Attempt to get an IPAddress from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting IPAddress</param>
+            <returns>true if fetching the IPAddress succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetIPAddress(System.String,System.Net.IPAddress)">
+            <summary>
+Get an IPAddress from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the IPAddress value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetIPAddress(System.String)">
+            <summary>
+Get an IPAddress from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the IPAddress value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetCountedString(System.String,System.String@)">
+            <summary>
+Attempt to get a counted string from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting string</param>
+            <returns>true if fetching the string succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetCountedString(System.String,System.String)">
+            <summary>
+Get a counted string from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the counted string value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetCountedString(System.String)">
+            <summary>
+Get a counted string from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the counted string value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetAnsiString(System.String,System.String@)">
+            <summary>
+Attempt to get a ANSI string from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting string</param>
+            <returns>true if fetching the string succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetAnsiString(System.String,System.String)">
+            <summary>
+Get a ANSI string from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the ANSI string value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetAnsiString(System.String)">
+            <summary>
+Get a ANSI string from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the ANSI string value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.TryGetUnicodeString(System.String,System.String@)">
+            <summary>
+Attempt to get a unicode string from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting string</param>
+            <returns>true if fetching the string succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetUnicodeString(System.String,System.String)">
+            <summary>
+Get a unicode string from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the unicode string value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecord.GetUnicodeString(System.String)">
+            <summary>
+Get a unicode string from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the unicode string value associated with the specified property</returns>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecord.ProviderName">
+            <summary>
+Retrieves the name of the provider that fires this event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecord.TaskName">
+            <summary>
+Retrieves the task_name of the event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecord.OpcodeName">
+            <summary>
+Retrieves the opcode_name of the event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecord.Name">
+            <summary>
+Retrieves the name of the event.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.EventRecord">
+            <summary>
+EventRecord represents a managed instance of an event from ETW.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetStackTrace">
+            <summary>
+ Retrieves the call stack associated with the record, if enabled.
+</summary>
+            <returns>a list of return addresses</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.TryGetBinary(System.String,System.Byte[]@)">
+            <summary>
+Attempt to get a binary field with the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting byte array</param>
+            <returns>true if fetching the data succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetBinary(System.String)">
+            <summary>
+Get a binary field with the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the byte array value associated with the specified property</returns>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecord.Properties">
+            <summary>
+Gets an IEnumerable of <see cref="T:Microsoft.O365.Security.ETW.Property" />
+representing the properties available on the EventRecord.
+</summary>
+            <returns>IEnumerable of Property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.TryGetUInt64(System.String,System.UInt64@)">
+            <summary>
+Attempt to get an UInt64 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting UInt64</param>
+            <returns>true if fetching the UInt64 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetUInt64(System.String,System.UInt64)">
+            <summary>
+Get an UInt64 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the UInt64 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetUInt64(System.String)">
+            <summary>
+Get an UInt64 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the UInt64 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.TryGetInt64(System.String,System.Int64@)">
+            <summary>
+Attempt to get an Int64 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting Int64</param>
+            <returns>true if fetching the Int64 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetInt64(System.String,System.Int64)">
+            <summary>
+Get an Int64 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the Int64 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetInt64(System.String)">
+            <summary>
+Get an Int64 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the Int64 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.TryGetUInt32(System.String,System.UInt32@)">
+            <summary>
+Attempt to get an UInt32 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting UInt32</param>
+            <returns>true if fetching the UInt32 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetUInt32(System.String,System.UInt32)">
+            <summary>
+Get an UInt32 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the UInt32 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetUInt32(System.String)">
+            <summary>
+Get an UInt32 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the UInt32 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.TryGetInt32(System.String,System.Int32@)">
+            <summary>
+Attempt to get an Int32 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting Int32</param>
+            <returns>true if fetching the Int32 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetInt32(System.String,System.Int32)">
+            <summary>
+Get an Int32 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the Int32 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetInt32(System.String)">
+            <summary>
+Get an Int32 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the Int32 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.TryGetUInt16(System.String,System.UInt16@)">
+            <summary>
+Attempt to get an UInt16 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting UInt16</param>
+            <returns>true if fetching the UInt16 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetUInt16(System.String,System.UInt16)">
+            <summary>
+Get an UInt16 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the UInt16 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetUInt16(System.String)">
+            <summary>
+Get an UInt16 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the UInt16 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.TryGetInt16(System.String,System.Int16@)">
+            <summary>
+Attempt to get an Int16 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting Int16</param>
+            <returns>true if fetching the Int16 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetInt16(System.String,System.Int16)">
+            <summary>
+Get an Int16 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the Int16 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetInt16(System.String)">
+            <summary>
+Get an Int16 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the Int16 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.TryGetUInt8(System.String,System.Byte@)">
+            <summary>
+Attempt to get an UInt8 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting UInt8</param>
+            <returns>true if fetching the UInt8 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetUInt8(System.String,System.Byte)">
+            <summary>
+Get an UInt8 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the UInt8 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetUInt8(System.String)">
+            <summary>
+Get an UInt8 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the UInt8 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.TryGetInt8(System.String,System.SByte@)">
+            <summary>
+Attempt to get an Int8 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting Int8</param>
+            <returns>true if fetching the Int8 succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetInt8(System.String,System.SByte)">
+            <summary>
+Get an Int8 from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the Int8 value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetInt8(System.String)">
+            <summary>
+Get an Int8 from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the Int8 value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.TryGetDateTime(System.String,System.ValueType!System.DateTime!System.Runtime.CompilerServices.IsBoxed@)">
+            <summary>
+Attempt to get an DateTime from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting DateTime</param>
+            <returns>true if fetching the DateTime succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetDateTime(System.String,System.ValueType!System.DateTime!System.Runtime.CompilerServices.IsBoxed)">
+            <summary>
+Get an DateTime from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the DateTime value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetDateTime(System.String)">
+            <summary>
+Get a DateTime from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the DateTime value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.TryGetSocketAddress(System.String,System.Net.SocketAddress@)">
+            <summary>
+Attempt to get an SocketAddress from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting SocketAddress</param>
+            <returns>true if fetching the SocketAddress succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetSocketAddress(System.String,System.Net.SocketAddress)">
+            <summary>
+Get an SocketAddress from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the SocketAddress value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetSocketAddress(System.String)">
+            <summary>
+Get an SocketAddress from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the SocketAddress value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.TryGetIPAddress(System.String,System.Net.IPAddress@)">
+            <summary>
+Attempt to get an IPAddress from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting IPAddress</param>
+            <returns>true if fetching the IPAddress succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetIPAddress(System.String,System.Net.IPAddress)">
+            <summary>
+Get an IPAddress from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the IPAddress value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetIPAddress(System.String)">
+            <summary>
+Get an IPAddress from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the IPAddress value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.TryGetCountedString(System.String,System.String@)">
+            <summary>
+Attempt to get a counted string from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting string</param>
+            <returns>true if fetching the string succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetCountedString(System.String,System.String)">
+            <summary>
+Get a counted string from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the counted string value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetCountedString(System.String)">
+            <summary>
+Get a counted string from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the counted string value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.TryGetAnsiString(System.String,System.String@)">
+            <summary>
+Attempt to get a ANSI string from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting string</param>
+            <returns>true if fetching the string succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetAnsiString(System.String,System.String)">
+            <summary>
+Get a ANSI string from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the ANSI string value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetAnsiString(System.String)">
+            <summary>
+Get a ANSI string from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the ANSI string value associated with the specified property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.TryGetUnicodeString(System.String,System.String@)">
+            <summary>
+Attempt to get a unicode string from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <param name="result">the resulting string</param>
+            <returns>true if fetching the string succeeded, false otherwise</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetUnicodeString(System.String,System.String)">
+            <summary>
+Get a unicode string from the specified property name or returns
+the specified default value.
+</summary>
+            <param name="name">property name</param>
+            <param name="defaultValue">the default value to return if the property lookup fails</param>
+            <returns>the unicode string value associated with the specified property or the specified default value</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecord.GetUnicodeString(System.String)">
+            <summary>
+Get a unicode string from the specified property name.
+</summary>
+            <param name="name">property name</param>
+            <returns>the unicode string value associated with the specified property</returns>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecord.ProviderName">
+            <summary>
+Returns the name of the provider that fires this event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecord.TaskName">
+            <summary>
+Retrieves the task_name of the event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecord.OpcodeName">
+            <summary>
+Retrieves the opcode_name of the event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecord.Name">
+            <summary>
+Returns the name of the event.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.IEventRecord">
+            <summary>
+Interface for handling records in C#. Abstracts
+using the krabs API to make using krabs more efficient
+and to improve testability of code that uses lobsters.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.PropertyEnumerable.GetEnumerator2">
+            <summary>
+Implementation of non-generic IEnumerable::GetEnumerator
+</summary>
+            <returns>an IEnumerator of object that can be cast to IEnumerator of
+<see cref="T:Microsoft.O365.Security.ETW.Property" /></returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.PropertyEnumerable.GetEnumerator">
+            <summary>
+Implementation of generic IEnumerable::GetEnumerator
+</summary>
+            <returns>an IEnumerator of <see cref="T:Microsoft.O365.Security.ETW.Property" /></returns>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.PropertyEnumerable">
+            <summary>
+IEnumerable implementation for property enumeration.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.PropertyEnumerator.Reset">
+            <summary>Reset the enumeration</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.PropertyEnumerator.Current2">
+            <summary>Return the current element in the enumeration</summary>
+            <returns>the current element in the enumeration as a <see cref="T:System.Object" /></returns>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.PropertyEnumerator.Current">
+            <summary>Return the current element in the enumeration</summary>
+            <returns>the current element in the enumeration as a <see cref="T:Microsoft.O365.Security.ETW.Property" /></returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.PropertyEnumerator.MoveNext">
+            <summary>
+Advance the enumerator by one element.
+</summary>
+            <returns>true if more elements to enumerate, false if at the end</returns>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.PropertyEnumerator">
+            <summary>
+Iterates the properties in an event schema.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.Property.OutType">
+            <summary>Returns the out type of this property.</summary>
+            <returns>the out type of this property</returns>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.Property.Type">
+            <summary>Returns the type of this property.</summary>
+            <returns>the type of this property</returns>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.Property.Name">
+            <summary>Returns the name of this property.</summary>
+            <returns>the name of this property</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.Property.#ctor(System.String,System.UInt32,System.UInt32)">
+            <summary>
+Represents a property on an EventRecord.
+</summary>
+            <param name="name">the property's name</param>
+            <param name="type">the property's type</param>
+            <param name="outType">the property's out type</param>
+            <remarks>
+See <see href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa964763(v=vs.85).aspx" />
+for more information about property types. In particular, the TDH_INTYPE_* values.
+</remarks>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.Property">
+            <summary>
+Represents a single property in an EventRecord.
+</summary>
+            <remarks>
+  Noticeably absent from this property is the ability to ask what its
+  value is.The reason for this is that this property instance is
+  intended to work with synth_records, which don't always have data to
+  correspond with properties.This class *cannot* return a value because
+  there isn't always a value to return.
+</remarks>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecordMetadata.TryGetContainerId(System.Guid@)">
+            <summary>
+If the event's extended data contains a Windows container ID (i.e. event came from inside
+a container using process isolation), retrieve it.
+Can be expensive, avoid calling more than once per event.
+</summary>
+            <returns>
+True if a Guid was present. False if not. If a Guid was present, it will be written into the result 
+parameter. Throws a ContainerIdFormatException if the container ID is present but parsing fails.
+</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.EventRecordMetadata.CopyUserData">
+            <summary>
+Marshals the event UserData onto the managed heap.
+</summary>
+            <returns>a byte array representing the marshalled EVENT_RECORD.UserData buffer</returns>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecordMetadata.UserData">
+            <summary>
+Returns a pointer to the UserData buffer.
+</summary>
+            <returns>a pointer to the EVENT_RECORD.UserData buffer</returns>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecordMetadata.UserDataLength">
+            <summary>
+Returns the size in bytes of the UserData buffer.
+</summary>
+            <returns>the size of the EVENT_RECORD.UserData buffer</returns>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecordMetadata.ActivityId">
+            <summary>
+Returns the Activity ID associated with the event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecordMetadata.ProviderId">
+            <summary>
+Returns the Thread ID associated with the event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecordMetadata.Timestamp">
+            <summary>
+Returns the timestamp associated with this event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecordMetadata.ThreadId">
+            <summary>
+Retrieves the Thread ID associated with the event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecordMetadata.ProcessId">
+            <summary>
+Retrieves the PID associated with the event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecordMetadata.EventProperty">
+            <summary>
+Returns the EventProperty of the event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecordMetadata.Flags">
+            <summary>
+Returns the flags of the event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecordMetadata.Level">
+            <summary>
+Returns the level of this event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecordMetadata.Version">
+            <summary>
+Returns the version of this event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecordMetadata.Opcode">
+            <summary>
+Returns the opcode of this event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.EventRecordMetadata.Id">
+            <summary>
+Retrieves the ID of this event.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.EventRecordMetadata">
+            <summary>
+Concrete implementation representing the metadata about an ETW event record.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecordMetadata.TryGetContainerId(System.Guid@)">
+            <summary>
+If the event's extended data contains a Windows container ID (i.e. event came from inside
+a container using process isolation), retrieve it.
+Can be expensive, avoid calling more than once per event.
+</summary>
+            <returns>
+True if a Guid was present. False if not. If a Guid was present, it will be written into the result 
+parameter. Throws a ContainerIdFormatException if the container ID is present but parsing fails.
+</returns>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.IEventRecordMetadata.CopyUserData">
+            <summary>
+Marshals the event UserData onto the managed heap.
+This is expensive. Use the parse methods unless your
+event doesn't have a schema.
+</summary>
+            <returns>a byte array representing the marshalled EVENT_RECORD.UserData buffer</returns>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecordMetadata.UserData">
+            <summary>
+Returns a pointer to the UserData buffer.
+</summary>
+            <returns>a pointer to the EVENT_RECORD.UserData buffer</returns>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecordMetadata.UserDataLength">
+            <summary>
+Returns the size in bytes of the UserData buffer.
+</summary>
+            <returns>the size of the EVENT_RECORD.UserData buffer</returns>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecordMetadata.ActivityId">
+            <summary>
+Returns the Activity ID associated with this event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecordMetadata.ProviderId">
+            <summary>
+Returns the Thread ID associated with the event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecordMetadata.Timestamp">
+            <summary>
+Returns the timestamp associated with this event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecordMetadata.ThreadId">
+            <summary>
+Returns the Thread ID associated with the event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecordMetadata.ProcessId">
+            <summary>
+Returns the PID associated with the event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecordMetadata.EventProperty">
+            <summary>
+Returns the EventProperty of the event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecordMetadata.Flags">
+            <summary>
+Returns the flags of the event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecordMetadata.Level">
+            <summary>
+Returns the level of this event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecordMetadata.Version">
+            <summary>
+Returns the version of this event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecordMetadata.Opcode">
+            <summary>
+Returns the opcode of this event.
+</summary>
+        </member>
+        <member name="P:Microsoft.O365.Security.ETW.IEventRecordMetadata.Id">
+            <summary>
+Returns the ID of this event.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.IEventRecordMetadata">
+            <summary>
+Interface for handling records without access to
+the event schema. This can be useful for processing
+events that do not have a registered schema.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.EventHeaderProperty">
+            <summary>
+From the EVENT_HEADER.EventProperty defines:
+https://msdn.microsoft.com/en-us/library/windows/desktop/aa363759(v=vs.85).aspx
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.LogFileModeFlags">
+            <summary>
+LogFileModeFlags enumerates the options for EventTraceProperties.LogFileMode
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.EventTraceProperties">
+            <summary>
+EventTraceProperties represents the performance characteristics
+for a trace session.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.NoTraceSessionsRemaining">
+            <summary>
+Thrown when no trace sessions remaining to register. An existing trace
+session must be deleted first.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.ContainerIdFormatException">
+            <summary>
+Thrown on internal parsing errors when retrieving container ID's.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.TypeMismatchAssert.#ctor(System.String)">
+            <param name="msg">the error message returned when types mismatched</param>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.TypeMismatchAssert">
+            <summary>
+Thrown when a requested type does not match the ETW property type.
+NOTE: This is only thrown in debug builds.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.ParserException.#ctor(System.String)">
+            <param name="msg">the error message returned while parsing</param>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.ParserException">
+            <summary>
+Thrown when an error is encountered parsing an ETW property.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.UnexpectedError.#ctor(System.String)">
+            <param name="msg">Additional context related to the error</param>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.UnexpectedError">
+            <summary>
+Thrown when an error occurs that we did not explicitly handle.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.CouldNotFindSchema.#ctor(System.String)">
+            <param name="msg">Additional context related to the error</param>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.CouldNotFindSchema">
+            <summary>
+Thrown when the schema for an event could not be found.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.OpenTraceFailure">
+            <summary>
+Thrown when the trace fails to open.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.InvalidParameter">
+            <summary>
+Thrown when an invalid parameter is provided.
+</summary>
+        </member>
+        <member name="T:Microsoft.O365.Security.ETW.TraceAlreadyRegistered">
+            <summary>
+Thrown when the ETW trace object is already registered.
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.ConvertGuid(System.Guid)">
+            <summary>
+Converts a System::Guid to a native GUID
+</summary>
+        </member>
+        <member name="M:Microsoft.O365.Security.ETW.ConvertGuid(_GUID)">
+            <summary>
+Converts a native GUID to a System::Guid
+</summary>
+        </member>
+        <member name="M:krabs.predicates.property_is(std.basic_string&lt;System.Char,std.char_traits{System.Char},std.allocator&lt;System.Char&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.Char!System.Runtime.CompilerServices.IsConst*)">
+            <summary>
+  Explicit specialization for string arrays, because C++.
+</summary>
+        </member>
+        <member name="T:krabs.predicates.process_id_is">
+            <summary>
+  Accepts an event if its PID matches the expected value.
+</summary>
+        </member>
+        <member name="T:krabs.predicates.version_is">
+            <summary>
+  Accepts an event if its version matches the expected value.
+</summary>
+        </member>
+        <member name="T:krabs.predicates.none_of">
+            <summary>
+  Accepts an event only if none of the predicates in the vector match
+</summary>
+        </member>
+        <member name="T:krabs.predicates.all_of">
+            <summary>
+  Accepts an event if all of the predicates in the vector matches
+</summary>
+        </member>
+        <member name="T:krabs.predicates.any_of">
+            <summary>
+  Accepts an event if any of the predicates in the vector matches
+</summary>
+        </member>
+        <member name="T:krabs.predicates.opcode_is">
+            <summary>
+  Accepts an event if its opcode matches the expected value.
+</summary>
+        </member>
+        <member name="T:krabs.predicates.id_is">
+            <summary>
+  Accepts an event if its ID matches the expected value.
+</summary>
+        </member>
+        <member name="F:krabs.predicates.no_event">
+            <summary>
+  A simple filter that accepts no events.
+</summary>
+        </member>
+        <member name="F:krabs.predicates.any_event">
+            <summary>
+  A simple filter that accepts any event.
+</summary>
+        </member>
+        <member name="T:krabs.predicates.details.no_event">
+            <summary>
+  Returns false for any event.
+</summary>
+        </member>
+        <member name="T:krabs.predicates.details.any_event">
+            <summary>
+  Returns true for any event.
+</summary>
+        </member>
+        <member name="T:krabs.predicates.details.predicate_base">
+            <summary>
+  The base predicate struct, use to create a vector or list of
+  Arbitrary predicate types
+</summary>
+        </member>
+        <member name="T:krabs.predicates.comparers.iequal_to{System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte}">
+            <summary>
+  Binary predicate for comparing two characters case insensitively
+  Does not handle all locales
+</summary>
+        </member>
+        <member name="T:krabs.predicates.comparers.iequal_to{System.Char}">
+            <summary>
+  Binary predicate for comparing two wide characters case insensitively
+  Does not handle all locales
+</summary>
+        </member>
+        <member name="T:krabs.predicates.adapters.counted_string">
+View adapter for counted_string strings
+
+</member>
+        <member name="M:krabs.testing.event_filter_proxy.push_event(krabs.testing.synth_record!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+ Pushes an event through to the proxied filter instance.
+ </summary>
+            <example>
+     krabs::event_filter event_filter;
+     krabs::testing::event_filter_proxy proxy(event_filter);
+
+     krabs::guid powershell(L"{A0C1853B-5C40-4B15-8766-3CF1C58F985A}");
+     krabs::testing::record_builder builder(powershell, krabs::id(7942), krabs::version(1));
+
+     builder.add_properties()
+             (L"ClassName", L"FakeETWEventForRealz")
+             (L"Message", L"This message is completely faked");
+
+     auto record = builder.pack_incomplete();
+     proxy.push_event(record);
+ </example>
+        </member>
+        <member name="M:krabs.testing.event_filter_proxy.#ctor(krabs.event_filter*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+Constructs a proxy for the given event_filter.
+</summary>
+            <example>
+    krabs::event_filter event_filter;
+    krabs::testing::event_filter_proxy proxy(event_filter);
+</example>
+        </member>
+        <member name="T:krabs.testing.event_filter_proxy">
+            <summary>
+  Serves as a fill-in for the event_filter class for testing purposes.
+  It acts as a liason for the actual filter instance and allows for forced event
+  testing.
+</summary>
+        </member>
+        <member name="M:krabs.testing.record_builder.pack_impl(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+Does the dirty work of packing up an event record's user data.
+</summary>
+            <returns>
+  A pair, where the first item is the packed user data and
+  the second is the properties that were not filled (because the
+  user never specified them).
+</returns>
+        </member>
+        <member name="M:krabs.testing.record_builder.create_stub_record">
+            <summary>
+  Fills an EVENT_RECORD with the info necessary to grab its schema
+  via Tdh.
+</summary>
+        </member>
+        <member name="M:krabs.testing.record_builder.header">
+            <summary>
+Gives direct access to the EVENT_HEADER that will be packed into
+the faked record.
+</summary>
+        </member>
+        <member name="M:krabs.testing.record_builder.add_container_id_extended_data(_GUID!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+Adds extended data representing a GUID for an Windows container ID
+</summary>
+        </member>
+        <member name="M:krabs.testing.record_builder.pack_incomplete">
+            <summary>
+  Packs the event properties into an EVENT_RECORD, but
+  doesn't throw when the properties are not complete.
+</summary>
+            <example>
+   record_builder builder;
+   builder.add_properties()
+        (L"Name", L"Grumpy Gills");
+   auto event = builder.pack_incomplete();
+</example>
+        </member>
+        <member name="M:krabs.testing.record_builder.pack">
+            <summary>Packs the event properties into an EVENT_RECORD.</summary>
+            <example>
+   record_builder builder;
+   builder.add_properties()
+        (L"Name", L"Bjarne Stroustrup")
+        (L"Level", 9001);
+   auto event = builder.pack();
+</example>
+        </member>
+        <member name="M:krabs.testing.record_builder.add_properties">
+            <summary>Enables adding new properties to the builder.</summary>
+            <example>
+   record_builder builder;
+   builder.add_properties()
+        (L"Name", L"Bjarne Stroustrup")
+        (L"Level", 9001);
+</example>
+        </member>
+        <member name="T:krabs.testing.record_builder">
+            <summary>
+  Enables creation of synthetic events in order to test client code.
+</summary>
+            <remarks>
+  This beast of a class enables the creation of EVENT_RECORD events
+  for testing. The class accepts a collection of keyed pairs that are
+  then packed into the event according to the schema on the local
+  machine. Because a lot of this is Dark Arts kind of stuff, there
+  really isn't a guarantee that this code works perfectly. Please
+  file bugs.
+</remarks>
+        </member>
+        <member name="T:krabs.testing.details.property_adder">
+            <summary>
+  Provides a convenient syntax for adding properties to a
+  record_builder.
+</summary>
+            <remarks>
+  Really shouldn't be used by client code. An instance of this should
+  be handed out by a specific record_builder's `add_properties`
+  method.
+</remarks>
+        </member>
+        <member name="T:krabs.testing.extended_data_builder">
+            <summary>
+   Generates fake packed EVENT_HEADER_EXTENDED_DATA_ITEM structures to later add into test
+   synth_record objects. These are not guaranteed to be indistinguishable from the real
+   thing, just good enough to unit test code that reads/interprets extended data.
+
+   Note for testing: this builder just appends extended data structures, it won't stop you
+   from breaking any API invariants, such as only one of a specific extended data item type.
+ </summary>
+        </member>
+        <member name="T:krabs.testing.extended_data_thunk">
+            <summary>
+  Since extended data items have to be packed later, we have to hold onto the data
+  until we're ready to pack it.
+</summary>
+        </member>
+        <member name="T:krabs.testing.record_property_thunk">
+            <summary>
+  Takes any value and turns it into a sequence of serialized bytes.
+</summary>
+            <remarks>
+  When we're composing an event, we need to store heterogeneous types in
+  a collection while we wait until we know exactly how to pack the actual
+  event. Because the actual EVENT_RECORD structure properties are packed
+  into a byte collection, we take our cue from that and do similarly. We
+  keep all of the random property byte blobs separate until we know the
+  particular order to stash them in so we have less futzing to do later.
+</remarks>
+        </member>
+        <member name="M:krabs.testing.details.how_many_bytes_to_fill(_TDH_IN_TYPE)">
+            <summary>
+  Defines how much padding to inject into a synth_record when a property
+  is not filled by calling code.
+</summary>
+        </member>
+        <member name="D:krabs.testing.kernel_trace_proxy">
+            <summary>Specific instantiation for kernel traces.</summary>
+        </member>
+        <member name="D:krabs.testing.user_trace_proxy">
+            <summary>Specific instantiation for user traces.</summary>
+        </member>
+        <member name="M:krabs.testing.synth_record.swap(krabs.testing.synth_record*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,krabs.testing.synth_record*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Swaps two synth_records.
+</summary>
+        </member>
+        <member name="M:krabs.testing.synth_record.op_Implicit~_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced">
+            <summary>
+  Allows implicit casts to an EVENT_RECORD.
+</summary>
+        </member>
+        <member name="M:krabs.testing.synth_record.op_Assign(krabs.testing.synth_record)">
+            <summary>
+  Assigns a synth_record to another.
+</summary>
+            <remarks>by value to take advantage of move ctor</remarks>
+        </member>
+        <member name="M:krabs.testing.synth_record.#ctor(krabs.testing.synth_record*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Moves a synth_record into a new instance.
+</summary>
+        </member>
+        <member name="M:krabs.testing.synth_record.#ctor(krabs.testing.synth_record!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Copies a synth_record and updates the pointers
+  in the EVENT_RECORD appropriately.
+</summary>
+        </member>
+        <member name="M:krabs.testing.synth_record.#ctor(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.vector&lt;System.Byte,std.allocator&lt;System.Byte&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.shared_ptr&lt;System.Byte[][]&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Constructs a synthetic property, given a partially filled
+  EVENT_RECORD and a packed sequence of bytes that represent the
+  event's user data.
+</summary>
+            <remarks>
+  This class should not be directly instantiated -- an record_builder
+  should return this with its `pack` methods.
+</remarks>
+        </member>
+        <member name="M:krabs.testing.synth_record.#ctor(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.vector&lt;System.Byte,std.allocator&lt;System.Byte&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Constructs a synthetic property, given a partially filled
+  EVENT_RECORD and a packed sequence of bytes that represent the
+  event's user data.
+</summary>
+            <remarks>
+  This class should not be directly instantiated -- an record_builder
+  should return this with its `pack` methods.
+</remarks>
+        </member>
+        <member name="T:krabs.testing.synth_record">
+            <summary>
+  Represents a property that is faked -- one that is built by hand for the
+  purpose of testing event reaction code.
+</summary>
+        </member>
+        <member name="T:krabs.kernel.object_manager_provider">
+            <summary>A provider that enables Object Manager events.</summary>
+        </member>
+        <member name="T:krabs.kernel.virtual_alloc_provider">
+            <summary>A provider that enables VirtualAlloc and VirtualFree events.</summary>
+        </member>
+        <member name="T:krabs.kernel.vamap_provider">
+            <summary>A provider that enables file map and unmap (excluding images) events.</summary>
+        </member>
+        <member name="T:krabs.kernel.thread_provider">
+            <summary>A provider that enables thread start and stop events.</summary>
+        </member>
+        <member name="T:krabs.kernel.system_call_provider">
+            <summary>A provider that enables system call events.</summary>
+        </member>
+        <member name="T:krabs.kernel.split_io_provider">
+            <summary>A provider that enables split I/O events.</summary>
+        </member>
+        <member name="T:krabs.kernel.registry_provider">
+            <summary>A provider that enables registry events.</summary>
+        </member>
+        <member name="T:krabs.kernel.profile_provider">
+            <summary>A provider that enables profiling events.</summary>
+        </member>
+        <member name="T:krabs.kernel.process_counter_provider">
+            <summary>A provider that enables process counter events.</summary>
+        </member>
+        <member name="T:krabs.kernel.process_provider">
+            <summary>A provider that enables process events.</summary>
+        </member>
+        <member name="T:krabs.kernel.network_tcpip_provider">
+            <summary>A provider that enables network tcp/ip events.</summary>
+        </member>
+        <member name="T:krabs.kernel.memory_page_fault_provider">
+            <summary>A provider that enables memory page fault events.</summary>
+        </member>
+        <member name="T:krabs.kernel.memory_hard_fault_provider">
+            <summary>A provider that enables memory hard fault events.</summary>
+        </member>
+        <member name="T:krabs.kernel.interrupt_provider">
+            <summary>A provider that enables interrupt events.</summary>
+        </member>
+        <member name="T:krabs.kernel.image_load_provider">
+            <summary>A provider that enables image load events.</summary>
+        </member>
+        <member name="T:krabs.kernel.driver_provider">
+            <summary>A provider that enables driver events.</summary>
+        </member>
+        <member name="T:krabs.kernel.dpc_provider">
+            <summary>A provider that enables device deferred procedure call events.</summary>
+        </member>
+        <member name="T:krabs.kernel.thread_dispatch_provider">
+            <summary>A provider that enables thread dispatch events.</summary>
+        </member>
+        <member name="T:krabs.kernel.file_init_io_provider">
+            <summary>A provider that enables file I/O start events.</summary>
+        </member>
+        <member name="T:krabs.kernel.file_io_provider">
+            <summary>A provider that enables file I/O completion events.</summary>
+        </member>
+        <member name="T:krabs.kernel.disk_init_io_provider">
+            <summary>A provider that enables disk I/O start events.</summary>
+        </member>
+        <member name="T:krabs.kernel.disk_io_provider">
+            <summary>A provider that enables disk I/O completion events.</summary>
+        </member>
+        <member name="T:krabs.kernel.disk_file_io_provider">
+            <summary>A provider that enables file I/O name events.</summary>
+        </member>
+        <member name="T:krabs.kernel.debug_print_provider">
+            <summary>A provider that enables debug print events.</summary>
+        </member>
+        <member name="T:krabs.kernel.context_switch_provider">
+            <summary>A provider that enables context switch events.</summary>
+        </member>
+        <member name="T:krabs.kernel.alpc_provider">
+            <summary>A provider that enables ALPC events.</summary>
+        </member>
+        <member name="T:krabs.parser">
+            <summary>
+Used to parse specific properties out of an event schema.
+</summary>
+            <remarks>
+The parser class dodges the task of trying to validate that the expected
+type of a field matches the actual type of a field -- the onus is on
+client code to get this right.
+</remarks>
+        </member>
+        <member name="M:krabs.property_iterator.get_property(System.UInt64)">
+            <summary>
+  Constructs a property instance out of the raw data of the
+  given property.
+</summary>
+        </member>
+        <member name="M:krabs.property_iterator.end">
+            <summary>
+Returns an iterator that has yielded all properties.
+</summary>
+        </member>
+        <member name="M:krabs.property_iterator.begin">
+            <summary>
+Returns an iterator that hasn't yielded any properties yet.
+</summary>
+        </member>
+        <member name="M:krabs.property_iterator.#ctor(krabs.schema!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Constructs a new iterator that lazily retrieves the properties of
+  the given event record.
+</summary>
+            <remarks>
+  Don't construct this yourself. Let the `parser` class do it for you.
+</remarks>
+        </member>
+        <member name="T:krabs.property_iterator">
+            <summary>
+Iterates the properties in a given event record.
+</summary>
+        </member>
+        <member name="M:krabs.property.out_type">
+            <summary>
+Retrieves the Tdh type of the property.
+</summary>
+        </member>
+        <member name="M:krabs.property.type">
+            <summary>
+Retrieves the Tdh type of the property.
+</summary>
+        </member>
+        <member name="M:krabs.property.name">
+            <summary>
+Retrieves the name of the property.
+</summary>
+        </member>
+        <member name="M:krabs.property.#ctor(std.basic_string&lt;System.Char,std.char_traits{System.Char},std.allocator&lt;System.Char&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,_TDH_IN_TYPE,_TDH_OUT_TYPE)">
+            <summary>
+Constructs a property.
+</summary>
+            <remarks>
+  This should be instantiated by client code -- let the parser
+  object do this for you with its `properties` method.
+</remarks>
+        </member>
+        <member name="T:krabs.property">
+            <summary>
+Represents a single property of the record schema.
+</summary>
+            <remarks>
+  Noticeably absent from this property is the ability to ask what its
+  value is. The reason for this is that this property instance is
+  intended to work with synth_records, which don't always have data to
+  correspond with properties. This class *cannot* return a value because
+  there isn't always a value to return.
+</remarks>
+        </member>
+        <member name="F:krabs.counted_string.size_">
+size of the string in bytes
+
+</member>
+        <member name="T:krabs.counted_string">
+            <summary>
+Used to handle parsing of CountedStrings in an ETW Record.
+This is used in the parser class in a template specialization.
+</summary>
+        </member>
+        <member name="F:krabs.pointer.address">
+We store the pointer as an uint64_t, as it is highly unlikley
+to be pointing to somewhere accessible to our process
+
+</member>
+        <member name="T:krabs.pointer">
+            <summary>
+Used to handle parsing of Pointer Address types.
+</summary>
+        </member>
+        <member name="T:krabs.sid">
+            <summary>
+Used to handle parsing of SIDs from either a
+SID or WBEMSID property
+</summary>
+        </member>
+        <member name="T:krabs.property_info">
+            <summary>
+Holds information about an property extracted from the etw schema
+</summary>
+        </member>
+        <member name="T:krabs.socket_address">
+            <summary>
+Used to handle parsing of socket addresses in
+network order. This union is a convenient wrapper
+around the type IPv4 and IPv6 types provided by
+the Winsock (v2) APIs.
+</summary>
+        </member>
+        <member name="T:krabs.ip_address">
+            <summary>
+Used to handle parsing of IPv4 and IPv6 fields in an ETW record.
+This is used in the parser class in a template specialization.
+</summary>
+        </member>
+        <member name="T:krabs.binary">
+            <summary>
+Used to support parsing and creation of binary ETW fields.
+</summary>
+        </member>
+        <member name="T:krabs.hexint32">
+            <summary>
+Used to discriminate between hex ints and regular ints in ETW events.
+</summary>
+            <remarks>
+Q: Why in the world? I can't even.
+A: ETW differentiates between hexints and regular ints. When
+   record_builder validates that the input type matches the type
+   specified in the schema, getting this wrong will cause an
+   exception. A quick little type wrapper like this lets us
+   discriminate based on the type and everything turns out better.
+</remarks>
+        </member>
+        <member name="M:krabs.schema.event_flags">
+            <summary>
+Returns the flags of the event.
+</summary>
+        </member>
+        <member name="M:krabs.schema.event_version">
+            <summary>
+Returns the version of the event.
+</summary>
+        </member>
+        <member name="T:krabs.schema">
+            <summary>
+Used to query events for detailed information. Creation is rather
+costly, so client code should try hard to delay creation of this.
+</summary>
+        </member>
+        <member name="D:krabs.kernel_trace">
+            <summary>
+Specialization of the base trace class for kernel traces.
+</summary>
+        </member>
+        <member name="D:krabs.user_trace">
+            <summary>
+Specialization of the base trace class for user traces.
+</summary>
+        </member>
+        <member name="M:krabs.details.kt.get_trace_guid">
+            <summary>
+  Returns the GUID of the trace session.
+</summary>
+        </member>
+        <member name="M:krabs.details.kt.augment_file_mode">
+            <summary>
+  Sets the ETW trace log file mode.
+</summary>
+        </member>
+        <member name="M:krabs.details.kt.forward_events(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,krabs.trace&lt;krabs.details.kt&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Decides to forward an event to any of the providers in the trace.
+</summary>
+        </member>
+        <member name="M:krabs.details.kt.enable_rundown(krabs.trace&lt;krabs.details.kt&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Enables the configured kernel rundown flags.
+</summary>
+            <remarks>
+  This ETW feature is undocumented and should be used with caution.
+</remarks>
+        </member>
+        <member name="M:krabs.details.kt.enable_providers(krabs.trace&lt;krabs.details.kt&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Enables the providers that are attached to the given trace.
+</summary>
+        </member>
+        <member name="M:krabs.details.kt.construct_enable_flags(krabs.trace&lt;krabs.details.kt&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Generates a value that fills the EnableFlags field in an
+  EVENT_TRACE_PROPERTIES structure. This controls the providers that
+  get enabled for a kernel trace.
+</summary>
+        </member>
+        <member name="M:krabs.details.kt.enforce_name_policy(std.basic_string&lt;System.Char,std.char_traits{System.Char},std.allocator&lt;System.Char&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Used to assign a name to the trace instance that is being
+  instantiated.
+</summary>
+            <remarks>
+  In pre-Win8 days, there could only be a single kernel trace
+  instance on an entire machine, and that instance had to be named
+  a particular name. This restriction was loosened in Win8, but
+  the trace still needs to do the right thing on older OSes.
+</remarks>
+        </member>
+        <member name="T:krabs.details.kt">
+            <summary>
+  Used as a template argument to a trace instance. This class implements
+  code paths for kernel traces. Should never be used or seen by client
+  code.
+</summary>
+        </member>
+        <member name="M:krabs.details.ut.get_trace_guid">
+            <summary>
+  Returns the GUID of the trace session.
+</summary>
+        </member>
+        <member name="M:krabs.details.ut.augment_file_mode">
+            <summary>
+  Sets the ETW trace log file mode.
+</summary>
+        </member>
+        <member name="M:krabs.details.ut.forward_events(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,krabs.trace&lt;krabs.details.ut&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Decides to forward an event to any of the providers in the trace.
+</summary>
+        </member>
+        <member name="M:krabs.details.ut.enable_rundown(krabs.trace&lt;krabs.details.ut&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Enables the configured rundown events for each provider.
+  Should be called immediately prior to ProcessTrace.
+</summary>
+        </member>
+        <member name="M:krabs.details.ut.enable_providers(krabs.trace&lt;krabs.details.ut&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Enables the providers that are attached to the given trace.
+</summary>
+        </member>
+        <member name="M:krabs.details.ut.construct_enable_flags(krabs.trace&lt;krabs.details.ut&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Generates a value that fills the EnableFlags field in an
+  EVENT_TRACE_PROPERTIES structure. This controls the providers that
+  get enabled for a kernel trace. For a user trace, it doesn't do
+  much of anything.
+</summary>
+        </member>
+        <member name="M:krabs.details.ut.enforce_name_policy(std.basic_string&lt;System.Char,std.char_traits{System.Char},std.allocator&lt;System.Char&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Used to assign a name to the trace instance that is being
+  instantiated.
+</summary>
+            <remarks>
+  There really isn't a name policy to enforce with user traces, but
+  kernel traces do have specific naming requirements.
+</remarks>
+        </member>
+        <member name="T:krabs.details.ut">
+            <summary>
+  Used as a template argument to a trace instance. This class implements
+  code paths for user traces. Should never be used or seen by client
+  code.
+</summary>
+        </member>
+        <member name="T:krabs.trace_stats">
+            <summary>
+Selected statistics about an ETW trace
+</summary>
+        </member>
+        <member name="M:krabs.kernel_provider.rundown_enabled">
+            <summary>
+  Have rundown flags been set for this this provider?
+</summary>
+        </member>
+        <member name="M:krabs.kernel_provider.rundown_flags">
+            <summary>
+  Retrieves the rundown flag value associated with this provider.
+</summary>
+        </member>
+        <member name="M:krabs.kernel_provider.group_mask">
+            <summary>
+  Retrieves the group mask value associated with this provider.
+</summary>
+        </member>
+        <member name="M:krabs.kernel_provider.flags">
+            <summary>
+  Retrieves the flag value associated with this provider.
+</summary>
+        </member>
+        <member name="M:krabs.kernel_provider.set_rundown_flags(System.UInt32!System.Runtime.CompilerServices.IsLong)">
+            <summary>
+  Sets flags to be enabled for the kernel rundown GUID.
+</summary>
+            <remarks>
+  This ETW feature is undocumented and should be used with caution.
+</remarks>
+        </member>
+        <member name="M:krabs.kernel_provider.id">
+            <summary>
+  Retrieves the GUID associated with this provider.
+</summary>
+        </member>
+        <member name="M:krabs.kernel_provider.#ctor(_GUID!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.UInt32!System.Runtime.CompilerServices.IsLong)">
+            <summary>
+  Constructs a kernel_provider that enables events of the given
+  group mask.
+</summary>
+            <remarks>
+  Only supported on Windows 8 and newer.
+</remarks>
+        </member>
+        <member name="M:krabs.kernel_provider.#ctor(System.UInt32!System.Runtime.CompilerServices.IsLong,_GUID!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Constructs a kernel_provider that enables events of the given
+  flags.
+</summary>
+        </member>
+        <member name="T:krabs.kernel_provider">
+            <summary>
+  Used to enable specific types of event sources from an ETW kernel
+  trace.
+</summary>
+        </member>
+        <member name="M:krabs.from_wstring(std.basic_string&lt;System.Char,std.char_traits{System.Char},std.allocator&lt;System.Char&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,System.UInt32)">
+            <summary>
+      * Converts std::wstring argument to std::string using UTF-8 codepage
+      * Returns empty string if translation fails or input string is empty
+      * </summary>
+        </member>
+        <member name="M:krabs.event_filter.on_error(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.basic_string&lt;System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte,std.char_traits{System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte},std.allocator&lt;System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Called when an error occurs, forwards to the error callback
+</summary>
+        </member>
+        <member name="M:krabs.event_filter.on_event(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,krabs.trace_context!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+  Called when an event occurs, forwards to callbacks if the event
+  satisfies the predicate.
+</summary>
+        </member>
+        <member name="M:krabs.event_filter.add_on_error_callback(=FUNC:System.Void(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,std.basic_string&lt;System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte,std.char_traits{System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte},std.allocator&lt;System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte&gt;&gt;!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced))">
+            <summary>
+Adds a function to call when an error occurs.
+</summary>
+        </member>
+        <member name="M:krabs.event_filter.add_on_event_callback(=FUNC:System.Void(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,krabs.trace_context!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced))">
+            <summary>
+Adds a function to call when an event for this filter is fired.
+</summary>
+        </member>
+        <member name="M:krabs.event_filter.#ctor(std.vector&lt;System.UInt16,std.allocator&lt;System.UInt16&gt;&gt;,std.function&lt;(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,krabs.trace_context!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced&amp;,krabs.trace_context!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced&amp;)&gt;)">
+            <summary>
+  Constructs an event_filter that applies event id filtering by event_id
+  which will be added to list of filtered event ids in ETW API.
+  This way is more effective from performance point of view.
+  Given optional predicate will be applied to ETW API filtered results
+</summary>
+        </member>
+        <member name="M:krabs.event_filter.#ctor(System.UInt16,std.function&lt;(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,krabs.trace_context!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced&amp;,krabs.trace_context!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced&amp;)&gt;)">
+            <summary>
+  Constructs an event_filter that applies event id filtering by event_id
+  which will be added to list of filtered event ids in ETW API.
+  This way is more effective from performance point of view.
+  Given optional predicate will be applied to ETW API filtered results
+</summary>
+        </member>
+        <member name="M:krabs.event_filter.#ctor(std.function&lt;(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,krabs.trace_context!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced&amp;,krabs.trace_context!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced&amp;)&gt;)">
+            <summary>
+  Constructs an event_filter that applies the given predicate to all
+  events.
+</summary>
+        </member>
+        <member name="T:krabs.event_filter">
+            <summary>
+  Use this to provide event filtering before an event bubbles to
+  specific callbacks.
+</summary>
+            <remarks>
+  Each event_filter has a single predicate (which can do complicated
+  checks and logic on the event). All callbacks registered under the
+  filter are invoked only if the predicate returns true for a given
+  event.
+</remarks>
+        </member>
+        <member name="T:krabs.trace_context">
+            <summary>
+Additional ETW trace context passed to event callbacks
+to enable processing.
+</summary>
+        </member>
+        <member name="M:krabs.schema_locator.get_event_schema(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+Retrieves the event schema from the cache or falls back to
+TDH to load the schema.
+</summary>
+        </member>
+        <member name="T:krabs.schema_locator">
+            <summary>
+Fetches and caches schemas from TDH.
+NOTE: this cache also reduces the number of managed to native transitions
+when krabs is compiled into a managed assembly.
+</summary>
+        </member>
+        <member name="M:krabs.get_event_schema_from_tdh(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>
+Get event schema from TDH.
+</summary>
+        </member>
+        <member name="T:std.hash{krabs.schema_key}">
+            <summary>
+Builds a hash code for a schema_key
+</summary>
+        </member>
+        <member name="T:krabs.schema_key">
+            <summary>
+Type used as the key for cache lookup in a schema_locator.
+</summary>
+        </member>
+        <member name="M:krabs.error_check_common_conditions(System.UInt32!System.Runtime.CompilerServices.IsLong,_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
+            <summary>Checks for common ETW API error codes and includes properties from the event record.</summary>
+        </member>
+        <member name="M:krabs.error_check_common_conditions(System.UInt32!System.Runtime.CompilerServices.IsLong)">
+            <summary>Checks for common ETW API error codes.</summary>
+        </member>
+        <member name="M:krabs.guid_parser.parse_guid(System.SByte!System.Runtime.CompilerServices.IsSignUnspecifiedByte!System.Runtime.CompilerServices.IsConst*,System.UInt32)">
+            <summary>
+          * Parses GUID of "D" format. For example, the nil GUID would be "00000000-0000-0000-0000-000000000000".
+          * See: https://docs.microsoft.com/en-us/dotnet/api/system.guid.tostring?view=netframework-4.8
+          *
+          * (str) must have at least (length) valid characters for memory safety. A null terminator is not
+          * required. Instead, (length) is used for the bounds check.
+          *
+          * Returns the parsed GUID. Throws a std::runtime_error if there is a bounds error or format error.
+          *
+          * This function is for performance, to help deal with container ID extended data, which has no null
+          * terminator, which would force us to clone the data to append a null terminator in order to use
+          * existing GUID parsing functions.
+          * </summary>
+            <summary>
+      * Parses GUID of "D" format. For example, the nil GUID would be "00000000-0000-0000-0000-000000000000".
+      * See: https://docs.microsoft.com/en-us/dotnet/api/system.guid.tostring?view=netframework-4.8
+      *
+      * (str) must have at least (length) valid characters for memory safety. A null terminator is not
+      * required. Instead, (length) is used for the bounds check.
+      *
+      * Returns the parsed GUID. Throws a std::runtime_error if there is a bounds error or format error.
+      * 
+      * This function is for performance, to help deal with container ID extended data, which has no null 
+      * terminator, which would force us to clone the data to append a null terminator in order to use 
+      * existing GUID parsing functions.
+      * </summary>
+        </member>
+        <member name="T:krabs.guid_parser">
+            <summary>
+      * Helper functions for parsing GUID's.
+      * </summary>
+        </member>
+        <member name="M:krabs.guid.random_guid">
+            <summary>
+          * Constructs a new random guid.
+          * </summary>
+        </member>
+        <member name="T:krabs.guid">
+            <summary>
+     * Represents a GUID, allowing simplified construction from a string or
+     * Windows GUID structure.
+     * </summary>
+        </member>
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.schema.#ctor(_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,krabs.schema_locator!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.schema.op_Equality(krabs.schema!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.schema.event_id'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.schema.event_opcode'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.schema.provider_id'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.schema.provider_name'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.schema.process_id'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.schema.thread_id'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.schema.timestamp'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.schema.activity_id'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.schema.stack_trace'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.size_provider.get_property_size(System.Byte!System.Runtime.CompilerServices.IsConst*,System.Char!System.Runtime.CompilerServices.IsConst*,_EVENT_RECORD!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,_EVENT_PROPERTY_INFO!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.property_iterator.enum_properties'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.parser.#ctor(krabs.schema!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.parser.properties'. -->
+        <!-- Discarding badly formed XML document comment for member 'M:krabs.testing.record_builder.properties'. -->
+    </members>
+</doc>

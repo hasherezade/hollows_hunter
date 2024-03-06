@@ -2,7 +2,8 @@
 
 #include <string>
 #include <sstream>
-
+#include <codecvt>
+#include <locale>
 #include <iostream>
 #include <iomanip>
 #include <cmath>
@@ -22,7 +23,7 @@ bool is_suspicious_process(pesieve::t_report report)
     return false;
 }
 
-bool HHScanReport::appendReport(pesieve::t_report &scan_report, const std::string &img_name)
+bool HHScanReport::appendReport(pesieve::t_report &scan_report, const std::wstring &img_name)
 {
     pidToReport[scan_report.pid] = scan_report;
     pidToName[scan_report.pid] = img_name;
@@ -32,7 +33,7 @@ bool HHScanReport::appendReport(pesieve::t_report &scan_report, const std::strin
     return true;
 }
 
-size_t HHScanReport::reportsToString(std::stringstream &stream)
+size_t HHScanReport::reportsToString(std::wstringstream &stream)
 {
     std::vector<DWORD>::const_iterator itr;
 
@@ -41,123 +42,123 @@ size_t HHScanReport::reportsToString(std::stringstream &stream)
     const size_t max_len = size_t(std::floor(std::log10(double(suspicious.size() - 1))) + 1);
     for (itr = this->suspicious.begin(); itr != suspicious.end(); ++itr) {
         DWORD pid = *itr;
-        stream << "[" << std::setw(max_len) << counter++ << "]: PID: " << std::dec << pid << ", ";
-        stream << "Name: " << this->pidToName[pid] << "\n";
+        stream << L"[" << std::setw(max_len) << counter++ << L"]: PID: " << std::dec << pid << L", ";
+        stream << L"Name: " << this->pidToName[pid] << L"\n";
         printed++;
     }
     return printed;
 }
 
-size_t HHScanReport::reportsToJSON(std::stringstream &stream, size_t level, const t_hh_params &params)
+size_t HHScanReport::reportsToJSON(std::wstringstream &stream, size_t level, const t_hh_params &params)
 {
     std::vector<DWORD>::const_iterator itr;
-    OUT_PADDED(stream, level, "\"suspicious\" : [\n");
+    OUT_PADDED(stream, level, L"\"suspicious\" : [\n");
     level++;
     size_t printed = 0;
     for (itr = this->suspicious.begin(); itr != suspicious.end(); ++itr) {
         DWORD pid = *itr;
-        OUT_PADDED(stream, level, "{\n");
+        OUT_PADDED(stream, level, L"{\n");
         level++;
 
-        OUT_PADDED(stream, level, "\"pid\" : ");
-        stream << std::dec << pid << ",\n";
-        OUT_PADDED(stream, level, "\"is_managed\" : ");
-        stream << std::dec << pidToReport[pid].is_managed << ",\n";
-        OUT_PADDED(stream, level, "\"name\" : ");
-        stream << "\"" << this->pidToName[pid] << "\",\n";
-        OUT_PADDED(stream, level, "\"replaced\" : ");
-        stream << std::dec << pidToReport[pid].replaced << ",\n";
-        OUT_PADDED(stream, level, "\"hdr_modified\" : ");
-        stream << std::dec << pidToReport[pid].hdr_mod << ",\n";
+        OUT_PADDED(stream, level, L"\"pid\" : ");
+        stream << std::dec << pid << L",\n";
+        OUT_PADDED(stream, level, L"\"is_managed\" : ");
+        stream << std::dec << pidToReport[pid].is_managed << L",\n";
+        OUT_PADDED(stream, level, L"\"name\" : ");
+        stream << L"\"" << this->pidToName[pid] << L"\",\n";
+        OUT_PADDED(stream, level, L"\"replaced\" : ");
+        stream << std::dec << pidToReport[pid].replaced << L",\n";
+        OUT_PADDED(stream, level, L"\"hdr_modified\" : ");
+        stream << std::dec << pidToReport[pid].hdr_mod << L",\n";
         if (!params.pesieve_args.no_hooks) {
-            OUT_PADDED(stream, level, "\"patched\" : ");
-            stream << std::dec << pidToReport[pid].patched << ",\n";
+            OUT_PADDED(stream, level, L"\"patched\" : ");
+            stream << std::dec << pidToReport[pid].patched << L",\n";
         }
         if (params.pesieve_args.iat != pesieve::PE_IATS_NONE) {
-            OUT_PADDED(stream, level, "\"iat_hooked\" : ");
-            stream << std::dec << pidToReport[pid].iat_hooked << ",\n";
+            OUT_PADDED(stream, level, L"\"iat_hooked\" : ");
+            stream << std::dec << pidToReport[pid].iat_hooked << L",\n";
         }
-        OUT_PADDED(stream, level, "\"implanted_pe\" : ");
-        stream << std::dec << pidToReport[pid].implanted_pe << ",\n";
-        OUT_PADDED(stream, level, "\"implanted_shc\" : ");
-        stream << std::dec << pidToReport[pid].implanted_shc << ",\n";
-        OUT_PADDED(stream, level, "\"unreachable_file\" : ");
-        stream << std::dec << pidToReport[pid].unreachable_file << ",\n";
-        OUT_PADDED(stream, level, "\"other\" : ");
-        stream << std::dec << pidToReport[pid].other << "\n";
+        OUT_PADDED(stream, level, L"\"implanted_pe\" : ");
+        stream << std::dec << pidToReport[pid].implanted_pe << L",\n";
+        OUT_PADDED(stream, level, L"\"implanted_shc\" : ");
+        stream << std::dec << pidToReport[pid].implanted_shc << L",\n";
+        OUT_PADDED(stream, level, L"\"unreachable_file\" : ");
+        stream << std::dec << pidToReport[pid].unreachable_file << L",\n";
+        OUT_PADDED(stream, level, L"\"other\" : ");
+        stream << std::dec << pidToReport[pid].other << L"\n";
         level--;
-        OUT_PADDED(stream, level, "}");
+        OUT_PADDED(stream, level, L"}");
         printed++;
         if (printed < suspicious.size()) {
-            stream << ",";
+            stream << L",";
         }
-        stream << "\n";
+        stream << L"\n";
     }
     level--;
-    OUT_PADDED(stream, level, "]\n");
+    OUT_PADDED(stream, level, L"]\n");
     return printed;
 }
 
 std::string HHScanReport::toJSON(const t_hh_params &params)
 {
-    std::stringstream stream;
+    std::wstringstream stream;
     size_t level = 0;
-    OUT_PADDED(stream, level, "{\n");
+    OUT_PADDED(stream, level, L"{\n");
     level++;
     //summary:
     const size_t suspicious_count = countSuspicious();
 
-    OUT_PADDED(stream, level, "\"scan_date_time\" : ");
-    stream << std::dec << "\"" << util::strtime(this->startTime) << "\"" << ",\n";
-    OUT_PADDED(stream, level, "\"scan_timestamp\" : ");
-    stream << std::dec << startTime << ",\n";
-    OUT_PADDED(stream, level, "\"scan_time_ms\" : ");
-    stream << std::dec << getScanTime() << ",\n";
-    OUT_PADDED(stream, level, "\"scanned_count\" : ");
-    stream << std::dec << countTotal() << ",\n";
-    OUT_PADDED(stream, level, "\"suspicious_count\" : ");
+    OUT_PADDED(stream, level, L"\"scan_date_time\" : ");
+    stream << std::dec << L"\"" << util::strtime(this->startTime) << L"\"" << L",\n";
+    OUT_PADDED(stream, level, L"\"scan_timestamp\" : ");
+    stream << std::dec << startTime << L",\n";
+    OUT_PADDED(stream, level, L"\"scan_time_ms\" : ");
+    stream << std::dec << getScanTime() << L",\n";
+    OUT_PADDED(stream, level, L"\"scanned_count\" : ");
+    stream << std::dec << countTotal() << L",\n";
+    OUT_PADDED(stream, level, L"\"suspicious_count\" : ");
     stream << std::dec << suspicious_count;
     if (suspicious_count > 0) {
-        stream << ",\n";
+        stream << L",\n";
         reportsToJSON(stream, level, params);
     }
     else {
-        stream << "\n";
+        stream << L"\n";
     }
     level--;
-    OUT_PADDED(stream, level, "}\n");
-    return stream.str();
+    OUT_PADDED(stream, level, L"}\n");
+    return std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(stream.str());
 }
 
-
-void print_scantime(std::stringstream &stream, size_t timeInMs)
+template<class STR_STREAM>
+void print_scantime(STR_STREAM& stream, size_t timeInMs)
 {
     float seconds = ((float)timeInMs / 1000);
     float minutes = ((float)timeInMs / 60000);
-    stream << std::dec << timeInMs << " ms.";
+    stream << std::dec << timeInMs << L" ms.";
     if (seconds > 0.5) {
-        stream << " = " << seconds << " sec.";
+        stream << L" = " << seconds << L" sec.";
     }
     if (minutes > 0.5) {
-        stream << " = " << minutes << " min.";
+        stream << L" = " << minutes << L" min.";
     }
 }
 
 std::string HHScanReport::toString()
 {
-    std::stringstream stream;
+    std::wstringstream stream;
     //summary:
-    stream << "--------" << std::endl;
-    stream << "SUMMARY:\n";
-    stream << "Scan at: " << util::strtime(this->startTime) << " (" << std::dec << startTime << ")\n";
-    stream << "Finished scan in: ";
+    stream << L"--------" << std::endl;
+    stream << L"SUMMARY:\n";
+    stream << L"Scan at: " << util::strtime(this->startTime) << L" (" << std::dec << startTime << L")\n";
+    stream << L"Finished scan in: ";
     print_scantime(stream, getScanTime());
-    stream << "\n";
-    stream << "[*] Total scanned: " << std::dec << countTotal() << "\n";
-    stream << "[*] Total suspicious: " << std::dec << countSuspicious() << "\n";
+    stream << L"\n";
+    stream << L"[*] Total scanned: " << std::dec << countTotal() << L"\n";
+    stream << L"[*] Total suspicious: " << std::dec << countSuspicious() << L"\n";
     if (countSuspicious() > 0) {
-        stream << "[+] List of suspicious: \n";
+        stream << L"[+] List of suspicious: \n";
         reportsToString(stream);
     }
-    return stream.str();
+    return std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(stream.str());
 }

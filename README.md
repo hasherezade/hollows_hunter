@@ -1,6 +1,10 @@
 # hollows_hunter
 ![](./logo/logo2_128.png)
 
+(Modified to be driven by ETW Events)
+This requires https://github.com/microsoft/krabsetw. In order to compile Hollows Hunter, a static version of krabs is required and the header file krabsetw/krabs/krabs.hpp. The static version of krabs can be compiled from the project directly or the version given in the folder krabs_lib can be used by changing the CMAKEList.txt KRABS_LIB variable to that path instead. There is also a posibility to get it from nugget. (The version we are interested is Microsoft.O365.Security.Native.ETW.dll from net 4.6.2) Krabs can be completely added to the solution by : Inside krabs directory, you will see krabs.hpp and another directory “krabs”. Drop these two in your project directory, thats it!
+
+
 [![Build status](https://ci.appveyor.com/api/projects/status/nsc2eux5986y1shq?svg=true)](https://ci.appveyor.com/project/hasherezade/hollows-hunter)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0c149fcd62084f96ac0c131e4473dbdf)](https://app.codacy.com/gh/hasherezade/hollows_hunter/dashboard?branch=master)
 [![Commit activity](https://img.shields.io/github/commit-activity/m/hasherezade/hollows_hunter)](https://github.com/hasherezade/hollows_hunter/commits)

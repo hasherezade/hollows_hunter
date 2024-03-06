@@ -1,5 +1,6 @@
 #include "time_util.h"
-
+#include <codecvt>
+#include <locale>
 #include <string>
 #include <sstream>
 
@@ -8,15 +9,16 @@
 #include <ctime>
 #include <cmath>
 
-std::string util::strtime(const time_t t)
+std::wstring util::strtime(const time_t t)
 {
     struct tm time_info;
     if (localtime_s(&time_info, &t) == 0) {
-        std::stringstream str;
-        str << std::put_time(&time_info, "%c");
-        return str.str();
+        std::wstringstream str;
+        str << std::put_time(&time_info, L"%c");
+        std::wstring result = str.str();
+        return result;
     }
-    return "";
+    return L"";
 }
 
 // snippet from: https://www.frenk.com/2009/12/convert-filetime-to-unix-timestamp/

@@ -35,7 +35,7 @@ protected:
     size_t scanProcesses(HHScanReport &my_report);
     void printSingleReport(pesieve::t_report& report);
 
-    t_single_scan_status scanNextProcess(DWORD pid, char* image_buf, HHScanReport &report);
+    t_single_scan_status scanNextProcess(DWORD pid, WCHAR* image_buf, HHScanReport &report);
     void initOutDir(time_t scan_time, pesieve::t_params &pesieve_args);
 
     t_hh_params &hh_args;

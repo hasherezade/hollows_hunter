@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="ETWLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{496956b8-4005-4ae3-ac9b-11eab32cb721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{7b471d7e-6f69-45e0-a76e-e5fd3cb6d15a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include=".nuget">
+      <UniqueIdentifier>{8c66e43c-83e0-4965-b71d-1409f807ac51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Filtering">
+      <UniqueIdentifier>{ce3bf1a4-eb35-4f47-b17b-0dbc511e8b0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Kernel">
+      <UniqueIdentifier>{61685433-8806-4bc1-9e4c-60ce5ab1669a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\User">
+      <UniqueIdentifier>{c2fc8bab-b190-4850-a4fe-9863d5a00d89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Testing">
+      <UniqueIdentifier>{d2144890-b387-409f-9e5b-805abc28ee9b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Errors.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NativePtr.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Filtering\EventFilter.hpp">
+      <Filter>Header Files\Filtering</Filter>
+    </ClInclude>
+    <ClInclude Include="Filtering\Fluent.hpp">
+      <Filter>Header Files\Filtering</Filter>
+    </ClInclude>
+    <ClInclude Include="Filtering\Predicate.hpp">
+      <Filter>Header Files\Filtering</Filter>
+    </ClInclude>
+    <ClInclude Include="KernelProvider.hpp">
+      <Filter>Header Files\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="KernelTrace.hpp">
+      <Filter>Header Files\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="UserTrace.hpp">
+      <Filter>Header Files\User</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel\KernelProviders.hpp">
+      <Filter>Header Files\Kernel</Filter>
+    </ClInclude>
+    <ClInclude Include="Testing\SynthRecord.hpp">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="Property.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Testing\RecordBuilder.hpp">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="Provider.hpp">
+      <Filter>Header Files\User</Filter>
+    </ClInclude>
+    <ClInclude Include="Testing\Proxy.hpp">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="Testing\EventHeader.hpp">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="IEventRecord.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventRecord.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Filtering\CountedString.hpp">
+      <Filter>Header Files\Filtering</Filter>
+    </ClInclude>
+    <ClInclude Include="Guid.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Filtering\AnsiString.hpp">
+      <Filter>Header Files\Filtering</Filter>
+    </ClInclude>
+    <ClInclude Include="Filtering\UnicodeString.hpp">
+      <Filter>Header Files\Filtering</Filter>
+    </ClInclude>
+    <ClInclude Include="IEventRecordMetadata.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventRecordMetadata.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventRecordError.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RawProvider.hpp">
+      <Filter>Header Files\User</Filter>
+    </ClInclude>
+    <ClInclude Include="TraceStats.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ITrace.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Conversions.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventTraceProperties.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IEventRecordError.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".nuget\NuGet.Config">
+      <Filter>.nuget</Filter>
+    </None>
+    <None Include=".nuget\NuGet.exe">
+      <Filter>.nuget</Filter>
+    </None>
+    <None Include=".nuget\NuGet.targets">
+      <Filter>.nuget</Filter>
+    </None>
+  </ItemGroup>
+</Project>

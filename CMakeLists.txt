@@ -4,6 +4,20 @@ project (hollows_hunter)
 option(HH_BUILD_TESTING "Enable testing for HollowsHunter" ON)
 option (PECONV_LIB_INSTALL OFF)
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+set (KRABS_DIR "${CMAKE_SOURCE_DIR}/krabs_lib" CACHE PATH "KrabsETV main path" )
+#if (BUILD_32)
+#	set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS
+#	"-m32" LINK_FLAGS "-m32")
+#    MESSAGE(STATUS "Excluding 64bit library paths from search.")
+#    set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS OFF)
+#	set(ARCH i686)
+#elseif (BUILD_64)
+#	set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS
+#	"-m64" LINK_FLAGS "-m64")
+#	set(ARCH amd64)
+#else()
+#	set(ARCH amd64)
+#endif()
 
 # static linking for GNU compilers
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -19,8 +33,10 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 endif()
 
 # modules:
+set ( PESIEVE_AS_STATIC_LIB "pe-sieve" ON )
 set ( M_PESIEVE "pe-sieve" )
 set ( M_PARAMKIT "paramkit" )
+set ( M_KRABS "${KRABS_DIR}/Microsoft.O365.Security.Native.ETW.lib")
 
 # modules paths:
 set (PESIEVE_DIR "${PROJECT_SOURCE_DIR}/${M_PESIEVE}" CACHE PATH "PE-sieve main path")
@@ -54,6 +70,7 @@ set (hdrs
 	util/process_privilege.h
 	util/time_util.h
 	util/strings_util.h
+	krabsetw/krabs/krabs.hpp
 )
 set (rsrc
 	resources.h
@@ -75,16 +92,17 @@ set ( PESIEVE_LIB $<TARGET_FILE:pe-sieve> CACHE PATH "PE-sieve library path" )
 
 add_subdirectory ( ${PARAMKIT_DIR} )
 set ( PARAMKIT_LIB $<TARGET_FILE:paramkit> CACHE PATH "ParamKit library path" )
-
+set ( KRABS_LIB "${CMAKE_SOURCE_DIR}/krabsetw/krabs/x64/Release/net462" )
 
 cmake_policy(SET CMP0015 NEW)
-LINK_DIRECTORIES ( ${PESIEVE_LIB} )
+LINK_DIRECTORIES ( ${PESIEVE_LIB} ${KRABS_LIB})
 add_executable ( ${PROJECT_NAME} ${hdrs} ${srcs} ${rsrc} main.cpp )
-target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} ${M_PARAMKIT} "psapi.lib" "ntdll.lib")
+target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} ${M_PARAMKIT} "psapi.lib" "ntdll.lib" ${M_KRABS})
 
 # dependencies
 add_dependencies( ${PROJECT_NAME} ${M_PESIEVE} ${M_PARAMKIT} )
-
+target_compile_definitions(${PROJECT_NAME} PUBLIC -DUNICODE)
+target_compile_definitions(${M_PARAMKIT} PUBLIC -DUNICODE)
 #install
 INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX} COMPONENT ${PROJECT_NAME} )
 

@@ -1,0 +1,25 @@
+# Good Reference
+# https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
+
+bin
+obj
+*.user
+*.suo
+TestResults/
+FakesAssemblies/
+
+# Native Stuff
+*.sdf
+*.opensdf
+*.ipch
+*.aps
+[Dd]ebug/
+[Rr]elease/
+x64/
+
+# NuGet Packages
+**/packages/*
+#!**/packages/repositories.config
+
+# githooks specific
+githooks/*.dll
