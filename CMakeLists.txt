@@ -36,7 +36,7 @@ endif()
 set ( PESIEVE_AS_STATIC_LIB "pe-sieve" ON )
 set ( M_PESIEVE "pe-sieve" )
 set ( M_PARAMKIT "paramkit" )
-set ( M_KRABS "${KRABS_DIR}/Microsoft.O365.Security.Native.ETW.lib")
+
 
 # modules paths:
 set (PESIEVE_DIR "${PROJECT_SOURCE_DIR}/${M_PESIEVE}" CACHE PATH "PE-sieve main path")
@@ -97,7 +97,7 @@ set ( KRABS_LIB "${CMAKE_SOURCE_DIR}/krabsetw/krabs/x64/Release/net462" )
 cmake_policy(SET CMP0015 NEW)
 LINK_DIRECTORIES ( ${PESIEVE_LIB} ${KRABS_LIB})
 add_executable ( ${PROJECT_NAME} ${hdrs} ${srcs} ${rsrc} main.cpp )
-target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} ${M_PARAMKIT} "psapi.lib" "ntdll.lib" ${M_KRABS})
+target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} ${M_PARAMKIT} "psapi.lib" "ntdll.lib")
 
 # dependencies
 add_dependencies( ${PROJECT_NAME} ${M_PESIEVE} ${M_PARAMKIT} )
