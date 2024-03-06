@@ -4,7 +4,7 @@ project (hollows_hunter)
 option(HH_BUILD_TESTING "Enable testing for HollowsHunter" ON)
 option (PECONV_LIB_INSTALL OFF)
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
-set (KRABS_DIR "${CMAKE_SOURCE_DIR}/krabs_lib" CACHE PATH "KrabsETV main path" )
+set (KRABS_DIR "${CMAKE_SOURCE_DIR}/krabs_lib" CACHE PATH "KrabsETW main path" )
 #if (BUILD_32)
 #	set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS
 #	"-m32" LINK_FLAGS "-m32")
