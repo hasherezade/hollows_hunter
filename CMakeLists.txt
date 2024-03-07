@@ -21,6 +21,7 @@ endif()
 # modules:
 set ( M_PESIEVE "pe-sieve" )
 set ( M_PARAMKIT "paramkit" )
+set ( M_KRABS "krabs" )
 
 # modules paths:
 set (PESIEVE_DIR "${PROJECT_SOURCE_DIR}/${M_PESIEVE}" CACHE PATH "PE-sieve main path")
@@ -28,6 +29,8 @@ include_directories ( ${PESIEVE_DIR}/include )
 
 set (PARAMKIT_DIR "${CMAKE_SOURCE_DIR}/${M_PARAMKIT}/${M_PARAMKIT}" CACHE PATH "ParamKit main path" )
 include_directories ( ${PARAMKIT_DIR}/include )
+
+set (LIBKRABS_DIR "${CMAKE_SOURCE_DIR}/${M_KRABS}" CACHE PATH "KrabsETW main path" )
 
 set (srcs
 	main.cpp
@@ -76,6 +79,7 @@ set ( PESIEVE_LIB $<TARGET_FILE:pe-sieve> CACHE PATH "PE-sieve library path" )
 add_subdirectory ( ${PARAMKIT_DIR} )
 set ( PARAMKIT_LIB $<TARGET_FILE:paramkit> CACHE PATH "ParamKit library path" )
 
+add_subdirectory ( ${LIBKRABS_DIR} )
 
 cmake_policy(SET CMP0015 NEW)
 LINK_DIRECTORIES ( ${PESIEVE_LIB} )
