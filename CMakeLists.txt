@@ -24,7 +24,6 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 endif()
 
 # modules:
-set ( PESIEVE_AS_STATIC_LIB "pe-sieve" ON )
 set ( M_PESIEVE "pe-sieve" )
 set ( M_PARAMKIT "paramkit" )
 
