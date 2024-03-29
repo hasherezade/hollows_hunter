@@ -46,3 +46,6 @@ protected:
     bool isScannerWow64;
 };
 
+
+// Global arguments
+extern t_hh_params g_hh_args;

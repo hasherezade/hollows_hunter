@@ -64,8 +64,14 @@ set (hdrs
 )
 
 if(USE_ETW)
+	set (srcs
+		${srcs}
+		etw_listener.cpp
+	)
+
 	set (hdrs
 		${hdrs}
+		etw_listener.h
 		krabsetw/krabs/krabs.hpp
 	)
 endif()
