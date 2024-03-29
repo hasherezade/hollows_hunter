@@ -46,28 +46,28 @@ BOOL isCooldown(std::uint32_t pid)
 
 void updateCooldown(std::uint32_t pid)
 {
-    if (0 != pidCooldown[pid])
+    if (pidCooldown[pid])
     {
         time(&pidCooldown[pid]);
     }
 }
 
 
-BOOL isAllocationExecutable(std::uint32_t pid, LPVOID baseAddress)
+bool isAllocationExecutable(std::uint32_t pid, LPVOID baseAddress)
 {
-    BOOL isExec = FALSE;
+    bool isExec = false;
 
     HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION, FALSE, pid);
     if (hProcess)
     {
-        BOOL    stop = FALSE;
+        bool    stop = false;
         PVOID   base = 0;
         LPVOID  addr = baseAddress;
         MEMORY_BASIC_INFORMATION mbi = { 0 };
 
         do
         {
-            if (NULL != VirtualQueryEx(hProcess, addr, &mbi, sizeof(MEMORY_BASIC_INFORMATION)) && mbi.AllocationBase)
+            if (VirtualQueryEx(hProcess, addr, &mbi, sizeof(MEMORY_BASIC_INFORMATION)) && mbi.AllocationBase)
             {
                 // Start of the allocation
                 if (!base)
@@ -81,19 +81,19 @@ BOOL isAllocationExecutable(std::uint32_t pid, LPVOID baseAddress)
                     if (mbi.AllocationProtect & EXECUTABLE_FLAGS || mbi.Protect & EXECUTABLE_FLAGS)
                     {
                         std::cout << "New Executable Section: " << " (" << pid << ") 0x" << std::hex << addr << " Flags=[Alloc: " << mbi.AllocationProtect << " | Now: " << mbi.Protect << "] " << std::dec << std::endl;
-                        isExec = TRUE;
+                        isExec = true;
                     }
 
                     // Move to next block
                     addr = static_cast<char*>(addr) + mbi.RegionSize;
                 }
                 else
-                    stop = TRUE;
+                    stop = true;
             }
             else
-                stop = TRUE;
+                stop = true;
 
-        } while (stop == FALSE && isExec == FALSE);
+        } while (!stop && !isExec);
 
         CloseHandle(hProcess);
     }
@@ -147,7 +147,7 @@ bool ETWstart()
                 std::uint32_t targetPid = parser.parse<std::uint32_t>(L"ProcessId");
                 LPVOID baseAddress = parser.parse<LPVOID>(L"BaseAddress");
 
-                bool doScan = FALSE;
+                bool doScan = false;
 
                 if (!isCooldown(targetPid))
                     return;
