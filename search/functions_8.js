@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kill_5fsuspicious_0',['kill_suspicious',['../namespaceprocess__util.html#ad8765675543bcce40dec2c3207d76ce9',1,'process_util']]]
+  ['join_5fpath_0',['join_path',['../namespacefiles__util.html#a9a7fcfd84189964e87c1b572f1fe8fbe',1,'files_util']]]
 ];

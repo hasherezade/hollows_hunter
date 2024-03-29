@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['write_5fto_5ffile_0',['write_to_file',['../namespacefiles__util.html#af87086ea253d2c9f93852ad9b40fd7ac',1,'files_util']]]
+  ['updatecooldown_0',['updateCooldown',['../etw__listener_8cpp.html#a71daf6335ddd7bd8c88185f08132a5be',1,'etw_listener.cpp']]]
 ];

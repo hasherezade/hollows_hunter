@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['log_0',['log',['../structt__hh__params.html#a4342e0e736b7458a4df29aeb4b81c77f',1,'t_hh_params']]],
-  ['loop_5fscanning_1',['loop_scanning',['../structt__hh__params.html#a54fb1cc9b16aead60aa2127869563c93',1,'t_hh_params']]]
+  ['kill_5fsuspicious_0',['kill_suspicious',['../structt__hh__params.html#a3eaef78e7737553c53b537ae60424e04',1,'t_hh_params']]]
 ];

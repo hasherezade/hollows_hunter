@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['get_5fbg_5fcolor_0',['GET_BG_COLOR',['../term__util_8h.html#adc380188dbfb7af8f9a5899776d08745',1,'term_util.h']]],
-  ['gray_1',['GRAY',['../term__util_8h.html#ae5f70677050eecd8909e0248e07b9e73',1,'term_util.h']]]
+  ['executable_5fflags_0',['EXECUTABLE_FLAGS',['../etw__listener_8cpp.html#a9b6042fcf3eb14e4e938a314626eea2d',1,'etw_listener.cpp']]]
 ];

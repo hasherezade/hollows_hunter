@@ -82,6 +82,8 @@ $(function() {
 <div class="textblock"><code>#include &quot;<a class="el" href="hh__report_8h_source.html">hh_report.h</a>&quot;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;codecvt&gt;</code><br />
+<code>#include &lt;locale&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;iomanip&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
@@ -98,8 +100,9 @@ Macros</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a658a84d039df1c8c4f7555a7f5de2e14" id="r_a658a84d039df1c8c4f7555a7f5de2e14"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a658a84d039df1c8c4f7555a7f5de2e14">is_suspicious_process</a> (pesieve::t_report report)</td></tr>
 <tr class="separator:a658a84d039df1c8c4f7555a7f5de2e14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7da95fdc0fd230a1a203045782d07a9c" id="r_a7da95fdc0fd230a1a203045782d07a9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7da95fdc0fd230a1a203045782d07a9c">print_scantime</a> (std::stringstream &amp;stream, size_t timeInMs)</td></tr>
-<tr class="separator:a7da95fdc0fd230a1a203045782d07a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca43a9a1ca6d4871d919d565632f5662" id="r_aca43a9a1ca6d4871d919d565632f5662"><td class="memTemplParams" colspan="2">template&lt;class STR_STREAM &gt; </td></tr>
+<tr class="memitem:aca43a9a1ca6d4871d919d565632f5662"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#aca43a9a1ca6d4871d919d565632f5662">print_scantime</a> (STR_STREAM &amp;stream, size_t timeInMs)</td></tr>
+<tr class="separator:aca43a9a1ca6d4871d919d565632f5662"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="af8c1dc1f3ee7d070821c2490bba01a84" name="af8c1dc1f3ee7d070821c2490bba01a84"></a>
@@ -129,7 +132,7 @@ Functions</h2></td></tr>
 <div class="line">if (field_size) stream &lt;&lt; std::setw(field_size) &lt;&lt; <span class="charliteral">&#39; &#39;</span>; \</div>
 <div class="line">stream &lt;&lt; str;</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="hh__report_8cpp_source.html#l00012">12</a> of file <a class="el" href="hh__report_8cpp_source.html">hh_report.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__report_8cpp_source.html#l00013">13</a> of file <a class="el" href="hh__report_8cpp_source.html">hh_report.cpp</a>.</p>
 
 </div>
 </div>
@@ -149,20 +152,22 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__report_8cpp_source.html#l00017">17</a> of file <a class="el" href="hh__report_8cpp_source.html">hh_report.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__report_8cpp_source.html#l00018">18</a> of file <a class="el" href="hh__report_8cpp_source.html">hh_report.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a7da95fdc0fd230a1a203045782d07a9c" name="a7da95fdc0fd230a1a203045782d07a9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7da95fdc0fd230a1a203045782d07a9c">&#9670;&#160;</a></span>print_scantime()</h2>
+<a id="aca43a9a1ca6d4871d919d565632f5662" name="aca43a9a1ca6d4871d919d565632f5662"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca43a9a1ca6d4871d919d565632f5662">&#9670;&#160;</a></span>print_scantime()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class STR_STREAM &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void print_scantime </td>
           <td>(</td>
-          <td class="paramtype">std::stringstream &amp;</td>          <td class="paramname"><span class="paramname"><em>stream</em>, </span></td>
+          <td class="paramtype">STR_STREAM &amp;</td>          <td class="paramname"><span class="paramname"><em>stream</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -172,7 +177,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__report_8cpp_source.html#l00133">133</a> of file <a class="el" href="hh__report_8cpp_source.html">hh_report.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__report_8cpp_source.html#l00134">134</a> of file <a class="el" href="hh__report_8cpp_source.html">hh_report.cpp</a>.</p>
 
 </div>
 </div>

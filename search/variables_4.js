@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kill_5fsuspicious_0',['kill_suspicious',['../structt__hh__params.html#a3eaef78e7737553c53b537ae60424e04',1,'t_hh_params']]]
+  ['json_5foutput_0',['json_output',['../structt__hh__params.html#ad25b3cfb998534bcbe0e0ffc814a5da5',1,'t_hh_params']]]
 ];

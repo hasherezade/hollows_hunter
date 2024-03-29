@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main.cpp']]],
-  ['make_5fdir_5fname_1',['make_dir_name',['../namespacefiles__util.html#a9c2cf1240e4b850893c4e7a0a2ab641b',1,'files_util']]]
+  ['levenshtein_5fdistance_0',['levenshtein_distance',['../namespacehhunter_1_1util.html#a48183ed17d49191649fbac64927b6f28',1,'hhunter::util']]],
+  ['list_5fto_5fstr_1',['list_to_str',['../namespaceutil.html#a4afca6eda8fe7bc220cfdb824b79fd8b',1,'util']]]
 ];

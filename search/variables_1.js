@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hh_5fargs_0',['hh_args',['../class_h_h_scanner.html#aa9841ff29a663251372cf65e2db3cbef',1,'HHScanner']]]
+  ['g_5fhh_5fargs_0',['g_hh_args',['../hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781',1,'g_hh_args:&#160;main.cpp'],['../main_8cpp.html#a316fb776978a9d4b668b2ff824c7d781',1,'g_hh_args:&#160;main.cpp']]]
 ];
