@@ -7,22 +7,8 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
 option( USE_ETW "Use ETW" ON )
 if(USE_ETW)
     add_compile_definitions(USE_ETW)
-	set (KRABS_DIR "${CMAKE_SOURCE_DIR}/krabs_lib" CACHE PATH "KrabsETW main path" )
 	#FYI Krabs need to be built as a static lib which is not the default from the submodule 
 endif()
-#if (BUILD_32)
-#	set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS
-#	"-m32" LINK_FLAGS "-m32")
-#    MESSAGE(STATUS "Excluding 64bit library paths from search.")
-#    set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS OFF)
-#	set(ARCH i686)
-#elseif (BUILD_64)
-#	set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS
-#	"-m64" LINK_FLAGS "-m64")
-#	set(ARCH amd64)
-#else()
-#	set(ARCH amd64)
-#endif()
 
 # static linking for GNU compilers
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -75,8 +61,15 @@ set (hdrs
 	util/process_privilege.h
 	util/time_util.h
 	util/strings_util.h
-	krabsetw/krabs/krabs.hpp
 )
+
+if(USE_ETW)
+	set (hdrs
+		${hdrs}
+		krabsetw/krabs/krabs.hpp
+	)
+endif()
+
 set (rsrc
 	resources.h
 	hh_res.rc
@@ -99,7 +92,7 @@ add_subdirectory ( ${PARAMKIT_DIR} )
 set ( PARAMKIT_LIB $<TARGET_FILE:paramkit> CACHE PATH "ParamKit library path" )
 
 cmake_policy(SET CMP0015 NEW)
-LINK_DIRECTORIES ( ${PESIEVE_LIB} ${KRABS_LIB})
+LINK_DIRECTORIES ( ${PESIEVE_LIB} )
 add_executable ( ${PROJECT_NAME} ${hdrs} ${srcs} ${rsrc} main.cpp )
 target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} ${M_PARAMKIT} "psapi.lib" "ntdll.lib")
 
