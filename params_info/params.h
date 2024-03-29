@@ -135,10 +135,13 @@ public:
 
         this->addParam(new BoolParam(PARAM_LOOP, false));
         this->setInfo(PARAM_LOOP, "Enable continuous scanning.");
-
-        this->addParam(new BoolParam(PARAM_ETW, false));
-        this->setInfo(PARAM_ETW, "Use ETW.");
-
+        BoolParam* etwParam = new BoolParam(PARAM_ETW, false);
+        this->addParam(etwParam);
+        this->setInfo(PARAM_ETW, "Use ETW (requires Administrator privilege).");
+#ifndef USE_ETW
+        etwParam->setActive(false);
+        this->setInfo(PARAM_ETW, "Use ETW (disabled).");
+#endif //USE_ETW
         EnumParam *enumParam = new EnumParam(PARAM_IMP_REC, "imprec_mode", false);
         if (enumParam) {
             this->addParam(enumParam);
@@ -299,7 +302,7 @@ public:
         this->addParamToGroup(PARAM_HOOKS, str_group);
         this->addParamToGroup(PARAM_PATTERN, str_group);
         this->addParamToGroup(PARAM_ETW, str_group);
-        
+ 
         str_group = "5. dump options";
         this->addGroup(new ParamGroup(str_group));
         this->addParamToGroup(PARAM_MINIDUMP, str_group);
@@ -366,8 +369,9 @@ public:
         copyVal<BoolParam>(PARAM_UNIQUE_DIR, ps.unique_dir);
         copyVal<BoolParam>(PARAM_SUSPEND, ps.suspend_suspicious);
         copyVal<BoolParam>(PARAM_KILL, ps.kill_suspicious);
-
+#ifdef USE_ETW
         copyVal<BoolParam>(PARAM_ETW, ps.etw_scan);
+#endif // USE_ETW
         copyVal<BoolParam>(PARAM_LOOP, ps.loop_scanning);
         copyVal<BoolParam>(PARAM_LOG, ps.log);
         copyVal<BoolParam>(PARAM_QUIET, ps.quiet);

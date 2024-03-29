@@ -25,19 +25,28 @@
 
 using namespace hhunter::util;
 
+#ifndef _WIN64
+#undef USE_ETW //ETW support works only for 64 bit
+#endif //_WIN64
+
+#ifdef USE_ETW
 // ETW includes
 #include "krabsetw/krabs/krabs.hpp"
+#endif
 
 #define EXECUTABLE_FLAGS (PAGE_EXECUTE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY)
 #define MAX_PROCESSES 65536
+
+// Global arguments
+t_hh_params g_hh_args;
 
 void compatibility_alert()
 {
     print_in_color(WARNING_COLOR, "[!] Scanner mismatch! For a 64-bit OS, use the 64-bit version of the scanner!\n");
 }
 
+#ifdef USE_ETW
 // Global var for ETW thread
-t_hh_params g_hh_args;
 time_t      pidCooldown[MAX_PROCESSES] = { 0 };
 
 
@@ -134,6 +143,7 @@ BOOL isAllocationExecutable(std::uint32_t pid, LPVOID baseAddress)
     return isExec;
 }
 
+
 bool ETWstart()
 {
     krabs::kernel_trace trace(L"HollowsHunter");
@@ -223,7 +233,7 @@ bool ETWstart()
     }
     return isOk;
 }
-
+#endif // USE_ETW
 
 t_pesieve_res deploy_scan()
 {
@@ -234,9 +244,14 @@ t_pesieve_res deploy_scan()
     }
     if (g_hh_args.etw_scan)
     {
+#ifdef USE_ETW
         if (!ETWstart()) {
             return PESIEVE_ERROR;
         }
+#else
+        std::cerr << "ETW support is disabled\n";
+        return PESIEVE_ERROR;
+#endif
     }
     else
     {

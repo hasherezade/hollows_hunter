@@ -4,8 +4,12 @@ project (hollows_hunter)
 option(HH_BUILD_TESTING "Enable testing for HollowsHunter" ON)
 option (PECONV_LIB_INSTALL OFF)
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
-set (KRABS_DIR "${CMAKE_SOURCE_DIR}/krabs_lib" CACHE PATH "KrabsETW main path" )
-#FYI Krabs need to be built as a static lib which is not the default from the submodule 
+option( USE_ETW "Use ETW" ON )
+if(USE_ETW)
+    add_compile_definitions(USE_ETW)
+	set (KRABS_DIR "${CMAKE_SOURCE_DIR}/krabs_lib" CACHE PATH "KrabsETW main path" )
+	#FYI Krabs need to be built as a static lib which is not the default from the submodule 
+endif()
 #if (BUILD_32)
 #	set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS
 #	"-m32" LINK_FLAGS "-m32")
