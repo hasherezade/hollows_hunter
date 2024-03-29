@@ -4,3 +4,6 @@
 [submodule "paramkit"]
 	path = paramkit
 	url = https://github.com/hasherezade/paramkit
+[submodule "krabsetw"]
+	path = krabsetw
+	url = https://github.com/microsoft/krabsetw.git

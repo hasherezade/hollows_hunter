@@ -34,7 +34,7 @@ public:
         return (this->endTick - this->startTick);
     }
 
-    bool appendReport(pesieve::t_report &scan_report, const std::string &img_name);
+    bool appendReport(pesieve::t_report &scan_report, const std::wstring &img_name);
 
     size_t countSuspicious() const
     {
@@ -49,10 +49,10 @@ public:
     std::string toString();
 
 protected:
-    size_t reportsToString(std::stringstream &stream);
+    size_t reportsToString(std::wstringstream &stream);
 
     std::string toJSON(const t_hh_params &params);
-    size_t reportsToJSON(std::stringstream &stream, size_t level, const t_hh_params &params);
+    size_t reportsToJSON(std::wstringstream &stream, size_t level, const t_hh_params &params);
 
     time_t startTime;
     time_t endTime;
@@ -61,7 +61,7 @@ protected:
     DWORD endTick;
 
     std::map<DWORD, pesieve::t_report> pidToReport;
-    std::map<DWORD, std::string> pidToName;
+    std::map<DWORD, std::wstring> pidToName;
     std::vector<DWORD> suspicious;
 
     friend class HHScanner;

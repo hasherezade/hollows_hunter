@@ -7,7 +7,7 @@
 #define INVALID_TIME LONGLONG(-1)
 
 namespace util {
-    std::string strtime(const time_t t);
+    std::wstring strtime(const time_t t);
 
     LONGLONG FileTime_to_POSIX(FILETIME ft);
 

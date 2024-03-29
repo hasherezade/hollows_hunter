@@ -4,7 +4,8 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
-
+#include <codecvt>
+#include <locale>
 #include <time.h>
 #include <tlhelp32.h>
 
@@ -154,12 +155,12 @@ namespace files_util {
 
 namespace util {
 
-    bool is_searched_name(const char* processName, std::set<std::string> &names_list)
+    bool is_searched_name(const WCHAR* processName, std::set<std::wstring> &names_list)
     {
-        std::set<std::string>::iterator itr;
+        std::set<std::wstring>::iterator itr;
         for (itr = names_list.begin(); itr != names_list.end(); ++itr) {
-            const char* searchedName = itr->c_str();
-            if (_stricmp(processName, searchedName) == 0) {
+            const WCHAR* searchedName = itr->c_str();
+            if (_wcsicmp(processName, searchedName) == 0) {
                 return true;
             }
         }
@@ -178,16 +179,17 @@ namespace util {
     template <typename TYPE_T>
     std::string list_to_str(std::set<TYPE_T> &list)
     {
-        std::stringstream stream;
+        std::wstringstream stream;
 
-        for (auto itr = list.begin(); itr != list.end(); ) {
+        std::set<TYPE_T>::iterator itr;
+        for (itr = list.begin(); itr != list.end(); ) {
             stream << *itr;
             ++itr;
             if (itr != list.end()) {
                 stream << ", ";
             }
         }
-        return stream.str();
+        return std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(stream.str());
     }
 
 }; //namespace util
@@ -322,7 +324,7 @@ void HHScanner::printSingleReport(pesieve::t_report& report)
     }
 }
 
-t_single_scan_status HHScanner::scanNextProcess(DWORD pid, char* exe_file, HHScanReport &my_report)
+t_single_scan_status HHScanner::scanNextProcess(DWORD pid, WCHAR* exe_file, HHScanReport &my_report)
 {
     bool found = false;
 
@@ -362,7 +364,7 @@ t_single_scan_status HHScanner::scanNextProcess(DWORD pid, char* exe_file, HHSca
     }
     if (!hh_args.quiet) {
         std::cout << ">> Scanning PID: " << std::setw(PID_FIELD_SIZE) << std::dec << pid;
-        std::cout << " : " << exe_file;
+        std::wcout << " : " << exe_file;
 
         if (is_process_wow64) {
             std::cout << " : 32b";

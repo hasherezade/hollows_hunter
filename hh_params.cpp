@@ -14,6 +14,7 @@ void hh_args_init(t_hh_params &hh_args)
     hh_args.suspend_suspicious = false;
     hh_args.kill_suspicious = false;
     hh_args.loop_scanning = false;
+    hh_args.etw_scan = false;
     hh_args.unique_dir = false;
 
     hh_args.quiet = false;

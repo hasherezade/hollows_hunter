@@ -1,5 +1,5 @@
 os:
-  - Visual Studio 2015
+  - Visual Studio 2019
   
 platform: x64
   - x64
@@ -31,7 +31,7 @@ before_build:
   - if [%env_arch%]==[x64] (
     cmake .. -A x64 )
   - if [%env_arch%]==[x86] (
-    cmake .. )
+    cmake .. -A Win32 )
   - cmake -DCMAKE_INSTALL_PREFIX:PATH=%APPVEYOR_BUILD_FOLDER%/%APPVEYOR_REPO_COMMIT% ..
   
 build_script:

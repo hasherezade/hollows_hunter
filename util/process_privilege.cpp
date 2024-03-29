@@ -19,7 +19,7 @@ namespace hhunter {
 			TOKEN_PRIVILEGES tpPrevious;
 			DWORD cbPrevious = sizeof(TOKEN_PRIVILEGES);
 
-			if (!LookupPrivilegeValueA(nullptr, Privilege, &luid)) {
+			if (!LookupPrivilegeValue(nullptr, Privilege, &luid)) {
 				return FALSE;
 			}
 			// get current privilege
