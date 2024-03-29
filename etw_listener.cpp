@@ -144,7 +144,6 @@ bool ETWstart()
             if (schema.event_opcode() == 98)
             {
                 krabs::parser parser(schema);
-                std::uint64_t sourcePid = schema.process_id();
                 std::uint32_t targetPid = parser.parse<std::uint32_t>(L"ProcessId");
                 LPVOID baseAddress = parser.parse<LPVOID>(L"BaseAddress");
 
