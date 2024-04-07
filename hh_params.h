@@ -8,7 +8,9 @@
 #define HH_DEFAULT_DIR "hollows_hunter.dumps"
 
 //HollowsHunter's parameters:
-typedef struct {
+typedef struct hh_params
+{
+public:
     std::string out_dir;
     bool unique_dir;
     bool loop_scanning;
@@ -23,6 +25,11 @@ typedef struct {
     std::set<long> pids_list;
     std::set<std::wstring> ignored_names_list;
     pesieve::t_params pesieve_args; //PE-sieve parameters
+
+    void init();
+    hh_params& operator=(const hh_params& other) noexcept;
+
 } t_hh_params;
 
-void hh_args_init(t_hh_params &args);
+
+

@@ -78,7 +78,7 @@ t_pesieve_res deploy_scan()
 
 int main(int argc, char *argv[])
 {
-    hh_args_init(g_hh_args);
+    g_hh_args.init();
 
     bool info_req = false;
     HHParams uParams(HH_VERSION_STR);
