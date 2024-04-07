@@ -2,6 +2,7 @@
 
 #include <windows.h>
 #include <psapi.h>
+
 #include "suspend.h"
 
 namespace process_util {
@@ -36,7 +37,7 @@ namespace process_util {
     }
 
 
-    inline bool get_process_name(DWORD processID, WCHAR* szProcessName, size_t processNameSize)
+    inline bool get_process_path(DWORD processID, WCHAR* szProcessName, size_t processNameSize)
     {
         if (!szProcessName || !processNameSize) return false;
 

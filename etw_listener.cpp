@@ -1,6 +1,8 @@
 #include "etw_listener.h"
 #include "hh_scanner.h"
 #include <winmeta.h>
+#include <string>
+#include "util/process_util.h"
 
 #define EXECUTABLE_FLAGS (PAGE_EXECUTE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY)
 #define MAX_PROCESSES 65536
@@ -17,13 +19,6 @@ time_t      pidCooldown[MAX_PROCESSES] = { 0 };
 // The documentation specific to the image load provider is here:
 // https://msdn.microsoft.com/en-us/library/windows/desktop/aa364068(v=vs.85).aspx
 
-void setPid(std::uint32_t pid)
-{
-    g_hh_args.pids_list.clear();
-    g_hh_args.pids_list.insert(pid);
-
-    g_hh_args.pesieve_args.pid = pid;
-}
 
 void resetCooldown(std::uint32_t pid)
 {
@@ -103,10 +98,71 @@ bool isAllocationExecutable(std::uint32_t pid, LPVOID baseAddress)
     return isExec;
 }
 
-void runHHScan()
+
+inline std::wstring getProcessName(DWORD pid)
 {
-    // Initiate HH Scan
-    HHScanner hhunter(g_hh_args);
+    WCHAR processName[MAX_PATH] = { 0 };
+    if (!process_util::get_process_path(pid, processName, MAX_PATH * 2)) {
+        return L"";
+    }
+    std::wstring pName(processName);
+    std::transform(pName.begin(), pName.end(), pName.begin(), tolower);
+    std::size_t found = pName.find_last_of(L"/\\");
+    if (found == (-1) || found >= pName.length()) {
+        return pName;
+    }
+    return pName.substr(found + 1);
+}
+
+
+bool isWatchedPid(DWORD pid)
+{
+    if (!g_hh_args.names_list.size() && !g_hh_args.pids_list.size()) {
+        // no filter applied, watch everything
+        return true;
+    }
+    if (g_hh_args.pids_list.find(pid) != g_hh_args.pids_list.end()) {
+        // the PID is on the watch list
+        return true;
+    }
+    
+    // get process name:
+    std::wstring wImgFileName = getProcessName(pid);
+    if (g_hh_args.names_list.find(wImgFileName) != g_hh_args.names_list.end()) {
+        // the name is on the watch list
+        return true;
+    }
+    // the PID is not on the watch list
+    return false;
+}
+
+bool isWatchedName(std::string& imgFileName)
+{
+    if (!g_hh_args.names_list.size() && !g_hh_args.pids_list.size()) {
+        // no filter applied, watch everything
+        return true;
+    }
+    std::wstring wImgFileName(imgFileName.begin(), imgFileName.end());
+    if (g_hh_args.names_list.find(wImgFileName) != g_hh_args.names_list.end()) {
+        // the name is on the watch list
+        return true;
+    }
+    // the name is not on the watch list
+    return false;
+}
+
+void runHHScan(std::uint32_t pid)
+{
+    // local copy of arguments
+    t_hh_params args = g_hh_args;
+
+    // during the current scan use only a single PID
+    args.pids_list.clear();
+    args.names_list.clear();
+    args.pids_list.insert(pid);
+    args.pesieve_args.pid = pid;
+
+    HHScanner hhunter(args);
     HHScanReport* report = hhunter.scan();
     if (report)
     {
@@ -130,14 +186,14 @@ bool ETWstart()
             {
                 krabs::parser parser(schema);
                 std::string filename = parser.parse<std::string>(L"ImageFileName");
-                std::uint32_t pid = parser.parse<std::uint32_t>(L"ProcessId");
+                if (!isWatchedName(filename)) return;
 
+                std::uint32_t pid = parser.parse<std::uint32_t>(L"ProcessId");
                 // New process reset cooldown just in case
                 resetCooldown(pid);
-                setPid(pid);
 
                 std::cout << "Scanning New Process: " << filename << " (" << pid << ")" << std::endl;
-                runHHScan();
+                runHHScan(pid);
             }
         });
 
@@ -149,12 +205,14 @@ bool ETWstart()
             {
                 krabs::parser parser(schema);
                 std::uint32_t targetPid = parser.parse<std::uint32_t>(L"ProcessId");
-                LPVOID baseAddress = parser.parse<LPVOID>(L"BaseAddress");
 
-                bool doScan = false;
+                if (!isWatchedPid(targetPid)) return;
 
                 if (!isCooldown(targetPid))
                     return;
+
+                bool doScan = false;
+                LPVOID baseAddress = parser.parse<LPVOID>(L"BaseAddress");
 
                 if (targetPid)
                 {
@@ -163,9 +221,8 @@ bool ETWstart()
 
                 if (doScan)
                 {
-                    setPid(targetPid);
                     updateCooldown(targetPid);
-                    runHHScan();
+                    runHHScan(targetPid);
                 }
             }
         });
