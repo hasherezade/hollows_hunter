@@ -13,5 +13,7 @@ var searchData=
   ['is_5fwow_5f64_5fby_5fpid_10',['is_wow_64_by_pid',['../namespaceprocess__util.html#af9bdd83e9c8262ef548737112964d2f9',1,'process_util']]],
   ['isallocationexecutable_11',['isAllocationExecutable',['../etw__listener_8cpp.html#ac682b8c5125d08564536a196179fcc02',1,'etw_listener.cpp']]],
   ['iscooldown_12',['isCooldown',['../etw__listener_8cpp.html#a4c138864a2017d6e176c70333bc97d8a',1,'etw_listener.cpp']]],
-  ['isscannercompatibile_13',['isScannerCompatibile',['../class_h_h_scanner.html#adec367c7541ba8e334c7f674e57f429a',1,'HHScanner']]]
+  ['isscannercompatibile_13',['isScannerCompatibile',['../class_h_h_scanner.html#adec367c7541ba8e334c7f674e57f429a',1,'HHScanner']]],
+  ['iswatchedname_14',['isWatchedName',['../etw__listener_8cpp.html#a494bead718253dc741d56616634d02e6',1,'etw_listener.cpp']]],
+  ['iswatchedpid_15',['isWatchedPid',['../etw__listener_8cpp.html#a5c22d44e136bf79ff1f029ae5fa88ac1',1,'etw_listener.cpp']]]
 ];

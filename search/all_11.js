@@ -8,5 +8,5 @@ var searchData=
   ['resetcooldown_5',['resetCooldown',['../etw__listener_8cpp.html#ab23d150dcf90a1714066b3082a4c5ee3',1,'etw_listener.cpp']]],
   ['resources_2eh_6',['resources.h',['../resources_8h.html',1,'']]],
   ['resume_5fprocess_7',['resume_process',['../suspend_8cpp.html#a91b8c7e4bd20a21524565bf87e913b41',1,'resume_process(DWORD processId):&#160;suspend.cpp'],['../suspend_8h.html#a91b8c7e4bd20a21524565bf87e913b41',1,'resume_process(DWORD processId):&#160;suspend.cpp']]],
-  ['runhhscan_8',['runHHScan',['../etw__listener_8cpp.html#a51e484448472c8fc90ff674c661c8e84',1,'etw_listener.cpp']]]
+  ['runhhscan_8',['runHHScan',['../etw__listener_8cpp.html#ad10d7be89fd7812d39cb5525801371a1',1,'etw_listener.cpp']]]
 ];

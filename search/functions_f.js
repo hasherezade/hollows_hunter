@@ -8,11 +8,10 @@ var searchData=
   ['set_5foutput_5fdir_5',['set_output_dir',['../namespacefiles__util.html#abab65a3cbe43de11dd5d25ed5e4d47e5',1,'files_util']]],
   ['set_5fprivilege_6',['set_privilege',['../namespacehhunter_1_1util.html#a0a7f83c9acd615ee401364757a03341e',1,'hhunter::util']]],
   ['setendtick_7',['setEndTick',['../class_h_h_scan_report.html#a15b2afc2c28036efa8e034a2ecf3ff0c',1,'HHScanReport']]],
-  ['setpid_8',['setPid',['../etw__listener_8cpp.html#aed3cdd6e89776afc48edd3a115263f41',1,'etw_listener.cpp']]],
-  ['shellc_5fmode_5fmode_5fto_5fid_9',['shellc_mode_mode_to_id',['../pe__sieve__params__info_8cpp.html#a7e0ff5634e6f041eb6cb58f81c280323',1,'shellc_mode_mode_to_id(const pesieve::t_shellc_mode &amp;mode):&#160;pe_sieve_params_info.cpp'],['../pe__sieve__params__info_8h.html#a7e0ff5634e6f041eb6cb58f81c280323',1,'shellc_mode_mode_to_id(const pesieve::t_shellc_mode &amp;mode):&#160;pe_sieve_params_info.cpp']]],
-  ['str_5fhist_5fdiffrence_10',['str_hist_diffrence',['../namespacehhunter_1_1util.html#a0ec1bb29952cdc467b9936fb2495ccf9',1,'hhunter::util']]],
-  ['strtime_11',['strtime',['../namespaceutil.html#a928be58496639689a6a86142ab7030eb',1,'util']]],
-  ['summarizescan_12',['summarizeScan',['../class_h_h_scanner.html#a6c20de8e1a13034173c42c2e87267af3',1,'HHScanner']]],
-  ['suspend_5fprocess_13',['suspend_process',['../suspend_8cpp.html#a3c63f252433e6e7532e441ed5cacca9d',1,'suspend_process(DWORD processId):&#160;suspend.cpp'],['../suspend_8h.html#a3c63f252433e6e7532e441ed5cacca9d',1,'suspend_process(DWORD processId):&#160;suspend.cpp']]],
-  ['suspend_5fsuspicious_14',['suspend_suspicious',['../namespaceprocess__util.html#a9edce70fe41a8ec91d549fb9d71a3b10',1,'process_util']]]
+  ['shellc_5fmode_5fmode_5fto_5fid_8',['shellc_mode_mode_to_id',['../pe__sieve__params__info_8cpp.html#a7e0ff5634e6f041eb6cb58f81c280323',1,'shellc_mode_mode_to_id(const pesieve::t_shellc_mode &amp;mode):&#160;pe_sieve_params_info.cpp'],['../pe__sieve__params__info_8h.html#a7e0ff5634e6f041eb6cb58f81c280323',1,'shellc_mode_mode_to_id(const pesieve::t_shellc_mode &amp;mode):&#160;pe_sieve_params_info.cpp']]],
+  ['str_5fhist_5fdiffrence_9',['str_hist_diffrence',['../namespacehhunter_1_1util.html#a0ec1bb29952cdc467b9936fb2495ccf9',1,'hhunter::util']]],
+  ['strtime_10',['strtime',['../namespaceutil.html#a928be58496639689a6a86142ab7030eb',1,'util']]],
+  ['summarizescan_11',['summarizeScan',['../class_h_h_scanner.html#a6c20de8e1a13034173c42c2e87267af3',1,'HHScanner']]],
+  ['suspend_5fprocess_12',['suspend_process',['../suspend_8cpp.html#a3c63f252433e6e7532e441ed5cacca9d',1,'suspend_process(DWORD processId):&#160;suspend.cpp'],['../suspend_8h.html#a3c63f252433e6e7532e441ed5cacca9d',1,'suspend_process(DWORD processId):&#160;suspend.cpp']]],
+  ['suspend_5fsuspicious_13',['suspend_suspicious',['../namespaceprocess__util.html#a9edce70fe41a8ec91d549fb9d71a3b10',1,'process_util']]]
 ];

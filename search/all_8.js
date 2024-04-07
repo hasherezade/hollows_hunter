@@ -18,5 +18,7 @@ var searchData=
   ['isallocationexecutable_15',['isAllocationExecutable',['../etw__listener_8cpp.html#ac682b8c5125d08564536a196179fcc02',1,'etw_listener.cpp']]],
   ['iscooldown_16',['isCooldown',['../etw__listener_8cpp.html#a4c138864a2017d6e176c70333bc97d8a',1,'etw_listener.cpp']]],
   ['isscannercompatibile_17',['isScannerCompatibile',['../class_h_h_scanner.html#adec367c7541ba8e334c7f674e57f429a',1,'HHScanner']]],
-  ['isscannerwow64_18',['isScannerWow64',['../class_h_h_scanner.html#a64bb7d15ea59c9fe7e25f266e05005b9',1,'HHScanner']]]
+  ['isscannerwow64_18',['isScannerWow64',['../class_h_h_scanner.html#a64bb7d15ea59c9fe7e25f266e05005b9',1,'HHScanner']]],
+  ['iswatchedname_19',['isWatchedName',['../etw__listener_8cpp.html#a494bead718253dc741d56616634d02e6',1,'etw_listener.cpp']]],
+  ['iswatchedpid_20',['isWatchedPid',['../etw__listener_8cpp.html#a5c22d44e136bf79ff1f029ae5fa88ac1',1,'etw_listener.cpp']]]
 ];
