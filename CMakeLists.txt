@@ -60,6 +60,7 @@ set (hdrs
 	util/process_privilege.h
 	util/time_util.h
 	util/strings_util.h
+	util/process_util.h
 )
 
 if(USE_ETW)

@@ -12,89 +12,13 @@
 #include "util/suspend.h"
 #include "util/time_util.h"
 #include "term_util.h"
+#include "util/process_util.h"
 
 #include <paramkit.h>
 
 #define PID_FIELD_SIZE 4
 
 using namespace pesieve;
-
-namespace process_util {
-
-    bool is_wow_64(HANDLE process)
-    {
-        FARPROC procPtr = GetProcAddress(GetModuleHandleA("kernel32"), "IsWow64Process");
-        if (!procPtr) {
-            //this system does not have a function IsWow64Process
-            return false;
-        }
-        BOOL(WINAPI * is_process_wow64)(IN HANDLE, OUT PBOOL)
-            = (BOOL(WINAPI*)(IN HANDLE, OUT PBOOL))procPtr;
-
-        BOOL isCurrWow64 = FALSE;
-        if (!is_process_wow64(process, &isCurrWow64)) {
-            return false;
-        }
-        return isCurrWow64 ? true : false;
-    }
-
-    bool get_process_info(DWORD processID, bool &isWow64, char* szProcessName, DWORD processNameSize)
-    {
-        HANDLE hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_VM_READ, FALSE, processID);
-        if (!hProcess) {
-            return false;
-        }
-
-        bool is_ok = true;
-        if (szProcessName && processNameSize > 0) {
-            DWORD cbNeeded = 0;
-            HMODULE hMod = nullptr;
-            memset(szProcessName, 0, processNameSize);
-            if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeeded)) {
-                GetModuleBaseNameA(hProcess, hMod, szProcessName, processNameSize);
-            } else { is_ok = false; }
-        }
-        isWow64 = is_wow_64(hProcess);
-        CloseHandle(hProcess);
-        return is_ok;
-    }
-
-    size_t suspend_suspicious(std::vector<DWORD> &suspicious_pids)
-    {
-        size_t done = 0;
-        std::vector<DWORD>::iterator itr;
-        for (itr = suspicious_pids.begin(); itr != suspicious_pids.end(); ++itr) {
-            DWORD pid = *itr;
-            if (!suspend_process(pid)) {
-                std::cerr << "Could not suspend the process. PID = " << pid << std::endl;
-            }
-        }
-        return done;
-    }
-
-    size_t kill_suspicious(std::vector<DWORD> &suspicious_pids)
-    {
-        size_t killed = 0;
-        std::vector<DWORD>::iterator itr;
-        for (itr = suspicious_pids.begin(); itr != suspicious_pids.end(); ++itr) {
-            DWORD pid = *itr;
-            HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, pid);
-            if (!hProcess) {
-                continue;
-            }
-            if (TerminateProcess(hProcess, 0)) {
-                killed++;
-            }
-            else {
-                std::cerr << "Could not terminate the process. PID = " << pid << std::endl;
-            }
-            CloseHandle(hProcess);
-        }
-        return killed;
-    }
-
-}; // namespace process_util
-
 
 namespace files_util {
 
@@ -328,8 +252,7 @@ t_single_scan_status HHScanner::scanNextProcess(DWORD pid, WCHAR* exe_file, HHSc
 {
     bool found = false;
 
-    bool is_process_wow64 = false;
-    process_util::get_process_info(pid, is_process_wow64, nullptr, 0);
+    const bool is_process_wow64 = process_util::is_wow_64_by_pid(pid);
 
     const bool check_time = (hh_args.ptimes != TIME_UNDEFINED) ? true : false;
 #ifdef _DEBUG
