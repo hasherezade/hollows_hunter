@@ -83,217 +83,215 @@ $(function() { codefold.init(0); });
 <div class="contents">
 <a href="etw__listener_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="etw__listener_8h.html">etw_listener.h</a>&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="hh__scanner_8h.html">hh_scanner.h</a>&quot;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#a9b6042fcf3eb14e4e938a314626eea2d">    4</a></span><span class="preprocessor">#define EXECUTABLE_FLAGS (PAGE_EXECUTE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY)</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#a92fd8bb5807bf6abb640686f51e5df3e">    5</a></span><span class="preprocessor">#define MAX_PROCESSES 65536</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// Global var for ETW thread</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">    8</a></span>time_t      <a class="code hl_variable" href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">pidCooldown</a>[<a class="code hl_define" href="etw__listener_8cpp.html#a92fd8bb5807bf6abb640686f51e5df3e">MAX_PROCESSES</a>] = { 0 };</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;winmeta.h&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#a9b6042fcf3eb14e4e938a314626eea2d">    5</a></span><span class="preprocessor">#define EXECUTABLE_FLAGS (PAGE_EXECUTE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY)</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#a92fd8bb5807bf6abb640686f51e5df3e">    6</a></span><span class="preprocessor">#define MAX_PROCESSES 65536</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">// Global var for ETW thread</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">    9</a></span>time_t      <a class="code hl_variable" href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">pidCooldown</a>[<a class="code hl_define" href="etw__listener_8cpp.html#a92fd8bb5807bf6abb640686f51e5df3e">MAX_PROCESSES</a>] = { 0 };</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// ETW Handler</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// To filter our events, we want to compare against the</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// event opcode. For kernel traces, you can consult this page</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// https://msdn.microsoft.com/en-us/library/windows/desktop/aa364083(v=vs.85).aspx</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">//</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// The documentation specific to the image load provider is here:</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// https://msdn.microsoft.com/en-us/library/windows/desktop/aa364068(v=vs.85).aspx</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#aed3cdd6e89776afc48edd3a115263f41">   19</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="etw__listener_8cpp.html#aed3cdd6e89776afc48edd3a115263f41">setPid</a>(std::uint32_t pid)</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>{</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_variable" href="hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781">g_hh_args</a>.<a class="code hl_variable" href="structt__hh__params.html#a6cdcdd13e245c3ddba0ee30e23653257">pids_list</a>.clear();</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_variable" href="hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781">g_hh_args</a>.<a class="code hl_variable" href="structt__hh__params.html#a6cdcdd13e245c3ddba0ee30e23653257">pids_list</a>.insert(pid);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}</div>
-</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// ETW Handler</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// To filter our events, we want to compare against the</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// event opcode. For kernel traces, you can consult this page</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// https://msdn.microsoft.com/en-us/library/windows/desktop/aa364083(v=vs.85).aspx</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// The documentation specific to the image load provider is here:</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// https://msdn.microsoft.com/en-us/library/windows/desktop/aa364068(v=vs.85).aspx</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#aed3cdd6e89776afc48edd3a115263f41">   20</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="etw__listener_8cpp.html#aed3cdd6e89776afc48edd3a115263f41">setPid</a>(std::uint32_t pid)</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>{</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_variable" href="hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781">g_hh_args</a>.<a class="code hl_variable" href="structt__hh__params.html#a6cdcdd13e245c3ddba0ee30e23653257">pids_list</a>.clear();</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_variable" href="hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781">g_hh_args</a>.<a class="code hl_variable" href="structt__hh__params.html#a6cdcdd13e245c3ddba0ee30e23653257">pids_list</a>.insert(pid);</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="foldopen" id="foldopen00025" data-start="{" data-end="}">
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#ab23d150dcf90a1714066b3082a4c5ee3">   25</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="etw__listener_8cpp.html#ab23d150dcf90a1714066b3082a4c5ee3">resetCooldown</a>(std::uint32_t pid)</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>{</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_variable" href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">pidCooldown</a>[pid] = 0;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_variable" href="hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781">g_hh_args</a>.<a class="code hl_variable" href="structt__hh__params.html#a6d866df34826f2db1cb9f76269887007">pesieve_args</a>.pid = pid;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}</div>
 </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#a35fca35282a44d7555d0ad5cfeece23d">   30</a></span>BOOL <a class="code hl_function" href="etw__listener_8cpp.html#a35fca35282a44d7555d0ad5cfeece23d">isCooldown</a>(std::uint32_t pid)</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>{</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">if</span> (0 != <a class="code hl_variable" href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">pidCooldown</a>[pid])</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        time_t now = 0;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        time(&amp;now);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">if</span> (now - <a class="code hl_variable" href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">pidCooldown</a>[pid] &gt; 1)</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <a class="code hl_function" href="etw__listener_8cpp.html#ab23d150dcf90a1714066b3082a4c5ee3">resetCooldown</a>(pid);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <span class="comment">//std::cout &lt;&lt; &quot;Skipping scan for: &quot; &lt;&lt; pid &lt;&lt; &quot;is in cooldown&quot; &lt;&lt; std::endl;</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            <span class="keywordflow">return</span> FALSE;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    }</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">return</span> TRUE;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#ab23d150dcf90a1714066b3082a4c5ee3">   28</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="etw__listener_8cpp.html#ab23d150dcf90a1714066b3082a4c5ee3">resetCooldown</a>(std::uint32_t pid)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>{</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_variable" href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">pidCooldown</a>[pid] = 0;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>}</div>
 </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#a4c138864a2017d6e176c70333bc97d8a">   33</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="etw__listener_8cpp.html#a4c138864a2017d6e176c70333bc97d8a">isCooldown</a>(std::uint32_t pid)</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>{</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">pidCooldown</a>[pid])</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        time_t now = 0;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        time(&amp;now);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordflow">if</span> (now - <a class="code hl_variable" href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">pidCooldown</a>[pid] &gt; 1)</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            <a class="code hl_function" href="etw__listener_8cpp.html#ab23d150dcf90a1714066b3082a4c5ee3">resetCooldown</a>(pid);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            <span class="comment">//std::cout &lt;&lt; &quot;Skipping scan for: &quot; &lt;&lt; pid &lt;&lt; &quot;is in cooldown&quot; &lt;&lt; std::endl;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#a71daf6335ddd7bd8c88185f08132a5be">   47</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="etw__listener_8cpp.html#a71daf6335ddd7bd8c88185f08132a5be">updateCooldown</a>(std::uint32_t pid)</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>{</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">pidCooldown</a>[pid])</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        time(&amp;<a class="code hl_variable" href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">pidCooldown</a>[pid]);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
 </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#ac682b8c5125d08564536a196179fcc02">   56</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="etw__listener_8cpp.html#ac682b8c5125d08564536a196179fcc02">isAllocationExecutable</a>(std::uint32_t pid, LPVOID baseAddress)</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>{</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">bool</span> isExec = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION, FALSE, pid);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">if</span> (hProcess)</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    {</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordtype">bool</span>    stop = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        PVOID   base = 0;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        LPVOID  addr = baseAddress;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        MEMORY_BASIC_INFORMATION mbi = { 0 };</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">do</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        {</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            <span class="keywordflow">if</span> (VirtualQueryEx(hProcess, addr, &amp;mbi, <span class="keyword">sizeof</span>(MEMORY_BASIC_INFORMATION)) &amp;&amp; mbi.AllocationBase)</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            {</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                <span class="comment">// Start of the allocation</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                <span class="keywordflow">if</span> (!base)</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                {</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                    base = mbi.AllocationBase;</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                }</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                <span class="comment">// Still within?</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                <span class="keywordflow">if</span> (base == mbi.AllocationBase)</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                {</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                    <span class="keywordflow">if</span> (mbi.AllocationProtect &amp; <a class="code hl_define" href="etw__listener_8cpp.html#a9b6042fcf3eb14e4e938a314626eea2d">EXECUTABLE_FLAGS</a> || mbi.Protect &amp; <a class="code hl_define" href="etw__listener_8cpp.html#a9b6042fcf3eb14e4e938a314626eea2d">EXECUTABLE_FLAGS</a>)</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                    {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                        std::cout &lt;&lt; <span class="stringliteral">&quot;New Executable Section: &quot;</span> &lt;&lt; <span class="stringliteral">&quot; (&quot;</span> &lt;&lt; pid &lt;&lt; <span class="stringliteral">&quot;) 0x&quot;</span> &lt;&lt; std::hex &lt;&lt; addr &lt;&lt; <span class="stringliteral">&quot; Flags=[Alloc: &quot;</span> &lt;&lt; mbi.AllocationProtect &lt;&lt; <span class="stringliteral">&quot; | Now: &quot;</span> &lt;&lt; mbi.Protect &lt;&lt; <span class="stringliteral">&quot;] &quot;</span> &lt;&lt; std::dec &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                        isExec = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                    }</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                    <span class="comment">// Move to next block</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                    addr = <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(addr) + mbi.RegionSize;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                }</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                    stop = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            }</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                stop = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        } <span class="keywordflow">while</span> (!stop &amp;&amp; !isExec);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        CloseHandle(hProcess);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordflow">return</span> isExec;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#a71daf6335ddd7bd8c88185f08132a5be">   50</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="etw__listener_8cpp.html#a71daf6335ddd7bd8c88185f08132a5be">updateCooldown</a>(std::uint32_t pid)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>{</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">pidCooldown</a>[pid])</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        time(&amp;<a class="code hl_variable" href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">pidCooldown</a>[pid]);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    }</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>}</div>
 </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="foldopen" id="foldopen00103" data-start="{" data-end="}">
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#a04ed7dd8998af138c7cca0225c99be08">  103</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="etw__listener_8cpp.html#a04ed7dd8998af138c7cca0225c99be08">ETWstart</a>()</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>{</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    krabs::kernel_trace trace(L<span class="stringliteral">&quot;HollowsHunter&quot;</span>);</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    krabs::kernel::process_provider         processProvider;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    krabs::kernel::virtual_alloc_provider   virtualAllocProvider;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="comment">// Process Start Trigger</span></div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    processProvider.add_on_event_callback([](<span class="keyword">const</span> EVENT_RECORD&amp; record, <span class="keyword">const</span> krabs::trace_context&amp; trace_context)</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        {</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            krabs::schema schema(record, trace_context.schema_locator);</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            <span class="keywordflow">if</span> (schema.event_opcode() == 1)</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            {</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                krabs::parser parser(schema);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                std::string filename = parser.parse&lt;std::string&gt;(L<span class="stringliteral">&quot;ImageFileName&quot;</span>);</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                std::uint32_t pid = parser.parse&lt;std::uint32_t&gt;(L<span class="stringliteral">&quot;ProcessId&quot;</span>);</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                <span class="comment">// New process reset cooldown just in case</span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                <a class="code hl_function" href="etw__listener_8cpp.html#ab23d150dcf90a1714066b3082a4c5ee3">resetCooldown</a>(pid);</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                std::cout &lt;&lt; <span class="stringliteral">&quot;Scanning New Process: &quot;</span> &lt;&lt; filename &lt;&lt; <span class="stringliteral">&quot; (&quot;</span> &lt;&lt; pid &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                <a class="code hl_function" href="etw__listener_8cpp.html#aed3cdd6e89776afc48edd3a115263f41">setPid</a>(pid);</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                <a class="code hl_variable" href="hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781">g_hh_args</a>.<a class="code hl_variable" href="structt__hh__params.html#a6d866df34826f2db1cb9f76269887007">pesieve_args</a>.pid = pid;</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                <span class="comment">// Initiate HH Scan</span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                <a class="code hl_class" href="class_h_h_scanner.html">HHScanner</a> <a class="code hl_namespace" href="namespacehhunter.html">hhunter</a>(<a class="code hl_variable" href="hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781">g_hh_args</a>);</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                <a class="code hl_class" href="class_h_h_scan_report.html">HHScanReport</a>* report = <a class="code hl_namespace" href="namespacehhunter.html">hhunter</a>.scan();</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                <span class="keywordflow">if</span> (report)</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                {</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                    <a class="code hl_namespace" href="namespacehhunter.html">hhunter</a>.summarizeScan(report);</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                    <span class="keyword">delete</span> report;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                }</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            }</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        });</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#ac682b8c5125d08564536a196179fcc02">   59</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="etw__listener_8cpp.html#ac682b8c5125d08564536a196179fcc02">isAllocationExecutable</a>(std::uint32_t pid, LPVOID baseAddress)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>{</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">bool</span> isExec = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION, FALSE, pid);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordflow">if</span> (hProcess)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordtype">bool</span>    stop = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        PVOID   base = 0;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        LPVOID  addr = baseAddress;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        MEMORY_BASIC_INFORMATION mbi = { 0 };</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordflow">do</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            <span class="keywordflow">if</span> (VirtualQueryEx(hProcess, addr, &amp;mbi, <span class="keyword">sizeof</span>(MEMORY_BASIC_INFORMATION)) &amp;&amp; mbi.AllocationBase)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                <span class="comment">// Start of the allocation</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                <span class="keywordflow">if</span> (!base)</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                    base = mbi.AllocationBase;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                <span class="comment">// Still within?</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                <span class="keywordflow">if</span> (base == mbi.AllocationBase)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                    <span class="keywordflow">if</span> (mbi.AllocationProtect &amp; <a class="code hl_define" href="etw__listener_8cpp.html#a9b6042fcf3eb14e4e938a314626eea2d">EXECUTABLE_FLAGS</a> || mbi.Protect &amp; <a class="code hl_define" href="etw__listener_8cpp.html#a9b6042fcf3eb14e4e938a314626eea2d">EXECUTABLE_FLAGS</a>)</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                    {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                        std::cout &lt;&lt; <span class="stringliteral">&quot;New Executable Section: &quot;</span> &lt;&lt; <span class="stringliteral">&quot; (&quot;</span> &lt;&lt; pid &lt;&lt; <span class="stringliteral">&quot;) 0x&quot;</span> &lt;&lt; std::hex &lt;&lt; addr &lt;&lt; <span class="stringliteral">&quot; Flags=[Alloc: &quot;</span> &lt;&lt; mbi.AllocationProtect &lt;&lt; <span class="stringliteral">&quot; | Now: &quot;</span> &lt;&lt; mbi.Protect &lt;&lt; <span class="stringliteral">&quot;] &quot;</span> &lt;&lt; std::dec &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                        isExec = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                    }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                    <span class="comment">// Move to next block</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                    addr = <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(addr) + mbi.RegionSize;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                    stop = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                stop = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        } <span class="keywordflow">while</span> (!stop &amp;&amp; !isExec);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        CloseHandle(hProcess);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordflow">return</span> isExec;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}</div>
+</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="foldopen" id="foldopen00106" data-start="{" data-end="}">
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#a51e484448472c8fc90ff674c661c8e84">  106</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="etw__listener_8cpp.html#a51e484448472c8fc90ff674c661c8e84">runHHScan</a>()</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>{</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="comment">// Initiate HH Scan</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <a class="code hl_class" href="class_h_h_scanner.html">HHScanner</a> <a class="code hl_namespace" href="namespacehhunter.html">hhunter</a>(<a class="code hl_variable" href="hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781">g_hh_args</a>);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <a class="code hl_class" href="class_h_h_scan_report.html">HHScanReport</a>* report = <a class="code hl_namespace" href="namespacehhunter.html">hhunter</a>.scan();</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordflow">if</span> (report)</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <a class="code hl_namespace" href="namespacehhunter.html">hhunter</a>.summarizeScan(report);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keyword">delete</span> report;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    }</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>}</div>
+</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="foldopen" id="foldopen00118" data-start="{" data-end="}">
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="etw__listener_8cpp.html#a04ed7dd8998af138c7cca0225c99be08">  118</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="etw__listener_8cpp.html#a04ed7dd8998af138c7cca0225c99be08">ETWstart</a>()</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>{</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    krabs::kernel_trace trace(L<span class="stringliteral">&quot;HollowsHunter&quot;</span>);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    krabs::kernel::process_provider         processProvider;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    krabs::kernel::virtual_alloc_provider   virtualAllocProvider;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="comment">// Process Start Trigger</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    processProvider.add_on_event_callback([](<span class="keyword">const</span> EVENT_RECORD&amp; record, <span class="keyword">const</span> krabs::trace_context&amp; trace_context)</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        {</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            krabs::schema schema(record, trace_context.schema_locator);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            <span class="keywordflow">if</span> (schema.event_opcode() == WINEVENT_OPCODE_START)</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                krabs::parser parser(schema);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                std::string filename = parser.parse&lt;std::string&gt;(L<span class="stringliteral">&quot;ImageFileName&quot;</span>);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                std::uint32_t pid = parser.parse&lt;std::uint32_t&gt;(L<span class="stringliteral">&quot;ProcessId&quot;</span>);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                <span class="comment">// New process reset cooldown just in case</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                <a class="code hl_function" href="etw__listener_8cpp.html#ab23d150dcf90a1714066b3082a4c5ee3">resetCooldown</a>(pid);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                <a class="code hl_function" href="etw__listener_8cpp.html#aed3cdd6e89776afc48edd3a115263f41">setPid</a>(pid);</div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="comment">// Process VirtualAlloc Trigger</span></div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    virtualAllocProvider.add_on_event_callback([](<span class="keyword">const</span> EVENT_RECORD&amp; record, <span class="keyword">const</span> krabs::trace_context&amp; trace_context)</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        {</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            krabs::schema schema(record, trace_context.schema_locator);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                std::cout &lt;&lt; <span class="stringliteral">&quot;Scanning New Process: &quot;</span> &lt;&lt; filename &lt;&lt; <span class="stringliteral">&quot; (&quot;</span> &lt;&lt; pid &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                <a class="code hl_function" href="etw__listener_8cpp.html#a51e484448472c8fc90ff674c661c8e84">runHHScan</a>();</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            }</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        });</div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            <span class="keywordflow">if</span> (schema.event_opcode() == 98)</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            {</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                krabs::parser parser(schema);</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                std::uint32_t targetPid = parser.parse&lt;std::uint32_t&gt;(L<span class="stringliteral">&quot;ProcessId&quot;</span>);</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>                LPVOID baseAddress = parser.parse&lt;LPVOID&gt;(L<span class="stringliteral">&quot;BaseAddress&quot;</span>);</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                <span class="keywordtype">bool</span> doScan = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                <span class="keywordflow">if</span> (!<a class="code hl_function" href="etw__listener_8cpp.html#a35fca35282a44d7555d0ad5cfeece23d">isCooldown</a>(targetPid))</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>                <span class="keywordflow">if</span> (0 != targetPid)</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                {</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                    doScan = <a class="code hl_function" href="etw__listener_8cpp.html#ac682b8c5125d08564536a196179fcc02">isAllocationExecutable</a>(targetPid, baseAddress);</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                }</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                <span class="keywordflow">if</span> (doScan)</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                {</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                    <a class="code hl_function" href="etw__listener_8cpp.html#aed3cdd6e89776afc48edd3a115263f41">setPid</a>(targetPid);</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                    <a class="code hl_function" href="etw__listener_8cpp.html#a71daf6335ddd7bd8c88185f08132a5be">updateCooldown</a>(targetPid);</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                    <a class="code hl_variable" href="hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781">g_hh_args</a>.<a class="code hl_variable" href="structt__hh__params.html#a6d866df34826f2db1cb9f76269887007">pesieve_args</a>.pid = targetPid;</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                    <span class="comment">// Initiate HH Scan</span></div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                    <a class="code hl_class" href="class_h_h_scanner.html">HHScanner</a> <a class="code hl_namespace" href="namespacehhunter.html">hhunter</a>(<a class="code hl_variable" href="hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781">g_hh_args</a>);</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                    <a class="code hl_class" href="class_h_h_scan_report.html">HHScanReport</a>* report = <a class="code hl_namespace" href="namespacehhunter.html">hhunter</a>.scan();</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                    <span class="keywordflow">if</span> (report)</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                    {</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                        <a class="code hl_namespace" href="namespacehhunter.html">hhunter</a>.summarizeScan(report);</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                        <span class="keyword">delete</span> report;</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                    }</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                }</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            }</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        });</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keywordtype">bool</span> isOk = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    trace.enable(processProvider);</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    trace.enable(virtualAllocProvider);</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keywordflow">try</span> {</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;Starting listener...&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        trace.start();</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;Started&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    }</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keywordflow">catch</span> (std::runtime_error&amp; err) {</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        std::cerr &lt;&lt; <span class="stringliteral">&quot;[ERROR] &quot;</span> &lt;&lt; err.what() &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        isOk = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    }</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="keywordflow">return</span> isOk;</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>}</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="comment">// Process VirtualAlloc Trigger</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    virtualAllocProvider.add_on_event_callback([](<span class="keyword">const</span> EVENT_RECORD&amp; record, <span class="keyword">const</span> krabs::trace_context&amp; trace_context)</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        {</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            krabs::schema schema(record, trace_context.schema_locator);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            <span class="keywordflow">if</span> (schema.event_opcode() == 98) <span class="comment">// VirtualAlloc</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            {</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                krabs::parser parser(schema);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>                std::uint32_t targetPid = parser.parse&lt;std::uint32_t&gt;(L<span class="stringliteral">&quot;ProcessId&quot;</span>);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                LPVOID baseAddress = parser.parse&lt;LPVOID&gt;(L<span class="stringliteral">&quot;BaseAddress&quot;</span>);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                <span class="keywordtype">bool</span> doScan = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                <span class="keywordflow">if</span> (!<a class="code hl_function" href="etw__listener_8cpp.html#a4c138864a2017d6e176c70333bc97d8a">isCooldown</a>(targetPid))</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                <span class="keywordflow">if</span> (targetPid)</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                {</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                    doScan = <a class="code hl_function" href="etw__listener_8cpp.html#ac682b8c5125d08564536a196179fcc02">isAllocationExecutable</a>(targetPid, baseAddress);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                }</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                <span class="keywordflow">if</span> (doScan)</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                {</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                    <a class="code hl_function" href="etw__listener_8cpp.html#aed3cdd6e89776afc48edd3a115263f41">setPid</a>(targetPid);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                    <a class="code hl_function" href="etw__listener_8cpp.html#a71daf6335ddd7bd8c88185f08132a5be">updateCooldown</a>(targetPid);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                    <a class="code hl_function" href="etw__listener_8cpp.html#a51e484448472c8fc90ff674c661c8e84">runHHScan</a>();</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            }</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        });</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordtype">bool</span> isOk = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    trace.enable(processProvider);</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    trace.enable(virtualAllocProvider);</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;Starting listener...&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        trace.start();</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    }</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keywordflow">catch</span> (std::runtime_error&amp; err) {</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        std::cerr &lt;&lt; <span class="stringliteral">&quot;[ERROR] &quot;</span> &lt;&lt; err.what() &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        isOk = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    }</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordflow">return</span> isOk;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>}</div>
 </div>
 <div class="ttc" id="aclass_h_h_scan_report_html"><div class="ttname"><a href="class_h_h_scan_report.html">HHScanReport</a></div><div class="ttdef"><b>Definition</b> <a href="hh__report_8h_source.html#l00012">hh_report.h:13</a></div></div>
 <div class="ttc" id="aclass_h_h_scanner_html"><div class="ttname"><a href="class_h_h_scanner.html">HHScanner</a></div><div class="ttdef"><b>Definition</b> <a href="hh__scanner_8h_source.html#l00023">hh_scanner.h:23</a></div></div>
-<div class="ttc" id="aetw__listener_8cpp_html_a04ed7dd8998af138c7cca0225c99be08"><div class="ttname"><a href="etw__listener_8cpp.html#a04ed7dd8998af138c7cca0225c99be08">ETWstart</a></div><div class="ttdeci">bool ETWstart()</div><div class="ttdef"><b>Definition</b> <a href="#l00103">etw_listener.cpp:103</a></div></div>
-<div class="ttc" id="aetw__listener_8cpp_html_a35fca35282a44d7555d0ad5cfeece23d"><div class="ttname"><a href="etw__listener_8cpp.html#a35fca35282a44d7555d0ad5cfeece23d">isCooldown</a></div><div class="ttdeci">BOOL isCooldown(std::uint32_t pid)</div><div class="ttdef"><b>Definition</b> <a href="#l00030">etw_listener.cpp:30</a></div></div>
-<div class="ttc" id="aetw__listener_8cpp_html_a71daf6335ddd7bd8c88185f08132a5be"><div class="ttname"><a href="etw__listener_8cpp.html#a71daf6335ddd7bd8c88185f08132a5be">updateCooldown</a></div><div class="ttdeci">void updateCooldown(std::uint32_t pid)</div><div class="ttdef"><b>Definition</b> <a href="#l00047">etw_listener.cpp:47</a></div></div>
-<div class="ttc" id="aetw__listener_8cpp_html_a92fd8bb5807bf6abb640686f51e5df3e"><div class="ttname"><a href="etw__listener_8cpp.html#a92fd8bb5807bf6abb640686f51e5df3e">MAX_PROCESSES</a></div><div class="ttdeci">#define MAX_PROCESSES</div><div class="ttdef"><b>Definition</b> <a href="#l00005">etw_listener.cpp:5</a></div></div>
-<div class="ttc" id="aetw__listener_8cpp_html_a9b6042fcf3eb14e4e938a314626eea2d"><div class="ttname"><a href="etw__listener_8cpp.html#a9b6042fcf3eb14e4e938a314626eea2d">EXECUTABLE_FLAGS</a></div><div class="ttdeci">#define EXECUTABLE_FLAGS</div><div class="ttdef"><b>Definition</b> <a href="#l00004">etw_listener.cpp:4</a></div></div>
-<div class="ttc" id="aetw__listener_8cpp_html_ab23d150dcf90a1714066b3082a4c5ee3"><div class="ttname"><a href="etw__listener_8cpp.html#ab23d150dcf90a1714066b3082a4c5ee3">resetCooldown</a></div><div class="ttdeci">void resetCooldown(std::uint32_t pid)</div><div class="ttdef"><b>Definition</b> <a href="#l00025">etw_listener.cpp:25</a></div></div>
-<div class="ttc" id="aetw__listener_8cpp_html_ac4e67b026d044b9641b90b57dc66bc8c"><div class="ttname"><a href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">pidCooldown</a></div><div class="ttdeci">time_t pidCooldown[MAX_PROCESSES]</div><div class="ttdef"><b>Definition</b> <a href="#l00008">etw_listener.cpp:8</a></div></div>
-<div class="ttc" id="aetw__listener_8cpp_html_ac682b8c5125d08564536a196179fcc02"><div class="ttname"><a href="etw__listener_8cpp.html#ac682b8c5125d08564536a196179fcc02">isAllocationExecutable</a></div><div class="ttdeci">bool isAllocationExecutable(std::uint32_t pid, LPVOID baseAddress)</div><div class="ttdef"><b>Definition</b> <a href="#l00056">etw_listener.cpp:56</a></div></div>
-<div class="ttc" id="aetw__listener_8cpp_html_aed3cdd6e89776afc48edd3a115263f41"><div class="ttname"><a href="etw__listener_8cpp.html#aed3cdd6e89776afc48edd3a115263f41">setPid</a></div><div class="ttdeci">void setPid(std::uint32_t pid)</div><div class="ttdef"><b>Definition</b> <a href="#l00019">etw_listener.cpp:19</a></div></div>
+<div class="ttc" id="aetw__listener_8cpp_html_a04ed7dd8998af138c7cca0225c99be08"><div class="ttname"><a href="etw__listener_8cpp.html#a04ed7dd8998af138c7cca0225c99be08">ETWstart</a></div><div class="ttdeci">bool ETWstart()</div><div class="ttdef"><b>Definition</b> <a href="#l00118">etw_listener.cpp:118</a></div></div>
+<div class="ttc" id="aetw__listener_8cpp_html_a4c138864a2017d6e176c70333bc97d8a"><div class="ttname"><a href="etw__listener_8cpp.html#a4c138864a2017d6e176c70333bc97d8a">isCooldown</a></div><div class="ttdeci">bool isCooldown(std::uint32_t pid)</div><div class="ttdef"><b>Definition</b> <a href="#l00033">etw_listener.cpp:33</a></div></div>
+<div class="ttc" id="aetw__listener_8cpp_html_a51e484448472c8fc90ff674c661c8e84"><div class="ttname"><a href="etw__listener_8cpp.html#a51e484448472c8fc90ff674c661c8e84">runHHScan</a></div><div class="ttdeci">void runHHScan()</div><div class="ttdef"><b>Definition</b> <a href="#l00106">etw_listener.cpp:106</a></div></div>
+<div class="ttc" id="aetw__listener_8cpp_html_a71daf6335ddd7bd8c88185f08132a5be"><div class="ttname"><a href="etw__listener_8cpp.html#a71daf6335ddd7bd8c88185f08132a5be">updateCooldown</a></div><div class="ttdeci">void updateCooldown(std::uint32_t pid)</div><div class="ttdef"><b>Definition</b> <a href="#l00050">etw_listener.cpp:50</a></div></div>
+<div class="ttc" id="aetw__listener_8cpp_html_a92fd8bb5807bf6abb640686f51e5df3e"><div class="ttname"><a href="etw__listener_8cpp.html#a92fd8bb5807bf6abb640686f51e5df3e">MAX_PROCESSES</a></div><div class="ttdeci">#define MAX_PROCESSES</div><div class="ttdef"><b>Definition</b> <a href="#l00006">etw_listener.cpp:6</a></div></div>
+<div class="ttc" id="aetw__listener_8cpp_html_a9b6042fcf3eb14e4e938a314626eea2d"><div class="ttname"><a href="etw__listener_8cpp.html#a9b6042fcf3eb14e4e938a314626eea2d">EXECUTABLE_FLAGS</a></div><div class="ttdeci">#define EXECUTABLE_FLAGS</div><div class="ttdef"><b>Definition</b> <a href="#l00005">etw_listener.cpp:5</a></div></div>
+<div class="ttc" id="aetw__listener_8cpp_html_ab23d150dcf90a1714066b3082a4c5ee3"><div class="ttname"><a href="etw__listener_8cpp.html#ab23d150dcf90a1714066b3082a4c5ee3">resetCooldown</a></div><div class="ttdeci">void resetCooldown(std::uint32_t pid)</div><div class="ttdef"><b>Definition</b> <a href="#l00028">etw_listener.cpp:28</a></div></div>
+<div class="ttc" id="aetw__listener_8cpp_html_ac4e67b026d044b9641b90b57dc66bc8c"><div class="ttname"><a href="etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c">pidCooldown</a></div><div class="ttdeci">time_t pidCooldown[MAX_PROCESSES]</div><div class="ttdef"><b>Definition</b> <a href="#l00009">etw_listener.cpp:9</a></div></div>
+<div class="ttc" id="aetw__listener_8cpp_html_ac682b8c5125d08564536a196179fcc02"><div class="ttname"><a href="etw__listener_8cpp.html#ac682b8c5125d08564536a196179fcc02">isAllocationExecutable</a></div><div class="ttdeci">bool isAllocationExecutable(std::uint32_t pid, LPVOID baseAddress)</div><div class="ttdef"><b>Definition</b> <a href="#l00059">etw_listener.cpp:59</a></div></div>
+<div class="ttc" id="aetw__listener_8cpp_html_aed3cdd6e89776afc48edd3a115263f41"><div class="ttname"><a href="etw__listener_8cpp.html#aed3cdd6e89776afc48edd3a115263f41">setPid</a></div><div class="ttdeci">void setPid(std::uint32_t pid)</div><div class="ttdef"><b>Definition</b> <a href="#l00020">etw_listener.cpp:20</a></div></div>
 <div class="ttc" id="aetw__listener_8h_html"><div class="ttname"><a href="etw__listener_8h.html">etw_listener.h</a></div></div>
 <div class="ttc" id="ahh__scanner_8h_html"><div class="ttname"><a href="hh__scanner_8h.html">hh_scanner.h</a></div></div>
 <div class="ttc" id="ahh__scanner_8h_html_a316fb776978a9d4b668b2ff824c7d781"><div class="ttname"><a href="hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781">g_hh_args</a></div><div class="ttdeci">t_hh_params g_hh_args</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00030">main.cpp:30</a></div></div>

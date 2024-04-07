@@ -82,6 +82,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="etw__listener_8h_source.html">etw_listener.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="hh__scanner_8h_source.html">hh_scanner.h</a>&quot;</code><br />
+<code>#include &lt;winmeta.h&gt;</code><br />
 </div>
 <p><a href="etw__listener_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -98,12 +99,14 @@ Functions</h2></td></tr>
 <tr class="separator:aed3cdd6e89776afc48edd3a115263f41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab23d150dcf90a1714066b3082a4c5ee3" id="r_ab23d150dcf90a1714066b3082a4c5ee3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab23d150dcf90a1714066b3082a4c5ee3">resetCooldown</a> (std::uint32_t pid)</td></tr>
 <tr class="separator:ab23d150dcf90a1714066b3082a4c5ee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35fca35282a44d7555d0ad5cfeece23d" id="r_a35fca35282a44d7555d0ad5cfeece23d"><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35fca35282a44d7555d0ad5cfeece23d">isCooldown</a> (std::uint32_t pid)</td></tr>
-<tr class="separator:a35fca35282a44d7555d0ad5cfeece23d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c138864a2017d6e176c70333bc97d8a" id="r_a4c138864a2017d6e176c70333bc97d8a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c138864a2017d6e176c70333bc97d8a">isCooldown</a> (std::uint32_t pid)</td></tr>
+<tr class="separator:a4c138864a2017d6e176c70333bc97d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71daf6335ddd7bd8c88185f08132a5be" id="r_a71daf6335ddd7bd8c88185f08132a5be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71daf6335ddd7bd8c88185f08132a5be">updateCooldown</a> (std::uint32_t pid)</td></tr>
 <tr class="separator:a71daf6335ddd7bd8c88185f08132a5be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac682b8c5125d08564536a196179fcc02" id="r_ac682b8c5125d08564536a196179fcc02"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac682b8c5125d08564536a196179fcc02">isAllocationExecutable</a> (std::uint32_t pid, LPVOID baseAddress)</td></tr>
 <tr class="separator:ac682b8c5125d08564536a196179fcc02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51e484448472c8fc90ff674c661c8e84" id="r_a51e484448472c8fc90ff674c661c8e84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51e484448472c8fc90ff674c661c8e84">runHHScan</a> ()</td></tr>
+<tr class="separator:a51e484448472c8fc90ff674c661c8e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04ed7dd8998af138c7cca0225c99be08" id="r_a04ed7dd8998af138c7cca0225c99be08"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a04ed7dd8998af138c7cca0225c99be08">ETWstart</a> ()</td></tr>
 <tr class="separator:a04ed7dd8998af138c7cca0225c99be08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -125,7 +128,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00004">4</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00005">5</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
 
 </div>
 </div>
@@ -141,7 +144,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00005">5</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00006">6</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
 
 </div>
 </div>
@@ -161,23 +164,25 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00103">103</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00118">118</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="etw__listener_8cpp_a04ed7dd8998af138c7cca0225c99be08_cgraph.png" border="0" usemap="#aetw__listener_8cpp_a04ed7dd8998af138c7cca0225c99be08_cgraph" alt=""/></div>
 <map name="aetw__listener_8cpp_a04ed7dd8998af138c7cca0225c99be08_cgraph" id="aetw__listener_8cpp_a04ed7dd8998af138c7cca0225c99be08_cgraph">
-<area shape="rect" title=" " alt="" coords="5,105,81,131"/>
+<area shape="rect" title=" " alt="" coords="5,131,81,156"/>
 <area shape="rect" href="etw__listener_8cpp.html#ac682b8c5125d08564536a196179fcc02" title=" " alt="" coords="129,5,280,31"/>
-<area shape="poly" title=" " alt="" coords="54,103,85,72,127,40,137,35,139,40,130,44,88,76,57,107"/>
-<area shape="rect" href="etw__listener_8cpp.html#a35fca35282a44d7555d0ad5cfeece23d" title=" " alt="" coords="160,55,249,80"/>
-<area shape="poly" title=" " alt="" coords="80,104,145,83,147,88,82,109"/>
+<area shape="poly" title=" " alt="" coords="50,129,80,85,102,61,127,40,134,36,137,40,130,44,105,65,84,89,54,132"/>
+<area shape="rect" href="etw__listener_8cpp.html#a4c138864a2017d6e176c70333bc97d8a" title=" " alt="" coords="160,55,249,80"/>
+<area shape="poly" title=" " alt="" coords="68,128,128,97,155,85,157,89,130,102,70,132"/>
 <area shape="rect" href="etw__listener_8cpp.html#ab23d150dcf90a1714066b3082a4c5ee3" title=" " alt="" coords="328,80,435,106"/>
-<area shape="poly" title=" " alt="" coords="81,113,312,95,313,101,81,118"/>
-<area shape="rect" href="etw__listener_8cpp.html#aed3cdd6e89776afc48edd3a115263f41" title=" " alt="" coords="175,156,234,182"/>
-<area shape="poly" title=" " alt="" coords="82,127,161,153,160,158,80,132"/>
-<area shape="rect" href="etw__listener_8cpp.html#a71daf6335ddd7bd8c88185f08132a5be" title=" " alt="" coords="146,205,263,231"/>
-<area shape="poly" title=" " alt="" coords="57,129,88,161,130,192,139,197,137,201,127,196,85,165,54,133"/>
+<area shape="poly" title=" " alt="" coords="81,135,313,100,313,106,81,141"/>
+<area shape="rect" href="etw__listener_8cpp.html#a51e484448472c8fc90ff674c661c8e84" title=" " alt="" coords="160,156,249,182"/>
+<area shape="poly" title=" " alt="" coords="82,147,145,157,144,162,81,152"/>
+<area shape="rect" href="etw__listener_8cpp.html#aed3cdd6e89776afc48edd3a115263f41" title=" " alt="" coords="175,205,234,231"/>
+<area shape="poly" title=" " alt="" coords="65,155,130,192,161,204,159,209,128,197,62,159"/>
+<area shape="rect" href="etw__listener_8cpp.html#a71daf6335ddd7bd8c88185f08132a5be" title=" " alt="" coords="146,255,263,280"/>
+<area shape="poly" title=" " alt="" coords="54,155,84,198,106,221,130,241,137,245,134,250,127,246,102,225,80,201,50,158"/>
 <area shape="poly" title=" " alt="" coords="249,71,313,80,313,86,248,76"/>
 </map>
 </div>
@@ -203,18 +208,18 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00056">56</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00059">59</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a35fca35282a44d7555d0ad5cfeece23d" name="a35fca35282a44d7555d0ad5cfeece23d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35fca35282a44d7555d0ad5cfeece23d">&#9670;&#160;</a></span>isCooldown()</h2>
+<a id="a4c138864a2017d6e176c70333bc97d8a" name="a4c138864a2017d6e176c70333bc97d8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c138864a2017d6e176c70333bc97d8a">&#9670;&#160;</a></span>isCooldown()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">BOOL isCooldown </td>
+          <td class="memname">bool isCooldown </td>
           <td>(</td>
           <td class="paramtype">std::uint32_t</td>          <td class="paramname"><span class="paramname"><em>pid</em></span></td><td>)</td>
           <td></td>
@@ -222,12 +227,12 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00030">30</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00033">33</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="etw__listener_8cpp_a35fca35282a44d7555d0ad5cfeece23d_cgraph.png" border="0" usemap="#aetw__listener_8cpp_a35fca35282a44d7555d0ad5cfeece23d_cgraph" alt=""/></div>
-<map name="aetw__listener_8cpp_a35fca35282a44d7555d0ad5cfeece23d_cgraph" id="aetw__listener_8cpp_a35fca35282a44d7555d0ad5cfeece23d_cgraph">
+<div class="center"><img src="etw__listener_8cpp_a4c138864a2017d6e176c70333bc97d8a_cgraph.png" border="0" usemap="#aetw__listener_8cpp_a4c138864a2017d6e176c70333bc97d8a_cgraph" alt=""/></div>
+<map name="aetw__listener_8cpp_a4c138864a2017d6e176c70333bc97d8a_cgraph" id="aetw__listener_8cpp_a4c138864a2017d6e176c70333bc97d8a_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,94,31"/>
 <area shape="rect" href="etw__listener_8cpp.html#ab23d150dcf90a1714066b3082a4c5ee3" title=" " alt="" coords="142,5,249,31"/>
 <area shape="poly" title=" " alt="" coords="94,16,126,16,126,21,94,21"/>
@@ -251,7 +256,26 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00025">25</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00028">28</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a51e484448472c8fc90ff674c661c8e84" name="a51e484448472c8fc90ff674c661c8e84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51e484448472c8fc90ff674c661c8e84">&#9670;&#160;</a></span>runHHScan()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void runHHScan </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00106">106</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
 
 </div>
 </div>
@@ -270,7 +294,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00019">19</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00020">20</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
 
 </div>
 </div>
@@ -289,7 +313,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00047">47</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00050">50</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
 
 </div>
 </div>
@@ -306,7 +330,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00008">8</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="etw__listener_8cpp_source.html#l00009">9</a> of file <a class="el" href="etw__listener_8cpp_source.html">etw_listener.cpp</a>.</p>
 
 </div>
 </div>

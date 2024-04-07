@@ -10,6 +10,6 @@ var searchData=
   ['is_5fsuspicious_5fprocess_7',['is_suspicious_process',['../hh__report_8cpp.html#a658a84d039df1c8c4f7555a7f5de2e14',1,'hh_report.cpp']]],
   ['is_5fwow_5f64_8',['is_wow_64',['../namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01',1,'process_util']]],
   ['isallocationexecutable_9',['isAllocationExecutable',['../etw__listener_8cpp.html#ac682b8c5125d08564536a196179fcc02',1,'etw_listener.cpp']]],
-  ['iscooldown_10',['isCooldown',['../etw__listener_8cpp.html#a35fca35282a44d7555d0ad5cfeece23d',1,'etw_listener.cpp']]],
+  ['iscooldown_10',['isCooldown',['../etw__listener_8cpp.html#a4c138864a2017d6e176c70333bc97d8a',1,'etw_listener.cpp']]],
   ['isscannercompatibile_11',['isScannerCompatibile',['../class_h_h_scanner.html#adec367c7541ba8e334c7f674e57f429a',1,'HHScanner']]]
 ];
