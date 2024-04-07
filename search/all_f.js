@@ -32,10 +32,10 @@ var searchData=
   ['params_2eh_29',['params.h',['../params_8h.html',1,'']]],
   ['pe_5fsieve_5fparams_5finfo_2ecpp_30',['pe_sieve_params_info.cpp',['../pe__sieve__params__info_8cpp.html',1,'']]],
   ['pe_5fsieve_5fparams_5finfo_2eh_31',['pe_sieve_params_info.h',['../pe__sieve__params__info_8h.html',1,'']]],
-  ['pesieve_5fargs_32',['pesieve_args',['../structt__hh__params.html#a6d866df34826f2db1cb9f76269887007',1,'t_hh_params']]],
+  ['pesieve_5fargs_32',['pesieve_args',['../structhh__params.html#a6e835a4060ea3db6af99e5ff8aae8834',1,'hh_params']]],
   ['pid_5ffield_5fsize_33',['PID_FIELD_SIZE',['../hh__scanner_8cpp.html#ac02ff12a84f72a554a357650a1631c2f',1,'hh_scanner.cpp']]],
   ['pidcooldown_34',['pidCooldown',['../etw__listener_8cpp.html#ac4e67b026d044b9641b90b57dc66bc8c',1,'etw_listener.cpp']]],
-  ['pids_5flist_35',['pids_list',['../structt__hh__params.html#a6cdcdd13e245c3ddba0ee30e23653257',1,'t_hh_params']]],
+  ['pids_5flist_35',['pids_list',['../structhh__params.html#a179cffc6577cad21f16e07ca3ae14a67',1,'hh_params']]],
   ['pidtoname_36',['pidToName',['../class_h_h_scan_report.html#a08715ebd47278844ca763cfa03951f2b',1,'HHScanReport']]],
   ['pidtoreport_37',['pidToReport',['../class_h_h_scan_report.html#a74077d56483e55918ec3420b528a3994',1,'HHScanReport']]],
   ['print_5fin_5fcolor_38',['print_in_color',['../term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095',1,'print_in_color(WORD color, const std::string &amp;text):&#160;term_util.cpp'],['../term__util_8h.html#a0547053c3ed0d110bcb9477d83a32095',1,'print_in_color(WORD color, const std::string &amp;text):&#160;term_util.cpp']]],
@@ -48,5 +48,5 @@ var searchData=
   ['process_5fprivilege_2eh_45',['process_privilege.h',['../process__privilege_8h.html',1,'']]],
   ['process_5fstart_5ftime_46',['process_start_time',['../namespaceutil.html#a1b58bbd7118af7892e3926017211542b',1,'util']]],
   ['process_5futil_47',['process_util',['../namespaceprocess__util.html',1,'']]],
-  ['ptimes_48',['ptimes',['../structt__hh__params.html#a2f2fb874d04169ea8578dde2f7341e90',1,'t_hh_params']]]
+  ['ptimes_48',['ptimes',['../structhh__params.html#aeaa430eb92a01d64b063bc3537ceb4c8',1,'hh_params']]]
 ];

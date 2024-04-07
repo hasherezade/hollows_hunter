@@ -32,6 +32,6 @@ var searchData=
   ['suspend_2ecpp_29',['suspend.cpp',['../suspend_8cpp.html',1,'']]],
   ['suspend_2eh_30',['suspend.h',['../suspend_8h.html',1,'']]],
   ['suspend_5fprocess_31',['suspend_process',['../suspend_8cpp.html#a3c63f252433e6e7532e441ed5cacca9d',1,'suspend_process(DWORD processId):&#160;suspend.cpp'],['../suspend_8h.html#a3c63f252433e6e7532e441ed5cacca9d',1,'suspend_process(DWORD processId):&#160;suspend.cpp']]],
-  ['suspend_5fsuspicious_32',['suspend_suspicious',['../structt__hh__params.html#a71690a0c800f062ccb1f7bceb8926e57',1,'t_hh_params::suspend_suspicious'],['../namespaceprocess__util.html#a9edce70fe41a8ec91d549fb9d71a3b10',1,'process_util::suspend_suspicious()']]],
+  ['suspend_5fsuspicious_32',['suspend_suspicious',['../structhh__params.html#ada2ba65bfb7d9e5395dd38ad4003d1cd',1,'hh_params::suspend_suspicious'],['../namespaceprocess__util.html#a9edce70fe41a8ec91d549fb9d71a3b10',1,'process_util::suspend_suspicious()']]],
   ['suspicious_33',['suspicious',['../class_h_h_scan_report.html#a8ec4849570e43fbf4a915300becceb92',1,'HHScanReport']]]
 ];

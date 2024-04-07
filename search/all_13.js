@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['t_5fhh_5fparams_0',['t_hh_params',['../structt__hh__params.html',1,'']]],
+  ['t_5fhh_5fparams_0',['t_hh_params',['../hh__params_8h.html#a2b2deab5f259454bc3b369632784e89b',1,'hh_params.h']]],
   ['t_5fsingle_5fscan_5fstatus_1',['t_single_scan_status',['../hh__scanner_8h.html#ad5caa6b1d4b11989c8ff90d46fc231aa',1,'hh_scanner.h']]],
   ['term_5futil_2ecpp_2',['term_util.cpp',['../term__util_8cpp.html',1,'']]],
   ['term_5futil_2eh_3',['term_util.h',['../term__util_8h.html',1,'']]],

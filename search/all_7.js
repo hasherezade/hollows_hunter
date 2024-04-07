@@ -1,11 +1,11 @@
 var searchData=
 [
   ['hh_5fargs_0',['hh_args',['../class_h_h_scanner.html#aa9841ff29a663251372cf65e2db3cbef',1,'HHScanner']]],
-  ['hh_5fargs_5finit_1',['hh_args_init',['../hh__params_8cpp.html#ac6edc4939761c76f668b573fe1a428cd',1,'hh_args_init(t_hh_params &amp;hh_args):&#160;hh_params.cpp'],['../hh__params_8h.html#a405ebf46d40831f9c1d01b367f25aed8',1,'hh_args_init(t_hh_params &amp;args):&#160;hh_params.cpp']]],
-  ['hh_5fdefault_5fdir_2',['HH_DEFAULT_DIR',['../hh__params_8h.html#a2d98bcdd623b59c233a1350aebbb1b54',1,'hh_params.h']]],
-  ['hh_5fmajor_5fversion_3',['HH_MAJOR_VERSION',['../hh__ver__short_8h.html#a0dcf389e770defe2c2ace005b33d394a',1,'hh_ver_short.h']]],
-  ['hh_5fmicro_5fversion_4',['HH_MICRO_VERSION',['../hh__ver__short_8h.html#acf3863b36b86506a78d1c01f83d17844',1,'hh_ver_short.h']]],
-  ['hh_5fminor_5fversion_5',['HH_MINOR_VERSION',['../hh__ver__short_8h.html#a58c22a3fe74aad05831cbbfb0f82fdb7',1,'hh_ver_short.h']]],
+  ['hh_5fdefault_5fdir_1',['HH_DEFAULT_DIR',['../hh__params_8h.html#a2d98bcdd623b59c233a1350aebbb1b54',1,'hh_params.h']]],
+  ['hh_5fmajor_5fversion_2',['HH_MAJOR_VERSION',['../hh__ver__short_8h.html#a0dcf389e770defe2c2ace005b33d394a',1,'hh_ver_short.h']]],
+  ['hh_5fmicro_5fversion_3',['HH_MICRO_VERSION',['../hh__ver__short_8h.html#acf3863b36b86506a78d1c01f83d17844',1,'hh_ver_short.h']]],
+  ['hh_5fminor_5fversion_4',['HH_MINOR_VERSION',['../hh__ver__short_8h.html#a58c22a3fe74aad05831cbbfb0f82fdb7',1,'hh_ver_short.h']]],
+  ['hh_5fparams_5',['hh_params',['../structhh__params.html',1,'']]],
   ['hh_5fparams_2ecpp_6',['hh_params.cpp',['../hh__params_8cpp.html',1,'']]],
   ['hh_5fparams_2eh_7',['hh_params.h',['../hh__params_8h.html',1,'']]],
   ['hh_5fpatch_5fversion_8',['HH_PATCH_VERSION',['../hh__ver__short_8h.html#a2be3612e01a0eb7974d4cdc78a4bd3d5',1,'hh_ver_short.h']]],
