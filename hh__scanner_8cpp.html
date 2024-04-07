@@ -92,14 +92,13 @@ $(function() {
 <code>#include &quot;<a class="el" href="suspend_8h_source.html">util/suspend.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="time__util_8h_source.html">util/time_util.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="term__util_8h_source.html">term_util.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="process__util_8h_source.html">util/process_util.h</a>&quot;</code><br />
 <code>#include &lt;paramkit.h&gt;</code><br />
 </div>
 <p><a href="hh__scanner_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:namespaceprocess__util" id="r_namespaceprocess__util"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprocess__util.html">process_util</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespacefiles__util" id="r_namespacefiles__util"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefiles__util.html">files_util</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceutil" id="r_namespaceutil"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html">util</a></td></tr>
@@ -112,14 +111,6 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a1550838f32323b66051e0d05a0acdb01" id="r_a1550838f32323b66051e0d05a0acdb01"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01">process_util::is_wow_64</a> (HANDLE process)</td></tr>
-<tr class="separator:a1550838f32323b66051e0d05a0acdb01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a258bf9fcaf9b1f5b6419f4e6a5d1e1" id="r_a4a258bf9fcaf9b1f5b6419f4e6a5d1e1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprocess__util.html#a4a258bf9fcaf9b1f5b6419f4e6a5d1e1">process_util::get_process_info</a> (DWORD processID, bool &amp;isWow64, char *szProcessName, DWORD processNameSize)</td></tr>
-<tr class="separator:a4a258bf9fcaf9b1f5b6419f4e6a5d1e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9edce70fe41a8ec91d549fb9d71a3b10" id="r_a9edce70fe41a8ec91d549fb9d71a3b10"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprocess__util.html#a9edce70fe41a8ec91d549fb9d71a3b10">process_util::suspend_suspicious</a> (std::vector&lt; DWORD &gt; &amp;suspicious_pids)</td></tr>
-<tr class="separator:a9edce70fe41a8ec91d549fb9d71a3b10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8765675543bcce40dec2c3207d76ce9" id="r_ad8765675543bcce40dec2c3207d76ce9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprocess__util.html#ad8765675543bcce40dec2c3207d76ce9">process_util::kill_suspicious</a> (std::vector&lt; DWORD &gt; &amp;suspicious_pids)</td></tr>
-<tr class="separator:ad8765675543bcce40dec2c3207d76ce9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a7fcfd84189964e87c1b572f1fe8fbe" id="r_a9a7fcfd84189964e87c1b572f1fe8fbe"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefiles__util.html#a9a7fcfd84189964e87c1b572f1fe8fbe">files_util::join_path</a> (const std::string &amp;baseDir, const std::string &amp;subpath)</td></tr>
 <tr class="separator:a9a7fcfd84189964e87c1b572f1fe8fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c2cf1240e4b850893c4e7a0a2ab641b" id="r_a9c2cf1240e4b850893c4e7a0a2ab641b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefiles__util.html#a9c2cf1240e4b850893c4e7a0a2ab641b">files_util::make_dir_name</a> (std::string baseDir, time_t timestamp)</td></tr>
@@ -149,7 +140,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00018">18</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00019">19</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
 
 </div>
 </div>
