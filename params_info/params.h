@@ -79,6 +79,13 @@ void print_version(const std::string &version , WORD info_color = HILIGHTED_COLO
     std::cout << std::endl;
 }
 
+std::wstring to_wstring(const std::string& stringToConvert)
+{
+    std::wstring wideString =
+        std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(stringToConvert);
+    return wideString;
+}
+
 class HHParams : public Params
 {
 public:
@@ -382,22 +389,19 @@ public:
         StringListParam* myParam = dynamic_cast<StringListParam*>(this->getParam(PARAM_PNAME));
         if (myParam && myParam->isSet()) {
             std::set<std::string> names_list;
-            std::set<std::wstring>::iterator itr;
-            for (itr = ps.names_list.begin(); itr != ps.names_list.end(); itr++)
-            {
-                names_list.insert(std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(*itr));
-            }
             myParam->stripToElements(names_list);
+            for (auto itr = names_list.begin(); itr != names_list.end(); itr++) {
+                ps.names_list.insert(to_wstring(*itr));
+            }
         }
+
         myParam = dynamic_cast<StringListParam*>(this->getParam(PARAM_PROCESSES_IGNORE));
         if (myParam && myParam->isSet()) {
             std::set<std::string> ignored_names_list;
-            std::set<std::wstring>::iterator itr;
-            for (itr = ps.ignored_names_list.begin(); itr != ps.ignored_names_list.end(); itr++)
-            {
-                ignored_names_list.insert(std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(*itr));
-            }
             myParam->stripToElements(ignored_names_list);
+            for (auto itr = ignored_names_list.begin(); itr != ignored_names_list.end(); itr++) {
+                ps.ignored_names_list.insert(to_wstring(*itr));
+            }
         }
         IntListParam* myIntParam = dynamic_cast<IntListParam*>(this->getParam(PARAM_PID));
         if (myIntParam && myIntParam->isSet()) {
