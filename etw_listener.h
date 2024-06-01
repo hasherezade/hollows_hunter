@@ -11,7 +11,11 @@
 #include <windows.h>
 #include <time.h>
 
+#if (_MSC_VER >= 1900) //krabsetw is only supported with Visual Studio 2015 and above (MSVC++ 14.0)
+
 // ETW includes
 #include "krabsetw/krabs/krabs.hpp"
 
 bool ETWstart();
+
+#endif

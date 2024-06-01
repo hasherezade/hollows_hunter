@@ -4,6 +4,10 @@
 #undef USE_ETW //ETW support works only for 64 bit
 #endif //_WIN64
 
+#if (_MSC_VER < 1900)
+#undef USE_ETW //ETW not supported
+#endif
+
 #include <stdio.h>
 
 #include <string>

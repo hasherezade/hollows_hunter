@@ -23,7 +23,7 @@ void hh_params::init()
     ptimes = TIME_UNDEFINED;
 }
 
-hh_params& hh_params::operator=(const hh_params& other) noexcept
+hh_params& hh_params::operator=(const hh_params& other)
 {
     //copy PE-sieve params:
     ::memcpy(&pesieve_args, &other.pesieve_args, sizeof(pesieve::t_params));

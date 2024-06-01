@@ -27,7 +27,7 @@ public:
     pesieve::t_params pesieve_args; //PE-sieve parameters
 
     void init();
-    hh_params& operator=(const hh_params& other) noexcept;
+    hh_params& operator=(const hh_params& other);
 
 } t_hh_params;
 
