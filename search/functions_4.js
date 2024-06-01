@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['filetime_5fto_5fposix_0',['FileTime_to_POSIX',['../namespaceutil.html#a60893a3cb25d9aff16347e26b602141b',1,'util']]],
-  ['fillpesievestruct_1',['fillPEsieveStruct',['../class_h_h_params.html#af9c459d9b85e95a45920eef39bc4ba63',1,'HHParams']]],
-  ['fillstringparam_2',['fillStringParam',['../class_h_h_params.html#a4d4a0f5e4334f4789dff7c5290fac4bf',1,'HHParams']]],
-  ['fillstruct_3',['fillStruct',['../class_h_h_params.html#ae1bf54e6b2f8dc2e16f0e325d937f96c',1,'HHParams']]],
-  ['free_5fstrparam_4',['free_strparam',['../class_h_h_params.html#a1914d221cdfd7e453885cebcb175e77b',1,'HHParams']]],
-  ['freestruct_5',['freeStruct',['../class_h_h_params.html#a642bbb19ed482e09f4312409a44e21c5',1,'HHParams']]]
+  ['get_5fcurrent_5fcolor_0',['get_current_color',['../term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9',1,'get_current_color(int descriptor, WORD &amp;color):&#160;term_util.cpp'],['../term__util_8h.html#aff4c0279a81f579add3c3b1e9f208ee9',1,'get_current_color(int descriptor, WORD &amp;color):&#160;term_util.cpp']]],
+  ['get_5fprocess_5fpath_1',['get_process_path',['../namespaceprocess__util.html#a621b5b62e4c16a095a99557c03ffce53',1,'process_util']]],
+  ['getparentprocessid_2',['GetParentProcessID',['../suspend_8cpp.html#a6844401d82ea5410225fae1dd2f33365',1,'GetParentProcessID(DWORD dwPID):&#160;suspend.cpp'],['../suspend_8h.html#a6844401d82ea5410225fae1dd2f33365',1,'GetParentProcessID(DWORD dwPID):&#160;suspend.cpp']]],
+  ['getscantime_3',['getScanTime',['../class_h_h_scan_report.html#ae662be540e84fe79516c5fc79c6d9999',1,'HHScanReport']]]
 ];

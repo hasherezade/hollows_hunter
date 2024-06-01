@@ -15,10 +15,6 @@ var searchData=
   ['is_5fsuspicious_5fprocess_12',['is_suspicious_process',['../hh__report_8cpp.html#a658a84d039df1c8c4f7555a7f5de2e14',1,'hh_report.cpp']]],
   ['is_5fwow_5f64_13',['is_wow_64',['../namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01',1,'process_util']]],
   ['is_5fwow_5f64_5fby_5fpid_14',['is_wow_64_by_pid',['../namespaceprocess__util.html#af9bdd83e9c8262ef548737112964d2f9',1,'process_util']]],
-  ['isallocationexecutable_15',['isAllocationExecutable',['../etw__listener_8cpp.html#ac682b8c5125d08564536a196179fcc02',1,'etw_listener.cpp']]],
-  ['iscooldown_16',['isCooldown',['../etw__listener_8cpp.html#a4c138864a2017d6e176c70333bc97d8a',1,'etw_listener.cpp']]],
-  ['isscannercompatibile_17',['isScannerCompatibile',['../class_h_h_scanner.html#adec367c7541ba8e334c7f674e57f429a',1,'HHScanner']]],
-  ['isscannerwow64_18',['isScannerWow64',['../class_h_h_scanner.html#a64bb7d15ea59c9fe7e25f266e05005b9',1,'HHScanner']]],
-  ['iswatchedname_19',['isWatchedName',['../etw__listener_8cpp.html#a494bead718253dc741d56616634d02e6',1,'etw_listener.cpp']]],
-  ['iswatchedpid_20',['isWatchedPid',['../etw__listener_8cpp.html#a5c22d44e136bf79ff1f029ae5fa88ac1',1,'etw_listener.cpp']]]
+  ['isscannercompatibile_15',['isScannerCompatibile',['../class_h_h_scanner.html#adec367c7541ba8e334c7f674e57f429a',1,'HHScanner']]],
+  ['isscannerwow64_16',['isScannerWow64',['../class_h_h_scanner.html#a64bb7d15ea59c9fe7e25f266e05005b9',1,'HHScanner']]]
 ];

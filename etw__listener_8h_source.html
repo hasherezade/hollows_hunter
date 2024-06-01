@@ -102,11 +102,14 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;windows.h&gt;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;time.h&gt;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// ETW includes</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;krabsetw/krabs/krabs.hpp&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keywordtype">bool</span> <a class="code hl_function" href="etw__listener_8h.html#a04ed7dd8998af138c7cca0225c99be08">ETWstart</a>();</div>
-<div class="ttc" id="aetw__listener_8h_html_a04ed7dd8998af138c7cca0225c99be08"><div class="ttname"><a href="etw__listener_8h.html#a04ed7dd8998af138c7cca0225c99be08">ETWstart</a></div><div class="ttdeci">bool ETWstart()</div><div class="ttdef"><b>Definition</b> <a href="etw__listener_8cpp_source.html#l00174">etw_listener.cpp:174</a></div></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#if (_MSC_VER &gt;= 1900) </span><span class="comment">//krabsetw is only supported with Visual Studio 2015 and above (MSVC++ 14.0)</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// ETW includes</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;krabsetw/krabs/krabs.hpp&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keywordtype">bool</span> ETWstart();</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

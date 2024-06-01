@@ -1,7 +1,0 @@
-<map id="isWatchedPid" name="isWatchedPid">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,107,31"/>
-<area shape="rect" id="Node000002" href="$etw__listener_8cpp.html#a545ff7cdc40eca198e175404379a1e04" title=" " alt="" coords="155,5,277,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,16,139,16,139,21,107,21"/>
-<area shape="rect" id="Node000003" href="$namespaceprocess__util.html#a621b5b62e4c16a095a99557c03ffce53" title=" " alt="" coords="325,5,525,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="277,16,309,16,309,21,277,21"/>
-</map>

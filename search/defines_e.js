@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['white_0',['WHITE',['../term__util_8h.html#a87b537f5fa5c109d3c05c13d6b18f382',1,'term_util.h']]],
-  ['win32_5flean_5fand_5fmean_1',['WIN32_LEAN_AND_MEAN',['../etw__listener_8h.html#ac7bef5d85e3dcd73eef56ad39ffc84a9',1,'WIN32_LEAN_AND_MEAN:&#160;etw_listener.h'],['../main_8cpp.html#ac7bef5d85e3dcd73eef56ad39ffc84a9',1,'WIN32_LEAN_AND_MEAN:&#160;main.cpp']]]
+  ['yellow_0',['YELLOW',['../term__util_8h.html#abf681265909adf3d3e8116c93c0ba179',1,'term_util.h']]],
+  ['yellow_5fon_5fblack_1',['YELLOW_ON_BLACK',['../term__util_8h.html#a51f81624c8a900209617c4b7a0e97d50',1,'term_util.h']]]
 ];

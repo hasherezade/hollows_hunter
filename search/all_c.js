@@ -5,6 +5,5 @@ var searchData=
   ['main_2ecpp_2',['main.cpp',['../main_8cpp.html',1,'']]],
   ['make_5fcolor_3',['MAKE_COLOR',['../term__util_8h.html#a57815732ee1775789c29534c08b0a856',1,'term_util.h']]],
   ['make_5fdir_5fname_4',['make_dir_name',['../namespacefiles__util.html#a9c2cf1240e4b850893c4e7a0a2ab641b',1,'files_util']]],
-  ['max_5fprocesses_5',['MAX_PROCESSES',['../etw__listener_8cpp.html#a92fd8bb5807bf6abb640686f51e5df3e',1,'etw_listener.cpp']]],
-  ['min_6',['MIN',['../strings__util_8cpp.html#a74e75242132eaabbc1c512488a135926',1,'strings_util.cpp']]]
+  ['min_5',['MIN',['../strings__util_8cpp.html#a74e75242132eaabbc1c512488a135926',1,'strings_util.cpp']]]
 ];
