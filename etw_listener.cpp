@@ -178,7 +178,10 @@ bool ETWstart()
     krabs::kernel_trace trace(L"HollowsHunter");
 
     krabs::kernel::process_provider         processProvider;
+    krabs::kernel::image_load_provider      imageLoadProvider;
     krabs::kernel::virtual_alloc_provider   virtualAllocProvider;
+    krabs::kernel::network_tcpip_provider   tcpIpProvider;
+    krabs::kernel::object_manager_provider  objectMgrProvider;
 
     // Process Start Trigger
     processProvider.add_on_event_callback([](const EVENT_RECORD& record, const krabs::trace_context& trace_context)
@@ -194,11 +197,61 @@ bool ETWstart()
                 // New process reset cooldown just in case
                 resetCooldown(pid);
 
-                std::cout << "Scanning New Process: " << filename << " (" << pid << ")" << std::endl;
-                runHHScan(pid);
+                std::cout << std::dec << time(NULL) << " : New Process: " << filename << " (" << pid << ")" << std::endl;
+                
             }
         });
 
+    imageLoadProvider.add_on_event_callback([](const EVENT_RECORD& record, const krabs::trace_context& trace_context)
+        {
+            krabs::schema schema(record, trace_context.schema_locator);
+            if (schema.event_opcode() == 10) { // Load
+                krabs::parser parser(schema);
+                std::uint32_t pid = parser.parse<std::uint32_t>(L"ProcessId");
+                if (!isWatchedPid(pid)) return;
+
+                std::wstring filename = parser.parse<std::wstring>(L"FileName");
+                std::uint8_t sign = parser.parse<std::uint8_t>(L"SignatureType");
+                
+                std::wcout << std::dec << pid << " : " << time(NULL) << " : IMAGE:" << filename << " : " << sign << std::endl;
+                //runHHScan(pid);
+                //std::wcout << std::dec << pid << ": IMAGE:" << schema.task_name() << " : Opcode : " << schema.opcode_name() << " : " << std::dec << schema.event_opcode() << "\n";
+                /*for (krabs::property& prop : parser.properties())
+                {
+                    std::wcout << prop.name() << "\n";
+                }*/
+            }
+        });
+
+    tcpIpProvider.add_on_event_callback([](const EVENT_RECORD& record, const krabs::trace_context& trace_context)
+        {
+            krabs::schema schema(record, trace_context.schema_locator);
+            krabs::parser parser(schema);
+            std::uint32_t pid = parser.parse<std::uint32_t>(L"PID");
+            if (!isWatchedPid(pid)) return;
+
+            std::wcout << std::dec << pid << ": TCPIP:" << schema.task_name() << " : Opcode : " << schema.opcode_name() << " : " << std::dec << schema.event_opcode() << "\n";
+            /*for (krabs::property& prop : parser.properties())
+            {
+                std::wcout << prop.name() << "\n";
+            }*/
+            runHHScan(pid);
+        });
+
+
+    objectMgrProvider.add_on_event_callback([](const EVENT_RECORD& record, const krabs::trace_context& trace_context)
+        {
+            krabs::schema schema(record, trace_context.schema_locator);
+            if (schema.event_opcode() != 32 && schema.event_opcode() != 33) // CreateHandle, CloseHandle
+            {
+                krabs::parser parser(schema);
+                std::wcout << "ObjManager:" << schema.task_name() << " : Opcode : " << schema.opcode_name() << " : " << std::dec << schema.event_opcode() << "\n";
+                for (krabs::property& prop : parser.properties())
+                {
+                    std::wcout << prop.name() << "\n";
+                }
+            }
+        });
     // Process VirtualAlloc Trigger
     virtualAllocProvider.add_on_event_callback([](const EVENT_RECORD& record, const krabs::trace_context& trace_context)
         {
@@ -230,8 +283,11 @@ bool ETWstart()
         });
 
     bool isOk = true;
-    trace.enable(processProvider);
-    trace.enable(virtualAllocProvider);
+    trace.enable(tcpIpProvider);
+    trace.enable(objectMgrProvider);
+    //trace.enable(processProvider);
+    //trace.enable(imageLoadProvider);
+    //trace.enable(virtualAllocProvider);
     try {
         std::cout << "Starting listener..." << std::endl;
         trace.start();
