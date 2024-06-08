@@ -248,16 +248,22 @@ bool ETWstart()
             if (schema.event_opcode() == WINEVENT_OPCODE_START)
             {
                 krabs::parser parser(schema);
-                std::string filename = parser.parse<std::string>(L"ImageFileName");
-                if (!isWatchedName(filename)) return;
+                std::uint32_t parentPid = parser.parse<std::uint32_t>(L"ParentId");
 
-                std::uint32_t pid = parser.parse<std::uint32_t>(L"ProcessId");
-                // New process, reset stats
-                procStats[pid].init();
-                if (!g_hh_args.quiet) {
-                    std::cout << std::dec << time(NULL) << " : New Process: " << filename << " (" << pid << ")" << std::endl;
+                std::string filename = parser.parse<std::string>(L"ImageFileName");
+                if (isWatchedName(filename)) {
+                    std::uint32_t pid = parser.parse<std::uint32_t>(L"ProcessId");
+                    // New process, reset stats
+                    procStats[pid].init();
+                    if (!g_hh_args.quiet) {
+                        std::cout << std::dec << time(NULL) << " : New Process: " << filename << " (" << pid << ") Parent: " << parentPid << std::endl;
+                    }
+                    runHHScan(pid);
                 }
-                runHHScan(pid);
+
+                if (isWatchedPid(parentPid)) {
+                    runHHScan(parentPid);
+                }
             }
         });
 
