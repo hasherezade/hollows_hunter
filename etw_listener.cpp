@@ -27,9 +27,6 @@ struct ProceesStat
 
 ProceesStat procStats[MAX_PROCESSES] = { 0 };
 
-//time_t      pidCooldown[MAX_PROCESSES] = { 0 };
-//time_t      pidStartTime[MAX_PROCESSES] = { 0 };
-
 // ETW Handler
 // To filter our events, we want to compare against the
 // event opcode. For kernel traces, you can consult this page
@@ -281,7 +278,7 @@ bool ETWstart()
                 std::wstring filename = parser.parse<std::wstring>(L"FileName");
                 if (!isDelayedLoad(pid)) {
 #ifdef _DEBUG
-                    std::wcout << " LOADING " <<  std::dec << pid << " : " << time(NULL) << " : IMAGE:" << filename << " : " << sign << std::endl;
+                    std::wcout << " LOADING " <<  std::dec << pid << " : " << time(NULL) << " : IMAGE:" << filename << std::endl;
 #endif
                     return;
                 }
