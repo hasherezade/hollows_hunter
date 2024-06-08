@@ -34,7 +34,7 @@ struct ProceesStat
     {
         if (thread) {
 #ifdef _DEBUG
-            std::cout << std::dec << pid << " : Deleting thread: " << procStats[pid].thread->get_id() << std::endl;
+            std::cout << std::dec << "Deleting thread: " << thread->get_id() << std::endl;
 #endif
             if (thread->joinable()) {
                 thread->join();
