@@ -11,7 +11,7 @@
 
 // Global var for ETW thread
 time_t      pidCooldown[MAX_PROCESSES] = { 0 };
-
+time_t      pidStartTime[MAX_PROCESSES] = { 0 };
 
 // ETW Handler
 // To filter our events, we want to compare against the
@@ -21,6 +21,25 @@ time_t      pidCooldown[MAX_PROCESSES] = { 0 };
 // The documentation specific to the image load provider is here:
 // https://msdn.microsoft.com/en-us/library/windows/desktop/aa364068(v=vs.85).aspx
 
+
+void setProcessStart(std::uint32_t pid)
+{
+    time_t now = 0;
+    time(&now);
+    pidStartTime[pid] = now;
+}
+
+bool isDelayedLoad(std::uint32_t pid)
+{
+    if (!pidStartTime[pid]) true;
+
+    time_t now = 0;
+    time(&now);
+    if (now - pidStartTime[pid] > 1) {
+        return true;
+    }
+    return false;
+}
 
 void resetCooldown(std::uint32_t pid)
 {
@@ -36,11 +55,11 @@ bool isCooldown(std::uint32_t pid)
 
         if (now - pidCooldown[pid] > 1)
             resetCooldown(pid);
-        else
+        else {
             //std::cout << "Skipping scan for: " << pid << "is in cooldown" << std::endl;
             return false;
+        }
     }
-
     return true;
 }
 
@@ -173,6 +192,13 @@ void runHHScan(std::uint32_t pid)
     }
 }
 
+void printAllProperties(krabs::parser &parser)
+{
+    for (krabs::property& prop : parser.properties()) {
+        std::wcout << prop.name() << "\n";
+    }
+}
+
 bool ETWstart()
 {
     krabs::kernel_trace trace(L"HollowsHunter");
@@ -195,10 +221,11 @@ bool ETWstart()
 
                 std::uint32_t pid = parser.parse<std::uint32_t>(L"ProcessId");
                 // New process reset cooldown just in case
+                setProcessStart(pid);
                 resetCooldown(pid);
-
-                std::cout << std::dec << time(NULL) << " : New Process: " << filename << " (" << pid << ")" << std::endl;
                 
+                std::cout << std::dec << time(NULL) << " : New Process: " << filename << " (" << pid << ")" << std::endl;
+                runHHScan(pid);
             }
         });
 
@@ -208,18 +235,17 @@ bool ETWstart()
             if (schema.event_opcode() == 10) { // Load
                 krabs::parser parser(schema);
                 std::uint32_t pid = parser.parse<std::uint32_t>(L"ProcessId");
-                if (!isWatchedPid(pid)) return;
+                if (!isWatchedPid(pid) || pid == GetCurrentProcessId()) return;
 
                 std::wstring filename = parser.parse<std::wstring>(L"FileName");
                 std::uint8_t sign = parser.parse<std::uint8_t>(L"SignatureType");
-                
+
+                if (!isDelayedLoad(pid)) {
+                    std::wcout << " LOADING " <<  std::dec << pid << " : " << time(NULL) << " : IMAGE:" << filename << " : " << sign << std::endl;
+                    return;
+                }
                 std::wcout << std::dec << pid << " : " << time(NULL) << " : IMAGE:" << filename << " : " << sign << std::endl;
-                //runHHScan(pid);
-                //std::wcout << std::dec << pid << ": IMAGE:" << schema.task_name() << " : Opcode : " << schema.opcode_name() << " : " << std::dec << schema.event_opcode() << "\n";
-                /*for (krabs::property& prop : parser.properties())
-                {
-                    std::wcout << prop.name() << "\n";
-                }*/
+                runHHScan(pid);
             }
         });
 
@@ -231,10 +257,6 @@ bool ETWstart()
             if (!isWatchedPid(pid)) return;
 
             std::wcout << std::dec << pid << ": TCPIP:" << schema.task_name() << " : Opcode : " << schema.opcode_name() << " : " << std::dec << schema.event_opcode() << "\n";
-            /*for (krabs::property& prop : parser.properties())
-            {
-                std::wcout << prop.name() << "\n";
-            }*/
             runHHScan(pid);
         });
 
@@ -284,10 +306,10 @@ bool ETWstart()
 
     bool isOk = true;
     trace.enable(tcpIpProvider);
-    trace.enable(objectMgrProvider);
-    //trace.enable(processProvider);
-    //trace.enable(imageLoadProvider);
-    //trace.enable(virtualAllocProvider);
+    //trace.enable(objectMgrProvider);
+    trace.enable(processProvider);
+    trace.enable(imageLoadProvider);
+    trace.enable(virtualAllocProvider);
     try {
         std::cout << "Starting listener..." << std::endl;
         trace.start();
