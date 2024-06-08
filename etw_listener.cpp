@@ -10,8 +10,25 @@
 #define MAX_PROCESSES 65536
 
 // Global var for ETW thread
-time_t      pidCooldown[MAX_PROCESSES] = { 0 };
-time_t      pidStartTime[MAX_PROCESSES] = { 0 };
+
+struct ProceesStat
+{
+    time_t startTime;
+    time_t cooldown;
+    time_t lastScan;
+
+    void init()
+    {
+        startTime = 0;
+        cooldown = 0;
+        lastScan = 0;
+    }
+};
+
+ProceesStat procStats[MAX_PROCESSES] = { 0 };
+
+//time_t      pidCooldown[MAX_PROCESSES] = { 0 };
+//time_t      pidStartTime[MAX_PROCESSES] = { 0 };
 
 // ETW Handler
 // To filter our events, we want to compare against the
@@ -26,16 +43,16 @@ void setProcessStart(std::uint32_t pid)
 {
     time_t now = 0;
     time(&now);
-    pidStartTime[pid] = now;
+    procStats[pid].startTime = now;
 }
 
 bool isDelayedLoad(std::uint32_t pid)
 {
-    if (!pidStartTime[pid]) true;
+    if (!procStats[pid].startTime) true;
 
     time_t now = 0;
     time(&now);
-    if (now - pidStartTime[pid] > 1) {
+    if (now - procStats[pid].startTime > 1) {
         return true;
     }
     return false;
@@ -43,17 +60,17 @@ bool isDelayedLoad(std::uint32_t pid)
 
 void resetCooldown(std::uint32_t pid)
 {
-    pidCooldown[pid] = 0;
+    procStats[pid].cooldown = 0;
 }
 
 bool isCooldown(std::uint32_t pid)
 {
-    if (pidCooldown[pid])
+    if (procStats[pid].cooldown)
     {
         time_t now = 0;
         time(&now);
 
-        if (now - pidCooldown[pid] > 1)
+        if (now - procStats[pid].cooldown > 1)
             resetCooldown(pid);
         else {
             //std::cout << "Skipping scan for: " << pid << "is in cooldown" << std::endl;
@@ -65,57 +82,58 @@ bool isCooldown(std::uint32_t pid)
 
 void updateCooldown(std::uint32_t pid)
 {
-    if (pidCooldown[pid])
+    if (procStats[pid].cooldown)
     {
-        time(&pidCooldown[pid]);
+        time(&procStats[pid].cooldown);
     }
 }
 
 
 bool isAllocationExecutable(std::uint32_t pid, LPVOID baseAddress)
 {
-    bool isExec = false;
-
     HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION, FALSE, pid);
-    if (hProcess)
+    if (!hProcess) return false;
+
+    bool isExec = false;
+    
+    bool    stop = false;
+    PVOID   base = 0;
+    LPVOID  addr = baseAddress;
+    MEMORY_BASIC_INFORMATION mbi = { 0 };
+
+    do
     {
-        bool    stop = false;
-        PVOID   base = 0;
-        LPVOID  addr = baseAddress;
-        MEMORY_BASIC_INFORMATION mbi = { 0 };
-
-        do
+        if (VirtualQueryEx(hProcess, addr, &mbi, sizeof(MEMORY_BASIC_INFORMATION)) && mbi.AllocationBase)
         {
-            if (VirtualQueryEx(hProcess, addr, &mbi, sizeof(MEMORY_BASIC_INFORMATION)) && mbi.AllocationBase)
+            // Start of the allocation
+            if (!base)
             {
-                // Start of the allocation
-                if (!base)
-                {
-                    base = mbi.AllocationBase;
-                }
+                base = mbi.AllocationBase;
+            }
 
-                // Still within?
-                if (base == mbi.AllocationBase)
+            // Still within?
+            if (base == mbi.AllocationBase)
+            {
+                if (mbi.AllocationProtect & EXECUTABLE_FLAGS || mbi.Protect & EXECUTABLE_FLAGS)
                 {
-                    if (mbi.AllocationProtect & EXECUTABLE_FLAGS || mbi.Protect & EXECUTABLE_FLAGS)
-                    {
+                    if (!g_hh_args.quiet) {
                         std::cout << "New Executable Section: " << " (" << pid << ") 0x" << std::hex << addr << " Flags=[Alloc: " << mbi.AllocationProtect << " | Now: " << mbi.Protect << "] " << std::dec << std::endl;
-                        isExec = true;
                     }
-
-                    // Move to next block
-                    addr = static_cast<char*>(addr) + mbi.RegionSize;
+                    isExec = true;
                 }
-                else
-                    stop = true;
+
+                // Move to next block
+                addr = static_cast<char*>(addr) + mbi.RegionSize;
             }
             else
                 stop = true;
+        }
+        else
+            stop = true;
 
-        } while (!stop && !isExec);
+    } while (!stop && !isExec);
 
-        CloseHandle(hProcess);
-    }
+    CloseHandle(hProcess);
     return isExec;
 }
 
@@ -174,6 +192,20 @@ bool isWatchedName(std::string& imgFileName)
 
 void runHHScan(std::uint32_t pid)
 {
+    time_t now = 0;
+    time(&now);
+
+    bool shouldScan = false;
+    if (!procStats[pid].lastScan || now - procStats[pid].lastScan > 1) {
+        shouldScan = true;
+    }
+    if (!shouldScan) {
+#ifdef _DEBUG
+        std::cout << std::dec << pid << " : " << now << ": Skipping the scan...\n";
+#endif
+        return;
+    }
+    procStats[pid].lastScan = now;
     // local copy of arguments
     t_hh_params args = g_hh_args;
 
@@ -220,11 +252,11 @@ bool ETWstart()
                 if (!isWatchedName(filename)) return;
 
                 std::uint32_t pid = parser.parse<std::uint32_t>(L"ProcessId");
-                // New process reset cooldown just in case
-                setProcessStart(pid);
-                resetCooldown(pid);
-                
-                std::cout << std::dec << time(NULL) << " : New Process: " << filename << " (" << pid << ")" << std::endl;
+                // New process, reset stats
+                procStats[pid].init();
+                if (!g_hh_args.quiet) {
+                    std::cout << std::dec << time(NULL) << " : New Process: " << filename << " (" << pid << ")" << std::endl;
+                }
                 runHHScan(pid);
             }
         });
@@ -232,19 +264,22 @@ bool ETWstart()
     imageLoadProvider.add_on_event_callback([](const EVENT_RECORD& record, const krabs::trace_context& trace_context)
         {
             krabs::schema schema(record, trace_context.schema_locator);
+            //std::wcout << schema.task_name() << " : Opcode : " << schema.opcode_name() << " : " << std::dec << schema.event_opcode() << "\n";
             if (schema.event_opcode() == 10) { // Load
                 krabs::parser parser(schema);
                 std::uint32_t pid = parser.parse<std::uint32_t>(L"ProcessId");
-                if (!isWatchedPid(pid) || pid == GetCurrentProcessId()) return;
+                if (!isWatchedPid(pid)) return;
 
                 std::wstring filename = parser.parse<std::wstring>(L"FileName");
-                std::uint8_t sign = parser.parse<std::uint8_t>(L"SignatureType");
-
                 if (!isDelayedLoad(pid)) {
+#ifdef _DEBUG
                     std::wcout << " LOADING " <<  std::dec << pid << " : " << time(NULL) << " : IMAGE:" << filename << " : " << sign << std::endl;
+#endif
                     return;
                 }
-                std::wcout << std::dec << pid << " : " << time(NULL) << " : IMAGE:" << filename << " : " << sign << std::endl;
+                if (!g_hh_args.quiet) {
+                    std::wcout << std::dec << pid << " : " << time(NULL) << " : IMAGE:" << filename << std::endl;
+                }
                 runHHScan(pid);
             }
         });
@@ -255,8 +290,9 @@ bool ETWstart()
             krabs::parser parser(schema);
             std::uint32_t pid = parser.parse<std::uint32_t>(L"PID");
             if (!isWatchedPid(pid)) return;
-
-            std::wcout << std::dec << pid << ": TCPIP:" << schema.task_name() << " : Opcode : " << schema.opcode_name() << " : " << std::dec << schema.event_opcode() << "\n";
+            if (!g_hh_args.quiet) {
+                std::wcout << std::dec << pid << " : " << schema.task_name() << " : " << schema.opcode_name() << "\n";
+            }
             runHHScan(pid);
         });
 
@@ -268,10 +304,7 @@ bool ETWstart()
             {
                 krabs::parser parser(schema);
                 std::wcout << "ObjManager:" << schema.task_name() << " : Opcode : " << schema.opcode_name() << " : " << std::dec << schema.event_opcode() << "\n";
-                for (krabs::property& prop : parser.properties())
-                {
-                    std::wcout << prop.name() << "\n";
-                }
+                printAllProperties(parser);
             }
         });
     // Process VirtualAlloc Trigger
@@ -282,11 +315,9 @@ bool ETWstart()
             {
                 krabs::parser parser(schema);
                 std::uint32_t targetPid = parser.parse<std::uint32_t>(L"ProcessId");
-
                 if (!isWatchedPid(targetPid)) return;
 
-                if (!isCooldown(targetPid))
-                    return;
+                if (!isCooldown(targetPid)) return;
 
                 bool doScan = false;
                 LPVOID baseAddress = parser.parse<LPVOID>(L"BaseAddress");
