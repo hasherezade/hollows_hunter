@@ -342,7 +342,8 @@ void HHScanner::summarizeScan(HHScanReport *hh_report)
         //file the same report into the directory with dumps:
         if (hh_report->suspicious.size()) {
             std::string report_path = files_util::join_path(this->outDir, "summary.json");
-            files_util::write_to_file(report_path, hh_report->toJSON(this->hh_args), false);
+            //TODO: fix JSON formatting for the appended reports
+            files_util::write_to_file(report_path, hh_report->toJSON(this->hh_args), true);
         }
     }
     if (hh_args.log) {
