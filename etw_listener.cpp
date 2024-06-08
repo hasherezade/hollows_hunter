@@ -302,15 +302,19 @@ bool ETWstart()
             runHHScan(pid);
         });
 
-
     objectMgrProvider.add_on_event_callback([](const EVENT_RECORD& record, const krabs::trace_context& trace_context)
         {
             krabs::schema schema(record, trace_context.schema_locator);
-            if (schema.event_opcode() != 32 && schema.event_opcode() != 33) // CreateHandle, CloseHandle
+            if (schema.event_opcode()  == 34) // DuplicateHandle
             {
                 krabs::parser parser(schema);
-                std::wcout << "ObjManager:" << schema.task_name() << " : Opcode : " << schema.opcode_name() << " : " << std::dec << schema.event_opcode() << "\n";
-                printAllProperties(parser);
+                std::uint32_t pid = parser.parse<std::uint32_t>(L"TargetProcessId");
+                if (!isWatchedPid(pid)) return;
+
+                if (!g_hh_args.quiet) {
+                    std::wcout << std::dec << pid << " : " << schema.task_name() << " : " << schema.opcode_name() << "\n";
+                }
+                runHHScan(pid);
             }
         });
     // Process VirtualAlloc Trigger
@@ -343,7 +347,7 @@ bool ETWstart()
 
     bool isOk = true;
     trace.enable(tcpIpProvider);
-    //trace.enable(objectMgrProvider);
+    trace.enable(objectMgrProvider);
     trace.enable(processProvider);
     trace.enable(imageLoadProvider);
     trace.enable(virtualAllocProvider);
