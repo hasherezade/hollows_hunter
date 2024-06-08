@@ -196,7 +196,7 @@ void runHHScan(std::uint32_t pid)
     time(&now);
 
     bool shouldScan = false;
-    if (!procStats[pid].lastScan || now - procStats[pid].lastScan > 1) {
+    if (!procStats[pid].lastScan || (now - procStats[pid].lastScan) > 10) {
         shouldScan = true;
     }
     if (!shouldScan) {
