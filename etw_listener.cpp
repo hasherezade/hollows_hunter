@@ -174,7 +174,9 @@ inline std::wstring getProcessName(DWORD pid)
 
 bool isWatchedPid(DWORD pid)
 {
-    if (!g_hh_args.names_list.size() && !g_hh_args.pids_list.size()) {
+    if (!g_hh_args.names_list.size() && !g_hh_args.pids_list.size() 
+        && !g_hh_args.ignored_names_list.size())
+    {
         // no filter applied, watch everything
         return true;
     }
@@ -189,19 +191,33 @@ bool isWatchedPid(DWORD pid)
         // the name is on the watch list
         return true;
     }
+    if (g_hh_args.ignored_names_list.size() &&
+        g_hh_args.ignored_names_list.find(wImgFileName) == g_hh_args.ignored_names_list.end())
+    {
+        // the name is NOT on the ignore list
+        return true;
+    }
     // the PID is not on the watch list
     return false;
 }
 
 bool isWatchedName(std::string& imgFileName)
 {
-    if (!g_hh_args.names_list.size() && !g_hh_args.pids_list.size()) {
+    if (!g_hh_args.names_list.size() && !g_hh_args.pids_list.size()
+        && !g_hh_args.ignored_names_list.size())
+    {
         // no filter applied, watch everything
         return true;
     }
     std::wstring wImgFileName(imgFileName.begin(), imgFileName.end());
     if (g_hh_args.names_list.find(wImgFileName) != g_hh_args.names_list.end()) {
         // the name is on the watch list
+        return true;
+    }
+    if (g_hh_args.ignored_names_list.size() &&
+        g_hh_args.ignored_names_list.find(wImgFileName) == g_hh_args.ignored_names_list.end())
+    {
+        // the name is NOT on the ignore list
         return true;
     }
     // the name is not on the watch list
@@ -211,8 +227,6 @@ bool isWatchedName(std::string& imgFileName)
 // The function we want to execute on the new thread.
 void runHHinNewThread(t_hh_params args)
 {
-    // during the current scan use only a single PID
-    std::uint32_t pid = args.pesieve_args.pid;
     HHScanner hhunter(args);
     HHScanReport* report = hhunter.scan();
     if (report)
@@ -224,7 +238,10 @@ void runHHinNewThread(t_hh_params args)
     }
     time_t now = 0;
     time(&now);
-    procStats[args.pesieve_args.pid].lastScanEnd = now;
+    for (auto itr = args.pids_list.begin(); itr != args.pids_list.end(); ++itr) {
+        long pid = *itr;
+        procStats[pid].lastScanEnd = now;
+    }
 }
 
 
@@ -251,10 +268,10 @@ void runHHScan(std::uint32_t pid)
     procStats[pid].lastScanEnd = 0;
 
     t_hh_params args = g_hh_args;
+    // during the current scan use only a single PID
     args.pids_list.clear();
     args.names_list.clear();
     args.pids_list.insert(pid);
-    args.pesieve_args.pid = pid;
 
     procStats[pid].cleanupThread();
     procStats[pid].thread = new std::thread(runHHinNewThread, args);
