@@ -2,6 +2,9 @@
 #include "hh_scanner.h"
 #include <winmeta.h>
 #include <string>
+#include <thread>
+#include <mutex>
+
 #include "util/process_util.h"
 
 #if (_MSC_VER >= 1900)
@@ -15,14 +18,32 @@ struct ProceesStat
 {
     time_t startTime;
     time_t cooldown;
-    time_t lastScan;
+    time_t lastScanStart;
+    time_t lastScanEnd;
+    std::thread* thread;
 
     void init()
     {
         startTime = 0;
         cooldown = 0;
-        lastScan = 0;
+        lastScanStart = lastScanEnd = 0;
+        thread = nullptr;
     }
+
+    void cleanupThread()
+    {
+        if (thread) {
+#ifdef _DEBUG
+            std::cout << std::dec << pid << " : Deleting thread: " << procStats[pid].thread->get_id() << std::endl;
+#endif
+            if (thread->joinable()) {
+                thread->join();
+            }
+            delete thread;
+            thread = nullptr;
+        }
+    }
+
 };
 
 ProceesStat procStats[MAX_PROCESSES] = { 0 };
@@ -187,31 +208,11 @@ bool isWatchedName(std::string& imgFileName)
     return false;
 }
 
-void runHHScan(std::uint32_t pid)
+// The function we want to execute on the new thread.
+void runHHinNewThread(t_hh_params args)
 {
-    time_t now = 0;
-    time(&now);
-
-    bool shouldScan = false;
-    if (!procStats[pid].lastScan || (now - procStats[pid].lastScan) > 10) {
-        shouldScan = true;
-    }
-    if (!shouldScan) {
-#ifdef _DEBUG
-        std::cout << std::dec << pid << " : " << now << ": Skipping the scan...\n";
-#endif
-        return;
-    }
-    procStats[pid].lastScan = now;
-    // local copy of arguments
-    t_hh_params args = g_hh_args;
-
     // during the current scan use only a single PID
-    args.pids_list.clear();
-    args.names_list.clear();
-    args.pids_list.insert(pid);
-    args.pesieve_args.pid = pid;
-
+    std::uint32_t pid = args.pesieve_args.pid;
     HHScanner hhunter(args);
     HHScanReport* report = hhunter.scan();
     if (report)
@@ -221,6 +222,45 @@ void runHHScan(std::uint32_t pid)
         }
         delete report;
     }
+    time_t now = 0;
+    time(&now);
+    procStats[args.pesieve_args.pid].lastScanEnd = now;
+}
+
+
+void runHHScan(std::uint32_t pid)
+{
+    static std::mutex mutx;
+    const std::lock_guard<std::mutex> lock(mutx);
+
+    time_t now = 0;
+    time(&now);
+
+    bool shouldScan = false;
+    if (procStats[pid].lastScanStart == 0 || 
+        (procStats[pid].lastScanEnd != 0 && (now - procStats[pid].lastScanEnd) > 1)) {
+        shouldScan = true;
+    }
+    if (!shouldScan) {
+#ifdef _DEBUG
+        std::cout << std::dec << pid << " : " << now << ": Skipping the scan...\n";
+#endif
+        return;
+    }
+    procStats[pid].lastScanStart = now;
+    procStats[pid].lastScanEnd = 0;
+
+    t_hh_params args = g_hh_args;
+    args.pids_list.clear();
+    args.names_list.clear();
+    args.pids_list.insert(pid);
+    args.pesieve_args.pid = pid;
+
+    procStats[pid].cleanupThread();
+    procStats[pid].thread = new std::thread(runHHinNewThread, args);
+#ifdef _DEBUG
+    std::cout << std::dec << pid << " : Running a new thread: " << procStats[pid].thread->get_id() << std::endl;
+#endif
 }
 
 void printAllProperties(krabs::parser &parser)
@@ -244,6 +284,11 @@ bool ETWstart()
     processProvider.add_on_event_callback([](const EVENT_RECORD& record, const krabs::trace_context& trace_context)
         {
             krabs::schema schema(record, trace_context.schema_locator);
+            if (schema.event_opcode() == WINEVENT_OPCODE_STOP) {
+                krabs::parser parser(schema);
+                std::uint32_t pid = parser.parse<std::uint32_t>(L"ProcessId");
+                procStats[pid].cleanupThread();
+            }
             if (schema.event_opcode() == WINEVENT_OPCODE_START)
             {
                 krabs::parser parser(schema);
@@ -253,6 +298,7 @@ bool ETWstart()
                 if (isWatchedName(filename)) {
                     std::uint32_t pid = parser.parse<std::uint32_t>(L"ProcessId");
                     // New process, reset stats
+                    procStats[pid].cleanupThread();
                     procStats[pid].init();
                     if (!g_hh_args.quiet) {
                         std::cout << std::dec << time(NULL) << " : New Process: " << filename << " (" << pid << ") Parent: " << parentPid << std::endl;
