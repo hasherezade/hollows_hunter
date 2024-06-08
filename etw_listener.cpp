@@ -219,7 +219,9 @@ void runHHScan(std::uint32_t pid)
     HHScanReport* report = hhunter.scan();
     if (report)
     {
-        hhunter.summarizeScan(report);
+        if (!g_hh_args.quiet || report->countSuspicious()) {
+            hhunter.summarizeScan(report);
+        }
         delete report;
     }
 }
