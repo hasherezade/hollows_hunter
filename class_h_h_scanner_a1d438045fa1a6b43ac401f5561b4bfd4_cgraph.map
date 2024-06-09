@@ -1,0 +1,19 @@
+<map id="HHScanner::writeToLog" name="HHScanner::writeToLog">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,155,166,180"/>
+<area shape="rect" id="Node000002" href="$class_h_h_scan_report.html#ab833046e9e59cb66fe2f94c056c4f517" title=" " alt="" coords="214,129,374,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,155,198,151,198,156,166,160"/>
+<area shape="rect" id="Node000009" href="$namespacefiles__util.html#af87086ea253d2c9f93852ad9b40fd7ac" title=" " alt="" coords="222,179,366,204"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="166,174,207,179,206,184,165,179"/>
+<area shape="rect" id="Node000003" href="$class_h_h_scan_report.html#a10b9aaf6b6f15a816500daff8b200746" title=" " alt="" coords="422,5,633,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="306,127,354,84,386,60,421,40,435,34,437,39,423,45,389,64,357,88,310,131"/>
+<area shape="rect" id="Node000004" href="$class_h_h_scan_report.html#a4610487e2354e4c651abd3e83658f369" title=" " alt="" coords="440,55,616,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="324,126,421,89,445,82,447,87,423,94,326,131"/>
+<area shape="rect" id="Node000005" href="$class_h_h_scan_report.html#ae662be540e84fe79516c5fc79c6d9999" title=" " alt="" coords="432,104,624,130"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="374,131,416,126,416,132,374,136"/>
+<area shape="rect" id="Node000006" href="$hh__report_8cpp.html#aca43a9a1ca6d4871d919d565632f5662" title=" " alt="" coords="475,153,581,179"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="374,148,459,157,459,162,374,153"/>
+<area shape="rect" id="Node000007" href="$class_h_h_scan_report.html#a4076b31ea0626681d6ecfa129d9274ab" title=" " alt="" coords="426,203,630,228"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="345,153,375,164,399,177,423,189,443,196,441,201,421,194,397,181,373,169,344,158"/>
+<area shape="rect" id="Node000008" href="$namespaceutil.html#a928be58496639689a6a86142ab7030eb" title=" " alt="" coords="486,252,570,278"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="357,153,376,164,393,183,400,203,408,222,424,239,446,250,471,258,470,263,444,255,420,243,403,224,395,205,388,186,372,168,354,158"/>
+</map>
