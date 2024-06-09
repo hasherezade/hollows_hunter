@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <mutex>
 
 bool get_current_color(int descriptor, WORD &color)
 {
@@ -29,6 +30,8 @@ WORD set_color(WORD color)
 
 void print_in_color(WORD color, const std::string &text)
 {
+    static std::mutex colorOutMtx;
+    const std::lock_guard<std::mutex> stdOutLock(colorOutMtx);
     WORD old_color = set_color(color);
     std::cout << text;
     std::cout.flush();
