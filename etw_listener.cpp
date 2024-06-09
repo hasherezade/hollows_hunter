@@ -6,6 +6,7 @@
 #include <mutex>
 
 #include "util/process_util.h"
+#include "term_util.h"
 
 #if (_MSC_VER >= 1900)
 
@@ -59,7 +60,6 @@ struct ProceesStat
 };
 
 ProceesStat procStats[MAX_PROCESSES] = { 0 };
-std::mutex g_stdOutMutex;
 
 // ETW Handler
 // To filter our events, we want to compare against the

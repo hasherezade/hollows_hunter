@@ -6,6 +6,8 @@
 #include <string>
 #include <mutex>
 
+std::mutex g_stdOutMutex;
+
 bool get_current_color(int descriptor, WORD &color)
 {
     CONSOLE_SCREEN_BUFFER_INFO info;
@@ -30,8 +32,7 @@ WORD set_color(WORD color)
 
 void print_in_color(WORD color, const std::string &text)
 {
-    static std::mutex colorOutMtx;
-    const std::lock_guard<std::mutex> stdOutLock(colorOutMtx);
+    const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
     WORD old_color = set_color(color);
     std::cout << text;
     std::cout.flush();

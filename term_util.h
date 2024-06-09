@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <windows.h>
+#include <mutex>
+
+extern std::mutex g_stdOutMutex;
 
 #define BLACK 0
 #define DARK_BLUE 1
