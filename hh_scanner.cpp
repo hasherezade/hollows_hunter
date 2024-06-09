@@ -15,6 +15,7 @@
 #include "util/process_util.h"
 
 #include <paramkit.h>
+#include <mutex>
 
 #define PID_FIELD_SIZE 4
 
@@ -324,13 +325,13 @@ HHScanReport* HHScanner::scan()
     return my_report;
 }
 
-void HHScanner::summarizeScan(HHScanReport *hh_report)
+void HHScanner::summarizeScan(HHScanReport *hh_report, bool suspiciousOnly)
 {
     if (!hh_report) return;
     std::string summary_str;
 
     if (!this->hh_args.json_output) {
-        summary_str = hh_report->toString();
+        summary_str = hh_report->toString(suspiciousOnly);
         std::cout << summary_str;
     }
     else {
@@ -342,11 +343,16 @@ void HHScanner::summarizeScan(HHScanReport *hh_report)
         //file the same report into the directory with dumps:
         if (hh_report->suspicious.size()) {
             std::string report_path = files_util::join_path(this->outDir, "summary.json");
+
+            static std::mutex summaryMutx;
+            const std::lock_guard<std::mutex> lock(summaryMutx);
             //TODO: fix JSON formatting for the appended reports
             files_util::write_to_file(report_path, hh_report->toJSON(this->hh_args), true);
         }
     }
     if (hh_args.log) {
+        static std::mutex logMutx;
+        const std::lock_guard<std::mutex> lock(logMutx);
         files_util::write_to_file("hollows_hunter.log", summary_str, true);
     }
     if (hh_args.suspend_suspicious) {

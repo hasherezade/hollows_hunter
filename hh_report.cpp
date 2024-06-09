@@ -33,15 +33,24 @@ bool HHScanReport::appendReport(pesieve::t_report &scan_report, const std::wstri
     return true;
 }
 
-size_t HHScanReport::reportsToString(std::wstringstream &stream)
+size_t HHScanReport::reportsToString(std::wstringstream& stream, bool suspiciousOnly)
 {
-    std::vector<DWORD>::const_iterator itr;
-
     size_t printed = 0;
     size_t counter = 0;
-    const size_t max_len = size_t(std::floor(std::log10(double(suspicious.size() - 1))) + 1);
-    for (itr = this->suspicious.begin(); itr != suspicious.end(); ++itr) {
-        DWORD pid = *itr;
+    size_t scannedCount = pidToReport.size();
+    if (suspiciousOnly) {
+        scannedCount = suspicious.size();
+    }
+    if (!scannedCount) {
+        return printed;
+    }
+    const size_t max_len = size_t(std::floor(std::log10(double(scannedCount - 1))) + 1);
+    for (auto itr = this->pidToReport.begin(); itr != pidToReport.end(); ++itr) {
+        DWORD pid = itr->first;
+        if (suspiciousOnly) {
+            pesieve::t_report rep = itr->second;
+            if (!rep.suspicious) continue;
+        }
         stream << L"[" << std::setw(max_len) << counter++ << L"]: PID: " << std::dec << pid << L", ";
         stream << L"Name: " << this->pidToName[pid] << L"\n";
         printed++;
@@ -144,7 +153,7 @@ void print_scantime(STR_STREAM& stream, size_t timeInMs)
     }
 }
 
-std::string HHScanReport::toString()
+std::string HHScanReport::toString(bool suspiciousOnly)
 {
     std::wstringstream stream;
     //summary:
@@ -155,10 +164,14 @@ std::string HHScanReport::toString()
     print_scantime(stream, getScanTime());
     stream << L"\n";
     stream << L"[*] Total scanned: " << std::dec << countTotal() << L"\n";
+    if (!suspiciousOnly && countTotal() > 0) {
+        stream << L"[+] List of scanned: \n";
+        reportsToString(stream, false);
+    }
     stream << L"[*] Total suspicious: " << std::dec << countSuspicious() << L"\n";
     if (countSuspicious() > 0) {
         stream << L"[+] List of suspicious: \n";
-        reportsToString(stream);
+        reportsToString(stream, true);
     }
     return std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(stream.str());
 }

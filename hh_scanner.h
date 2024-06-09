@@ -28,7 +28,7 @@ public:
     HHScanner(t_hh_params &_args);
 
     HHScanReport* scan();
-    void summarizeScan(HHScanReport *hh_report);
+    void summarizeScan(HHScanReport *hh_report, bool suspiciousOnly = true);
 
 protected:
     void printScanRoundStats(size_t found, size_t ignored_count);
