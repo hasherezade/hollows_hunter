@@ -27,7 +27,7 @@ var searchData=
   ['strings_5futil_2eh_24',['strings_util.h',['../strings__util_8h.html',1,'']]],
   ['stringsim_5ftype_25',['stringsim_type',['../namespacehhunter_1_1util.html#ae165f6b8c8a8d721f1eb9f8417f352b1',1,'hhunter::util']]],
   ['strtime_26',['strtime',['../namespaceutil.html#a928be58496639689a6a86142ab7030eb',1,'util']]],
-  ['summarizescan_27',['summarizeScan',['../class_h_h_scanner.html#a6c20de8e1a13034173c42c2e87267af3',1,'HHScanner']]],
+  ['summarizescan_27',['summarizeScan',['../class_h_h_scanner.html#a07f8cd3076f3bf23323bca791651a710',1,'HHScanner']]],
   ['suspend_2ecpp_28',['suspend.cpp',['../suspend_8cpp.html',1,'']]],
   ['suspend_2eh_29',['suspend.h',['../suspend_8h.html',1,'']]],
   ['suspend_5fprocess_30',['suspend_process',['../suspend_8cpp.html#a3c63f252433e6e7532e441ed5cacca9d',1,'suspend_process(DWORD processId):&#160;suspend.cpp'],['../suspend_8h.html#a3c63f252433e6e7532e441ed5cacca9d',1,'suspend_process(DWORD processId):&#160;suspend.cpp']]],

@@ -112,13 +112,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a10b9aaf6b6f15a816500daff8b200746"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4610487e2354e4c651abd3e83658f369" id="r_a4610487e2354e4c651abd3e83658f369"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4610487e2354e4c651abd3e83658f369">countTotal</a> () const</td></tr>
 <tr class="separator:a4610487e2354e4c651abd3e83658f369"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7283b381ccf47bc892e264ddd6eae90" id="r_ad7283b381ccf47bc892e264ddd6eae90"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad7283b381ccf47bc892e264ddd6eae90">toString</a> ()</td></tr>
-<tr class="separator:ad7283b381ccf47bc892e264ddd6eae90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab833046e9e59cb66fe2f94c056c4f517" id="r_ab833046e9e59cb66fe2f94c056c4f517"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab833046e9e59cb66fe2f94c056c4f517">toString</a> (bool suspiciousOnly=true)</td></tr>
+<tr class="separator:ab833046e9e59cb66fe2f94c056c4f517"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a76f6c7cab7fe491524c6ddc88540ecad" id="r_a76f6c7cab7fe491524c6ddc88540ecad"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76f6c7cab7fe491524c6ddc88540ecad">reportsToString</a> (std::wstringstream &amp;stream)</td></tr>
-<tr class="separator:a76f6c7cab7fe491524c6ddc88540ecad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4076b31ea0626681d6ecfa129d9274ab" id="r_a4076b31ea0626681d6ecfa129d9274ab"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4076b31ea0626681d6ecfa129d9274ab">reportsToString</a> (std::wstringstream &amp;stream, bool suspiciousOnly=true)</td></tr>
+<tr class="separator:a4076b31ea0626681d6ecfa129d9274ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d63466cb4cb100244b164ae5e7cc846" id="r_a9d63466cb4cb100244b164ae5e7cc846"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d63466cb4cb100244b164ae5e7cc846">toJSON</a> (const <a class="el" href="hh__params_8h.html#a2b2deab5f259454bc3b369632784e89b">t_hh_params</a> &amp;params)</td></tr>
 <tr class="separator:a9d63466cb4cb100244b164ae5e7cc846"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a832f8ee9a72a851407015301d23f5467" id="r_a832f8ee9a72a851407015301d23f5467"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a832f8ee9a72a851407015301d23f5467">reportsToJSON</a> (std::wstringstream &amp;stream, size_t level, const <a class="el" href="hh__params_8h.html#a2b2deab5f259454bc3b369632784e89b">t_hh_params</a> &amp;params)</td></tr>
@@ -328,12 +328,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__report_8cpp_source.html#l00052">52</a> of file <a class="el" href="hh__report_8cpp_source.html">hh_report.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__report_8cpp_source.html#l00061">61</a> of file <a class="el" href="hh__report_8cpp_source.html">hh_report.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a76f6c7cab7fe491524c6ddc88540ecad" name="a76f6c7cab7fe491524c6ddc88540ecad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76f6c7cab7fe491524c6ddc88540ecad">&#9670;&#160;</a></span>reportsToString()</h2>
+<a id="a4076b31ea0626681d6ecfa129d9274ab" name="a4076b31ea0626681d6ecfa129d9274ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4076b31ea0626681d6ecfa129d9274ab">&#9670;&#160;</a></span>reportsToString()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -344,8 +344,12 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">size_t HHScanReport::reportsToString </td>
           <td>(</td>
-          <td class="paramtype">std::wstringstream &amp;</td>          <td class="paramname"><span class="paramname"><em>stream</em></span></td><td>)</td>
+          <td class="paramtype">std::wstringstream &amp;</td>          <td class="paramname"><span class="paramname"><em>stream</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>suspiciousOnly</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -413,7 +417,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__report_8cpp_source.html#l00102">102</a> of file <a class="el" href="hh__report_8cpp_source.html">hh_report.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__report_8cpp_source.html#l00111">111</a> of file <a class="el" href="hh__report_8cpp_source.html">hh_report.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -435,8 +439,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="ad7283b381ccf47bc892e264ddd6eae90" name="ad7283b381ccf47bc892e264ddd6eae90"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7283b381ccf47bc892e264ddd6eae90">&#9670;&#160;</a></span>toString()</h2>
+<a id="ab833046e9e59cb66fe2f94c056c4f517" name="ab833046e9e59cb66fe2f94c056c4f517"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab833046e9e59cb66fe2f94c056c4f517">&#9670;&#160;</a></span>toString()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -444,18 +448,18 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">std::string HHScanReport::toString </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>suspiciousOnly</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__report_8cpp_source.html#l00147">147</a> of file <a class="el" href="hh__report_8cpp_source.html">hh_report.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__report_8cpp_source.html#l00156">156</a> of file <a class="el" href="hh__report_8cpp_source.html">hh_report.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_h_h_scan_report_ad7283b381ccf47bc892e264ddd6eae90_cgraph.png" border="0" usemap="#aclass_h_h_scan_report_ad7283b381ccf47bc892e264ddd6eae90_cgraph" alt=""/></div>
-<map name="aclass_h_h_scan_report_ad7283b381ccf47bc892e264ddd6eae90_cgraph" id="aclass_h_h_scan_report_ad7283b381ccf47bc892e264ddd6eae90_cgraph">
+<div class="center"><img src="class_h_h_scan_report_ab833046e9e59cb66fe2f94c056c4f517_cgraph.png" border="0" usemap="#aclass_h_h_scan_report_ab833046e9e59cb66fe2f94c056c4f517_cgraph" alt=""/></div>
+<map name="aclass_h_h_scan_report_ab833046e9e59cb66fe2f94c056c4f517_cgraph" id="aclass_h_h_scan_report_ab833046e9e59cb66fe2f94c056c4f517_cgraph">
 <area shape="rect" title=" " alt="" coords="5,129,166,155"/>
 <area shape="rect" href="class_h_h_scan_report.html#a10b9aaf6b6f15a816500daff8b200746" title=" " alt="" coords="214,5,425,31"/>
 <area shape="poly" title=" " alt="" coords="98,127,145,84,178,60,212,40,226,34,228,39,215,45,180,64,149,88,101,131"/>
@@ -465,7 +469,7 @@ Here is the call graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="165,131,207,126,208,132,166,136"/>
 <area shape="rect" href="hh__report_8cpp.html#aca43a9a1ca6d4871d919d565632f5662" title=" " alt="" coords="266,153,373,179"/>
 <area shape="poly" title=" " alt="" coords="166,148,251,157,250,162,165,153"/>
-<area shape="rect" href="class_h_h_scan_report.html#a76f6c7cab7fe491524c6ddc88540ecad" title=" " alt="" coords="217,203,422,228"/>
+<area shape="rect" href="class_h_h_scan_report.html#a4076b31ea0626681d6ecfa129d9274ab" title=" " alt="" coords="217,203,422,228"/>
 <area shape="poly" title=" " alt="" coords="119,153,214,189,239,196,238,201,213,194,117,158"/>
 <area shape="rect" href="namespaceutil.html#a928be58496639689a6a86142ab7030eb" title=" " alt="" coords="277,252,362,278"/>
 <area shape="poly" title=" " alt="" coords="102,154,149,196,181,219,215,238,263,254,261,259,213,243,178,223,146,200,98,158"/>
