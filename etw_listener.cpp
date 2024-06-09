@@ -59,6 +59,7 @@ struct ProceesStat
 };
 
 ProceesStat procStats[MAX_PROCESSES] = { 0 };
+std::mutex g_stdOutMutex;
 
 // ETW Handler
 // To filter our events, we want to compare against the
@@ -136,6 +137,7 @@ bool isAllocationExecutable(std::uint32_t pid, LPVOID baseAddress)
                 if (mbi.AllocationProtect & EXECUTABLE_FLAGS || mbi.Protect & EXECUTABLE_FLAGS)
                 {
                     if (!g_hh_args.quiet) {
+                        const std::lock_guard<std::mutex> lock(g_stdOutMutex);
                         std::cout << "New Executable Section: " << " (" << pid << ") 0x" << std::hex << addr << " Flags=[Alloc: " << mbi.AllocationProtect << " | Now: " << mbi.Protect << "] " << std::dec << std::endl;
                     }
                     isExec = true;
@@ -237,6 +239,7 @@ void runHHinNewThread(t_hh_params args)
     if (report)
     {
         if (!g_hh_args.quiet || report->countSuspicious()) {
+            const std::lock_guard<std::mutex> lock(g_stdOutMutex);
             hhunter.summarizeScan(report);
         }
         delete report;
@@ -262,6 +265,7 @@ void runHHScan(std::uint32_t pid)
     }
     if (!shouldScan) {
 #ifdef _DEBUG
+        const std::lock_guard<std::mutex> lock(g_stdOutMutex);
         std::cout << std::dec << pid << " : " << now << ": Skipping the scan...\n";
 #endif
         return;
@@ -278,6 +282,7 @@ void runHHScan(std::uint32_t pid)
     procStats[pid].cleanupThread();
     procStats[pid].thread = new std::thread(runHHinNewThread, args);
 #ifdef _DEBUG
+    const std::lock_guard<std::mutex> lock(g_stdOutMutex);
     std::cout << std::dec << pid << " : Running a new thread: " << procStats[pid].thread->get_id() << std::endl;
 #endif
 }
@@ -321,6 +326,7 @@ bool ETWstart()
                     procStats[pid].init();
                     procStats[pid].setProcessStart();
                     if (!g_hh_args.quiet) {
+                        const std::lock_guard<std::mutex> lock(g_stdOutMutex);
                         std::cout << std::dec << time(NULL) << " : New Process: " << filename << " (" << pid << ") Parent: " << parentPid << std::endl;
                     }
                     runHHScan(pid);
@@ -344,11 +350,13 @@ bool ETWstart()
                 std::wstring filename = parser.parse<std::wstring>(L"FileName");
                 if (!isDelayedLoad(pid)) {
 #ifdef _DEBUG
+                    const std::lock_guard<std::mutex> lock(g_stdOutMutex);
                     std::wcout << " LOADING " <<  std::dec << pid << " : " << time(NULL) << " : IMAGE:" << filename << std::endl;
 #endif
                     return;
                 }
                 if (!g_hh_args.quiet) {
+                    const std::lock_guard<std::mutex> lock(g_stdOutMutex);
                     std::wcout << std::dec << pid << " : " << time(NULL) << " : IMAGE:" << filename << std::endl;
                 }
                 runHHScan(pid);
@@ -362,6 +370,7 @@ bool ETWstart()
             std::uint32_t pid = parser.parse<std::uint32_t>(L"PID");
             if (!isWatchedPid(pid)) return;
             if (!g_hh_args.quiet) {
+                const std::lock_guard<std::mutex> lock(g_stdOutMutex);
                 std::wcout << std::dec << pid << " : " << schema.task_name() << " : " << schema.opcode_name() << "\n";
             }
             runHHScan(pid);
@@ -377,6 +386,7 @@ bool ETWstart()
                 if (!isWatchedPid(pid)) return;
 
                 if (!g_hh_args.quiet) {
+                    const std::lock_guard<std::mutex> lock(g_stdOutMutex);
                     std::wcout << std::dec << pid << " : " << schema.task_name() << " : " << schema.opcode_name() << "\n";
                 }
                 runHHScan(pid);
