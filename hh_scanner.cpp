@@ -215,6 +215,7 @@ void HHScanner::printSingleReport(pesieve::t_report& report)
     if (hh_args.quiet) return;
 
     if (report.errors == pesieve::ERROR_SCAN_FAILURE) {
+        const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
         WORD old_color = set_color(MAKE_COLOR(SILVER, DARK_RED));
         if (report.errors == pesieve::ERROR_SCAN_FAILURE) {
             std::cout << "[!] Could not access: " << std::dec << report.pid;
@@ -225,6 +226,7 @@ void HHScanner::printSingleReport(pesieve::t_report& report)
     }
 #ifndef _WIN64
     if (report.is_64bit) {
+        const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
         WORD old_color = set_color(MAKE_COLOR(SILVER, DARK_MAGENTA));
         std::cout << "[!] Partial scan: " << std::dec << report.pid << " : " << (report.is_64bit ? 64 : 32) << "b";
         set_color(old_color);
@@ -239,6 +241,7 @@ void HHScanner::printSingleReport(pesieve::t_report& report)
         if (report.is_managed) {
             color = MAKE_COLOR(color, DARK_BLUE);
         }
+        const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
         WORD old_color = set_color(color);
         std::cout << ">> Detected: " << std::dec << report.pid;
         if (report.is_managed) {
@@ -258,6 +261,7 @@ t_single_scan_status HHScanner::scanNextProcess(DWORD pid, WCHAR* exe_file, HHSc
     const bool check_time = (hh_args.ptimes != TIME_UNDEFINED) ? true : false;
 #ifdef _DEBUG
     if (check_time) {
+        const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
         std::cout << "Init Time: " << std::hex << this->initTime << std::endl;
     }
 #endif
@@ -287,6 +291,7 @@ t_single_scan_status HHScanner::scanNextProcess(DWORD pid, WCHAR* exe_file, HHSc
         }
     }
     if (!hh_args.quiet) {
+        const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
         std::cout << ">> Scanning PID: " << std::setw(PID_FIELD_SIZE) << std::dec << pid;
         std::wcout << " : " << exe_file;
 
