@@ -28,6 +28,7 @@ public:
     HHScanner(t_hh_params &_args);
 
     HHScanReport* scan();
+    bool writeToLog(HHScanReport* hh_report);
     void summarizeScan(HHScanReport *hh_report, bool suspiciousOnly = true);
 
 protected:

@@ -325,6 +325,23 @@ HHScanReport* HHScanner::scan()
     return my_report;
 }
 
+bool HHScanner::writeToLog(HHScanReport* hh_report)
+{
+    if (!hh_args.log) {
+        return false;
+    }
+
+    const bool suspiciousOnly = false;
+
+    std::string summary_str;
+    summary_str = hh_report->toString(suspiciousOnly);
+    std::cout << summary_str;
+
+    static std::mutex logMutx;
+    const std::lock_guard<std::mutex> lock(logMutx);
+    return files_util::write_to_file("hollows_hunter.log", summary_str, true);
+}
+
 void HHScanner::summarizeScan(HHScanReport *hh_report, bool suspiciousOnly)
 {
     if (!hh_report) return;
@@ -351,9 +368,7 @@ void HHScanner::summarizeScan(HHScanReport *hh_report, bool suspiciousOnly)
         }
     }
     if (hh_args.log) {
-        static std::mutex logMutx;
-        const std::lock_guard<std::mutex> lock(logMutx);
-        files_util::write_to_file("hollows_hunter.log", summary_str, true);
+        writeToLog(hh_report);
     }
     if (hh_args.suspend_suspicious) {
         process_util::suspend_suspicious(hh_report->suspicious);

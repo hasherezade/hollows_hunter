@@ -242,6 +242,9 @@ void runHHinNewThread(t_hh_params args)
             const std::lock_guard<std::mutex> lock(g_stdOutMutex);
             hhunter.summarizeScan(report);
         }
+        else {
+            hhunter.writeToLog(report);
+        }
         delete report;
     }
     time_t now = 0;
