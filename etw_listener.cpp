@@ -30,6 +30,18 @@ struct ProceesStat
         thread = nullptr;
     }
 
+    void setProcessStart()
+    {
+        time_t now = 0;
+        time(&now);
+        startTime = now;
+    }
+
+    void resetCooldown()
+    {
+        cooldown = 0;
+    }
+
     void cleanupThread()
     {
         if (thread) {
@@ -57,13 +69,6 @@ ProceesStat procStats[MAX_PROCESSES] = { 0 };
 // https://msdn.microsoft.com/en-us/library/windows/desktop/aa364068(v=vs.85).aspx
 
 
-void setProcessStart(std::uint32_t pid)
-{
-    time_t now = 0;
-    time(&now);
-    procStats[pid].startTime = now;
-}
-
 bool isDelayedLoad(std::uint32_t pid)
 {
     if (!procStats[pid].startTime) true;
@@ -76,10 +81,6 @@ bool isDelayedLoad(std::uint32_t pid)
     return false;
 }
 
-void resetCooldown(std::uint32_t pid)
-{
-    procStats[pid].cooldown = 0;
-}
 
 bool isCooldown(std::uint32_t pid)
 {
@@ -89,7 +90,7 @@ bool isCooldown(std::uint32_t pid)
         time(&now);
 
         if (now - procStats[pid].cooldown > 1)
-            resetCooldown(pid);
+            procStats[pid].resetCooldown();
         else {
             //std::cout << "Skipping scan for: " << pid << "is in cooldown" << std::endl;
             return false;
@@ -227,6 +228,10 @@ bool isWatchedName(std::string& imgFileName)
 // The function we want to execute on the new thread.
 void runHHinNewThread(t_hh_params args)
 {
+    if (!args.pids_list.size()) {
+        return;
+    }
+    long pid = *(args.pids_list.begin());
     HHScanner hhunter(args);
     HHScanReport* report = hhunter.scan();
     if (report)
@@ -238,10 +243,7 @@ void runHHinNewThread(t_hh_params args)
     }
     time_t now = 0;
     time(&now);
-    for (auto itr = args.pids_list.begin(); itr != args.pids_list.end(); ++itr) {
-        long pid = *itr;
-        procStats[pid].lastScanEnd = now;
-    }
+    procStats[pid].lastScanEnd = now;
 }
 
 
@@ -317,6 +319,7 @@ bool ETWstart()
                     // New process, reset stats
                     procStats[pid].cleanupThread();
                     procStats[pid].init();
+                    procStats[pid].setProcessStart();
                     if (!g_hh_args.quiet) {
                         std::cout << std::dec << time(NULL) << " : New Process: " << filename << " (" << pid << ") Parent: " << parentPid << std::endl;
                     }
