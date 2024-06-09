@@ -268,7 +268,7 @@ void runHHScan(std::uint32_t pid)
     }
     if (!shouldScan) {
 #ifdef _DEBUG
-        const std::lock_guard<std::mutex> lock(g_stdOutMutex);
+        const std::lock_guard<std::mutex> stdOutlock(g_stdOutMutex);
         std::cout << std::dec << pid << " : " << now << ": Skipping the scan...\n";
 #endif
         return;
@@ -285,8 +285,10 @@ void runHHScan(std::uint32_t pid)
     procStats[pid].cleanupThread();
     procStats[pid].thread = new std::thread(runHHinNewThread, args);
 #ifdef _DEBUG
-    const std::lock_guard<std::mutex> lock(g_stdOutMutex);
-    std::cout << std::dec << pid << " : Running a new thread: " << procStats[pid].thread->get_id() << std::endl;
+    {
+        const std::lock_guard<std::mutex> stdOutlock(g_stdOutMutex);
+        std::cout << std::dec << pid << " : Running a new thread: " << procStats[pid].thread->get_id() << std::endl;
+    }
 #endif
 }
 
@@ -329,7 +331,7 @@ bool ETWstart()
                     procStats[pid].init();
                     procStats[pid].setProcessStart();
                     if (!g_hh_args.quiet) {
-                        const std::lock_guard<std::mutex> lock(g_stdOutMutex);
+                        const std::lock_guard<std::mutex> stdOutlock(g_stdOutMutex);
                         std::cout << std::dec << time(NULL) << " : New Process: " << filename << " (" << pid << ") Parent: " << parentPid << std::endl;
                     }
                     runHHScan(pid);
@@ -353,13 +355,13 @@ bool ETWstart()
                 std::wstring filename = parser.parse<std::wstring>(L"FileName");
                 if (!isDelayedLoad(pid)) {
 #ifdef _DEBUG
-                    const std::lock_guard<std::mutex> lock(g_stdOutMutex);
+                    const std::lock_guard<std::mutex> stdOutlock(g_stdOutMutex);
                     std::wcout << " LOADING " <<  std::dec << pid << " : " << time(NULL) << " : IMAGE:" << filename << std::endl;
 #endif
                     return;
                 }
                 if (!g_hh_args.quiet) {
-                    const std::lock_guard<std::mutex> lock(g_stdOutMutex);
+                    const std::lock_guard<std::mutex> stdOutlock(g_stdOutMutex);
                     std::wcout << std::dec << pid << " : " << time(NULL) << " : IMAGE:" << filename << std::endl;
                 }
                 runHHScan(pid);
@@ -373,7 +375,7 @@ bool ETWstart()
             std::uint32_t pid = parser.parse<std::uint32_t>(L"PID");
             if (!isWatchedPid(pid)) return;
             if (!g_hh_args.quiet) {
-                const std::lock_guard<std::mutex> lock(g_stdOutMutex);
+                const std::lock_guard<std::mutex> stdOutlock(g_stdOutMutex);
                 std::wcout << std::dec << pid << " : " << schema.task_name() << " : " << schema.opcode_name() << "\n";
             }
             runHHScan(pid);
@@ -389,7 +391,7 @@ bool ETWstart()
                 if (!isWatchedPid(pid)) return;
 
                 if (!g_hh_args.quiet) {
-                    const std::lock_guard<std::mutex> lock(g_stdOutMutex);
+                    const std::lock_guard<std::mutex> stdOutlock(g_stdOutMutex);
                     std::wcout << std::dec << pid << " : " << schema.task_name() << " : " << schema.opcode_name() << "\n";
                 }
                 runHHScan(pid);
