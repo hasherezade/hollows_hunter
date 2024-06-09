@@ -359,7 +359,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    }</div>
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <span class="keywordflow">if</span> (!shouldScan) {</div>
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="preprocessor">#ifdef _DEBUG</span></div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        <span class="keyword">const</span> std::lock_guard&lt;std::mutex&gt; stdOutlock(g_stdOutMutex);</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        <span class="keyword">const</span> std::lock_guard&lt;std::mutex&gt; stdOutLock(g_stdOutMutex);</div>
 <div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        std::cout &lt;&lt; std::dec &lt;&lt; pid &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; now &lt;&lt; <span class="stringliteral">&quot;: Skipping the scan...\n&quot;</span>;</div>
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        <span class="keywordflow">return</span>;</div>
@@ -377,7 +377,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    procStats[pid].thread = <span class="keyword">new</span> std::thread(runHHinNewThread, args);</div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span><span class="preprocessor">#ifdef _DEBUG</span></div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    {</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <span class="keyword">const</span> std::lock_guard&lt;std::mutex&gt; stdOutlock(g_stdOutMutex);</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <span class="keyword">const</span> std::lock_guard&lt;std::mutex&gt; stdOutLock(g_stdOutMutex);</div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        std::cout &lt;&lt; std::dec &lt;&lt; pid &lt;&lt; <span class="stringliteral">&quot; : Running a new thread: &quot;</span> &lt;&lt; procStats[pid].thread-&gt;get_id() &lt;&lt; std::endl;</div>
 <div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    }</div>
 <div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span><span class="preprocessor">#endif</span></div>
@@ -422,7 +422,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>                    procStats[pid].init();</div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>                    procStats[pid].setProcessStart();</div>
 <div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>                    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781">g_hh_args</a>.<a class="code hl_variable" href="structhh__params.html#a9c00556752d2c127c5c5b205c166976b">quiet</a>) {</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>                        <span class="keyword">const</span> std::lock_guard&lt;std::mutex&gt; stdOutlock(g_stdOutMutex);</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>                        <span class="keyword">const</span> std::lock_guard&lt;std::mutex&gt; stdOutLock(g_stdOutMutex);</div>
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>                        std::cout &lt;&lt; std::dec &lt;&lt; time(NULL) &lt;&lt; <span class="stringliteral">&quot; : New Process: &quot;</span> &lt;&lt; filename &lt;&lt; <span class="stringliteral">&quot; (&quot;</span> &lt;&lt; pid &lt;&lt; <span class="stringliteral">&quot;) Parent: &quot;</span> &lt;&lt; parentPid &lt;&lt; std::endl;</div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>                    }</div>
 <div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>                    runHHScan(pid);</div>
@@ -446,13 +446,13 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>                std::wstring filename = parser.parse&lt;std::wstring&gt;(L<span class="stringliteral">&quot;FileName&quot;</span>);</div>
 <div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>                <span class="keywordflow">if</span> (!isDelayedLoad(pid)) {</div>
 <div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span><span class="preprocessor">#ifdef _DEBUG</span></div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>                    <span class="keyword">const</span> std::lock_guard&lt;std::mutex&gt; stdOutlock(g_stdOutMutex);</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>                    <span class="keyword">const</span> std::lock_guard&lt;std::mutex&gt; stdOutLock(g_stdOutMutex);</div>
 <div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>                    std::wcout &lt;&lt; <span class="stringliteral">&quot; LOADING &quot;</span> &lt;&lt;  std::dec &lt;&lt; pid &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; time(NULL) &lt;&lt; <span class="stringliteral">&quot; : IMAGE:&quot;</span> &lt;&lt; filename &lt;&lt; std::endl;</div>
 <div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>                    <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>                }</div>
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>                <span class="keywordflow">if</span> (!<a class="code hl_variable" href="hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781">g_hh_args</a>.<a class="code hl_variable" href="structhh__params.html#a9c00556752d2c127c5c5b205c166976b">quiet</a>) {</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>                    <span class="keyword">const</span> std::lock_guard&lt;std::mutex&gt; stdOutlock(g_stdOutMutex);</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>                    <span class="keyword">const</span> std::lock_guard&lt;std::mutex&gt; stdOutLock(g_stdOutMutex);</div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>                    std::wcout &lt;&lt; std::dec &lt;&lt; pid &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; time(NULL) &lt;&lt; <span class="stringliteral">&quot; : IMAGE:&quot;</span> &lt;&lt; filename &lt;&lt; std::endl;</div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>                }</div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>                runHHScan(pid);</div>
@@ -466,7 +466,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>            std::uint32_t pid = parser.parse&lt;std::uint32_t&gt;(L<span class="stringliteral">&quot;PID&quot;</span>);</div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>            <span class="keywordflow">if</span> (!isWatchedPid(pid)) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>            <span class="keywordflow">if</span> (!<a class="code hl_variable" href="hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781">g_hh_args</a>.<a class="code hl_variable" href="structhh__params.html#a9c00556752d2c127c5c5b205c166976b">quiet</a>) {</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>                <span class="keyword">const</span> std::lock_guard&lt;std::mutex&gt; stdOutlock(g_stdOutMutex);</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>                <span class="keyword">const</span> std::lock_guard&lt;std::mutex&gt; stdOutLock(g_stdOutMutex);</div>
 <div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>                std::wcout &lt;&lt; std::dec &lt;&lt; pid &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; schema.task_name() &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; schema.opcode_name() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>            }</div>
 <div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>            runHHScan(pid);</div>
@@ -482,7 +482,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>                <span class="keywordflow">if</span> (!isWatchedPid(pid)) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span> </div>
 <div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>                <span class="keywordflow">if</span> (!<a class="code hl_variable" href="hh__scanner_8h.html#a316fb776978a9d4b668b2ff824c7d781">g_hh_args</a>.<a class="code hl_variable" href="structhh__params.html#a9c00556752d2c127c5c5b205c166976b">quiet</a>) {</div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>                    <span class="keyword">const</span> std::lock_guard&lt;std::mutex&gt; stdOutlock(g_stdOutMutex);</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>                    <span class="keyword">const</span> std::lock_guard&lt;std::mutex&gt; stdOutLock(g_stdOutMutex);</div>
 <div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>                    std::wcout &lt;&lt; std::dec &lt;&lt; pid &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; schema.task_name() &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; schema.opcode_name() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>                }</div>
 <div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>                runHHScan(pid);</div>
