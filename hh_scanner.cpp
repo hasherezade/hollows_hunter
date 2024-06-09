@@ -340,7 +340,6 @@ bool HHScanner::writeToLog(HHScanReport* hh_report)
 
     std::string summary_str;
     summary_str = hh_report->toString(suspiciousOnly);
-    std::cout << summary_str;
 
     static std::mutex logMutx;
     const std::lock_guard<std::mutex> lock(logMutx);
