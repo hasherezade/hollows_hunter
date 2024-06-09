@@ -88,12 +88,14 @@ $(function(){ initResizable(false); });
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">term_util.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;windows.h&gt;</code><br />
+<code>#include &lt;mutex&gt;</code><br />
 </div>
 <p><a href="term__util_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -148,6 +150,11 @@ Functions</h2></td></tr>
 <tr class="separator:a72fb5a7886c4d8ed5e351d64ad5c536b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0547053c3ed0d110bcb9477d83a32095" id="r_a0547053c3ed0d110bcb9477d83a32095"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0547053c3ed0d110bcb9477d83a32095">print_in_color</a> (WORD color, const std::string &amp;text)</td></tr>
 <tr class="separator:a0547053c3ed0d110bcb9477d83a32095"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a85f6c833db9db129b6d5ed3959ea6f85" id="r_a85f6c833db9db129b6d5ed3959ea6f85"><td class="memItemLeft" align="right" valign="top">std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85f6c833db9db129b6d5ed3959ea6f85">g_stdOutMutex</a></td></tr>
+<tr class="separator:a85f6c833db9db129b6d5ed3959ea6f85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a7b3b25cba33b07c303f3060fe41887f6" name="a7b3b25cba33b07c303f3060fe41887f6"></a>
@@ -162,7 +169,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00006">6</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00009">9</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -178,7 +185,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00015">15</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00018">18</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -194,7 +201,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00012">12</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00015">15</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -210,7 +217,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00017">17</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00020">20</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -226,7 +233,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00007">7</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00010">10</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -242,7 +249,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00009">9</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00012">12</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -258,7 +265,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00008">8</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00011">11</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -274,7 +281,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00011">11</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00014">14</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -290,7 +297,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00010">10</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00013">13</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -309,7 +316,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00024">24</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00027">27</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -325,7 +332,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00014">14</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00017">17</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -341,7 +348,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00016">16</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00019">19</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -357,7 +364,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00019">19</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00022">22</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -380,7 +387,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00023">23</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00026">26</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -396,7 +403,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00018">18</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00021">21</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -412,7 +419,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00027">27</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00030">30</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -428,7 +435,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00013">13</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00016">16</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -444,7 +451,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00021">21</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00024">24</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -460,7 +467,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00020">20</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00023">23</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -476,7 +483,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00026">26</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8h_source.html#l00029">29</a> of file <a class="el" href="term__util_8h_source.html">term_util.h</a>.</p>
 
 </div>
 </div>
@@ -500,7 +507,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8cpp_source.html#l00009">9</a> of file <a class="el" href="term__util_8cpp_source.html">term_util.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8cpp_source.html#l00011">11</a> of file <a class="el" href="term__util_8cpp_source.html">term_util.cpp</a>.</p>
 
 </div>
 </div>
@@ -523,7 +530,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8cpp_source.html#l00031">31</a> of file <a class="el" href="term__util_8cpp_source.html">term_util.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8cpp_source.html#l00033">33</a> of file <a class="el" href="term__util_8cpp_source.html">term_util.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -554,7 +561,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8cpp_source.html#l00018">18</a> of file <a class="el" href="term__util_8cpp_source.html">term_util.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8cpp_source.html#l00020">20</a> of file <a class="el" href="term__util_8cpp_source.html">term_util.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -565,6 +572,31 @@ Here is the call graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="80,16,112,16,112,21,80,21"/>
 </map>
 </div>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a85f6c833db9db129b6d5ed3959ea6f85" name="a85f6c833db9db129b6d5ed3959ea6f85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85f6c833db9db129b6d5ed3959ea6f85">&#9670;&#160;</a></span>g_stdOutMutex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex g_stdOutMutex</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="term__util_8cpp_source.html#l00009">9</a> of file <a class="el" href="term__util_8cpp_source.html">term_util.cpp</a>.</p>
 
 </div>
 </div>
