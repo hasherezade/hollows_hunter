@@ -155,11 +155,13 @@ void HHScanner::printScanRoundStats(size_t found, size_t ignored_count)
 {
     if (!found && hh_args.names_list.size() > 0) {
         if (!hh_args.quiet) {
+            const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
             std::cout << "[WARNING] No process from the list: {" << util::list_to_str(hh_args.names_list) << "} was found!" << std::endl;
         }
     }
     if (!found && hh_args.pids_list.size() > 0) {
         if (!hh_args.quiet) {
+            const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
             std::cout << "[WARNING] No process from the list: {" << util::list_to_str(hh_args.pids_list) << "} was found!" << std::endl;
         }
     }
@@ -167,6 +169,7 @@ void HHScanner::printScanRoundStats(size_t found, size_t ignored_count)
         if (!hh_args.quiet) {
             std::string info1 = (ignored_count > 1) ? "processes" : "process";
             std::string info2 = (ignored_count > 1) ? "were" : "was";
+            const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
             std::cout << "[INFO] " << std::dec << ignored_count << " " << info1 << " from the list : {" << util::list_to_str(hh_args.ignored_names_list) << "} " << info2 << " ignored!" << std::endl;
         }
     }
@@ -181,6 +184,7 @@ size_t HHScanner::scanProcesses(HHScanReport &my_report)
     HANDLE hProcessSnapShot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     if (hProcessSnapShot == INVALID_HANDLE_VALUE) {
         const DWORD err = GetLastError();
+        const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
         std::cerr << "[-] Could not create modules snapshot. Error: " << std::dec << err << std::endl;
         return 0;
     }
@@ -191,6 +195,7 @@ size_t HHScanner::scanProcesses(HHScanReport &my_report)
     //check all modules in the process, including the main module:
     if (!Process32First(hProcessSnapShot, &pe32)) {
         CloseHandle(hProcessSnapShot);
+        const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
         std::cerr << "[-] Could not enumerate processes. Error: " << GetLastError() << std::endl;
         return 0;
     }
