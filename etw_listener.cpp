@@ -299,6 +299,18 @@ void printAllProperties(krabs::parser &parser)
     }
 }
 
+std::string ipv4FromDword(DWORD ip_dword)
+{
+    std::ostringstream oss;
+    unsigned int octet1 = (ip_dword >> 24) & 0xFF;
+    unsigned int octet2 = (ip_dword >> 16) & 0xFF;
+    unsigned int octet3 = (ip_dword >> 8) & 0xFF;
+    unsigned int octet4 = ip_dword & 0xFF;
+
+    oss << ip_dword & 0xFF << '.' << octet3 << '.' << octet2 << '.' << octet1;
+    return oss.str();
+}
+
 bool ETWstart()
 {
     krabs::kernel_trace trace(L"HollowsHunter");
@@ -374,9 +386,17 @@ bool ETWstart()
             krabs::parser parser(schema);
             std::uint32_t pid = parser.parse<std::uint32_t>(L"PID");
             if (!isWatchedPid(pid)) return;
+
+            krabs::ip_address daddr = parser.parse<krabs::ip_address>(L"daddr");
+
             if (!g_hh_args.quiet) {
                 const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
-                std::wcout << std::dec << pid << " : " << schema.task_name() << " : " << schema.opcode_name() << "\n";
+                std::wcout << std::dec << pid << " : " << schema.task_name() << " : " << schema.opcode_name();
+                if (!daddr.is_ipv6) {
+                    long ipv4 = daddr.v4;
+                    std::cout << " -> " << ipv4FromDword(ipv4);
+                }
+                std::wcout <<"\n";
             }
             runHHScan(pid);
         });
