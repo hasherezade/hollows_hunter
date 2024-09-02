@@ -302,12 +302,13 @@ void printAllProperties(krabs::parser &parser)
 std::string ipv4FromDword(DWORD ip_dword)
 {
     std::ostringstream oss;
-    unsigned int octet1 = (ip_dword >> 24) & 0xFF;
-    unsigned int octet2 = (ip_dword >> 16) & 0xFF;
-    unsigned int octet3 = (ip_dword >> 8) & 0xFF;
-    unsigned int octet4 = ip_dword & 0xFF;
-
-    oss << ip_dword & 0xFF << '.' << octet3 << '.' << octet2 << '.' << octet1;
+    BYTE* ip_bytes = (BYTE*)&ip_dword;
+    const size_t chunks = sizeof(DWORD);
+    for (int i = 0; i < chunks; i++) {
+        oss << std::dec << (unsigned int)ip_bytes[i];
+        if (i < (chunks - 1))
+            oss << ".";
+    }
     return oss.str();
 }
 
@@ -388,6 +389,7 @@ bool ETWstart()
             if (!isWatchedPid(pid)) return;
 
             krabs::ip_address daddr = parser.parse<krabs::ip_address>(L"daddr");
+
 
             if (!g_hh_args.quiet) {
                 const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
