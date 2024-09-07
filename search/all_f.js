@@ -41,7 +41,7 @@ var searchData=
   ['print_5fscantime_38',['print_scantime',['../hh__report_8cpp.html#aca43a9a1ca6d4871d919d565632f5662',1,'hh_report.cpp']]],
   ['print_5fversion_39',['print_version',['../params_8h.html#aae813382de1d726483950947bc2da569',1,'params.h']]],
   ['printbanner_40',['printBanner',['../class_h_h_params.html#ad3c3e5a7250906720808df84f8c9c477',1,'HHParams']]],
-  ['printscanroundstats_41',['printScanRoundStats',['../class_h_h_scanner.html#a6700be392afaa57e77ddc4c649e718f1',1,'HHScanner']]],
+  ['printscanroundstats_41',['printScanRoundStats',['../class_h_h_scanner.html#a082b255de29111e4838a2e1e26a982b6',1,'HHScanner']]],
   ['printsinglereport_42',['printSingleReport',['../class_h_h_scanner.html#af1a026170edfe507268e6e21c5052bbb',1,'HHScanner']]],
   ['process_5fprivilege_2ecpp_43',['process_privilege.cpp',['../process__privilege_8cpp.html',1,'']]],
   ['process_5fprivilege_2eh_44',['process_privilege.h',['../process__privilege_8h.html',1,'']]],

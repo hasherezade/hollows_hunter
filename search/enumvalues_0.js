@@ -8,5 +8,6 @@ var searchData=
   ['sscan_5ferror1_5',['SSCAN_ERROR1',['../hh__scanner_8h.html#a71125474e5d0570a7970dbfeac97d2d4abbe276584c09951446b598f9ff89246b',1,'hh_scanner.h']]],
   ['sscan_5fignored_6',['SSCAN_IGNORED',['../hh__scanner_8h.html#a71125474e5d0570a7970dbfeac97d2d4a92a79c026616fa779bd92df2b65a626b',1,'hh_scanner.h']]],
   ['sscan_5fnot_5fmatch_7',['SSCAN_NOT_MATCH',['../hh__scanner_8h.html#a71125474e5d0570a7970dbfeac97d2d4a4cd58d13fa112594c7c4a6800e445842',1,'hh_scanner.h']]],
-  ['sscan_5fsuccess_8',['SSCAN_SUCCESS',['../hh__scanner_8h.html#a71125474e5d0570a7970dbfeac97d2d4af8af3004a5fccfada6848162d6bb2202',1,'hh_scanner.h']]]
+  ['sscan_5fready_8',['SSCAN_READY',['../hh__scanner_8h.html#a71125474e5d0570a7970dbfeac97d2d4a97ccc0f44e5b57ca00d76fdb80de39f6',1,'hh_scanner.h']]],
+  ['sscan_5fsuccess_9',['SSCAN_SUCCESS',['../hh__scanner_8h.html#a71125474e5d0570a7970dbfeac97d2d4af8af3004a5fccfada6848162d6bb2202',1,'hh_scanner.h']]]
 ];

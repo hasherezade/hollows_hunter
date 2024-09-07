@@ -94,13 +94,13 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3849afaac9ec9e32eadd5e0abe8e1aa7" id="r_a3849afaac9ec9e32eadd5e0abe8e1aa7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3849afaac9ec9e32eadd5e0abe8e1aa7">is_searched_name</a> (const WCHAR *processName, std::set&lt; std::wstring &gt; &amp;names_list)</td></tr>
-<tr class="separator:a3849afaac9ec9e32eadd5e0abe8e1aa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe3e470c6b385ed25f7d5f1d93b420cd" id="r_afe3e470c6b385ed25f7d5f1d93b420cd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe3e470c6b385ed25f7d5f1d93b420cd">is_searched_pid</a> (long pid, std::set&lt; long &gt; &amp;pids_list)</td></tr>
-<tr class="separator:afe3e470c6b385ed25f7d5f1d93b420cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4afca6eda8fe7bc220cfdb824b79fd8b" id="r_a4afca6eda8fe7bc220cfdb824b79fd8b"><td class="memTemplParams" colspan="2">template&lt;typename TYPE_T &gt; </td></tr>
-<tr class="memitem:a4afca6eda8fe7bc220cfdb824b79fd8b"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a4afca6eda8fe7bc220cfdb824b79fd8b">list_to_str</a> (std::set&lt; TYPE_T &gt; &amp;list)</td></tr>
-<tr class="separator:a4afca6eda8fe7bc220cfdb824b79fd8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54603ddf9200ae4d8947f3d7df864173" id="r_a54603ddf9200ae4d8947f3d7df864173"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54603ddf9200ae4d8947f3d7df864173">is_searched_name</a> (const WCHAR *processName, const std::set&lt; std::wstring &gt; &amp;names_list)</td></tr>
+<tr class="separator:a54603ddf9200ae4d8947f3d7df864173"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c194a8378c708f4dec617fde4fbd22f" id="r_a4c194a8378c708f4dec617fde4fbd22f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c194a8378c708f4dec617fde4fbd22f">is_searched_pid</a> (long pid, const std::set&lt; long &gt; &amp;pids_list)</td></tr>
+<tr class="separator:a4c194a8378c708f4dec617fde4fbd22f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67d303d8d26647d46ce66344ca8a228c" id="r_a67d303d8d26647d46ce66344ca8a228c"><td class="memTemplParams" colspan="2">template&lt;typename TYPE_T &gt; </td></tr>
+<tr class="memitem:a67d303d8d26647d46ce66344ca8a228c"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a67d303d8d26647d46ce66344ca8a228c">list_to_str</a> (const std::set&lt; TYPE_T &gt; &amp;list)</td></tr>
+<tr class="separator:a67d303d8d26647d46ce66344ca8a228c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a928be58496639689a6a86142ab7030eb" id="r_a928be58496639689a6a86142ab7030eb"><td class="memItemLeft" align="right" valign="top">std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a928be58496639689a6a86142ab7030eb">strtime</a> (const time_t t)</td></tr>
 <tr class="separator:a928be58496639689a6a86142ab7030eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60893a3cb25d9aff16347e26b602141b" id="r_a60893a3cb25d9aff16347e26b602141b"><td class="memItemLeft" align="right" valign="top">LONGLONG&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a60893a3cb25d9aff16347e26b602141b">FileTime_to_POSIX</a> (FILETIME ft)</td></tr>
@@ -128,8 +128,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3849afaac9ec9e32eadd5e0abe8e1aa7" name="a3849afaac9ec9e32eadd5e0abe8e1aa7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3849afaac9ec9e32eadd5e0abe8e1aa7">&#9670;&#160;</a></span>is_searched_name()</h2>
+<a id="a54603ddf9200ae4d8947f3d7df864173" name="a54603ddf9200ae4d8947f3d7df864173"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54603ddf9200ae4d8947f3d7df864173">&#9670;&#160;</a></span>is_searched_name()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -142,7 +142,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::set&lt; std::wstring &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>names_list</em></span>&#160;)</td>
+          <td class="paramtype">const std::set&lt; std::wstring &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>names_list</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -151,8 +151,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="afe3e470c6b385ed25f7d5f1d93b420cd" name="afe3e470c6b385ed25f7d5f1d93b420cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe3e470c6b385ed25f7d5f1d93b420cd">&#9670;&#160;</a></span>is_searched_pid()</h2>
+<a id="a4c194a8378c708f4dec617fde4fbd22f" name="a4c194a8378c708f4dec617fde4fbd22f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c194a8378c708f4dec617fde4fbd22f">&#9670;&#160;</a></span>is_searched_pid()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -165,17 +165,17 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::set&lt; long &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>pids_list</em></span>&#160;)</td>
+          <td class="paramtype">const std::set&lt; long &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>pids_list</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00095">95</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00094">94</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a4afca6eda8fe7bc220cfdb824b79fd8b" name="a4afca6eda8fe7bc220cfdb824b79fd8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4afca6eda8fe7bc220cfdb824b79fd8b">&#9670;&#160;</a></span>list_to_str()</h2>
+<a id="a67d303d8d26647d46ce66344ca8a228c" name="a67d303d8d26647d46ce66344ca8a228c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67d303d8d26647d46ce66344ca8a228c">&#9670;&#160;</a></span>list_to_str()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -185,13 +185,13 @@ template&lt;typename TYPE_T &gt; </div>
         <tr>
           <td class="memname">std::string util::list_to_str </td>
           <td>(</td>
-          <td class="paramtype">std::set&lt; TYPE_T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>list</em></span></td><td>)</td>
+          <td class="paramtype">const std::set&lt; TYPE_T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>list</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00105">105</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00104">104</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
 
 </div>
 </div>

@@ -100,8 +100,8 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abae28bb490b101cb3d1136eb76a5df33" id="r_abae28bb490b101cb3d1136eb76a5df33"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abae28bb490b101cb3d1136eb76a5df33">HHScanner</a> (<a class="el" href="hh__params_8h.html#a2b2deab5f259454bc3b369632784e89b">t_hh_params</a> &amp;_args)</td></tr>
-<tr class="separator:abae28bb490b101cb3d1136eb76a5df33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb3c5c9408a65e1c30ed75c61315068f" id="r_abb3c5c9408a65e1c30ed75c61315068f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb3c5c9408a65e1c30ed75c61315068f">HHScanner</a> (<a class="el" href="hh__params_8h.html#a2b2deab5f259454bc3b369632784e89b">t_hh_params</a> &amp;_args, time_t _initTime=0)</td></tr>
+<tr class="separator:abb3c5c9408a65e1c30ed75c61315068f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4515f951cf9a9c2f1761493e6f9b9eb" id="r_ab4515f951cf9a9c2f1761493e6f9b9eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_h_h_scan_report.html">HHScanReport</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab4515f951cf9a9c2f1761493e6f9b9eb">scan</a> ()</td></tr>
 <tr class="separator:ab4515f951cf9a9c2f1761493e6f9b9eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d438045fa1a6b43ac401f5561b4bfd4" id="r_a1d438045fa1a6b43ac401f5561b4bfd4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d438045fa1a6b43ac401f5561b4bfd4">writeToLog</a> (<a class="el" href="class_h_h_scan_report.html">HHScanReport</a> *hh_report)</td></tr>
@@ -113,11 +113,13 @@ Public Member Functions</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:adec367c7541ba8e334c7f674e57f429a" id="r_adec367c7541ba8e334c7f674e57f429a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adec367c7541ba8e334c7f674e57f429a">isScannerCompatibile</a> ()</td></tr>
 <tr class="separator:adec367c7541ba8e334c7f674e57f429a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7eca28ae664866f97b37c2d79c79d6b6" id="r_a7eca28ae664866f97b37c2d79c79d6b6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="hh__scanner_8h.html#ad5caa6b1d4b11989c8ff90d46fc231aa">t_single_scan_status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7eca28ae664866f97b37c2d79c79d6b6">shouldScanProcess</a> (const <a class="el" href="structhh__params.html">hh_params</a> &amp;<a class="el" href="#aa9841ff29a663251372cf65e2db3cbef">hh_args</a>, const time_t hh_initTime, const DWORD pid, const WCHAR *exe_file)</td></tr>
+<tr class="separator:a7eca28ae664866f97b37c2d79c79d6b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a6700be392afaa57e77ddc4c649e718f1" id="r_a6700be392afaa57e77ddc4c649e718f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6700be392afaa57e77ddc4c649e718f1">printScanRoundStats</a> (size_t found, size_t ignored_count)</td></tr>
-<tr class="separator:a6700be392afaa57e77ddc4c649e718f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a082b255de29111e4838a2e1e26a982b6" id="r_a082b255de29111e4838a2e1e26a982b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a082b255de29111e4838a2e1e26a982b6">printScanRoundStats</a> (size_t found, size_t ignored_count, size_t not_matched_count)</td></tr>
+<tr class="separator:a082b255de29111e4838a2e1e26a982b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8528d5f27f05bfefcd2278318dc61846" id="r_a8528d5f27f05bfefcd2278318dc61846"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8528d5f27f05bfefcd2278318dc61846">scanProcesses</a> (<a class="el" href="class_h_h_scan_report.html">HHScanReport</a> &amp;my_report)</td></tr>
 <tr class="separator:a8528d5f27f05bfefcd2278318dc61846"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1a026170edfe507268e6e21c5052bbb" id="r_af1a026170edfe507268e6e21c5052bbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af1a026170edfe507268e6e21c5052bbb">printSingleReport</a> (pesieve::t_report &amp;report)</td></tr>
@@ -140,10 +142,10 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8h_source.html#l00023">23</a> of file <a class="el" href="hh__scanner_8h_source.html">hh_scanner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8h_source.html#l00024">24</a> of file <a class="el" href="hh__scanner_8h_source.html">hh_scanner.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="abae28bb490b101cb3d1136eb76a5df33" name="abae28bb490b101cb3d1136eb76a5df33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abae28bb490b101cb3d1136eb76a5df33">&#9670;&#160;</a></span>HHScanner()</h2>
+<a id="abb3c5c9408a65e1c30ed75c61315068f" name="abb3c5c9408a65e1c30ed75c61315068f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb3c5c9408a65e1c30ed75c61315068f">&#9670;&#160;</a></span>HHScanner()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -151,18 +153,22 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">HHScanner::HHScanner </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="hh__params_8h.html#a2b2deab5f259454bc3b369632784e89b">t_hh_params</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>_args</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="hh__params_8h.html#a2b2deab5f259454bc3b369632784e89b">t_hh_params</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>_args</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">time_t</td>          <td class="paramname"><span class="paramname"><em>_initTime</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00124">124</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00123">123</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_h_h_scanner_abae28bb490b101cb3d1136eb76a5df33_cgraph.png" border="0" usemap="#aclass_h_h_scanner_abae28bb490b101cb3d1136eb76a5df33_cgraph" alt=""/></div>
-<map name="aclass_h_h_scanner_abae28bb490b101cb3d1136eb76a5df33_cgraph" id="aclass_h_h_scanner_abae28bb490b101cb3d1136eb76a5df33_cgraph">
+<div class="center"><img src="class_h_h_scanner_abb3c5c9408a65e1c30ed75c61315068f_cgraph.png" border="0" usemap="#aclass_h_h_scanner_abb3c5c9408a65e1c30ed75c61315068f_cgraph" alt=""/></div>
+<map name="aclass_h_h_scanner_abb3c5c9408a65e1c30ed75c61315068f_cgraph" id="aclass_h_h_scanner_abb3c5c9408a65e1c30ed75c61315068f_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,169,31"/>
 <area shape="rect" href="namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01" title=" " alt="" coords="217,5,379,31"/>
 <area shape="poly" title=" " alt="" coords="169,16,201,16,201,21,169,21"/>
@@ -199,7 +205,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00141">141</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00142">142</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -238,7 +244,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00131">131</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00132">132</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -252,8 +258,8 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a6700be392afaa57e77ddc4c649e718f1" name="a6700be392afaa57e77ddc4c649e718f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6700be392afaa57e77ddc4c649e718f1">&#9670;&#160;</a></span>printScanRoundStats()</h2>
+<a id="a082b255de29111e4838a2e1e26a982b6" name="a082b255de29111e4838a2e1e26a982b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a082b255de29111e4838a2e1e26a982b6">&#9670;&#160;</a></span>printScanRoundStats()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -269,7 +275,12 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>ignored_count</em></span>&#160;)</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>ignored_count</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>not_matched_count</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -279,14 +290,14 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00154">154</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00155">155</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_h_h_scanner_a6700be392afaa57e77ddc4c649e718f1_cgraph.png" border="0" usemap="#aclass_h_h_scanner_a6700be392afaa57e77ddc4c649e718f1_cgraph" alt=""/></div>
-<map name="aclass_h_h_scanner_a6700be392afaa57e77ddc4c649e718f1_cgraph" id="aclass_h_h_scanner_a6700be392afaa57e77ddc4c649e718f1_cgraph">
+<div class="center"><img src="class_h_h_scanner_a082b255de29111e4838a2e1e26a982b6_cgraph.png" border="0" usemap="#aclass_h_h_scanner_a082b255de29111e4838a2e1e26a982b6_cgraph" alt=""/></div>
+<map name="aclass_h_h_scanner_a082b255de29111e4838a2e1e26a982b6_cgraph" id="aclass_h_h_scanner_a082b255de29111e4838a2e1e26a982b6_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,193,46"/>
-<area shape="rect" href="namespaceutil.html#a4afca6eda8fe7bc220cfdb824b79fd8b" title=" " alt="" coords="241,13,342,38"/>
+<area shape="rect" href="namespaceutil.html#a67d303d8d26647d46ce66344ca8a228c" title=" " alt="" coords="241,13,342,38"/>
 <area shape="poly" title=" " alt="" coords="193,23,225,23,225,28,193,28"/>
 </map>
 </div>
@@ -316,7 +327,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00218">218</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00229">229</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -347,7 +358,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00325">325</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00340">340</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -364,34 +375,36 @@ Here is the call graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="335,51,428,32,429,37,336,57"/>
 <area shape="rect" href="namespacefiles__util.html#abab65a3cbe43de11dd5d25ed5e4d47e5" title=" " alt="" coords="431,55,587,80"/>
 <area shape="poly" title=" " alt="" coords="344,65,415,65,415,70,344,70"/>
-<area shape="rect" href="class_h_h_scanner.html#a6700be392afaa57e77ddc4c649e718f1" title=" " alt="" coords="416,104,603,145"/>
+<area shape="rect" href="class_h_h_scanner.html#a082b255de29111e4838a2e1e26a982b6" title=" " alt="" coords="416,104,603,145"/>
 <area shape="poly" title=" " alt="" coords="362,122,400,122,400,128,362,128"/>
-<area shape="rect" href="class_h_h_scanner.html#a4881091d77448e0812ab5581f01893c7" title=" " alt="" coords="410,215,608,240"/>
-<area shape="poly" title=" " alt="" coords="331,136,363,146,423,175,475,204,473,209,421,179,361,151,329,141"/>
-<area shape="rect" href="namespaceutil.html#a4afca6eda8fe7bc220cfdb824b79fd8b" title=" " alt="" coords="703,67,805,92"/>
-<area shape="poly" title=" " alt="" coords="603,105,688,89,689,94,604,110"/>
-<area shape="rect" href="class_h_h_scan_report.html#a003c9bdcd02586fe059ce5cbf9200c94" title=" " alt="" coords="656,116,852,142"/>
-<area shape="poly" title=" " alt="" coords="531,212,587,181,655,150,675,144,676,149,657,155,589,186,534,217"/>
-<area shape="rect" href="namespaceutil.html#a3849afaac9ec9e32eadd5e0abe8e1aa7" title=" " alt="" coords="677,165,831,191"/>
-<area shape="poly" title=" " alt="" coords="576,211,671,192,672,197,577,217"/>
-<area shape="rect" href="namespaceutil.html#afe3e470c6b385ed25f7d5f1d93b420cd" title=" " alt="" coords="685,215,823,240"/>
-<area shape="poly" title=" " alt="" coords="609,225,669,225,669,230,609,230"/>
-<area shape="rect" href="namespaceprocess__util.html#af9bdd83e9c8262ef548737112964d2f9" title=" " alt="" coords="683,264,825,305"/>
-<area shape="poly" title=" " alt="" coords="568,238,669,262,668,267,567,244"/>
-<area shape="rect" href="class_h_h_scanner.html#af1a026170edfe507268e6e21c5052bbb" title=" " alt="" coords="657,329,851,355"/>
-<area shape="poly" title=" " alt="" coords="530,239,585,276,657,314,677,322,675,327,655,319,583,281,527,243"/>
-<area shape="rect" href="namespaceutil.html#a1b58bbd7118af7892e3926017211542b" title=" " alt="" coords="676,379,832,404"/>
-<area shape="poly" title=" " alt="" coords="522,239,575,300,614,335,658,365,668,370,666,375,655,370,611,340,572,304,518,242"/>
-<area shape="rect" href="hh__report_8cpp.html#a658a84d039df1c8c4f7555a7f5de2e14" title=" " alt="" coords="904,116,1058,142"/>
-<area shape="poly" title=" " alt="" coords="852,126,888,126,888,132,852,132"/>
-<area shape="rect" href="namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01" title=" " alt="" coords="900,272,1062,298"/>
-<area shape="poly" title=" " alt="" coords="825,282,884,282,884,288,825,288"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="944,329,1018,355"/>
-<area shape="poly" title=" " alt="" coords="852,340,928,340,928,345,852,345"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="1110,329,1231,355"/>
-<area shape="poly" title=" " alt="" coords="1018,340,1094,340,1094,345,1018,345"/>
-<area shape="rect" href="namespaceutil.html#a60893a3cb25d9aff16347e26b602141b" title=" " alt="" coords="901,379,1061,404"/>
-<area shape="poly" title=" " alt="" coords="832,389,885,389,885,394,832,394"/>
+<area shape="rect" href="class_h_h_scanner.html#a4881091d77448e0812ab5581f01893c7" title=" " alt="" coords="410,193,608,219"/>
+<area shape="poly" title=" " alt="" coords="327,136,363,146,464,184,462,189,361,151,325,141"/>
+<area shape="rect" href="namespaceutil.html#a67d303d8d26647d46ce66344ca8a228c" title=" " alt="" coords="711,87,813,112"/>
+<area shape="poly" title=" " alt="" coords="603,113,695,103,696,109,604,118"/>
+<area shape="rect" href="class_h_h_scan_report.html#a003c9bdcd02586fe059ce5cbf9200c94" title=" " alt="" coords="664,136,860,162"/>
+<area shape="poly" title=" " alt="" coords="569,190,687,163,688,168,570,195"/>
+<area shape="rect" href="namespaceprocess__util.html#af9bdd83e9c8262ef548737112964d2f9" title=" " alt="" coords="691,186,833,226"/>
+<area shape="poly" title=" " alt="" coords="609,204,676,204,676,209,609,209"/>
+<area shape="rect" href="class_h_h_scanner.html#af1a026170edfe507268e6e21c5052bbb" title=" " alt="" coords="665,251,859,276"/>
+<area shape="poly" title=" " alt="" coords="570,217,688,244,687,249,569,222"/>
+<area shape="rect" href="class_h_h_scanner.html#a7eca28ae664866f97b37c2d79c79d6b6" title=" " alt="" coords="656,320,868,346"/>
+<area shape="poly" title=" " alt="" coords="534,217,658,286,713,311,711,316,655,291,531,222"/>
+<area shape="rect" href="hh__report_8cpp.html#a658a84d039df1c8c4f7555a7f5de2e14" title=" " alt="" coords="920,136,1074,162"/>
+<area shape="poly" title=" " alt="" coords="860,146,905,146,905,152,860,152"/>
+<area shape="rect" href="namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01" title=" " alt="" coords="916,193,1078,219"/>
+<area shape="poly" title=" " alt="" coords="833,204,900,204,900,209,833,209"/>
+<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="960,247,1034,272"/>
+<area shape="poly" title=" " alt="" coords="860,259,944,258,944,263,860,265"/>
+<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="1146,247,1267,272"/>
+<area shape="poly" title=" " alt="" coords="1035,257,1130,257,1130,262,1035,262"/>
+<area shape="rect" href="namespaceutil.html#a54603ddf9200ae4d8947f3d7df864173" title=" " alt="" coords="920,296,1074,322"/>
+<area shape="poly" title=" " alt="" coords="868,319,904,316,905,321,868,325"/>
+<area shape="rect" href="namespaceutil.html#a4c194a8378c708f4dec617fde4fbd22f" title=" " alt="" coords="928,345,1066,371"/>
+<area shape="poly" title=" " alt="" coords="868,342,912,346,912,352,868,347"/>
+<area shape="rect" href="namespaceutil.html#a1b58bbd7118af7892e3926017211542b" title=" " alt="" coords="919,395,1074,420"/>
+<area shape="poly" title=" " alt="" coords="804,344,916,381,936,387,935,392,915,386,802,349"/>
+<area shape="rect" href="namespaceutil.html#a60893a3cb25d9aff16347e26b602141b" title=" " alt="" coords="1126,395,1286,420"/>
+<area shape="poly" title=" " alt="" coords="1075,405,1110,405,1110,410,1075,410"/>
 </map>
 </div>
 
@@ -429,35 +442,37 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00260">260</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00309">309</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_h_h_scanner_a4881091d77448e0812ab5581f01893c7_cgraph.png" border="0" usemap="#aclass_h_h_scanner_a4881091d77448e0812ab5581f01893c7_cgraph" alt=""/></div>
 <map name="aclass_h_h_scanner_a4881091d77448e0812ab5581f01893c7_cgraph" id="aclass_h_h_scanner_a4881091d77448e0812ab5581f01893c7_cgraph">
-<area shape="rect" title=" " alt="" coords="5,133,204,159"/>
-<area shape="rect" href="class_h_h_scan_report.html#a003c9bdcd02586fe059ce5cbf9200c94" title=" " alt="" coords="252,5,447,31"/>
-<area shape="poly" title=" " alt="" coords="119,131,174,86,211,61,251,40,265,34,267,39,253,45,214,66,177,91,122,135"/>
-<area shape="rect" href="namespaceutil.html#a3849afaac9ec9e32eadd5e0abe8e1aa7" title=" " alt="" coords="273,55,426,80"/>
-<area shape="poly" title=" " alt="" coords="138,130,251,89,275,82,276,87,252,94,139,135"/>
-<area shape="rect" href="namespaceutil.html#afe3e470c6b385ed25f7d5f1d93b420cd" title=" " alt="" coords="280,104,418,130"/>
-<area shape="poly" title=" " alt="" coords="204,132,264,124,265,130,205,137"/>
-<area shape="rect" href="namespaceprocess__util.html#af9bdd83e9c8262ef548737112964d2f9" title=" " alt="" coords="279,154,420,194"/>
-<area shape="poly" title=" " alt="" coords="205,155,264,162,263,167,204,160"/>
-<area shape="rect" href="class_h_h_scanner.html#af1a026170edfe507268e6e21c5052bbb" title=" " alt="" coords="252,219,446,244"/>
-<area shape="poly" title=" " alt="" coords="136,157,253,204,278,211,276,217,251,209,134,162"/>
-<area shape="rect" href="namespaceutil.html#a1b58bbd7118af7892e3926017211542b" title=" " alt="" coords="272,268,427,294"/>
-<area shape="poly" title=" " alt="" coords="121,158,176,205,213,232,253,254,266,260,264,265,250,259,210,236,173,209,118,162"/>
-<area shape="rect" href="hh__report_8cpp.html#a658a84d039df1c8c4f7555a7f5de2e14" title=" " alt="" coords="500,5,653,31"/>
-<area shape="poly" title=" " alt="" coords="447,16,484,16,484,21,447,21"/>
-<area shape="rect" href="namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01" title=" " alt="" coords="495,161,657,187"/>
-<area shape="poly" title=" " alt="" coords="420,172,480,172,480,177,420,177"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="539,219,613,244"/>
-<area shape="poly" title=" " alt="" coords="447,229,524,229,524,234,447,234"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="705,219,827,244"/>
-<area shape="poly" title=" " alt="" coords="614,229,690,229,690,234,614,234"/>
-<area shape="rect" href="namespaceutil.html#a60893a3cb25d9aff16347e26b602141b" title=" " alt="" coords="496,268,656,294"/>
-<area shape="poly" title=" " alt="" coords="427,278,481,278,481,284,427,284"/>
+<area shape="rect" title=" " alt="" coords="5,92,204,118"/>
+<area shape="rect" href="class_h_h_scan_report.html#a003c9bdcd02586fe059ce5cbf9200c94" title=" " alt="" coords="260,5,455,31"/>
+<area shape="poly" title=" " alt="" coords="133,89,187,65,251,41,278,33,280,38,253,46,189,70,135,94"/>
+<area shape="rect" href="namespaceprocess__util.html#af9bdd83e9c8262ef548737112964d2f9" title=" " alt="" coords="287,55,428,96"/>
+<area shape="poly" title=" " alt="" coords="204,91,271,83,272,88,204,96"/>
+<area shape="rect" href="class_h_h_scanner.html#af1a026170edfe507268e6e21c5052bbb" title=" " alt="" coords="260,120,454,146"/>
+<area shape="poly" title=" " alt="" coords="204,113,245,118,244,123,204,118"/>
+<area shape="rect" href="class_h_h_scanner.html#a7eca28ae664866f97b37c2d79c79d6b6" title=" " alt="" coords="252,189,463,215"/>
+<area shape="poly" title=" " alt="" coords="141,116,309,181,307,186,139,121"/>
+<area shape="rect" href="hh__report_8cpp.html#a658a84d039df1c8c4f7555a7f5de2e14" title=" " alt="" coords="516,5,669,31"/>
+<area shape="poly" title=" " alt="" coords="455,16,500,16,500,21,455,21"/>
+<area shape="rect" href="namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01" title=" " alt="" coords="511,63,673,88"/>
+<area shape="poly" title=" " alt="" coords="428,73,495,73,495,78,428,78"/>
+<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="555,116,629,142"/>
+<area shape="poly" title=" " alt="" coords="455,129,539,127,540,132,455,134"/>
+<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="741,116,862,142"/>
+<area shape="poly" title=" " alt="" coords="630,126,725,126,725,132,630,132"/>
+<area shape="rect" href="namespaceutil.html#a54603ddf9200ae4d8947f3d7df864173" title=" " alt="" coords="516,165,669,191"/>
+<area shape="poly" title=" " alt="" coords="463,189,500,185,500,190,464,194"/>
+<area shape="rect" href="namespaceutil.html#a4c194a8378c708f4dec617fde4fbd22f" title=" " alt="" coords="523,215,661,240"/>
+<area shape="poly" title=" " alt="" coords="464,211,508,216,507,221,463,216"/>
+<area shape="rect" href="namespaceutil.html#a1b58bbd7118af7892e3926017211542b" title=" " alt="" coords="514,264,670,290"/>
+<area shape="poly" title=" " alt="" coords="399,213,512,250,532,256,530,262,510,255,397,218"/>
+<area shape="rect" href="namespaceutil.html#a60893a3cb25d9aff16347e26b602141b" title=" " alt="" coords="721,264,882,290"/>
+<area shape="poly" title=" " alt="" coords="670,274,705,274,705,280,670,280"/>
 </map>
 </div>
 
@@ -486,41 +501,100 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00178">178</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00187">187</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_h_h_scanner_a8528d5f27f05bfefcd2278318dc61846_cgraph.png" border="0" usemap="#aclass_h_h_scanner_a8528d5f27f05bfefcd2278318dc61846_cgraph" alt=""/></div>
 <map name="aclass_h_h_scanner_a8528d5f27f05bfefcd2278318dc61846_cgraph" id="aclass_h_h_scanner_a8528d5f27f05bfefcd2278318dc61846_cgraph">
-<area shape="rect" title=" " alt="" coords="5,125,191,151"/>
-<area shape="rect" href="class_h_h_scanner.html#a6700be392afaa57e77ddc4c649e718f1" title=" " alt="" coords="244,43,432,84"/>
-<area shape="poly" title=" " alt="" coords="141,122,255,86,256,92,143,127"/>
-<area shape="rect" href="class_h_h_scanner.html#a4881091d77448e0812ab5581f01893c7" title=" " alt="" coords="239,153,437,179"/>
-<area shape="poly" title=" " alt="" coords="191,146,224,150,223,155,191,152"/>
-<area shape="rect" href="namespaceutil.html#a4afca6eda8fe7bc220cfdb824b79fd8b" title=" " alt="" coords="532,5,633,31"/>
-<area shape="poly" title=" " alt="" coords="432,43,516,28,517,33,433,49"/>
-<area shape="rect" href="class_h_h_scan_report.html#a003c9bdcd02586fe059ce5cbf9200c94" title=" " alt="" coords="485,55,680,80"/>
-<area shape="poly" title=" " alt="" coords="360,151,415,120,484,89,503,83,505,88,486,94,418,125,362,155"/>
-<area shape="rect" href="namespaceutil.html#a3849afaac9ec9e32eadd5e0abe8e1aa7" title=" " alt="" coords="506,104,659,130"/>
-<area shape="poly" title=" " alt="" coords="405,150,500,131,501,136,406,155"/>
-<area shape="rect" href="namespaceutil.html#afe3e470c6b385ed25f7d5f1d93b420cd" title=" " alt="" coords="514,153,652,179"/>
-<area shape="poly" title=" " alt="" coords="438,164,498,164,498,169,438,169"/>
-<area shape="rect" href="namespaceprocess__util.html#af9bdd83e9c8262ef548737112964d2f9" title=" " alt="" coords="512,203,653,244"/>
-<area shape="poly" title=" " alt="" coords="397,177,498,201,496,206,395,182"/>
-<area shape="rect" href="class_h_h_scanner.html#af1a026170edfe507268e6e21c5052bbb" title=" " alt="" coords="486,268,680,294"/>
-<area shape="poly" title=" " alt="" coords="359,177,414,215,486,253,506,261,504,266,484,258,411,219,356,182"/>
-<area shape="rect" href="namespaceutil.html#a1b58bbd7118af7892e3926017211542b" title=" " alt="" coords="505,317,660,343"/>
-<area shape="poly" title=" " alt="" coords="351,178,404,239,443,274,486,304,497,309,494,314,484,308,439,278,400,242,347,181"/>
-<area shape="rect" href="hh__report_8cpp.html#a658a84d039df1c8c4f7555a7f5de2e14" title=" " alt="" coords="733,55,886,80"/>
-<area shape="poly" title=" " alt="" coords="680,65,717,65,717,70,680,70"/>
-<area shape="rect" href="namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01" title=" " alt="" coords="728,211,891,236"/>
-<area shape="poly" title=" " alt="" coords="654,221,713,221,713,226,654,226"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="772,268,847,294"/>
-<area shape="poly" title=" " alt="" coords="680,278,757,278,757,284,680,284"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="939,268,1060,294"/>
-<area shape="poly" title=" " alt="" coords="847,278,923,278,923,284,847,284"/>
-<area shape="rect" href="namespaceutil.html#a60893a3cb25d9aff16347e26b602141b" title=" " alt="" coords="729,317,890,343"/>
-<area shape="poly" title=" " alt="" coords="661,328,714,328,714,333,661,333"/>
+<area shape="rect" title=" " alt="" coords="5,84,191,110"/>
+<area shape="rect" href="class_h_h_scanner.html#a082b255de29111e4838a2e1e26a982b6" title=" " alt="" coords="244,23,432,64"/>
+<area shape="poly" title=" " alt="" coords="159,81,228,65,230,70,160,86"/>
+<area shape="rect" href="class_h_h_scanner.html#a4881091d77448e0812ab5581f01893c7" title=" " alt="" coords="239,112,437,138"/>
+<area shape="poly" title=" " alt="" coords="191,105,224,109,223,114,191,110"/>
+<area shape="rect" href="namespaceutil.html#a67d303d8d26647d46ce66344ca8a228c" title=" " alt="" coords="540,5,641,31"/>
+<area shape="poly" title=" " alt="" coords="432,31,524,22,525,27,432,37"/>
+<area shape="rect" href="class_h_h_scan_report.html#a003c9bdcd02586fe059ce5cbf9200c94" title=" " alt="" coords="493,55,688,80"/>
+<area shape="poly" title=" " alt="" coords="397,109,515,82,517,87,398,114"/>
+<area shape="rect" href="namespaceprocess__util.html#af9bdd83e9c8262ef548737112964d2f9" title=" " alt="" coords="520,104,661,145"/>
+<area shape="poly" title=" " alt="" coords="437,122,504,122,504,128,437,128"/>
+<area shape="rect" href="class_h_h_scanner.html#af1a026170edfe507268e6e21c5052bbb" title=" " alt="" coords="494,169,688,195"/>
+<area shape="poly" title=" " alt="" coords="398,136,517,163,515,168,397,141"/>
+<area shape="rect" href="class_h_h_scanner.html#a7eca28ae664866f97b37c2d79c79d6b6" title=" " alt="" coords="485,239,696,264"/>
+<area shape="poly" title=" " alt="" coords="362,136,486,205,541,230,539,235,484,210,360,141"/>
+<area shape="rect" href="hh__report_8cpp.html#a658a84d039df1c8c4f7555a7f5de2e14" title=" " alt="" coords="749,55,902,80"/>
+<area shape="poly" title=" " alt="" coords="689,65,733,65,733,70,689,70"/>
+<area shape="rect" href="namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01" title=" " alt="" coords="744,112,907,138"/>
+<area shape="poly" title=" " alt="" coords="662,122,729,122,729,128,662,128"/>
+<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="788,165,863,191"/>
+<area shape="poly" title=" " alt="" coords="688,178,773,176,773,182,688,183"/>
+<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="974,165,1096,191"/>
+<area shape="poly" title=" " alt="" coords="863,176,958,176,958,181,863,181"/>
+<area shape="rect" href="namespaceutil.html#a54603ddf9200ae4d8947f3d7df864173" title=" " alt="" coords="749,215,902,240"/>
+<area shape="poly" title=" " alt="" coords="697,238,733,234,734,240,697,243"/>
+<area shape="rect" href="namespaceutil.html#a4c194a8378c708f4dec617fde4fbd22f" title=" " alt="" coords="756,264,895,290"/>
+<area shape="poly" title=" " alt="" coords="697,260,741,265,740,270,697,266"/>
+<area shape="rect" href="namespaceutil.html#a1b58bbd7118af7892e3926017211542b" title=" " alt="" coords="748,313,903,339"/>
+<area shape="poly" title=" " alt="" coords="632,262,745,300,765,306,763,311,744,305,631,267"/>
+<area shape="rect" href="namespaceutil.html#a60893a3cb25d9aff16347e26b602141b" title=" " alt="" coords="955,313,1115,339"/>
+<area shape="poly" title=" " alt="" coords="904,324,939,324,939,329,904,329"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a7eca28ae664866f97b37c2d79c79d6b6" name="a7eca28ae664866f97b37c2d79c79d6b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7eca28ae664866f97b37c2d79c79d6b6">&#9670;&#160;</a></span>shouldScanProcess()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="hh__scanner_8h.html#ad5caa6b1d4b11989c8ff90d46fc231aa">t_single_scan_status</a> HHScanner::shouldScanProcess </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structhh__params.html">hh_params</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>hh_args</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const time_t</td>          <td class="paramname"><span class="paramname"><em>hh_initTime</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const DWORD</td>          <td class="paramname"><span class="paramname"><em>pid</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const WCHAR *</td>          <td class="paramname"><span class="paramname"><em>exe_file</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00271">271</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_h_h_scanner_a7eca28ae664866f97b37c2d79c79d6b6_cgraph.png" border="0" usemap="#aclass_h_h_scanner_a7eca28ae664866f97b37c2d79c79d6b6_cgraph" alt=""/></div>
+<map name="aclass_h_h_scanner_a7eca28ae664866f97b37c2d79c79d6b6_cgraph" id="aclass_h_h_scanner_a7eca28ae664866f97b37c2d79c79d6b6_cgraph">
+<area shape="rect" title=" " alt="" coords="5,55,217,80"/>
+<area shape="rect" href="namespaceutil.html#a54603ddf9200ae4d8947f3d7df864173" title=" " alt="" coords="266,5,419,31"/>
+<area shape="poly" title=" " alt="" coords="174,51,263,32,264,37,175,57"/>
+<area shape="rect" href="namespaceutil.html#a4c194a8378c708f4dec617fde4fbd22f" title=" " alt="" coords="273,55,412,80"/>
+<area shape="poly" title=" " alt="" coords="217,65,258,65,258,70,217,70"/>
+<area shape="rect" href="namespaceutil.html#a1b58bbd7118af7892e3926017211542b" title=" " alt="" coords="265,104,420,130"/>
+<area shape="poly" title=" " alt="" coords="175,78,264,98,263,103,174,84"/>
+<area shape="rect" href="namespaceutil.html#a60893a3cb25d9aff16347e26b602141b" title=" " alt="" coords="468,104,628,130"/>
+<area shape="poly" title=" " alt="" coords="420,114,453,114,453,120,420,120"/>
 </map>
 </div>
 
@@ -545,7 +619,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00354">354</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00369">369</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -608,7 +682,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00338">338</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8cpp_source.html#l00353">353</a> of file <a class="el" href="hh__scanner_8cpp_source.html">hh_scanner.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -657,7 +731,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8h_source.html#l00042">42</a> of file <a class="el" href="hh__scanner_8h_source.html">hh_scanner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8h_source.html#l00044">44</a> of file <a class="el" href="hh__scanner_8h_source.html">hh_scanner.h</a>.</p>
 
 </div>
 </div>
@@ -681,7 +755,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8h_source.html#l00046">46</a> of file <a class="el" href="hh__scanner_8h_source.html">hh_scanner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8h_source.html#l00048">48</a> of file <a class="el" href="hh__scanner_8h_source.html">hh_scanner.h</a>.</p>
 
 </div>
 </div>
@@ -705,7 +779,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8h_source.html#l00047">47</a> of file <a class="el" href="hh__scanner_8h_source.html">hh_scanner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8h_source.html#l00049">49</a> of file <a class="el" href="hh__scanner_8h_source.html">hh_scanner.h</a>.</p>
 
 </div>
 </div>
@@ -729,7 +803,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="hh__scanner_8h_source.html#l00043">43</a> of file <a class="el" href="hh__scanner_8h_source.html">hh_scanner.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="hh__scanner_8h_source.html#l00045">45</a> of file <a class="el" href="hh__scanner_8h_source.html">hh_scanner.h</a>.</p>
 
 </div>
 </div>
