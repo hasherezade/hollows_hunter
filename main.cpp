@@ -52,7 +52,9 @@ t_pesieve_res deploy_scan()
     if (g_hh_args.etw_scan)
     {
 #ifdef USE_ETW
-        if (!ETWstart()) {
+        ETWProfile profile;
+        profile.setAll();
+        if (!ETWstart(profile)) {
             return PESIEVE_ERROR;
         }
 #else

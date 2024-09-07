@@ -282,7 +282,7 @@ std::string ipv4FromDword(DWORD ip_dword)
     return oss.str();
 }
 
-bool ETWstart()
+bool ETWstart(ETWProfile& settings)
 {
     krabs::kernel_trace trace(L"HollowsHunter");
     g_initTime = time(NULL);
@@ -419,11 +419,11 @@ bool ETWstart()
         });
 
     bool isOk = true;
-    trace.enable(tcpIpProvider);
-    trace.enable(objectMgrProvider);
-    trace.enable(processProvider);
-    trace.enable(imageLoadProvider);
-    trace.enable(virtualAllocProvider);
+    if (settings.tcpip) trace.enable(tcpIpProvider);
+    if (settings.obj_mgr) trace.enable(objectMgrProvider);
+    if (settings.process_start) trace.enable(processProvider);
+    if (settings.img_load) trace.enable(imageLoadProvider);
+    if (settings.allocation) trace.enable(virtualAllocProvider);
     try {
         std::cout << "Starting listener..." << std::endl;
         trace.start();
