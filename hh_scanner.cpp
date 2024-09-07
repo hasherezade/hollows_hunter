@@ -272,12 +272,6 @@ t_single_scan_status HHScanner::shouldScanProcess(const hh_params &hh_args, cons
 {
     bool found = false;
     const bool check_time = (hh_args.ptimes != TIME_UNDEFINED) ? true : false;
-#ifdef _DEBUG
-    if (check_time) {
-        const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
-        std::cout << "Init Time: " << std::hex << this->initTime << std::endl;
-    }
-#endif
     // filter by the time
     time_t time_diff = 0;
     if (check_time) { // if the parameter was set
