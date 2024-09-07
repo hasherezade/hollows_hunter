@@ -31,5 +31,3 @@ public:
 
 } t_hh_params;
 
-
-

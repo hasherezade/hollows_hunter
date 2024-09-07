@@ -80,10 +80,9 @@ namespace files_util {
 
 namespace util {
 
-    bool is_searched_name(const WCHAR* processName, std::set<std::wstring> &names_list)
+    bool is_searched_name(const WCHAR* processName, const std::set<std::wstring> &names_list)
     {
-        std::set<std::wstring>::iterator itr;
-        for (itr = names_list.begin(); itr != names_list.end(); ++itr) {
+        for (auto itr = names_list.begin(); itr != names_list.end(); ++itr) {
             const WCHAR* searchedName = itr->c_str();
             if (_wcsicmp(processName, searchedName) == 0) {
                 return true;
@@ -92,7 +91,7 @@ namespace util {
         return false;
     }
 
-    bool is_searched_pid(long pid, std::set<long> &pids_list)
+    bool is_searched_pid(long pid, const std::set<long> &pids_list)
     {
         std::set<long>::iterator found = pids_list.find(pid);
         if (found != pids_list.end()) {
@@ -102,7 +101,7 @@ namespace util {
     }
 
     template <typename TYPE_T>
-    std::string list_to_str(std::set<TYPE_T> &list)
+    std::string list_to_str(const std::set<TYPE_T> &list)
     {
         std::wstringstream stream;
 
@@ -121,10 +120,12 @@ namespace util {
 
 //----
 
-HHScanner::HHScanner(t_hh_params &_args)
-    : hh_args(_args)
+HHScanner::HHScanner(t_hh_params& _args, time_t _initTime)
+    : hh_args(_args), initTime(_initTime)
 {
-    initTime = time(NULL);
+    if (!initTime) {
+        initTime = time(NULL);
+    }
     isScannerWow64 = process_util::is_wow_64(GetCurrentProcess());
 }
 
@@ -151,18 +152,26 @@ void HHScanner::initOutDir(time_t scan_time, pesieve::t_params &pesieve_args)
     }
 }
 
-void HHScanner::printScanRoundStats(size_t found, size_t ignored_count)
+void HHScanner::printScanRoundStats(size_t found, size_t ignored_count, size_t not_matched_count)
 {
+#ifdef _DEBUG
+    if (!found && not_matched_count) {
+        if (!hh_args.quiet) {
+            const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
+            std::cout << "[WARNING] Some processes were filtered out basing on the defined criteria: " << not_matched_count << " skipped" << std::endl;
+        }
+    }
+#endif
     if (!found && hh_args.names_list.size() > 0) {
         if (!hh_args.quiet) {
             const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
-            std::cout << "[WARNING] No process from the list: {" << util::list_to_str(hh_args.names_list) << "} was found!" << std::endl;
+            std::cout << "[WARNING] No process from the list: {" << util::list_to_str(hh_args.names_list) << "} was scanned!" << std::endl;
         }
     }
     if (!found && hh_args.pids_list.size() > 0) {
         if (!hh_args.quiet) {
             const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
-            std::cout << "[WARNING] No process from the list: {" << util::list_to_str(hh_args.pids_list) << "} was found!" << std::endl;
+            std::cout << "[WARNING] No process from the list: {" << util::list_to_str(hh_args.pids_list) << "} was scanned!" << std::endl;
         }
     }
     if (ignored_count > 0) {
@@ -180,6 +189,7 @@ size_t HHScanner::scanProcesses(HHScanReport &my_report)
     size_t count = 0;
     size_t scanned_count = 0;
     size_t ignored_count = 0;
+    size_t filtered_count = 0;
 
     HANDLE hProcessSnapShot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     if (hProcessSnapShot == INVALID_HANDLE_VALUE) {
@@ -203,6 +213,7 @@ size_t HHScanner::scanProcesses(HHScanReport &my_report)
         // scan callback
         const t_single_scan_status stat = scanNextProcess(pe32.th32ProcessID, pe32.szExeFile, my_report);
         if (stat == SSCAN_IGNORED) ignored_count++;
+        if (stat == SSCAN_NOT_MATCH) filtered_count++;
         if (stat == SSCAN_SUCCESS) scanned_count++;
         count++;
 
@@ -211,7 +222,7 @@ size_t HHScanner::scanProcesses(HHScanReport &my_report)
     //close the handles
     CloseHandle(hProcessSnapShot);
 
-    printScanRoundStats(scanned_count, ignored_count);
+    printScanRoundStats(scanned_count, ignored_count, filtered_count);
     return count;
 }
 
@@ -257,12 +268,9 @@ void HHScanner::printSingleReport(pesieve::t_report& report)
     }
 }
 
-t_single_scan_status HHScanner::scanNextProcess(DWORD pid, WCHAR* exe_file, HHScanReport &my_report)
+t_single_scan_status HHScanner::shouldScanProcess(const hh_params &hh_args, const time_t hh_initTime, const DWORD pid, const WCHAR* exe_file)
 {
     bool found = false;
-
-    const bool is_process_wow64 = process_util::is_wow_64_by_pid(pid);
-
     const bool check_time = (hh_args.ptimes != TIME_UNDEFINED) ? true : false;
 #ifdef _DEBUG
     if (check_time) {
@@ -277,8 +285,8 @@ t_single_scan_status HHScanner::scanNextProcess(DWORD pid, WCHAR* exe_file, HHSc
         if (process_time == INVALID_TIME) return SSCAN_ERROR0; //skip process if cannot retrieve the time
 
         // if HH was started after the process
-        if (this->initTime > process_time) {
-            time_diff = this->initTime - process_time;
+        if (hh_initTime > process_time) {
+            time_diff = hh_initTime - process_time;
             if (time_diff > hh_args.ptimes) return SSCAN_NOT_MATCH; // skip process created before the supplied time
         }
     }
@@ -295,6 +303,16 @@ t_single_scan_status HHScanner::scanNextProcess(DWORD pid, WCHAR* exe_file, HHSc
             return SSCAN_IGNORED;
         }
     }
+    return SSCAN_READY;
+}
+
+t_single_scan_status HHScanner::scanNextProcess(DWORD pid, WCHAR* exe_file, HHScanReport &my_report)
+{
+    const bool is_process_wow64 = process_util::is_wow_64_by_pid(pid);
+    t_single_scan_status res = HHScanner::shouldScanProcess(hh_args, this->initTime, pid, exe_file);
+    if (res != SSCAN_READY) {
+        return res;
+    }
     if (!hh_args.quiet) {
         const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
         std::cout << ">> Scanning PID: " << std::setw(PID_FIELD_SIZE) << std::dec << pid;
@@ -302,9 +320,6 @@ t_single_scan_status HHScanner::scanNextProcess(DWORD pid, WCHAR* exe_file, HHSc
 
         if (is_process_wow64) {
             std::cout << " : 32b";
-        }
-        if (check_time) {
-            std::cout << " : " << time_diff << "s";
         }
         std::cout << std::endl;
     }

@@ -60,6 +60,7 @@ struct ProceesStat
 };
 
 ProceesStat procStats[MAX_PROCESSES] = { 0 };
+time_t g_initTime = 0;
 
 // ETW Handler
 // To filter our events, we want to compare against the
@@ -159,7 +160,7 @@ bool isAllocationExecutable(std::uint32_t pid, LPVOID baseAddress)
 }
 
 
-inline std::wstring getProcessName(DWORD pid)
+inline std::wstring getProcessName(const DWORD pid)
 {
     WCHAR processName[MAX_PATH] = { 0 };
     if (!process_util::get_process_path(pid, processName, MAX_PATH * 2)) {
@@ -175,55 +176,24 @@ inline std::wstring getProcessName(DWORD pid)
 }
 
 
-bool isWatchedPid(DWORD pid)
+bool isWatchedPid(const DWORD pid)
 {
-    if (!g_hh_args.names_list.size() && !g_hh_args.pids_list.size() 
-        && !g_hh_args.ignored_names_list.size())
-    {
-        // no filter applied, watch everything
-        return true;
-    }
-    if (g_hh_args.pids_list.find(pid) != g_hh_args.pids_list.end()) {
-        // the PID is on the watch list
-        return true;
-    }
-    
     // get process name:
-    std::wstring wImgFileName = getProcessName(pid);
-    if (g_hh_args.names_list.find(wImgFileName) != g_hh_args.names_list.end()) {
-        // the name is on the watch list
+    const std::wstring wImgFileName = getProcessName(pid);
+    const t_single_scan_status res = HHScanner::shouldScanProcess(g_hh_args, g_initTime, pid, wImgFileName.c_str());
+    if (res == SSCAN_READY) {
         return true;
     }
-    if (g_hh_args.ignored_names_list.size() &&
-        g_hh_args.ignored_names_list.find(wImgFileName) == g_hh_args.ignored_names_list.end())
-    {
-        // the name is NOT on the ignore list
-        return true;
-    }
-    // the PID is not on the watch list
     return false;
 }
 
-bool isWatchedName(std::string& imgFileName)
+bool isWatchedName(const std::string& imgFileName)
 {
-    if (!g_hh_args.names_list.size() && !g_hh_args.pids_list.size()
-        && !g_hh_args.ignored_names_list.size())
-    {
-        // no filter applied, watch everything
+    const std::wstring wImgFileName(imgFileName.begin(), imgFileName.end());
+    const t_single_scan_status res = HHScanner::shouldScanProcess(g_hh_args, g_initTime, 0, wImgFileName.c_str());
+    if (res == SSCAN_READY) {
         return true;
     }
-    std::wstring wImgFileName(imgFileName.begin(), imgFileName.end());
-    if (g_hh_args.names_list.find(wImgFileName) != g_hh_args.names_list.end()) {
-        // the name is on the watch list
-        return true;
-    }
-    if (g_hh_args.ignored_names_list.size() &&
-        g_hh_args.ignored_names_list.find(wImgFileName) == g_hh_args.ignored_names_list.end())
-    {
-        // the name is NOT on the ignore list
-        return true;
-    }
-    // the name is not on the watch list
     return false;
 }
 
@@ -234,7 +204,7 @@ void runHHinNewThread(t_hh_params args)
         return;
     }
     long pid = *(args.pids_list.begin());
-    HHScanner hhunter(args);
+    HHScanner hhunter(args, g_initTime);
     HHScanReport* report = hhunter.scan();
     if (report)
     {
@@ -315,6 +285,7 @@ std::string ipv4FromDword(DWORD ip_dword)
 bool ETWstart()
 {
     krabs::kernel_trace trace(L"HollowsHunter");
+    g_initTime = time(NULL);
 
     krabs::kernel::process_provider         processProvider;
     krabs::kernel::image_load_provider      imageLoadProvider;
