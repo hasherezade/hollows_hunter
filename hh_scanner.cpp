@@ -60,9 +60,9 @@ namespace files_util {
         return true;
     }
 
-    bool write_to_file(const std::string &report_path, const std::string &summary_str, const bool append)
+    bool write_to_file(const std::string &report_path, const std::wstring &summary_str, const bool append)
     {
-        std::ofstream final_report;
+        std::wofstream final_report;
         if (append) {
             final_report.open(report_path, std::ios_base::app);
         }
@@ -351,27 +351,26 @@ bool HHScanner::writeToLog(HHScanReport* hh_report)
     }
 
     const bool suspiciousOnly = false;
-
-    std::string summary_str;
-    summary_str = hh_report->toString(suspiciousOnly);
+    std::wstringstream stream;
+    hh_report->toString(stream, suspiciousOnly);
 
     static std::mutex logMutx;
     const std::lock_guard<std::mutex> lock(logMutx);
-    return files_util::write_to_file("hollows_hunter.log", summary_str, true);
+    return files_util::write_to_file("hollows_hunter.log", stream.str(), true);
 }
 
 void HHScanner::summarizeScan(HHScanReport *hh_report, bool suspiciousOnly)
 {
     if (!hh_report) return;
-    std::string summary_str;
+    std::wstringstream summary_str;
 
     if (!this->hh_args.json_output) {
-        summary_str = hh_report->toString(suspiciousOnly);
-        std::cout << summary_str;
+        hh_report->toString(summary_str, suspiciousOnly);
+        std::wcout << summary_str.rdbuf();
     }
     else {
-        summary_str = hh_report->toJSON(this->hh_args);
-        std::cout << summary_str;
+        hh_report->toJSON(summary_str, this->hh_args);
+        std::wcout << summary_str.rdbuf();
     }
 
     if (hh_args.pesieve_args.out_filter != OUT_NO_DIR) {
@@ -382,7 +381,9 @@ void HHScanner::summarizeScan(HHScanReport *hh_report, bool suspiciousOnly)
             static std::mutex summaryMutx;
             const std::lock_guard<std::mutex> lock(summaryMutx);
             //TODO: fix JSON formatting for the appended reports
-            files_util::write_to_file(report_path, hh_report->toJSON(this->hh_args), true);
+            std::wstringstream summary_str1;
+            hh_report->toJSON(summary_str1, this->hh_args);
+            files_util::write_to_file(report_path, summary_str1.str(), true);
         }
     }
     if (hh_args.log) {

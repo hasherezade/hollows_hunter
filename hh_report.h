@@ -46,12 +46,12 @@ public:
         return pidToReport.size();
     }
 
-    std::string toString(bool suspiciousOnly = true);
+    void toString(std::wstringstream &stream, bool suspiciousOnly = true);
 
 protected:
     size_t reportsToString(std::wstringstream &stream, bool suspiciousOnly = true);
 
-    std::string toJSON(const t_hh_params &params);
+    size_t toJSON(std::wstringstream &stream, const t_hh_params &params);
     size_t reportsToJSON(std::wstringstream &stream, size_t level, const t_hh_params &params);
 
     time_t startTime;

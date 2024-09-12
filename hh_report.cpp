@@ -44,7 +44,7 @@ size_t HHScanReport::reportsToString(std::wstringstream& stream, bool suspicious
     if (!scannedCount) {
         return printed;
     }
-    const size_t max_len = size_t(std::floor(std::log10(double(scannedCount - 1))) + 1);
+    const size_t max_len = size_t(std::floor(std::log10(double(scannedCount - 1))) + 1) % 100;
     for (auto itr = this->pidToReport.begin(); itr != pidToReport.end(); ++itr) {
         DWORD pid = itr->first;
         if (suspiciousOnly) {
@@ -108,15 +108,14 @@ size_t HHScanReport::reportsToJSON(std::wstringstream &stream, size_t level, con
     return printed;
 }
 
-std::string HHScanReport::toJSON(const t_hh_params &params)
+size_t HHScanReport::toJSON(std::wstringstream &stream, const t_hh_params &params)
 {
-    std::wstringstream stream;
     size_t level = 0;
     OUT_PADDED(stream, level, L"{\n");
     level++;
     //summary:
     const size_t suspicious_count = countSuspicious();
-
+    size_t all_count = 0;
     OUT_PADDED(stream, level, L"\"scan_date_time\" : ");
     stream << std::dec << L"\"" << util::strtime(this->startTime) << L"\"" << L",\n";
     OUT_PADDED(stream, level, L"\"scan_timestamp\" : ");
@@ -129,14 +128,14 @@ std::string HHScanReport::toJSON(const t_hh_params &params)
     stream << std::dec << suspicious_count;
     if (suspicious_count > 0) {
         stream << L",\n";
-        reportsToJSON(stream, level, params);
+        all_count = reportsToJSON(stream, level, params);
     }
     else {
         stream << L"\n";
     }
     level--;
     OUT_PADDED(stream, level, L"}\n");
-    return std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(stream.str());
+    return all_count;
 }
 
 template<class STR_STREAM>
@@ -153,9 +152,8 @@ void print_scantime(STR_STREAM& stream, size_t timeInMs)
     }
 }
 
-std::string HHScanReport::toString(bool suspiciousOnly)
+void HHScanReport::toString(std::wstringstream &stream, bool suspiciousOnly)
 {
-    std::wstringstream stream;
     //summary:
     stream << L"--------" << std::endl;
     stream << L"SUMMARY:\n";
@@ -173,5 +171,4 @@ std::string HHScanReport::toString(bool suspiciousOnly)
         stream << L"[+] List of suspicious: \n";
         reportsToString(stream, true);
     }
-    return std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(stream.str());
 }
