@@ -142,7 +142,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">if</span> (!scannedCount) {</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordflow">return</span> printed;</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> max_len = size_t(std::floor(std::log10(<span class="keywordtype">double</span>(scannedCount - 1))) + 1) % 100;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> max_len = size_t(std::floor(std::log10(<span class="keywordtype">double</span>(scannedCount))) + 1) % 100;</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> itr = this-&gt;<a class="code hl_variable" href="class_h_h_scan_report.html#a74077d56483e55918ec3420b528a3994">pidToReport</a>.begin(); itr != <a class="code hl_variable" href="class_h_h_scan_report.html#a74077d56483e55918ec3420b528a3994">pidToReport</a>.end(); ++itr) {</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        DWORD pid = itr-&gt;first;</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">if</span> (suspiciousOnly) {</div>
