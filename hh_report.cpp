@@ -44,7 +44,7 @@ size_t HHScanReport::reportsToString(std::wstringstream& stream, bool suspicious
     if (!scannedCount) {
         return printed;
     }
-    const size_t max_len = size_t(std::floor(std::log10(double(scannedCount - 1))) + 1) % 100;
+    const size_t max_len = size_t(std::floor(std::log10(double(scannedCount))) + 1) % 100;
     for (auto itr = this->pidToReport.begin(); itr != pidToReport.end(); ++itr) {
         DWORD pid = itr->first;
         if (suspiciousOnly) {
