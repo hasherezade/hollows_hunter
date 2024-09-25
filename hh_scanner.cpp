@@ -34,7 +34,7 @@ namespace files_util {
         return stream.str();
     }
 
-    std::string make_dir_name(std::string baseDir, time_t timestamp)
+    std::string make_dir_name(const std::string &baseDir, time_t timestamp)
     {
         std::stringstream stream;
         if (baseDir.length() > 0) {
