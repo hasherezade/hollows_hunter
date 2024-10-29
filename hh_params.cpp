@@ -10,6 +10,7 @@ void hh_params::init()
 
     pesieve_args.quiet = true;
     pesieve_args.no_hooks = true;
+    pesieve_args.report_filter = pesieve::SHOW_SUSPICIOUS;
 
     suspend_suspicious = false;
     kill_suspicious = false;

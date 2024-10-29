@@ -39,6 +39,7 @@ using namespace pesieve;
 //output options:
 #define PARAM_QUIET "quiet"
 #define PARAM_OUT_FILTER "ofilter"
+#define PARAM_REPORT_FILTER "report"
 #define PARAM_SUSPEND "suspend"
 #define PARAM_KILL "kill"
 #define PARAM_UNIQUE_DIR "uniqd"
@@ -168,6 +169,18 @@ public:
                 enumParam->addEnumValue(mode, translate_out_filter(mode));
             }
         }
+        //
+        enumParam = new EnumParam(PARAM_REPORT_FILTER, "rfilter_id", false);
+        if (enumParam) {
+            this->addParam(enumParam);
+            this->setInfo(PARAM_REPORT_FILTER, "Define what is reported.");
+            for (size_t i = SHOW_SUSPICIOUS; i < SHOW_FILTERS_COUNT; i++) {
+                t_report_filter mode = (t_report_filter)(i);
+                std::string info = translate_report_filter(mode);
+                if (info == "undefined") continue;
+                enumParam->addEnumValue(mode, info);
+            }
+        }
 
         this->addParam(new StringListParam(PARAM_MODULES_IGNORE, false, PARAM_LIST_SEPARATOR));
         {
@@ -289,6 +302,7 @@ public:
         this->addParamToGroup(PARAM_JSON, str_group);
         this->addParamToGroup(PARAM_JSON_LVL, str_group);
         this->addParamToGroup(PARAM_OUT_FILTER, str_group);
+        this->addParamToGroup(PARAM_REPORT_FILTER, str_group);
         this->addParamToGroup(PARAM_LOG, str_group);
         this->addParamToGroup(PARAM_UNIQUE_DIR, str_group);
 
@@ -464,6 +478,7 @@ protected:
     {
         copyVal<EnumParam>(PARAM_IMP_REC, ps.imprec_mode);
         copyVal<EnumParam>(PARAM_OUT_FILTER, ps.out_filter);
+        copyVal<EnumParam>(PARAM_REPORT_FILTER, ps.report_filter);
 
         fillStringParam(PARAM_MODULES_IGNORE, ps.modules_ignored);
 
