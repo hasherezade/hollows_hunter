@@ -17,7 +17,7 @@
 #include <paramkit.h>
 #include <mutex>
 
-#define PID_FIELD_SIZE 4
+#define PID_FIELD_SIZE 8
 
 using namespace pesieve;
 
@@ -309,8 +309,9 @@ t_single_scan_status HHScanner::scanNextProcess(DWORD pid, WCHAR* exe_file, HHSc
     }
     if (!hh_args.quiet) {
         const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
-        std::cout << ">> Scanning PID: " << std::setw(PID_FIELD_SIZE) << std::dec << pid;
-        std::wcout << " : " << exe_file;
+        std::wcout << ">> Scanning PID: "
+            << std::setw(PID_FIELD_SIZE) << std::dec << pid
+            << " : " << exe_file;
 
         if (is_process_wow64) {
             std::cout << " : 32b";
