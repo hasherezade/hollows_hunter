@@ -351,22 +351,21 @@ bool HHScanner::writeToLog(HHScanReport* hh_report)
         return false;
     }
 
-    const bool suspiciousOnly = false;
     std::wstringstream stream;
-    hh_report->toString(stream, suspiciousOnly);
+    hh_report->toString(stream, pesieve::SHOW_ALL);
 
     static std::mutex logMutx;
     const std::lock_guard<std::mutex> lock(logMutx);
     return files_util::write_to_file("hollows_hunter.log", stream.str(), true);
 }
 
-void HHScanner::summarizeScan(HHScanReport *hh_report, bool suspiciousOnly)
+void HHScanner::summarizeScan(HHScanReport *hh_report, const pesieve::t_report_filter rfilter)
 {
     if (!hh_report) return;
     std::wstringstream summary_str;
 
     if (!this->hh_args.json_output) {
-        hh_report->toString(summary_str, suspiciousOnly);
+        hh_report->toString(summary_str, rfilter);
         std::wcout << summary_str.rdbuf();
     }
     else {
@@ -376,7 +375,7 @@ void HHScanner::summarizeScan(HHScanReport *hh_report, bool suspiciousOnly)
 
     if (hh_args.pesieve_args.out_filter != OUT_NO_DIR) {
         //file the same report into the directory with dumps:
-        if (hh_report->suspicious.size()) {
+        if (hh_report->countReports(rfilter)) {
             std::string report_path = files_util::join_path(this->outDir, "summary.json");
 
             static std::mutex summaryMutx;

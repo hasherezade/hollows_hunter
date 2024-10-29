@@ -208,9 +208,9 @@ void runHHinNewThread(t_hh_params args)
     HHScanReport* report = hhunter.scan();
     if (report)
     {
-        if (!g_hh_args.quiet || report->countSuspicious()) {
+        if (!g_hh_args.quiet || report->countReports(pesieve::SHOW_SUSPICIOUS)) {
             const std::lock_guard<std::mutex> lock(g_stdOutMutex);
-            hhunter.summarizeScan(report);
+            hhunter.summarizeScan(report, pesieve::SHOW_SUSPICIOUS);
         }
         else {
             hhunter.writeToLog(report);
