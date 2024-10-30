@@ -36,7 +36,7 @@ public:
 
     bool appendReport(pesieve::t_report &scan_report, const std::wstring &img_name);
 
-    size_t countReports(const pesieve::t_report_filter rfilter) const
+    size_t countReports(const pesieve::t_results_filter rfilter) const
     {
         if (rfilter == pesieve::SHOW_NONE) {
             return 0;
@@ -66,10 +66,10 @@ public:
         return total;
     }
 
-    void toString(std::wstringstream &stream, const pesieve::t_report_filter rfilter);
+    void toString(std::wstringstream &stream, const pesieve::t_results_filter rfilter);
 
 protected:
-    size_t reportsToString(std::wstringstream &stream, const pesieve::t_report_filter rfilter);
+    size_t reportsToString(std::wstringstream &stream, const pesieve::t_results_filter rfilter);
 
     size_t toJSON(std::wstringstream &stream, const t_hh_params &params);
     size_t reportsToJSON(std::wstringstream &stream, size_t level, const t_hh_params &params);

@@ -68,7 +68,7 @@ t_pesieve_res deploy_scan()
         do {
             HHScanReport *report = hhunter.scan();
             if (report) {
-                hhunter.summarizeScan(report, g_hh_args.pesieve_args.report_filter);
+                hhunter.summarizeScan(report, g_hh_args.pesieve_args.results_filter);
                 if (report->countReports(pesieve::SHOW_SUSPICIOUS) > 0) {
                     scan_res = PESIEVE_DETECTED;
                 }

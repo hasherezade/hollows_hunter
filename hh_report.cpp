@@ -29,7 +29,7 @@ bool HHScanReport::appendReport(pesieve::t_report &scan_report, const std::wstri
     return true;
 }
 
-size_t HHScanReport::reportsToString(std::wstringstream& stream, const pesieve::t_report_filter rfilter)
+size_t HHScanReport::reportsToString(std::wstringstream& stream, const pesieve::t_results_filter rfilter)
 {
     size_t printed = 0;
     size_t counter = 0;
@@ -161,7 +161,7 @@ void print_scantime(STR_STREAM& stream, size_t timeInMs)
     }
 }
 
-void HHScanReport::toString(std::wstringstream &stream, const pesieve::t_report_filter rfilter)
+void HHScanReport::toString(std::wstringstream &stream, const pesieve::t_results_filter rfilter)
 {
     //summary:
     stream << L"--------" << std::endl;

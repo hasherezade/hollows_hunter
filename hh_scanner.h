@@ -31,7 +31,7 @@ public:
 
     HHScanReport* scan();
     bool writeToLog(HHScanReport* hh_report);
-    void summarizeScan(HHScanReport* hh_report, const pesieve::t_report_filter rfilter);
+    void summarizeScan(HHScanReport* hh_report, const pesieve::t_results_filter rfilter);
 
 protected:
     void printScanRoundStats(size_t found, size_t ignored_count, size_t not_matched_count);

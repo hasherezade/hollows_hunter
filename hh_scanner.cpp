@@ -359,7 +359,7 @@ bool HHScanner::writeToLog(HHScanReport* hh_report)
     return files_util::write_to_file("hollows_hunter.log", stream.str(), true);
 }
 
-void HHScanner::summarizeScan(HHScanReport *hh_report, const pesieve::t_report_filter rfilter)
+void HHScanner::summarizeScan(HHScanReport *hh_report, const pesieve::t_results_filter rfilter)
 {
     if (!hh_report) return;
     std::wstringstream summary_str;
