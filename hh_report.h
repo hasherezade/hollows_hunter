@@ -49,10 +49,10 @@ public:
         }
         size_t total = 0;
         if (rfilter & pesieve::SHOW_ERRORS) {
-            total = failed.size();
+            total += failed.size();
         }
         if (rfilter & pesieve::SHOW_SUSPICIOUS) {
-            total = suspicious.size();
+            total += suspicious.size();
         }
         return total;
     }
