@@ -2,7 +2,7 @@
 
 #include <windows.h>
 #include <psapi.h>
-
+#include <iostream>
 #include "suspend.h"
 
 namespace process_util {
