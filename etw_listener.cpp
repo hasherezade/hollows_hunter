@@ -1,4 +1,6 @@
 #include "etw_listener.h"
+#ifdef __USE_ETW__
+
 #include "hh_scanner.h"
 
 #include <string>
@@ -7,8 +9,6 @@
 
 #include "util/process_util.h"
 #include "term_util.h"
-
-#if (_MSC_VER >= 1900)
 
 #define EXECUTABLE_FLAGS (PAGE_EXECUTE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY)
 #define MAX_PROCESSES 65536
@@ -438,4 +438,4 @@ bool ETWstart(ETWProfile& settings)
     return isOk;
 }
 
-#endif //(_MSC_VER >= 1900)
+#endif // __USE_ETW__
