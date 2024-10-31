@@ -209,6 +209,7 @@ size_t HHScanner::scanProcesses(HHScanReport &my_report)
         return 0;
     }
     do {
+        if (pe32.th32ProcessID == 0) continue;
         // scan callback
         const t_single_scan_status stat = scanNextProcess(pe32.th32ProcessID, pe32.szExeFile, my_report);
         if (stat == SSCAN_IGNORED) ignored_count++;
