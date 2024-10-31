@@ -36,20 +36,40 @@ public:
 
     bool appendReport(pesieve::t_report &scan_report, const std::wstring &img_name);
 
-    size_t countSuspicious() const
+    size_t countReports(const pesieve::t_results_filter rfilter) const
     {
-        return suspicious.size();
+        if (rfilter == pesieve::SHOW_NONE) {
+            return 0;
+        }
+        if (rfilter == pesieve::SHOW_ALL) {
+            return countTotal(false);
+        }
+        if (rfilter == pesieve::SHOW_SUCCESSFUL_ONLY) {
+            return countTotal(true);
+        }
+        size_t total = 0;
+        if (rfilter & pesieve::SHOW_ERRORS) {
+            total += failed.size();
+        }
+        if (rfilter & pesieve::SHOW_SUSPICIOUS) {
+            total += suspicious.size();
+        }
+        return total;
     }
 
-    size_t countTotal() const
+    size_t countTotal(bool successfulOnly = true) const
     {
-        return pidToReport.size();
+        size_t total = pidToReport.size();
+        if (successfulOnly) {
+            total -= failed.size();
+        }
+        return total;
     }
 
-    void toString(std::wstringstream &stream, bool suspiciousOnly = true);
+    void toString(std::wstringstream &stream, const pesieve::t_results_filter rfilter);
 
 protected:
-    size_t reportsToString(std::wstringstream &stream, bool suspiciousOnly = true);
+    size_t reportsToString(std::wstringstream &stream, const pesieve::t_results_filter rfilter);
 
     size_t toJSON(std::wstringstream &stream, const t_hh_params &params);
     size_t reportsToJSON(std::wstringstream &stream, size_t level, const t_hh_params &params);
@@ -63,6 +83,6 @@ protected:
     std::map<DWORD, pesieve::t_report> pidToReport;
     std::map<DWORD, std::wstring> pidToName;
     std::vector<DWORD> suspicious;
-
+    std::vector<DWORD> failed;
     friend class HHScanner;
 };

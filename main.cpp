@@ -65,18 +65,18 @@ t_pesieve_res deploy_scan()
     else
     {
         HHScanner hhunter(g_hh_args);
-    do {
-        HHScanReport *report = hhunter.scan();
-        if (report) {
-            hhunter.summarizeScan(report);
-            if (report->countSuspicious() > 0) {
-                scan_res = PESIEVE_DETECTED;
+        do {
+            HHScanReport *report = hhunter.scan();
+            if (report) {
+                hhunter.summarizeScan(report, g_hh_args.pesieve_args.results_filter);
+                if (report->countReports(pesieve::SHOW_SUSPICIOUS) > 0) {
+                    scan_res = PESIEVE_DETECTED;
+                }
+                delete report;
             }
-            delete report;
-        }
-        if (!HHScanner::isScannerCompatibile()) {
-            compatibility_alert();
-        }
+            if (!HHScanner::isScannerCompatibile()) {
+                compatibility_alert();
+            }
         } while (g_hh_args.loop_scanning);
     }
     return scan_res;
