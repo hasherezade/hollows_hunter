@@ -7,7 +7,7 @@
 #include <string>
 
 #include <sstream>
-#include <WinSock2.h>
+#include <winsock2.h>
 #include <windows.h>
 #include <time.h>
 

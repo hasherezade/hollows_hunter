@@ -1,6 +1,6 @@
 #include "etw_listener.h"
 #include "hh_scanner.h"
-#include <winmeta.h>
+
 #include <string>
 #include <thread>
 #include <mutex>
@@ -297,13 +297,15 @@ bool ETWstart(ETWProfile& settings)
     // Process Start Trigger
     processProvider.add_on_event_callback([](const EVENT_RECORD& record, const krabs::trace_context& trace_context)
         {
+            const int OPCODE_START = 0x1;
+            const int OPCODE_STOP = 0x2;
             krabs::schema schema(record, trace_context.schema_locator);
-            if (schema.event_opcode() == WINEVENT_OPCODE_STOP) {
+            if (schema.event_opcode() == OPCODE_STOP) {
                 krabs::parser parser(schema);
                 std::uint32_t pid = parser.parse<std::uint32_t>(L"ProcessId");
                 procStats[pid].cleanupThread();
             }
-            if (schema.event_opcode() == WINEVENT_OPCODE_START)
+            if (schema.event_opcode() == OPCODE_START)
             {
                 krabs::parser parser(schema);
                 std::uint32_t parentPid = parser.parse<std::uint32_t>(L"ParentId");
