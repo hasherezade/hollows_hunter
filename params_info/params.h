@@ -35,6 +35,7 @@ using namespace pesieve;
 //dump options:
 #define PARAM_IMP_REC "imp"
 #define PARAM_DUMP_MODE "dmode"
+#define PARAM_REBASE "rebase"
 
 //output options:
 #define PARAM_QUIET "quiet"
@@ -211,6 +212,10 @@ public:
         this->addParam(new BoolParam(PARAM_MINIDUMP, false));
         this->setInfo(PARAM_MINIDUMP, "Create a minidump of the full suspicious process.");
 
+        //PARAM_DUMP_MODE
+        this->addParam(new BoolParam(PARAM_REBASE, false));
+        this->setInfo(PARAM_REBASE, "Rebase the module to its original base (if known).");
+
         //PARAM_SHELLCODE
         enumParam = new EnumParam(PARAM_SHELLCODE, "shellc_mode", false);
         if (enumParam) {
@@ -329,6 +334,7 @@ public:
         this->addParamToGroup(PARAM_MINIDUMP, str_group);
         this->addParamToGroup(PARAM_IMP_REC, str_group);
         this->addParamToGroup(PARAM_DUMP_MODE, str_group);
+        this->addParamToGroup(PARAM_REBASE, str_group);
 
         str_group = "3. scan exclusions";
         this->addGroup(new ParamGroup(str_group));
@@ -482,6 +488,7 @@ protected:
 
         fillStringParam(PARAM_MODULES_IGNORE, ps.modules_ignored);
 
+        copyVal<BoolParam>(PARAM_REBASE, ps.rebase);
         copyVal<BoolParam>(PARAM_QUIET, ps.quiet);
         copyVal<EnumParam>(PARAM_JSON_LVL, ps.json_lvl);
 
