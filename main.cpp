@@ -8,13 +8,12 @@
 #undef USE_ETW //ETW not supported
 #endif
 
-#include <stdio.h>
-
+#include <iostream>
 #include <string>
 #include <map>
 #include <vector>
-
 #include <sstream>
+#include <mutex>
 
 #include "color_scheme.h"
 #include "hh_scanner.h"
