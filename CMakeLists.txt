@@ -7,7 +7,6 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
 option( USE_ETW "Use ETW" ON )
 if(USE_ETW)
     add_compile_definitions(USE_ETW)
-	#FYI Krabs need to be built as a static lib which is not the default from the submodule 
 endif()
 
 # static linking for GNU compilers
