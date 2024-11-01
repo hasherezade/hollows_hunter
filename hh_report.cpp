@@ -31,6 +31,9 @@ bool HHScanReport::appendReport(pesieve::t_report &scan_report, const std::wstri
 
 size_t HHScanReport::reportsToString(std::wstringstream& stream, const pesieve::t_results_filter rfilter)
 {
+    if (rfilter == pesieve::SHOW_NONE) {
+        return 0;
+    }
     size_t printed = 0;
     size_t counter = 0;
     size_t scannedCount = countReports(rfilter);
@@ -38,20 +41,23 @@ size_t HHScanReport::reportsToString(std::wstringstream& stream, const pesieve::
     if (!scannedCount) {
         return printed;
     }
-    
+
     const size_t max_len = size_t(std::floor(std::log10(double(scannedCount))) + 1) % 100;
     for (auto itr = this->pidToReport.begin(); itr != pidToReport.end(); ++itr) {
         bool isFailed = false;
         DWORD pid = itr->first;
         pesieve::t_report rep = itr->second;
         if ((rfilter & pesieve::SHOW_SUSPICIOUS) == 0) {
+            if (rep.suspicious) continue;
+        }
+        if ((rfilter & pesieve::SHOW_NOT_SUSPICIOUS) == 0) {
             if (!rep.suspicious) continue;
         }
         if (rep.errors == pesieve::ERROR_SCAN_FAILURE) {
             isFailed = true;
         }
         
-        if (isFailed && (rfilter & pesieve::SHOW_ERRORS) == 0) {
+        if (isFailed && ((rfilter & pesieve::SHOW_ERRORS) == 0)) {
             continue; // do not display failed
         }
         stream << L"[" << std::setw(max_len) << counter++ << L"]: PID: " << std::dec << pid << L", ";
