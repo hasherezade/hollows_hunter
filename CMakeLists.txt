@@ -5,14 +5,17 @@ option(HH_BUILD_TESTING "Enable testing for HollowsHunter" ON)
 option (PECONV_LIB_INSTALL OFF)
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
 option( USE_ETW "Use ETW" ON )
+
 if(USE_ETW)
     add_compile_definitions(USE_ETW)
 endif()
 
 # static linking for GNU compilers
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-
-	if(LINK_STATICALLY)
+	add_compile_definitions(
+		_WIN32_WINNT=1536 # 0x600 aka Windows Vista required
+	)
+	if (LINK_STATICALLY)
 		add_link_options(
 			-static
 			-static-libgcc
