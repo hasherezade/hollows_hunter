@@ -7,7 +7,7 @@ void hh_params::init()
 
     //reset output path:
     out_dir = HH_DEFAULT_DIR;
-
+    cache_mode = CACHE_AUTO;
     pesieve_args.quiet = true;
     pesieve_args.no_hooks = true;
     pesieve_args.results_filter = pesieve::SHOW_SUSPICIOUS;

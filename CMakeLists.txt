@@ -126,22 +126,22 @@ if(HH_BUILD_TESTING)
 	set_tests_properties(TestFalsePositives PROPERTIES PASS_REGULAR_EXPRESSION "\"suspicious_count\" : 0")
 
 	# 2) test scan with caching
-	add_test (TestCaching ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out -cache)
+	add_test (TestCaching ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out -cache E)
 	set_tests_properties(TestCaching PROPERTIES PASS_REGULAR_EXPRESSION "\"suspicious_count\" : 0")
 
 	# 3) test scan IAT with caching
-	add_test (TestIatScan ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out -cache -iat 1)
+	add_test (TestIatScan ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out -cache E -iat 1)
 	set_tests_properties(TestIatScan PROPERTIES PASS_REGULAR_EXPRESSION "\"suspicious_count\" : ")
 
 	# 4) test scan hooks with caching
-	add_test (TestHooksScan ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out -cache -hooks)
+	add_test (TestHooksScan ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out -cache E -hooks)
 	set_tests_properties(TestHooksScan PROPERTIES PASS_REGULAR_EXPRESSION "\"suspicious_count\" : ")
 
 	# 5) test scan threads with caching
-	add_test (TestThreadsScan ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out -cache -threads)
+	add_test (TestThreadsScan ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out -cache E -threads)
 	set_tests_properties(TestThreadsScan PROPERTIES PASS_REGULAR_EXPRESSION "\"suspicious_count\" : ")
 
 	# 6) test scan code patterns with caching
-	add_test (TestCodeScanNoDump ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out -cache -shellc P -ofilter 2)
+	add_test (TestCodeScanNoDump ${CMAKE_INSTALL_PREFIX}/hollows_hunter -json -dir scan_out -cache E -shellc P -ofilter 2)
 	set_tests_properties(TestCodeScanNoDump PROPERTIES PASS_REGULAR_EXPRESSION "\"suspicious_count\" : ")
 endif()

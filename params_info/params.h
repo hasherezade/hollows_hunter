@@ -88,6 +88,32 @@ std::wstring to_wstring(const std::string& stringToConvert)
     return wideString;
 }
 
+std::string cache_mode_to_id(const t_cache_mode mode)
+{
+    switch (mode) {
+    case CACHE_DISABLED:
+        return "D";
+    case CACHE_AUTO:
+        return "A";
+    case CACHE_ENABLED:
+        return "E";
+    }
+    return "";
+}
+
+std::string translate_cache_mode(const t_cache_mode mode)
+{
+    switch (mode) {
+    case CACHE_DISABLED:
+        return "cache always disabled";
+    case CACHE_AUTO:
+        return "automatically enable cache in continuous scanning mode (default)";
+    case CACHE_ENABLED:
+        return "cache always enabled";
+    }
+    return "";
+}
+
 class HHParams : public Params
 {
 public:
@@ -249,8 +275,15 @@ public:
         this->setInfo(PARAM_REFLECTION, "Make a process reflection before scan.", "\t   This allows i.e. to force-read inaccessible pages.");
 
         //PARAM_CACHE
-        this->addParam(new BoolParam(PARAM_CACHE, false));
-        this->setInfo(PARAM_CACHE, "Use modules caching.", "\t   This can speed up the scan (on the cost of memory consumption).");
+        enumParam = new EnumParam(PARAM_CACHE, "cache_mode", false);
+        if (enumParam) {
+            this->addParam(enumParam);
+            this->setInfo(PARAM_CACHE, "Use modules caching. This can speed up the scan (on the cost of memory consumption).\n");
+            for (size_t i = 0; i < CACHE_MODES_COUNT; i++) {
+                t_cache_mode mode = (t_cache_mode)(i);
+                enumParam->addEnumValue(mode, cache_mode_to_id(mode), translate_cache_mode(mode));
+            }
+        }
 
         //PARAM_IAT
         enumParam = new EnumParam(PARAM_IAT, "iat_scan_mode", false);
@@ -395,6 +428,7 @@ public:
         copyVal<BoolParam>(PARAM_HOOKS, hooks);
         ps.pesieve_args.no_hooks = hooks ? false : true;
 
+        copyVal<EnumParam>(PARAM_CACHE, ps.cache_mode);
         copyVal<BoolParam>(PARAM_UNIQUE_DIR, ps.unique_dir);
         copyVal<BoolParam>(PARAM_SUSPEND, ps.suspend_suspicious);
         copyVal<BoolParam>(PARAM_KILL, ps.kill_suspicious);
@@ -428,6 +462,17 @@ public:
         IntListParam* myIntParam = dynamic_cast<IntListParam*>(this->getParam(PARAM_PID));
         if (myIntParam && myIntParam->isSet()) {
             myIntParam->stripToIntElements(ps.pids_list);
+        }
+
+        ps.pesieve_args.use_cache = false;
+        if (ps.cache_mode == CACHE_ENABLED) {
+            ps.pesieve_args.use_cache = true;
+        }
+        else if (ps.cache_mode == CACHE_AUTO) {
+            if (ps.loop_scanning || ps.etw_scan) {
+                //continuous scanning: enable cache
+                ps.pesieve_args.use_cache = true;
+            }
         }
     }
 
@@ -499,7 +544,6 @@ protected:
         copyVal<EnumParam>(PARAM_OBFUSCATED, ps.obfuscated);
         copyVal<BoolParam>(PARAM_THREADS, ps.threads);
         copyVal<BoolParam>(PARAM_REFLECTION, ps.make_reflection);
-        copyVal<BoolParam>(PARAM_CACHE, ps.use_cache);
 
         copyVal<EnumParam>(PARAM_IAT, ps.iat);
         copyVal<EnumParam>(PARAM_DOTNET_POLICY, ps.dotnet_policy);
