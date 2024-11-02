@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['levenshtein_5fdistance_0',['levenshtein_distance',['../namespacehhunter_1_1util.html#a48183ed17d49191649fbac64927b6f28',1,'hhunter::util']]],
-  ['list_5fto_5fstr_1',['list_to_str',['../namespaceutil.html#a67d303d8d26647d46ce66344ca8a228c',1,'util']]]
+  ['join_5fpath_0',['join_path',['../namespacefiles__util.html#a9a7fcfd84189964e87c1b572f1fe8fbe',1,'files_util']]]
 ];

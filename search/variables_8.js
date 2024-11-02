@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['names_5flist_0',['names_list',['../structhh__params.html#aaada133523530dfd49401621b336d74b',1,'hh_params']]]
+  ['kill_5fsuspicious_0',['kill_suspicious',['../structhh__params.html#a4c77070993ef883769c1dfb8c2092c88',1,'hh_params']]]
 ];

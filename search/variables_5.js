@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['json_5foutput_0',['json_output',['../structhh__params.html#a4c710dd9009a2ee6a31580ca62c200de',1,'hh_params']]]
+  ['hh_5fargs_0',['hh_args',['../class_h_h_scanner.html#aa9841ff29a663251372cf65e2db3cbef',1,'HHScanner']]]
 ];

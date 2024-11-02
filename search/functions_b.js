@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['obfusc_5fmode_5fmode_5fto_5fid_0',['obfusc_mode_mode_to_id',['../pe__sieve__params__info_8cpp.html#a6708b87038f7675f4f81bd8d7351ca4f',1,'obfusc_mode_mode_to_id(const pesieve::t_obfusc_mode &amp;mode):&#160;pe_sieve_params_info.cpp'],['../pe__sieve__params__info_8h.html#a6708b87038f7675f4f81bd8d7351ca4f',1,'obfusc_mode_mode_to_id(const pesieve::t_obfusc_mode &amp;mode):&#160;pe_sieve_params_info.cpp']]],
-  ['operator_3d_1',['operator=',['../structhh__params.html#a01d9813b270bd39980ebc8450a1387b2',1,'hh_params']]]
+  ['levenshtein_5fdistance_0',['levenshtein_distance',['../namespacehhunter_1_1util.html#a48183ed17d49191649fbac64927b6f28',1,'hhunter::util']]],
+  ['list_5fto_5fstr_1',['list_to_str',['../namespaceutil.html#a67d303d8d26647d46ce66344ca8a228c',1,'util']]],
+  ['loadboolean_2',['loadBoolean',['../namespaceutil.html#af17aa8b4f49aa2e7427b578b1f929eaf',1,'util']]],
+  ['loadini_3',['loadIni',['../struct_e_t_w_profile.html#a611aa9e10a2a0c579d0e28e8a38d64c8',1,'ETWProfile']]],
+  ['loadint_4',['loadInt',['../namespaceutil.html#ad208e2ec4e78d56ab99ba9c297c0ce73',1,'util']]]
 ];

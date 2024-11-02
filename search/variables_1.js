@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['failed_0',['failed',['../class_h_h_scan_report.html#afd589b693a8bcaae6ac6dea7d77ba57c',1,'HHScanReport']]]
+  ['delim_0',['DELIM',['../struct_e_t_w_profile.html#a745c19aa7472409d09c6f028cba50be0',1,'ETWProfile']]]
 ];

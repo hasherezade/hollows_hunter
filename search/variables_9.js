@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['out_5fdir_0',['out_dir',['../structhh__params.html#a7777b45895ca0788d061e1f4c5f60a7b',1,'hh_params']]],
-  ['outdir_1',['outDir',['../class_h_h_scanner.html#a238a4958607b0f74d44c27c1505b1906',1,'HHScanner']]]
+  ['log_0',['log',['../structhh__params.html#a48a6a280e36ad9430b9be539faff3f5c',1,'hh_params']]],
+  ['loop_5fscanning_1',['loop_scanning',['../structhh__params.html#ad965e39c3f3a33482f9145c1f8fbfa76',1,'hh_params']]]
 ];

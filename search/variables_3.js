@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hh_5fargs_0',['hh_args',['../class_h_h_scanner.html#aa9841ff29a663251372cf65e2db3cbef',1,'HHScanner']]]
+  ['failed_0',['failed',['../class_h_h_scan_report.html#afd589b693a8bcaae6ac6dea7d77ba57c',1,'HHScanReport']]]
 ];
