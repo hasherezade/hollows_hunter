@@ -47,8 +47,13 @@ t_pesieve_res deploy_scan()
     if (g_hh_args.etw_scan)
     {
 #ifdef USE_ETW
+        const char profileIni[] = "ETWProfile.ini";
         ETWProfile profile;
-        profile.setAll();
+        profile.initProfile(profileIni);
+        if (!profile.isEnabled()) {
+            std::cerr << "Cannot start ETW: the profile (\"" << profileIni << "\") is empty\n";
+            return PESIEVE_ERROR;
+        }
         if (!ETWstart(profile)) {
             return PESIEVE_ERROR;
         }

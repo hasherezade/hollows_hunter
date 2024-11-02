@@ -19,28 +19,8 @@
 
 // ETW includes
 #include "krabsetw/krabs/krabs.hpp"
+#include "etw_settings.h"
 
-struct ETWProfile {
-    bool process_start;
-    bool img_load;
-    bool allocation;
-    bool tcpip;
-    bool obj_mgr;
-
-    ETWProfile(bool _process_start = false, bool _img_load = false, bool _allocation = false, bool _tcpip = false, bool _obj_mgr = false)
-        : process_start(_process_start), img_load(_img_load), allocation(_allocation), tcpip(_tcpip), obj_mgr(_obj_mgr)
-    {
-    }
-
-    void setAll()
-    {
-        this->process_start = true;
-        this->img_load = true;
-        this->allocation = true;
-        this->tcpip = true;
-        this->obj_mgr = true;
-    }
-};
 
 bool ETWstart(ETWProfile &settings);
 

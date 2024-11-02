@@ -69,11 +69,13 @@ if(USE_ETW)
 	set (srcs
 		${srcs}
 		etw_listener.cpp
+		etw_settings.cpp
 	)
 
 	set (hdrs
 		${hdrs}
 		etw_listener.h
+		etw_settings.h
 		krabsetw/krabs/krabs.hpp
 	)
 endif()
