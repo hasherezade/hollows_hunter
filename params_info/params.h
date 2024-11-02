@@ -145,12 +145,14 @@ public:
         this->addParam(new BoolParam(PARAM_LOOP, false));
         this->setInfo(PARAM_LOOP, "Enable continuous scanning.");
         BoolParam* etwParam = new BoolParam(PARAM_ETW, false);
-        this->addParam(etwParam);
-        this->setInfo(PARAM_ETW, "Use ETW (requires Administrator privilege).");
+        if (etwParam) {
+            this->addParam(etwParam);
+            this->setInfo(PARAM_ETW, "Use ETW (requires Administrator privilege).");
 #ifndef USE_ETW
-        etwParam->setActive(false);
-        this->setInfo(PARAM_ETW, "Use ETW (disabled).");
+            etwParam->setActive(false);
+            this->setInfo(PARAM_ETW, "Use ETW (disabled).");
 #endif //USE_ETW
+        }
         EnumParam *enumParam = new EnumParam(PARAM_IMP_REC, "imprec_mode", false);
         if (enumParam) {
             this->addParam(enumParam);
