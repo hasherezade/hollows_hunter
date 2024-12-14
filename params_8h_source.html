@@ -310,7 +310,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        <span class="keywordflow">if</span> (enumParam) {</div>
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            this-&gt;addParam(enumParam);</div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            this-&gt;setInfo(<a class="code hl_define" href="params_8h.html#a19dd8c0ad3ad870dc654eb38136ed1ac">PARAM_RESULTS_FILTER</a>, <span class="stringliteral">&quot;Define what type of results are reported.&quot;</span>);</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = SHOW_SUSPICIOUS; i &lt; SHOW_FILTERS_COUNT; i++) {</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = SHOW_SUSPICIOUS; i &lt;= SHOW_ALL; i++) {</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>                t_results_filter mode = (t_results_filter)(i);</div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>                std::string info = <a class="code hl_function" href="pe__sieve__params__info_8cpp.html#aa6d0f2c4785c77d67f822e4ddf98b281">translate_results_filter</a>(mode);</div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                <span class="keywordflow">if</span> (info.empty()) <span class="keywordflow">continue</span>;</div>
