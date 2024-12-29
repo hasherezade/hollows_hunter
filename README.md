@@ -17,7 +17,7 @@
 Hollows Hunter is a command-line application based on [PE-sieve](https://github.com/hasherezade/pe-sieve.git) passive memory scanner. Recognizes and dumps a variety of potentially malicious implants (replaced/implanted PEs, shellcodes, hooks, in-memory patches). While in case of PE-sieve you can select the process only by its PID, Hollows Hunter allows to select them by various criteria, such as:
 + list of PIDs
 + list of names
-+ the time of creation (relatively to the Hollows Hunter run time)
++ the time of creation (relatively to the Hollows Hunter execution time)
 
 If no specific target is selected, it proceeds to scan all available processes.
 
