@@ -14,7 +14,17 @@
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-blue.svg)](https://github.com/hasherezade/hollows_hunter/blob/master/LICENSE)
 [![Platform Badge](https://img.shields.io/badge/Windows-0078D6?logo=windows)](https://github.com/hasherezade/hollows_hunter)
 
-Scans all running processes. Recognizes and dumps a variety of potentially malicious implants (replaced/implanted PEs, shellcodes, hooks, in-memory patches).
+Hollows Hunter is a command-line application based on [PE-sieve](https://github.com/hasherezade/pe-sieve.git) passive memory scanner. Recognizes and dumps a variety of potentially malicious implants (replaced/implanted PEs, shellcodes, hooks, in-memory patches). While in case of PE-sieve you can select the process only by its PID, Hollows Hunter allows to select them by various criteria, such as:
++ list of PIDs
++ list of names
++ the time of creation (relatively to the Hollows Hunter run time)
+
+If no specific target is selected, it proceeds to scan all available processes.
+
+Hollows Hunter allows also for continuous memory scanning, via `/loop` argument, or by being run as an ETW listener: in `/etw` mode (64-bit version only).
+
+To display all available arguments, along with their descriptions, run with the `/help` argument.
+
 
 📦 Uses: [PE-sieve](https://github.com/hasherezade/pe-sieve.git) (the [library version](https://github.com/hasherezade/pe-sieve/wiki/2.-How-to-build)).
 
