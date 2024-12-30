@@ -23,8 +23,8 @@ If no specific target is selected, it proceeds to scan all available processes.
 
 Hollows Hunter allows also for continuous memory scanning, via `/loop` argument, or by being run as an ETW listener: in `/etw` mode (64-bit version only).
 
-To display all available arguments, along with their descriptions, run with the `/help` argument.
-
+> [!IMPORTANT]  
+> The available arguments are documented on [Wiki](https://github.com/hasherezade/pe-sieve/wiki). They can also be listed using the argument `/help`.
 
 📦 Uses: [PE-sieve](https://github.com/hasherezade/pe-sieve.git) (the [library version](https://github.com/hasherezade/pe-sieve/wiki/2.-How-to-build)).
 
