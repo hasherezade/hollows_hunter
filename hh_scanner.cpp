@@ -275,7 +275,7 @@ t_single_scan_status HHScanner::shouldScanProcess(const hh_params &hh_args, cons
     // filter by the time
     time_t time_diff = 0;
     if (check_time) { // if the parameter was set
-        const time_t process_time = util::process_start_time(pid);
+        const LONGLONG process_time = util::process_start_time(pid);
         if (process_time == INVALID_TIME) return SSCAN_ERROR0; //skip process if cannot retrieve the time
 
         // if HH was started after the process
