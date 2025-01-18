@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['cache_5fmode_0',['cache_mode',['../structhh__params.html#ac4cacfe91f614f8bba8a128c137c1f11',1,'hh_params']]]
+  ['buf_0',['buf',['../structutil_1_1_auto_buffer.html#ae91405161ad997bb473fcb5a6a4d0a16',1,'util::AutoBuffer']]],
+  ['buf_5fsize_1',['buf_size',['../structutil_1_1_auto_buffer.html#a35dc14f9ab1bc6b032a2cddec5246d4f',1,'util::AutoBuffer']]]
 ];

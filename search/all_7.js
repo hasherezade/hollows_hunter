@@ -17,7 +17,7 @@ var searchData=
   ['hh_5fver_5fshort_2eh_14',['hh_ver_short.h',['../hh__ver__short_8h.html',1,'']]],
   ['hh_5fversion_5fstr_15',['HH_VERSION_STR',['../hh__ver__short_8h.html#aa395b9afd70775101cf543627fd27b95',1,'hh_ver_short.h']]],
   ['hhparams_16',['HHParams',['../class_h_h_params.html',1,'HHParams'],['../class_h_h_params.html#a0f0ccaf07a74a2332bdc15ddf439296b',1,'HHParams::HHParams()']]],
-  ['hhscanner_17',['HHScanner',['../class_h_h_scanner.html',1,'HHScanner'],['../class_h_h_scan_report.html#a5e267708c5945d665038b0f79627b24b',1,'HHScanReport::HHScanner'],['../class_h_h_scanner.html#abb3c5c9408a65e1c30ed75c61315068f',1,'HHScanner::HHScanner()']]],
+  ['hhscanner_17',['HHScanner',['../class_h_h_scanner.html',1,'HHScanner'],['../class_h_h_scan_report.html#a5e267708c5945d665038b0f79627b24b',1,'HHScanReport::HHScanner()'],['../class_h_h_scanner.html#abb3c5c9408a65e1c30ed75c61315068f',1,'HHScanner::HHScanner()']]],
   ['hhscanreport_18',['HHScanReport',['../class_h_h_scan_report.html',1,'HHScanReport'],['../class_h_h_scan_report.html#ad77a79167ffaa20d804ceeec1e19f21c',1,'HHScanReport::HHScanReport()']]],
   ['hhunter_19',['hhunter',['../namespacehhunter.html',1,'']]],
   ['hhunter_3a_3autil_20',['util',['../namespacehhunter_1_1util.html',1,'hhunter']]],

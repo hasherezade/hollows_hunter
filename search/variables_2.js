@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['delim_0',['DELIM',['../struct_e_t_w_profile.html#a745c19aa7472409d09c6f028cba50be0',1,'ETWProfile']]]
+  ['cache_5fmode_0',['cache_mode',['../structhh__params.html#ac4cacfe91f614f8bba8a128c137c1f11',1,'hh_params']]]
 ];
