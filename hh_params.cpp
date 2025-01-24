@@ -31,6 +31,7 @@ hh_params& hh_params::operator=(const hh_params& other)
 
     // copy HHParams
     this->out_dir = other.out_dir;
+    this->cache_mode = other.cache_mode;
 
     this->suspend_suspicious = other.suspend_suspicious;
     this->kill_suspicious = other.kill_suspicious;
@@ -47,6 +48,5 @@ hh_params& hh_params::operator=(const hh_params& other)
     this->names_list = other.names_list;
     this->pids_list = other.pids_list;
     this->ignored_names_list = other.ignored_names_list;
-
     return *this;
 }
