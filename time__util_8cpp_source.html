@@ -154,7 +154,8 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">//---</span></div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>LONGLONG <a class="code hl_function" href="namespaceutil.html#a1b58bbd7118af7892e3926017211542b">util::process_start_time</a>(IN DWORD pid)</div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="namespaceutil.html#a1735e5b81407395fd70e22d944855bec">   56</a></span>LONGLONG <a class="code hl_function" href="namespaceutil.html#a1735e5b81407395fd70e22d944855bec">util::process_start_time</a>(IN DWORD pid)</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>{</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">static</span> <span class="keyword">auto</span> mod = GetModuleHandleA(<span class="stringliteral">&quot;ntdll.dll&quot;</span>);</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">if</span> (!mod) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
@@ -212,9 +213,10 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    LARGE_INTEGER createTime = info-&gt;CreateTime;</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespaceutil.html#a997df248c1c5179ac292aa9a34a8013e">util::LargeTime_to_POSIX</a>(createTime);</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>}</div>
+</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
 <div class="ttc" id="acustom__buffer_8h_html"><div class="ttname"><a href="custom__buffer_8h.html">custom_buffer.h</a></div></div>
-<div class="ttc" id="anamespaceutil_html_a1b58bbd7118af7892e3926017211542b"><div class="ttname"><a href="namespaceutil.html#a1b58bbd7118af7892e3926017211542b">util::process_start_time</a></div><div class="ttdeci">LONGLONG process_start_time(DWORD processID)</div></div>
+<div class="ttc" id="anamespaceutil_html_a1735e5b81407395fd70e22d944855bec"><div class="ttname"><a href="namespaceutil.html#a1735e5b81407395fd70e22d944855bec">util::process_start_time</a></div><div class="ttdeci">LONGLONG process_start_time(IN DWORD processID)</div><div class="ttdef"><b>Definition</b> <a href="#l00056">time_util.cpp:56</a></div></div>
 <div class="ttc" id="anamespaceutil_html_a60893a3cb25d9aff16347e26b602141b"><div class="ttname"><a href="namespaceutil.html#a60893a3cb25d9aff16347e26b602141b">util::FileTime_to_POSIX</a></div><div class="ttdeci">LONGLONG FileTime_to_POSIX(FILETIME ft)</div><div class="ttdef"><b>Definition</b> <a href="#l00044">time_util.cpp:44</a></div></div>
 <div class="ttc" id="anamespaceutil_html_a928be58496639689a6a86142ab7030eb"><div class="ttname"><a href="namespaceutil.html#a928be58496639689a6a86142ab7030eb">util::strtime</a></div><div class="ttdeci">std::wstring strtime(const time_t t)</div><div class="ttdef"><b>Definition</b> <a href="#l00015">time_util.cpp:15</a></div></div>
 <div class="ttc" id="anamespaceutil_html_a997df248c1c5179ac292aa9a34a8013e"><div class="ttname"><a href="namespaceutil.html#a997df248c1c5179ac292aa9a34a8013e">util::LargeTime_to_POSIX</a></div><div class="ttdeci">LONGLONG LargeTime_to_POSIX(LARGE_INTEGER date)</div><div class="ttdef"><b>Definition</b> <a href="#l00028">time_util.cpp:28</a></div></div>

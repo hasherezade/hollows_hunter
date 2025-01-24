@@ -261,7 +261,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    std::wstring pName(processName);</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    std::transform(pName.begin(), pName.end(), pName.begin(), tolower);</div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    std::size_t found = pName.find_last_of(L<span class="stringliteral">&quot;/\\&quot;</span>);</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordflow">if</span> (found == (-1) || found &gt;= pName.length()) {</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordflow">if</span> (found == std::wstring::npos || found &gt;= pName.length()) {</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <span class="keywordflow">return</span> pName;</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    }</div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordflow">return</span> pName.substr(found + 1);</div>

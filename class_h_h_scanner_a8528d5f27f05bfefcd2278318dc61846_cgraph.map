@@ -18,12 +18,16 @@
 <area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="662,122,729,122,729,128,662,128"/>
 <area shape="rect" id="Node000009" href="$term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="788,165,863,191"/>
 <area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="688,178,773,176,773,182,688,183"/>
-<area shape="rect" id="Node000010" href="$term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="955,165,1076,191"/>
-<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="863,176,939,176,939,181,863,181"/>
+<area shape="rect" id="Node000010" href="$term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="963,165,1084,191"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="863,176,947,176,947,181,863,181"/>
 <area shape="rect" id="Node000012" href="$namespaceutil.html#a54603ddf9200ae4d8947f3d7df864173" title=" " alt="" coords="749,215,902,240"/>
 <area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="697,238,733,234,734,240,697,243"/>
 <area shape="rect" id="Node000013" href="$namespaceutil.html#a4c194a8378c708f4dec617fde4fbd22f" title=" " alt="" coords="756,264,895,290"/>
 <area shape="poly" id="edge12_Node000011_Node000013" title=" " alt="" coords="697,260,741,265,740,270,697,266"/>
-<area shape="rect" id="Node000014" href="$namespaceutil.html#a1b58bbd7118af7892e3926017211542b" title=" " alt="" coords="748,313,903,339"/>
+<area shape="rect" id="Node000014" href="$namespaceutil.html#a1735e5b81407395fd70e22d944855bec" title=" " alt="" coords="748,313,903,339"/>
 <area shape="poly" id="edge13_Node000011_Node000014" title=" " alt="" coords="632,262,745,300,765,306,763,311,744,305,631,267"/>
+<area shape="rect" id="Node000015" href="$structutil_1_1_auto_buffer.html#ac5f843dd06dac7de4297370f219d10de" title=" " alt="" coords="955,284,1093,310"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="903,312,939,307,940,312,904,317"/>
+<area shape="rect" id="Node000016" href="$namespaceutil.html#a997df248c1c5179ac292aa9a34a8013e" title=" " alt="" coords="962,334,1086,374"/>
+<area shape="poly" id="edge15_Node000014_Node000016" title=" " alt="" coords="904,335,947,341,946,346,903,340"/>
 </map>
