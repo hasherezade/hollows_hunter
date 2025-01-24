@@ -170,7 +170,7 @@ inline std::wstring getProcessName(const DWORD pid)
     std::wstring pName(processName);
     std::transform(pName.begin(), pName.end(), pName.begin(), tolower);
     std::size_t found = pName.find_last_of(L"/\\");
-    if (found == (-1) || found >= pName.length()) {
+    if (found == std::wstring::npos || found >= pName.length()) {
         return pName;
     }
     return pName.substr(found + 1);
