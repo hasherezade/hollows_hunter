@@ -13,5 +13,5 @@ namespace util {
 
     LONGLONG FileTime_to_POSIX(FILETIME ft);
 
-    LONGLONG process_start_time(DWORD processID);
+    LONGLONG process_start_time(IN DWORD processID);
 };

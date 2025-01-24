@@ -6,12 +6,15 @@
 
 bool suspend_process(DWORD processId)
 {
+    HMODULE hNtdll = GetModuleHandleA("ntdll");
+    if (!hNtdll) return false;
+
     HANDLE processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processId);
 
     typedef LONG(NTAPI *NtSuspendProcess)(IN HANDLE ProcessHandle);
 
-    NtSuspendProcess pfnNtSuspendProcess = (NtSuspendProcess)GetProcAddress(
-        GetModuleHandleA("ntdll"), "NtSuspendProcess");
+    auto pfnNtSuspendProcess = (NtSuspendProcess)GetProcAddress(
+        hNtdll, "NtSuspendProcess");
     if (!pfnNtSuspendProcess) {
         return false;
     }
@@ -25,12 +28,15 @@ bool suspend_process(DWORD processId)
 
 bool resume_process(DWORD processId)
 {
+    HMODULE hNtdll = GetModuleHandleA("ntdll");
+    if (!hNtdll) return false;
+
     HANDLE processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processId);
 
     typedef LONG(NTAPI *NtResumeProcess)(IN HANDLE ProcessHandle);
 
-    NtResumeProcess pfnNtResumeProcess = (NtResumeProcess)GetProcAddress(
-        GetModuleHandleA("ntdll"), "NtResumeProcess");
+    auto pfnNtResumeProcess = (NtResumeProcess)GetProcAddress(
+        hNtdll, "NtResumeProcess");
     if (!pfnNtResumeProcess) {
         return false;
     }
@@ -45,7 +51,7 @@ bool resume_process(DWORD processId)
 bool is_process_associated(DWORD remote_pid)
 {
     DWORD my_pid = GetCurrentProcessId();
-    const bool is_me = remote_pid == my_pid;
+    const bool is_me = (remote_pid == my_pid);
     if (is_me) {
         return true;
     }
@@ -69,22 +75,22 @@ bool is_process_associated(DWORD remote_pid)
 
 DWORD GetParentProcessID(DWORD dwPID)
 {
-    NTSTATUS ntStatus;
     DWORD dwParentPID = INVALID_PID;
-    HANDLE hProcess;
-    PROCESS_BASIC_INFORMATION pbi;
-    ULONG ulRetLen;
 
-    //  create entry point for 'NtQueryInformationProcess()'
-    typedef NTSTATUS(__stdcall *FPTR_NtQueryInformationProcess) (HANDLE, PROCESSINFOCLASS, PVOID, ULONG, PULONG);
+    PROCESS_BASIC_INFORMATION pbi = { 0 };
+    ULONG ulRetLen = 0;
 
-    FPTR_NtQueryInformationProcess NtQueryInformationProcess
-        = (FPTR_NtQueryInformationProcess)GetProcAddress(GetModuleHandleA("ntdll"), "NtQueryInformationProcess");
+    HMODULE hNtdll = GetModuleHandleA("ntdll");
+    if (!hNtdll) return INVALID_PID;
+
+    typedef NTSTATUS(__stdcall* FPTR_NtQueryInformationProcess) (HANDLE, PROCESSINFOCLASS, PVOID, ULONG, PULONG);
+    auto NtQueryInformationProcess
+        = (FPTR_NtQueryInformationProcess)GetProcAddress(hNtdll, "NtQueryInformationProcess");
     if (!NtQueryInformationProcess) {
         return INVALID_PID;
     }
     //  get process handle
-    hProcess = OpenProcess(PROCESS_QUERY_INFORMATION,
+    HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION,
         FALSE,
         dwPID
     );
@@ -93,7 +99,7 @@ DWORD GetParentProcessID(DWORD dwPID)
         return INVALID_PID;
 
     //  gather information
-    ntStatus = NtQueryInformationProcess(hProcess,
+    NTSTATUS ntStatus = NtQueryInformationProcess(hProcess,
         ProcessBasicInformation,
         (void*)&pbi,
         sizeof(PROCESS_BASIC_INFORMATION),

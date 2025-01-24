@@ -273,14 +273,14 @@ t_single_scan_status HHScanner::shouldScanProcess(const hh_params &hh_args, cons
     bool found = false;
     const bool check_time = (hh_args.ptimes != TIME_UNDEFINED) ? true : false;
     // filter by the time
-    time_t time_diff = 0;
+    
     if (check_time) { // if the parameter was set
-        const LONGLONG process_time = util::process_start_time(pid);
+        const time_t process_time = static_cast<time_t>(util::process_start_time(pid));
         if (process_time == INVALID_TIME) return SSCAN_ERROR0; //skip process if cannot retrieve the time
 
         // if HH was started after the process
         if (hh_initTime > process_time) {
-            time_diff = hh_initTime - process_time;
+            time_t time_diff = hh_initTime - process_time;
             if (time_diff > hh_args.ptimes) return SSCAN_NOT_MATCH; // skip process created before the supplied time
         }
     }

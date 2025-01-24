@@ -61,12 +61,12 @@ size_t hhunter::util::str_hist_diffrence(const char s1[], const char s2[])
     const size_t len1 = strlen(s1);
     const size_t len2 = strlen(s2);
 
-    for (size_t i = 0; i < strlen(s1); i++) {
+    for (size_t i = 0; i < len1; i++) {
         char c = tolower(s1[i]);
         hist1[c]++;
     }
 
-    for (size_t i = 0; i < strlen(s2); i++) {
+    for (size_t i = 0; i < len2; i++) {
         char c = tolower(s2[i]);
         hist2[c]++;
     }
