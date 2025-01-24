@@ -54,6 +54,6 @@ public:
 protected:
     static const char DELIM;
 
-    bool fillSettings(std::string line);
+    bool fillSettings(const std::string& line);
     void stripComments(std::string& str);
 };

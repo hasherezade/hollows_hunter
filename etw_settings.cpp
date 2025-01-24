@@ -98,7 +98,7 @@ void ETWProfile::stripComments(std::string& str)
     }
 }
 
-bool ETWProfile::fillSettings(std::string line)
+bool ETWProfile::fillSettings(const std::string &line)
 {
     using namespace util;
 
