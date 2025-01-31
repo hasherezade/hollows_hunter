@@ -56,7 +56,7 @@ LONGLONG util::FileTime_to_POSIX(FILETIME ft)
 LONGLONG util::process_start_time(IN DWORD pid)
 {
     static auto mod = GetModuleHandleA("ntdll.dll");
-    if (!mod) return false;
+    if (!mod) return INVALID_TIME;
 
     static auto pNtQuerySystemInformation = reinterpret_cast<decltype(&NtQuerySystemInformation)>(GetProcAddress(mod, "NtQuerySystemInformation"));
     if (!pNtQuerySystemInformation)  return false;
@@ -69,7 +69,7 @@ LONGLONG util::process_start_time(IN DWORD pid)
         status = pNtQuerySystemInformation(SystemProcessInformation, bBuf.buf, bBuf.buf_size, &ret_len);
         if (status == STATUS_INFO_LENGTH_MISMATCH) {
             if (!bBuf.alloc(ret_len)) {
-                return false;
+                return INVALID_TIME;
             }
             continue; // try again
         }
@@ -77,7 +77,7 @@ LONGLONG util::process_start_time(IN DWORD pid)
     };
 
     if (status != STATUS_SUCCESS) {
-        return false;
+        return INVALID_TIME;
     }
 
     bool found = false;
