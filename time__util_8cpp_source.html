@@ -158,7 +158,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="namespaceutil.html#a1735e5b81407395fd70e22d944855bec">   56</a></span>LONGLONG <a class="code hl_function" href="namespaceutil.html#a1735e5b81407395fd70e22d944855bec">util::process_start_time</a>(IN DWORD pid)</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>{</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">static</span> <span class="keyword">auto</span> mod = GetModuleHandleA(<span class="stringliteral">&quot;ntdll.dll&quot;</span>);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">if</span> (!mod) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">if</span> (!mod) <span class="keywordflow">return</span> <a class="code hl_define" href="time__util_8h.html#a0dd0def9d0d1f83eab3aa811bedbc3e4">INVALID_TIME</a>;</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">static</span> <span class="keyword">auto</span> pNtQuerySystemInformation = <span class="keyword">reinterpret_cast&lt;</span>decltype(&amp;NtQuerySystemInformation)<span class="keyword">&gt;</span>(GetProcAddress(mod, <span class="stringliteral">&quot;NtQuerySystemInformation&quot;</span>));</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">if</span> (!pNtQuerySystemInformation)  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
@@ -171,7 +171,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        status = pNtQuerySystemInformation(SystemProcessInformation, bBuf.<a class="code hl_variable" href="structutil_1_1_auto_buffer.html#ae91405161ad997bb473fcb5a6a4d0a16">buf</a>, bBuf.<a class="code hl_variable" href="structutil_1_1_auto_buffer.html#a35dc14f9ab1bc6b032a2cddec5246d4f">buf_size</a>, &amp;ret_len);</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordflow">if</span> (status == STATUS_INFO_LENGTH_MISMATCH) {</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="keywordflow">if</span> (!bBuf.<a class="code hl_function" href="structutil_1_1_auto_buffer.html#ac5f843dd06dac7de4297370f219d10de">alloc</a>(ret_len)) {</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                <span class="keywordflow">return</span> <a class="code hl_define" href="time__util_8h.html#a0dd0def9d0d1f83eab3aa811bedbc3e4">INVALID_TIME</a>;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            }</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <span class="keywordflow">continue</span>; <span class="comment">// try again</span></div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        }</div>
@@ -179,7 +179,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    };</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">if</span> (status != STATUS_SUCCESS) {</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordflow">return</span> <a class="code hl_define" href="time__util_8h.html#a0dd0def9d0d1f83eab3aa811bedbc3e4">INVALID_TIME</a>;</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    }</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordtype">bool</span> found = <span class="keyword">false</span>;</div>
