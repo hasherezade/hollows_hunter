@@ -13,24 +13,29 @@
 
 namespace util {
 
+    std::string WHITESPACES = " \t\n\v\f\r";
+
     static inline void ltrim(std::string& s)
     {
-        s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {
-            return !std::isspace(ch);
-            }));
+        size_t startpos = s.find_first_not_of(WHITESPACES);
+        if (startpos != std::string::npos) {
+            s = s.substr(startpos);
+        }
     }
 
     static inline void rtrim(std::string& s)
     {
-        s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch) {
-            return !std::isspace(ch);
-            }).base(), s.end());
+        size_t endpos = s.find_last_not_of(WHITESPACES);
+        if (endpos != std::string::npos) {
+            s = s.substr(0, endpos + 1);
+        }
     }
 
-    void trim(std::string& s)
+    std::string trim(std::string& s)
     {
         ltrim(s);
         rtrim(s);
+        return s;
     }
 
     bool iequals(const std::string& a, const std::string& b)
