@@ -12,6 +12,12 @@ endif()
 
 # static linking for GNU compilers
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+
+	enable_language(RC)
+	
+	set(CMAKE_RC_COMPILE_OBJECT
+		"<CMAKE_RC_COMPILER> <FLAGS> -O coff <DEFINES> -i <SOURCE> -o <OBJECT>")
+		
 	add_compile_definitions(
 		_WIN32_WINNT=1536 # 0x600 aka Windows Vista required
 	)
