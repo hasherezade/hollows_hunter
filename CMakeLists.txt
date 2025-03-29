@@ -90,6 +90,7 @@ set (rsrc
 	resources.h
 	hh_res.rc
 	hh_ver_short.h
+	hollows_hunter.manifest
 )
 
 # libs
