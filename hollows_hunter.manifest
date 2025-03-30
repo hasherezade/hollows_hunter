@@ -14,7 +14,6 @@
 	<file name="USERENV.dll" loadFrom="%SystemRoot%\System32\"></file>
 	<file name="VERSION.dll" loadFrom="%SystemRoot%\System32\"></file>
 	<file name="oleaut32.dll" loadFrom="%SystemRoot%\System32\"></file>
-	<file name="oleaut32.dll" loadFrom="%SystemRoot%\System32\"></file>
 	<file name="bcrypt.dll" loadFrom="%SystemRoot%\System32\"></file>
 	<file name="bcryptprimitives.dll" loadFrom="%SystemRoot%\System32\"></file>
 	<trustInfo

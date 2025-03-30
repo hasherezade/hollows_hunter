@@ -117,6 +117,11 @@ target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} ${M_PARAMKIT} "psapi.lib" "
 add_dependencies( ${PROJECT_NAME} ${M_PESIEVE} ${M_PARAMKIT} )
 target_compile_definitions(${PROJECT_NAME} PUBLIC -DUNICODE)
 target_compile_definitions(${M_PARAMKIT} PUBLIC -DUNICODE)
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+	target_link_options( ${PROJECT_NAME} PRIVATE "/MANIFEST:NO")
+endif()
+
 #install
 INSTALL( TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX} COMPONENT ${PROJECT_NAME} )
 
