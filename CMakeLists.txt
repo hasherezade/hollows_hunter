@@ -6,8 +6,13 @@ option (PECONV_LIB_INSTALL OFF)
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
 option( USE_ETW "Use ETW" ON )
 
+
 if(USE_ETW)
-    add_compile_definitions(USE_ETW)
+	add_compile_definitions(USE_ETW)
+
+	set(CMAKE_CXX_STANDARD 17)
+	set(CMAKE_CXX_STANDARD_REQUIRED ON)
+	set(CMAKE_CXX_EXTENSIONS OFF)
 endif()
 
 # static linking for GNU compilers
