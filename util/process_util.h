@@ -48,7 +48,7 @@ namespace process_util {
             hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, processID);
             if (!hProcess) return false;
         }
-        DWORD exeNameSize = processNameSize;
+        DWORD exeNameSize = static_cast<DWORD>(processNameSize);
         BOOL isOK = QueryFullProcessImageNameW(hProcess, 0, szProcessName, &exeNameSize);
         CloseHandle(hProcess);
 
