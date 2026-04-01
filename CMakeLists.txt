@@ -101,22 +101,28 @@ set (rsrc
 )
 
 # libs
-if (NOT PESIEVE_AS_DLL)
-	set ( PESIEVE_AS_STATIC_LIB ON CACHE BOOL "Enable building PE-sieve as a static library" FORCE)
+set(HH_PESIEVE_LINK_MODE "STATIC" CACHE STRING "How HollowsHunter should build and link PE-sieve")
+set_property(CACHE HH_PESIEVE_LINK_MODE PROPERTY STRINGS STATIC DLL)
+
+if(NOT HH_PESIEVE_LINK_MODE STREQUAL "STATIC"
+   AND NOT HH_PESIEVE_LINK_MODE STREQUAL "DLL")
+	message(FATAL_ERROR
+		"Invalid HH_PESIEVE_LINK_MODE '${HH_PESIEVE_LINK_MODE}'. Choose: STATIC DLL"
+	)
 endif()
 
-if (NOT PESIEVE_AS_STATIC_LIB)
-	set ( PESIEVE_AS_DLL ON CACHE BOOL "Enable building PE-sieve as a DLL" FORCE)
+if(HH_PESIEVE_LINK_MODE STREQUAL "STATIC")
+	set(PESIEVE_BUILD_MODE "STATIC" CACHE STRING "Build mode for PE-sieve" FORCE)
+elseif(HH_PESIEVE_LINK_MODE STREQUAL "DLL")
+	set(PESIEVE_BUILD_MODE "DLL" CACHE STRING "Build mode for PE-sieve" FORCE)
 endif()
 
 add_subdirectory ( ${PESIEVE_DIR} )
 set ( PESIEVE_LIB $<TARGET_FILE:pe-sieve> CACHE PATH "PE-sieve library path" )
-
 add_subdirectory ( ${PARAMKIT_DIR} )
 set ( PARAMKIT_LIB $<TARGET_FILE:paramkit> CACHE PATH "ParamKit library path" )
 
 cmake_policy(SET CMP0015 NEW)
-LINK_DIRECTORIES ( ${PESIEVE_LIB} )
 add_executable ( ${PROJECT_NAME} ${hdrs} ${srcs} ${rsrc} main.cpp )
 target_link_libraries ( ${PROJECT_NAME} ${M_PESIEVE} ${M_PARAMKIT} "psapi.lib" "ntdll.lib")
 
