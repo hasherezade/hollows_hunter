@@ -3,9 +3,11 @@ project (hollows_hunter)
 
 option(HH_BUILD_TESTING "Enable testing for HollowsHunter" ON)
 option (PECONV_LIB_INSTALL OFF)
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
 option( USE_ETW "Use ETW" ON )
 
+if (MSVC)
+	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+endif()
 
 if(USE_ETW)
 	add_compile_definitions(USE_ETW)

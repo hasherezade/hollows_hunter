@@ -322,7 +322,7 @@ t_single_scan_status HHScanner::scanNextProcess(DWORD pid, WCHAR* exe_file, HHSc
     pesieve::t_params &pesieve_args = this->hh_args.pesieve_args;
     pesieve_args.pid = pid;
 
-    pesieve::t_report report = PESieve_scan(pesieve_args);
+    pesieve::t_report report = PESieve_scan(&pesieve_args);
     my_report.appendReport(report, exe_file);
 
     printSingleReport(report);
