@@ -431,7 +431,7 @@ $(function() {
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    pesieve::t_params &amp;pesieve_args = this-&gt;<a class="code hl_variable" href="class_h_h_scanner.html#aa9841ff29a663251372cf65e2db3cbef">hh_args</a>.pesieve_args;</div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    pesieve_args.pid = pid;</div>
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span> </div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    pesieve::t_report report = PESieve_scan(pesieve_args);</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    pesieve::t_report report = PESieve_scan(&amp;pesieve_args);</div>
 <div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    my_report.<a class="code hl_function" href="class_h_h_scan_report.html#a003c9bdcd02586fe059ce5cbf9200c94">appendReport</a>(report, exe_file);</div>
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    <a class="code hl_function" href="class_h_h_scanner.html#af1a026170edfe507268e6e21c5052bbb">printSingleReport</a>(report);</div>
