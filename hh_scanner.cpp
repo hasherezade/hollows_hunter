@@ -243,9 +243,9 @@ void HHScanner::printSingleReport(pesieve::t_report& report)
 #ifndef _WIN64
     if (report.is_64bit) {
         const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
-        WORD old_color = set_color(MAKE_COLOR(SILVER, DARK_MAGENTA));
+        WORD old_color = hh::util::set_color(MAKE_COLOR(SILVER, DARK_MAGENTA));
         std::cout << "[!] Partial scan: " << std::dec << report.pid << " : " << (report.is_64bit ? 64 : 32) << "b";
-        set_color(old_color);
+        hh::util::set_color(old_color);
         std::cout << std::endl;
     }
 #endif
