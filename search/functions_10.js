@@ -4,7 +4,7 @@ var searchData=
   ['scan_1',['scan',['../class_h_h_scanner.html#ab4515f951cf9a9c2f1761493e6f9b9eb',1,'HHScanner']]],
   ['scannextprocess_2',['scanNextProcess',['../class_h_h_scanner.html#a4881091d77448e0812ab5581f01893c7',1,'HHScanner']]],
   ['scanprocesses_3',['scanProcesses',['../class_h_h_scanner.html#a8528d5f27f05bfefcd2278318dc61846',1,'HHScanner']]],
-  ['set_5fcolor_4',['set_color',['../term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b',1,'set_color(WORD color):&#160;term_util.cpp'],['../term__util_8h.html#a72fb5a7886c4d8ed5e351d64ad5c536b',1,'set_color(WORD color):&#160;term_util.cpp']]],
+  ['set_5fcolor_4',['set_color',['../namespacehh_1_1util.html#a670dd5afca8ecdd2eb1caaefc1065282',1,'hh::util']]],
   ['set_5fdebug_5fprivilege_5',['set_debug_privilege',['../namespacehhunter_1_1util.html#a71c3879cac544c11cb2391e6c030c347',1,'hhunter::util']]],
   ['set_5foutput_5fdir_6',['set_output_dir',['../namespacefiles__util.html#abab65a3cbe43de11dd5d25ed5e4d47e5',1,'files_util']]],
   ['set_5fprivilege_7',['set_privilege',['../namespacehhunter_1_1util.html#a0a7f83c9acd615ee401364757a03341e',1,'hhunter::util']]],

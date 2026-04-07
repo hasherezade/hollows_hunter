@@ -74,7 +74,6 @@ $(function() {
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">term_util.cpp File Reference</div></div>
 </div><!--header-->
@@ -84,107 +83,14 @@ $(function() {
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;mutex&gt;</code><br />
+<code>#include &lt;paramkit.h&gt;</code><br />
 </div>
 <p><a href="term__util_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:aff4c0279a81f579add3c3b1e9f208ee9" id="r_aff4c0279a81f579add3c3b1e9f208ee9"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aff4c0279a81f579add3c3b1e9f208ee9">get_current_color</a> (int descriptor, WORD &amp;color)</td></tr>
-<tr class="memitem:a72fb5a7886c4d8ed5e351d64ad5c536b" id="r_a72fb5a7886c4d8ed5e351d64ad5c536b"><td class="memItemLeft">WORD&#160;</td><td class="memItemRight"><a class="el" href="#a72fb5a7886c4d8ed5e351d64ad5c536b">set_color</a> (WORD color)</td></tr>
-<tr class="memitem:a0547053c3ed0d110bcb9477d83a32095" id="r_a0547053c3ed0d110bcb9477d83a32095"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0547053c3ed0d110bcb9477d83a32095">print_in_color</a> (WORD color, const std::string &amp;text)</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a85f6c833db9db129b6d5ed3959ea6f85" id="r_a85f6c833db9db129b6d5ed3959ea6f85"><td class="memItemLeft">std::mutex&#160;</td><td class="memItemRight"><a class="el" href="#a85f6c833db9db129b6d5ed3959ea6f85">g_stdOutMutex</a></td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="aff4c0279a81f579add3c3b1e9f208ee9" name="aff4c0279a81f579add3c3b1e9f208ee9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff4c0279a81f579add3c3b1e9f208ee9">&#9670;&#160;</a></span>get_current_color()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool get_current_color </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>descriptor</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">WORD &amp;</td>          <td class="paramname"><span class="paramname"><em>color</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="term__util_8cpp_source.html#l00011">11</a> of file <a class="el" href="term__util_8cpp_source.html">term_util.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a0547053c3ed0d110bcb9477d83a32095" name="a0547053c3ed0d110bcb9477d83a32095"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0547053c3ed0d110bcb9477d83a32095">&#9670;&#160;</a></span>print_in_color()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_in_color </td>
-          <td>(</td>
-          <td class="paramtype">WORD</td>          <td class="paramname"><span class="paramname"><em>color</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>text</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="term__util_8cpp_source.html#l00033">33</a> of file <a class="el" href="term__util_8cpp_source.html">term_util.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="term__util_8cpp_a0547053c3ed0d110bcb9477d83a32095_cgraph.png" border="0" usemap="#aterm__util_8cpp_a0547053c3ed0d110bcb9477d83a32095_cgraph" loading="lazy" alt=""/></div>
-<map name="aterm__util_8cpp_a0547053c3ed0d110bcb9477d83a32095_cgraph" id="aterm__util_8cpp_a0547053c3ed0d110bcb9477d83a32095_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,104,31"/>
-<area shape="rect" href="term__util_8cpp.html#a72fb5a7886c4d8ed5e351d64ad5c536b" title=" " alt="" coords="152,5,226,31"/>
-<area shape="poly" title=" " alt="" coords="104,16,136,16,136,21,104,21"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="274,5,395,31"/>
-<area shape="poly" title=" " alt="" coords="227,16,258,16,258,21,227,21"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a72fb5a7886c4d8ed5e351d64ad5c536b" name="a72fb5a7886c4d8ed5e351d64ad5c536b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72fb5a7886c4d8ed5e351d64ad5c536b">&#9670;&#160;</a></span>set_color()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">WORD set_color </td>
-          <td>(</td>
-          <td class="paramtype">WORD</td>          <td class="paramname"><span class="paramname"><em>color</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="term__util_8cpp_source.html#l00020">20</a> of file <a class="el" href="term__util_8cpp_source.html">term_util.cpp</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="term__util_8cpp_a72fb5a7886c4d8ed5e351d64ad5c536b_cgraph.png" border="0" usemap="#aterm__util_8cpp_a72fb5a7886c4d8ed5e351d64ad5c536b_cgraph" loading="lazy" alt=""/></div>
-<map name="aterm__util_8cpp_a72fb5a7886c4d8ed5e351d64ad5c536b_cgraph" id="aterm__util_8cpp_a72fb5a7886c4d8ed5e351d64ad5c536b_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,80,31"/>
-<area shape="rect" href="term__util_8cpp.html#aff4c0279a81f579add3c3b1e9f208ee9" title=" " alt="" coords="128,5,249,31"/>
-<area shape="poly" title=" " alt="" coords="80,16,112,16,112,21,80,21"/>
-</map>
-</div>
-
-</div>
-</div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="a85f6c833db9db129b6d5ed3959ea6f85" name="a85f6c833db9db129b6d5ed3959ea6f85"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a85f6c833db9db129b6d5ed3959ea6f85">&#9670;&#160;</a></span>g_stdOutMutex</h2>
@@ -198,7 +104,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="term__util_8cpp_source.html#l00009">9</a> of file <a class="el" href="term__util_8cpp_source.html">term_util.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="term__util_8cpp_source.html#l00010">10</a> of file <a class="el" href="term__util_8cpp_source.html">term_util.cpp</a>.</p>
 
 </div>
 </div>

@@ -39,7 +39,7 @@ var searchData=
   ['pids_5flist_36',['pids_list',['../structhh__params.html#a179cffc6577cad21f16e07ca3ae14a67',1,'hh_params']]],
   ['pidtoname_37',['pidToName',['../class_h_h_scan_report.html#a08715ebd47278844ca763cfa03951f2b',1,'HHScanReport']]],
   ['pidtoreport_38',['pidToReport',['../class_h_h_scan_report.html#a74077d56483e55918ec3420b528a3994',1,'HHScanReport']]],
-  ['print_5fin_5fcolor_39',['print_in_color',['../term__util_8cpp.html#a0547053c3ed0d110bcb9477d83a32095',1,'print_in_color(WORD color, const std::string &amp;text):&#160;term_util.cpp'],['../term__util_8h.html#a0547053c3ed0d110bcb9477d83a32095',1,'print_in_color(WORD color, const std::string &amp;text):&#160;term_util.cpp']]],
+  ['print_5fin_5fcolor_39',['print_in_color',['../namespacehh_1_1util.html#a18305ccfe6bb354c4d0445c2df9519c1',1,'hh::util']]],
   ['print_5fscantime_40',['print_scantime',['../hh__report_8cpp.html#aca43a9a1ca6d4871d919d565632f5662',1,'hh_report.cpp']]],
   ['print_5fversion_41',['print_version',['../params_8h.html#aae813382de1d726483950947bc2da569',1,'params.h']]],
   ['printbanner_42',['printBanner',['../class_h_h_params.html#ad3c3e5a7250906720808df84f8c9c477',1,'HHParams']]],
