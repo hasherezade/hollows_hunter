@@ -5,36 +5,34 @@
 #include <iostream>
 #include <string>
 #include <mutex>
+#include <paramkit.h>
 
 std::mutex g_stdOutMutex;
 
-bool get_current_color(int descriptor, WORD &color)
+bool hh::util::get_current_color(int descriptor, WORD &color)
 {
-    CONSOLE_SCREEN_BUFFER_INFO info;
-    if (!GetConsoleScreenBufferInfo(GetStdHandle(descriptor), &info))
+    HANDLE hConsole = GetStdHandle(descriptor);
+    if (hConsole == INVALID_HANDLE_VALUE || hConsole == NULL) {
         return false;
-    color = info.wAttributes;
-    return true;
+    }
+    return paramkit::get_console_color(hConsole, color);
 }
 
-WORD set_color(WORD color)
+WORD hh::util::set_color(WORD color)
 {
     WORD old_color = 7;
-    get_current_color(STD_OUTPUT_HANDLE, old_color);
-
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    FlushConsoleInputBuffer(hConsole);
-    SetConsoleTextAttribute(hConsole, color);
-    FlushConsoleInputBuffer(hConsole);
-
+    if (hConsole == INVALID_HANDLE_VALUE || hConsole == NULL) {
+        return old_color;
+    }
+    if (paramkit::get_console_color(hConsole, old_color)) {
+        SetConsoleTextAttribute(hConsole, color);
+    }
     return old_color;
 }
 
-void print_in_color(WORD color, const std::string &text)
+void hh::util::print_in_color(WORD color, const std::string &text)
 {
     const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
-    WORD old_color = set_color(color);
-    std::cout << text;
-    std::cout.flush();
-    set_color(old_color);
+    paramkit::print_in_color(color, text);
 }

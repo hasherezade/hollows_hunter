@@ -232,11 +232,11 @@ void HHScanner::printSingleReport(pesieve::t_report& report)
 
     if (report.errors == pesieve::ERROR_SCAN_FAILURE) {
         const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
-        WORD old_color = set_color(MAKE_COLOR(SILVER, DARK_RED));
+        WORD old_color = hh::util::set_color(MAKE_COLOR(SILVER, DARK_RED));
         if (report.errors == pesieve::ERROR_SCAN_FAILURE) {
             std::cout << "[!] Could not access: " << std::dec << report.pid;
         }
-        set_color(old_color);
+        hh::util::set_color(old_color);
         std::cout << std::endl;
         return;
     }
@@ -258,12 +258,12 @@ void HHScanner::printSingleReport(pesieve::t_report& report)
             color = MAKE_COLOR(color, DARK_BLUE);
         }
         const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
-        WORD old_color = set_color(color);
+        WORD old_color = hh::util::set_color(color);
         std::cout << ">> Detected: " << std::dec << report.pid;
         if (report.is_managed) {
             std::cout << " [.NET]";
         }
-        set_color(old_color);
+        hh::util::set_color(old_color);
         std::cout << std::endl;
     }
 }

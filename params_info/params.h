@@ -67,7 +67,7 @@ std::string version_to_str(DWORD version)
 
 void print_version(const std::string &version , WORD info_color = HILIGHTED_COLOR)
 {
-    WORD old_color = set_color(info_color);
+    WORD old_color = hh::util::set_color(info_color);
     std::cout << "HollowsHunter v." << version;
     DWORD pesieve_ver = PESieve_version;
 #ifdef _WIN64
@@ -77,7 +77,7 @@ void print_version(const std::string &version , WORD info_color = HILIGHTED_COLO
 #endif
     std::cout << "Built on: " << __DATE__ << "\n\n";
     std::cout << "using: PE-sieve v." << version_to_str(pesieve_ver);
-    set_color(old_color);
+    hh::util::set_color(old_color);
     std::cout << std::endl;
 }
 
@@ -406,15 +406,15 @@ public:
         WORD logo_color = DARK_MAGENTA;
 
         WORD curr_color = 0;
-        if (get_current_color(STD_OUTPUT_HANDLE, curr_color)) {
+        if (hh::util::get_current_color(STD_OUTPUT_HANDLE, curr_color)) {
             WORD current_bg = GET_BG_COLOR(curr_color);
             if (current_bg == logo_color) {
                 logo_color = MAKE_COLOR(CYAN, current_bg);
             }
         }
-        WORD old_color = set_color(logo_color);
+        WORD old_color = hh::util::set_color(logo_color);
         std::cout << "\n" << logo << std::endl;
-        set_color(old_color);
+        hh::util::set_color(old_color);
         print_version(this->versionStr);
         std::cout << std::endl;
         std::cout << "Scans running processes. Recognizes and dumps a variety of in-memory implants:\nreplaced/implanted PEs, shellcodes, hooks, patches, etc.\n";

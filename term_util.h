@@ -29,9 +29,16 @@ extern std::mutex g_stdOutMutex;
 #define YELLOW_ON_BLACK MAKE_COLOR(YELLOW, BLACK)
 #define RED_ON_BLACK MAKE_COLOR(RED, BLACK)
 
-bool get_current_color(int descriptor, WORD& color);
 
-WORD set_color(WORD color);
+namespace hh {
+	namespace util {
+		bool get_current_color(int descriptor, WORD& color);
 
-// sets a color and returns the previous color:
-void print_in_color(WORD color, const std::string &text);
+		WORD set_color(WORD color);
+
+		// sets a color and returns the previous color:
+		void print_in_color(WORD color, const std::string& text);
+
+	}; // util
+}; //hh
+

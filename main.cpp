@@ -34,7 +34,7 @@ t_hh_params g_hh_args;
 
 void compatibility_alert()
 {
-    print_in_color(WARNING_COLOR, "[!] Scanner mismatch! For a 64-bit OS, use the 64-bit version of the scanner!\n");
+    hh::util::print_in_color(WARNING_COLOR, "[!] Scanner mismatch! For a 64-bit OS, use the 64-bit version of the scanner!\n");
 }
 
 t_pesieve_res deploy_scan()
@@ -42,7 +42,7 @@ t_pesieve_res deploy_scan()
     t_pesieve_res scan_res = PESIEVE_NOT_DETECTED;
     hhunter::util::set_debug_privilege();
     if (g_hh_args.pesieve_args.data >= pesieve::PE_DATA_SCAN_INACCESSIBLE && g_hh_args.pesieve_args.make_reflection == false) {
-        print_in_color(RED, "[WARNING] Scanning of inaccessible pages is enabled only in the reflection mode!\n");
+        hh::util::print_in_color(RED, "[WARNING] Scanning of inaccessible pages is enabled only in the reflection mode!\n");
     }
     if (g_hh_args.etw_scan)
     {
@@ -98,14 +98,14 @@ int main(int argc, char *argv[])
     if (g_hh_args.pesieve_args.data == pesieve::PE_DATA_SCAN_INACCESSIBLE || g_hh_args.pesieve_args.data == pesieve::PE_DATA_SCAN_INACCESSIBLE_ONLY) {
         if (!g_hh_args.pesieve_args.make_reflection) {
             g_hh_args.pesieve_args.make_reflection = true;
-            print_in_color(RED, "[WARNING] Scanning of inaccessible pages requested: auto-enabled reflection mode!\n");
+            hh::util::print_in_color(RED, "[WARNING] Scanning of inaccessible pages requested: auto-enabled reflection mode!\n");
         }
     }
 
     print_version(HH_VERSION_STR);
     std::cout << std::endl;
     if (argc < 2) {
-        print_in_color(WHITE, "Default scan deployed.");
+        hh::util::print_in_color(WHITE, "Default scan deployed.");
         std::cout << std::endl;
     }
     const t_pesieve_res  res = deploy_scan();
