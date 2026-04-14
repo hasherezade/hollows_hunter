@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
-	<assemblyIdentity name="HollowsHunter" type="win32" version="0.4.1.0" processorArchitecture="x86"></assemblyIdentity>
+	<assemblyIdentity name="HollowsHunter" type="win32" version="0.4.1.2" processorArchitecture="x86"></assemblyIdentity>
 	<description>HollowsHunter process forensic scanner.</description>
 	<dependency>
 		<dependentAssembly>
