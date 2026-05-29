@@ -85,6 +85,8 @@ t_pesieve_res deploy_scan()
 
 int main(int argc, char *argv[])
 {
+    SetDefaultDllDirectories(LOAD_LIBRARY_SEARCH_SYSTEM32 | LOAD_LIBRARY_SEARCH_USER_DIRS);
+
     g_hh_args.init();
 
     bool info_req = false;

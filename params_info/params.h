@@ -30,6 +30,7 @@ using namespace pesieve;
 #define PARAM_REFLECTION "refl"
 #define PARAM_CACHE "cache"
 #define PARAM_DOTNET_POLICY "dnet"
+#define PARAM_SYMBOLS "sym"
 #define PARAM_PTIMES "ptimes"
 
 //dump options:
@@ -296,6 +297,9 @@ public:
             }
         }
 
+        this->addParam(new BoolParam(PARAM_SYMBOLS, false));
+        this->setInfo(PARAM_SYMBOLS, "Autodownload symbols for scanned modules.");
+
         this->addParam(new StringParam(PARAM_PATTERN, false));
         this->setInfo(PARAM_PATTERN, "Set additional shellcode patterns (file in the SIG format).");
 
@@ -350,6 +354,7 @@ public:
         this->addGroup(new ParamGroup(str_group));
         this->addParamToGroup(PARAM_QUIET, str_group);
         this->addParamToGroup(PARAM_REFLECTION, str_group);
+        this->addParamToGroup(PARAM_SYMBOLS, str_group);
         this->addParamToGroup(PARAM_CACHE, str_group);
         this->addParamToGroup(PARAM_LOOP, str_group);
 
@@ -551,6 +556,8 @@ protected:
         copyVal<EnumParam>(PARAM_DUMP_MODE, ps.dump_mode);
 
         fillStringParam(PARAM_PATTERN, ps.pattern_file);
+
+        copyVal<BoolParam>(PARAM_SYMBOLS, ps.download_symbols);
     }
 
 };
