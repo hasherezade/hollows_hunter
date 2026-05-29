@@ -112,7 +112,7 @@ namespace util {
                 stream << ", ";
             }
         }
-        return std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(stream.str());
+        return hh::util::wstring_to_utf8(stream.str());
     }
 
 }; //namespace util

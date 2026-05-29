@@ -84,8 +84,7 @@ void print_version(const std::string &version , WORD info_color = HILIGHTED_COLO
 
 std::wstring to_wstring(const std::string& stringToConvert)
 {
-    std::wstring wideString =
-        std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(stringToConvert);
+    const std::wstring wideString = hh::util::utf8_to_wstring(stringToConvert);
     return wideString;
 }
 
@@ -204,7 +203,7 @@ public:
         if (enumParam) {
             this->addParam(enumParam);
             this->setInfo(PARAM_RESULTS_FILTER, "Define what type of results are reported.");
-            for (size_t i = SHOW_SUSPICIOUS; i <= SHOW_ALL; i++) {
+            for (DWORD i = SHOW_SUSPICIOUS; i <= SHOW_ALL; i++) {
                 t_results_filter mode = (t_results_filter)(i);
                 std::string info = translate_results_filter(mode);
                 if (info.empty()) continue;

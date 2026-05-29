@@ -3,6 +3,7 @@
 #include <iostream>
 #include <windows.h>
 #include <mutex>
+#include <string>
 
 extern std::mutex g_stdOutMutex;
 
@@ -31,14 +32,18 @@ extern std::mutex g_stdOutMutex;
 
 
 namespace hh {
-	namespace util {
-		bool get_current_color(int descriptor, WORD& color);
+    namespace util {
+        bool get_current_color(int descriptor, WORD& color);
 
-		WORD set_color(WORD color);
+        WORD set_color(WORD color);
 
-		// sets a color and returns the previous color:
-		void print_in_color(WORD color, const std::string& text);
+        // sets a color and returns the previous color:
+        void print_in_color(WORD color, const std::string& text);
 
-	}; // util
+        std::string wstring_to_utf8(const std::wstring& wstr);
+
+        std::wstring utf8_to_wstring(const std::string& utf8);
+
+    }; // util
 }; //hh
 
