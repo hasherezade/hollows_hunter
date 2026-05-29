@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['write_5fto_5ffile_0',['write_to_file',['../namespacefiles__util.html#a5d118caccc271905231b3c9999c7f7df',1,'files_util']]],
-  ['writetolog_1',['writeToLog',['../class_h_h_scanner.html#a1d438045fa1a6b43ac401f5561b4bfd4',1,'HHScanner']]]
+  ['version_5fto_5fstr_0',['version_to_str',['../params_8h.html#a26eb7bcb930d268f4e18105473fd17fc',1,'params.h']]]
 ];

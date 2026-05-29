@@ -115,6 +115,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a0e5403e89b3adfd459bca07752c028de" id="r_a0e5403e89b3adfd459bca07752c028de"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a0e5403e89b3adfd459bca07752c028de">get_current_color</a> (int descriptor, WORD &amp;color)</td></tr>
 <tr class="memitem:a670dd5afca8ecdd2eb1caaefc1065282" id="r_a670dd5afca8ecdd2eb1caaefc1065282"><td class="memItemLeft">WORD&#160;</td><td class="memItemRight"><a class="el" href="#a670dd5afca8ecdd2eb1caaefc1065282">set_color</a> (WORD color)</td></tr>
 <tr class="memitem:a18305ccfe6bb354c4d0445c2df9519c1" id="r_a18305ccfe6bb354c4d0445c2df9519c1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a18305ccfe6bb354c4d0445c2df9519c1">print_in_color</a> (WORD color, const std::string &amp;text)</td></tr>
+<tr class="memitem:ad376a9c94848e545d75ec600739aa240" id="r_ad376a9c94848e545d75ec600739aa240"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#ad376a9c94848e545d75ec600739aa240">wstring_to_utf8</a> (const std::wstring &amp;wstr)</td></tr>
+<tr class="memitem:a492d09bf73605d02381580eb771b0e0e" id="r_a492d09bf73605d02381580eb771b0e0e"><td class="memItemLeft">std::wstring&#160;</td><td class="memItemRight"><a class="el" href="#a492d09bf73605d02381580eb771b0e0e">utf8_to_wstring</a> (const std::string &amp;utf8)</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a0e5403e89b3adfd459bca07752c028de" name="a0e5403e89b3adfd459bca07752c028de"></a>
@@ -179,6 +181,44 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="term__util_8cpp_source.html#l00021">21</a> of file <a class="el" href="term__util_8cpp_source.html">term_util.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a492d09bf73605d02381580eb771b0e0e" name="a492d09bf73605d02381580eb771b0e0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a492d09bf73605d02381580eb771b0e0e">&#9670;&#160;</a></span>utf8_to_wstring()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::wstring hh::util::utf8_to_wstring </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>utf8</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="term__util_8cpp_source.html#l00071">71</a> of file <a class="el" href="term__util_8cpp_source.html">term_util.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad376a9c94848e545d75ec600739aa240" name="ad376a9c94848e545d75ec600739aa240"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad376a9c94848e545d75ec600739aa240">&#9670;&#160;</a></span>wstring_to_utf8()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string hh::util::wstring_to_utf8 </td>
+          <td>(</td>
+          <td class="paramtype">const std::wstring &amp;</td>          <td class="paramname"><span class="paramname"><em>wstr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="term__util_8cpp_source.html#l00040">40</a> of file <a class="el" href="term__util_8cpp_source.html">term_util.cpp</a>.</p>
 
 </div>
 </div>

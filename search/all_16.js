@@ -9,5 +9,6 @@ var searchData=
   ['whitespaces_6',['WHITESPACES',['../namespaceutil.html#a1678b7645efab2dcb28d68c0ba28f71b',1,'util']]],
   ['win32_5flean_5fand_5fmean_7',['WIN32_LEAN_AND_MEAN',['../main_8cpp.html#ac7bef5d85e3dcd73eef56ad39ffc84a9',1,'main.cpp']]],
   ['write_5fto_5ffile_8',['write_to_file',['../namespacefiles__util.html#a5d118caccc271905231b3c9999c7f7df',1,'files_util']]],
-  ['writetolog_9',['writeToLog',['../class_h_h_scanner.html#a1d438045fa1a6b43ac401f5561b4bfd4',1,'HHScanner']]]
+  ['writetolog_9',['writeToLog',['../class_h_h_scanner.html#a1d438045fa1a6b43ac401f5561b4bfd4',1,'HHScanner']]],
+  ['wstring_5fto_5futf8_10',['wstring_to_utf8',['../namespacehh_1_1util.html#ad376a9c94848e545d75ec600739aa240',1,'hh::util']]]
 ];

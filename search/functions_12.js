@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['version_5fto_5fstr_0',['version_to_str',['../params_8h.html#a26eb7bcb930d268f4e18105473fd17fc',1,'params.h']]]
+  ['utf8_5fto_5fwstring_0',['utf8_to_wstring',['../namespacehh_1_1util.html#a492d09bf73605d02381580eb771b0e0e',1,'hh::util']]]
 ];
