@@ -44,7 +44,7 @@ std::string hh::util::wstring_to_utf8(const std::wstring& wstr)
 
     int size = WideCharToMultiByte(
         CP_UTF8,
-        0,
+        MB_ERR_INVALID_CHARS,
         wstr.data(),
         static_cast<int>(wstr.size()),
         nullptr,
@@ -52,17 +52,23 @@ std::string hh::util::wstring_to_utf8(const std::wstring& wstr)
         nullptr,
         nullptr);
 
+    if (size == 0)
+        throw std::runtime_error("WideCharToMultiByte failed");
+
     std::string result(size, '\0');
 
-    WideCharToMultiByte(
+    int converted = WideCharToMultiByte(
         CP_UTF8,
-        0,
+        MB_ERR_INVALID_CHARS,
         wstr.data(),
         static_cast<int>(wstr.size()),
         result.data(),
         size,
         nullptr,
         nullptr);
+
+    if (converted == 0)
+        throw std::runtime_error("WideCharToMultiByte failed");
 
     return result;
 }
@@ -75,7 +81,7 @@ std::wstring hh::util::utf8_to_wstring(const std::string& utf8)
 
     int size = MultiByteToWideChar(
         CP_UTF8,
-        0,
+        MB_ERR_INVALID_CHARS,
         utf8.data(),
         static_cast<int>(utf8.size()),
         nullptr,
@@ -88,7 +94,7 @@ std::wstring hh::util::utf8_to_wstring(const std::string& utf8)
 
     int converted = MultiByteToWideChar(
         CP_UTF8,
-        0,
+        MB_ERR_INVALID_CHARS,
         utf8.data(),
         static_cast<int>(utf8.size()),
         result.data(),
