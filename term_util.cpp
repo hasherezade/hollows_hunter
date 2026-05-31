@@ -44,7 +44,7 @@ std::string hh::util::wstring_to_utf8(const std::wstring& wstr)
 
     int size = WideCharToMultiByte(
         CP_UTF8,
-        MB_ERR_INVALID_CHARS,
+        0,
         wstr.data(),
         static_cast<int>(wstr.size()),
         nullptr,
@@ -52,14 +52,18 @@ std::string hh::util::wstring_to_utf8(const std::wstring& wstr)
         nullptr,
         nullptr);
 
-    if (size == 0)
-        throw std::runtime_error("WideCharToMultiByte failed");
+    if (size == 0) {
+        //throw std::runtime_error("WideCharToMultiByte failed");
+        std::wcerr << "WideCharToMultiByte failed for: " << wstr << std::endl;
+        return {};
+    }
+        
 
     std::string result(size, '\0');
 
     int converted = WideCharToMultiByte(
         CP_UTF8,
-        MB_ERR_INVALID_CHARS,
+        0,
         wstr.data(),
         static_cast<int>(wstr.size()),
         result.data(),
@@ -67,9 +71,11 @@ std::string hh::util::wstring_to_utf8(const std::wstring& wstr)
         nullptr,
         nullptr);
 
-    if (converted == 0)
-        throw std::runtime_error("WideCharToMultiByte failed");
-
+    if (converted == 0) {
+        //throw std::runtime_error("WideCharToMultiByte failed");
+        std::wcerr << "WideCharToMultiByte failed for: " << wstr << std::endl;
+        return {};
+    }
     return result;
 }
 
@@ -81,27 +87,31 @@ std::wstring hh::util::utf8_to_wstring(const std::string& utf8)
 
     int size = MultiByteToWideChar(
         CP_UTF8,
-        MB_ERR_INVALID_CHARS,
+        0,
         utf8.data(),
         static_cast<int>(utf8.size()),
         nullptr,
         0);
 
-    if (size == 0)
-        throw std::runtime_error("MultiByteToWideChar failed");
+    if (size == 0) {
+        //throw std::runtime_error("MultiByteToWideChar failed");
+        std::cerr << "MultiByteToWideChar failed for: " << utf8 << std::endl;
+        return {};
+    }
 
     std::wstring result(size, L'\0');
 
     int converted = MultiByteToWideChar(
         CP_UTF8,
-        MB_ERR_INVALID_CHARS,
+        0,
         utf8.data(),
         static_cast<int>(utf8.size()),
         result.data(),
         size);
 
-    if (converted == 0)
-        throw std::runtime_error("MultiByteToWideChar failed");
-
+    if (converted == 0) {
+        std::cerr << "MultiByteToWideChar failed for: " << utf8 << std::endl;
+        return {};
+    }
     return result;
 }
