@@ -21,6 +21,7 @@ void hh_params::init()
     quiet = false;
     log = false;
     json_output = false;
+    process_arch = PROCESS_ALL;
     ptimes = TIME_UNDEFINED;
 }
 
@@ -48,5 +49,6 @@ hh_params& hh_params::operator=(const hh_params& other)
     this->names_list = other.names_list;
     this->pids_list = other.pids_list;
     this->ignored_names_list = other.ignored_names_list;
+    this->process_arch = other.process_arch;
     return *this;
 }

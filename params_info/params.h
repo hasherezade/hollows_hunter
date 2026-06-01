@@ -32,6 +32,7 @@ using namespace pesieve;
 #define PARAM_DOTNET_POLICY "dnet"
 #define PARAM_SYMBOLS "sym"
 #define PARAM_PTIMES "ptimes"
+#define PARAM_ARCH "arch"
 
 //dump options:
 #define PARAM_IMP_REC "imp"
@@ -154,7 +155,19 @@ public:
         }
 
         this->addParam(new IntParam(PARAM_PTIMES, false, IntParam::INT_BASE_DEC));
-        this->setInfo(PARAM_PTIMES, "Scan only processes created N seconds before HH, or later.");
+        this->setInfo(PARAM_PTIMES, "Skip processes created N or more seconds before the scanner start");
+
+#ifdef _WIN64
+#endif
+
+        EnumParam* enumParam = new EnumParam(PARAM_ARCH, "process_arch", false);
+        if (enumParam) {
+            this->addParam(enumParam);
+            this->setInfo(PARAM_ARCH, "Scan only processes with given architecture");
+            enumParam->addEnumValue(t_process_type::PROCESS_ALL, "All available");
+            enumParam->addEnumValue(t_process_type::PROCESS_32BIT, "Only 32-bit");
+            enumParam->addEnumValue(t_process_type::PROCESS_64BIT, "Only 64-bit");
+        }
 
         this->addParam(new BoolParam(PARAM_SUSPEND, false));
         this->setInfo(PARAM_SUSPEND, "Suspend processes detected as suspicious.");
@@ -179,7 +192,7 @@ public:
             this->setInfo(PARAM_ETW, "Use ETW (disabled).");
 #endif //USE_ETW
         }
-        EnumParam *enumParam = new EnumParam(PARAM_IMP_REC, "imprec_mode", false);
+        enumParam = new EnumParam(PARAM_IMP_REC, "imprec_mode", false);
         if (enumParam) {
             this->addParam(enumParam);
             this->setInfo(PARAM_IMP_REC, "Set in which mode the ImportTable should be recovered");
@@ -386,6 +399,7 @@ public:
         this->addParamToGroup(PARAM_PID, str_group);
         this->addParamToGroup(PARAM_PNAME, str_group);
         this->addParamToGroup(PARAM_PTIMES, str_group);
+        this->addParamToGroup(PARAM_ARCH, str_group);
 
         str_group = "6. post-scan actions";
         this->addGroup(new ParamGroup(str_group));
@@ -436,6 +450,7 @@ public:
         copyVal<BoolParam>(PARAM_UNIQUE_DIR, ps.unique_dir);
         copyVal<BoolParam>(PARAM_SUSPEND, ps.suspend_suspicious);
         copyVal<BoolParam>(PARAM_KILL, ps.kill_suspicious);
+        copyVal<EnumParam>(PARAM_ARCH, ps.process_arch);
 #ifdef USE_ETW
         copyVal<BoolParam>(PARAM_ETW, ps.etw_scan);
 #endif // USE_ETW

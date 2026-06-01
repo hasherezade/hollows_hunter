@@ -15,6 +15,13 @@ typedef enum {
     CACHE_MODES_COUNT
 } t_cache_mode;
 
+typedef enum {
+    PROCESS_ALL = 0,
+    PROCESS_32BIT = 1,
+    PROCESS_64BIT = 2,
+    PROCESS_TYPES_COUNT
+} t_process_type;
+
 //HollowsHunter's parameters:
 typedef struct hh_params
 {
@@ -33,6 +40,7 @@ public:
     std::set<std::wstring> names_list;
     std::set<long> pids_list;
     std::set<std::wstring> ignored_names_list;
+    t_process_type process_arch;
     pesieve::t_params pesieve_args; //PE-sieve parameters
 
     void init();

@@ -178,7 +178,7 @@ void HHScanner::printScanRoundStats(size_t found, size_t ignored_count, size_t n
             std::string info1 = (ignored_count > 1) ? "processes" : "process";
             std::string info2 = (ignored_count > 1) ? "were" : "was";
             const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
-            std::cout << "[INFO] " << std::dec << ignored_count << " " << info1 << " from the list : {" << util::list_to_str(hh_args.ignored_names_list) << "} " << info2 << " ignored!" << std::endl;
+            std::cout << "[INFO] " << std::dec << ignored_count << " " << info1 << " " << info2 << " ignored!" << std::endl;
         }
     }
 }
@@ -201,7 +201,6 @@ size_t HHScanner::scanProcesses(HHScanReport &my_report)
     PROCESSENTRY32 pe32 = { 0 };
     pe32.dwSize = sizeof(PROCESSENTRY32);
 
-    //check all modules in the process, including the main module:
     if (!Process32First(hProcessSnapShot, &pe32)) {
         CloseHandle(hProcessSnapShot);
         const std::lock_guard<std::mutex> stdOutLock(g_stdOutMutex);
@@ -210,6 +209,10 @@ size_t HHScanner::scanProcesses(HHScanReport &my_report)
     }
     do {
         if (pe32.th32ProcessID == 0) continue;
+
+        USHORT processMachine;
+        USHORT nativeMachine;
+
         // scan callback
         const t_single_scan_status stat = scanNextProcess(pe32.th32ProcessID, pe32.szExeFile, my_report);
         if (stat == SSCAN_IGNORED) ignored_count++;
@@ -268,9 +271,39 @@ void HHScanner::printSingleReport(pesieve::t_report& report)
     }
 }
 
+bool is_arch_ok(const t_process_type& process_arch, const bool is_process_wow64)
+{
+    if (process_arch == PROCESS_ALL) {
+        return true;
+    }
+#ifdef _WIN64
+    static const int is_curr_wow = false;
+    static const int is_curr_32 = false;
+    if (process_arch == PROCESS_32BIT && is_process_wow64) {
+        return true;
+    }
+    if (process_arch == PROCESS_64BIT && !is_process_wow64) {
+        return true;
+    }
+#else
+    static const int is_curr_wow = process_util::is_wow_64(GetCurrentProcess());
+    static const int is_curr_32 = true;
+    if (is_curr_wow) {
+        if (is_process_wow64 == is_curr_wow) {
+            if (process_arch == PROCESS_32BIT) return true;
+        }
+        else {
+            if (process_arch == PROCESS_64BIT) return true;
+        }
+    }
+#endif
+    return false;
+}
+
 t_single_scan_status HHScanner::shouldScanProcess(const hh_params &hh_args, const time_t hh_initTime, const DWORD pid, const WCHAR* exe_file)
 {
     bool found = false;
+
     const bool check_time = (hh_args.ptimes != TIME_UNDEFINED) ? true : false;
     // filter by the time
     
@@ -303,6 +336,9 @@ t_single_scan_status HHScanner::shouldScanProcess(const hh_params &hh_args, cons
 t_single_scan_status HHScanner::scanNextProcess(DWORD pid, WCHAR* exe_file, HHScanReport &my_report)
 {
     const bool is_process_wow64 = process_util::is_wow_64_by_pid(pid);
+    if (!is_arch_ok(hh_args.process_arch, is_process_wow64)) {
+        return SSCAN_IGNORED;
+    }
     t_single_scan_status res = HHScanner::shouldScanProcess(hh_args, this->initTime, pid, exe_file);
     if (res != SSCAN_READY) {
         return res;
