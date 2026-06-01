@@ -123,7 +123,7 @@ public:
     {
         {
             std::stringstream ss1;
-            ss1 << "Scan only processes with given PIDs";
+            ss1 << "Scan only processes with given PIDs.";
             std::stringstream ss2;
             ss2 << INFO_SPACER << "Example: 5367" << PARAM_LIST_SEPARATOR << "0xa90";
             this->addParam(new IntListParam(PARAM_PID, false, PARAM_LIST_SEPARATOR));
@@ -155,7 +155,7 @@ public:
         }
 
         this->addParam(new IntParam(PARAM_PTIMES, false, IntParam::INT_BASE_DEC));
-        this->setInfo(PARAM_PTIMES, "Skip processes created N or more seconds before the scanner start");
+        this->setInfo(PARAM_PTIMES, "Skip processes created N or more seconds before the scanner start.");
 
 #ifdef _WIN64
 #endif
@@ -163,7 +163,7 @@ public:
         EnumParam* enumParam = new EnumParam(PARAM_ARCH, "process_arch", false);
         if (enumParam) {
             this->addParam(enumParam);
-            this->setInfo(PARAM_ARCH, "Scan only processes with given architecture");
+            this->setInfo(PARAM_ARCH, "Scan only processes with given architecture.");
             enumParam->addEnumValue(t_process_type::PROCESS_ALL, "All available");
             enumParam->addEnumValue(t_process_type::PROCESS_32BIT, "Only 32-bit");
             enumParam->addEnumValue(t_process_type::PROCESS_64BIT, "Only 64-bit");
