@@ -1,5 +1,7 @@
 <map id="process_util::is_wow_64_by_pid" name="process_util::is_wow_64_by_pid">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,147,46"/>
-<area shape="rect" id="Node000002" href="$namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01" title=" " alt="" coords="195,13,357,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,23,179,23,179,28,147,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,147,70"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="38,29,36,19,42,10,56,5,76,3,98,5,111,11,108,16,96,10,76,8,57,10,46,15,41,20,43,28"/>
+<area shape="rect" id="Node000002" href="$namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01" title=" " alt="" coords="195,37,357,62"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,47,179,47,179,52,147,52"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="242,38,236,28,240,18,253,12,276,10,300,13,313,20,310,24,299,18,276,15,255,17,244,22,241,28,247,35"/>
 </map>

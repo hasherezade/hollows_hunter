@@ -1,13 +1,15 @@
 <map id="HHScanner::shouldScanProcess" name="HHScanner::shouldScanProcess">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,217,80"/>
-<area shape="rect" id="Node000002" href="$namespaceutil.html#a54603ddf9200ae4d8947f3d7df864173" title=" " alt="" coords="266,5,419,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="174,51,263,32,264,37,175,57"/>
-<area shape="rect" id="Node000003" href="$namespaceutil.html#a4c194a8378c708f4dec617fde4fbd22f" title=" " alt="" coords="273,55,412,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="217,65,258,65,258,70,217,70"/>
-<area shape="rect" id="Node000004" href="$namespaceutil.html#a1735e5b81407395fd70e22d944855bec" title=" " alt="" coords="265,104,420,130"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="175,78,264,98,263,103,174,84"/>
-<area shape="rect" id="Node000005" href="$structutil_1_1_auto_buffer.html#ac5f843dd06dac7de4297370f219d10de" title=" " alt="" coords="468,75,606,100"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="420,103,452,98,453,103,421,108"/>
-<area shape="rect" id="Node000006" href="$namespaceutil.html#a997df248c1c5179ac292aa9a34a8013e" title=" " alt="" coords="475,124,599,165"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="421,125,460,131,459,136,420,131"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,103,217,128"/>
+<area shape="rect" id="Node000002" href="$namespaceutil.html#a54603ddf9200ae4d8947f3d7df864173" title=" " alt="" coords="266,29,419,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,99,264,64,283,57,285,63,265,69,155,105"/>
+<area shape="rect" id="Node000003" href="$namespaceutil.html#a4c194a8378c708f4dec617fde4fbd22f" title=" " alt="" coords="273,103,412,128"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="217,113,258,113,258,118,217,118"/>
+<area shape="rect" id="Node000004" href="$namespaceutil.html#a1735e5b81407395fd70e22d944855bec" title=" " alt="" coords="265,152,420,178"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="175,126,264,146,263,151,174,132"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="310,30,303,21,307,11,320,5,342,3,366,5,379,12,376,17,365,10,342,8,322,10,311,15,309,20,314,27"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="310,104,303,94,307,84,320,78,342,76,366,79,379,86,376,90,365,84,342,81,322,83,311,88,309,93,314,101"/>
+<area shape="rect" id="Node000005" href="$structutil_1_1_auto_buffer.html#ac5f843dd06dac7de4297370f219d10de" title=" " alt="" coords="468,123,606,148"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="420,151,452,146,453,151,421,156"/>
+<area shape="rect" id="Node000006" href="$namespaceutil.html#a997df248c1c5179ac292aa9a34a8013e" title=" " alt="" coords="475,172,599,213"/>
+<area shape="poly" id="edge7_Node000004_Node000006" title=" " alt="" coords="421,173,460,179,459,184,420,179"/>
 </map>

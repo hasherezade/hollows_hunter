@@ -1,5 +1,6 @@
 <map id="to_wstring" name="to_wstring">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,87,31"/>
-<area shape="rect" id="Node000002" href="$namespacehh_1_1util.html#a492d09bf73605d02381580eb771b0e0e" title=" " alt="" coords="135,5,288,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,16,119,16,119,21,87,21"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,87,55"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="18,30,12,21,16,11,27,5,46,3,66,5,77,12,74,16,64,10,46,8,29,10,20,15,18,20,22,28"/>
+<area shape="rect" id="Node000002" href="$namespacehh_1_1util.html#a492d09bf73605d02381580eb771b0e0e" title=" " alt="" coords="135,29,288,55"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="87,40,119,40,119,45,87,45"/>
 </map>

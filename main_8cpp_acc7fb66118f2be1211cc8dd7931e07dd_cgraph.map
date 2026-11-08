@@ -1,5 +1,6 @@
 <map id="compatibility_alert" name="compatibility_alert">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,13,131,38"/>
-<area shape="rect" id="Node000002" href="$namespacehh_1_1util.html#a18305ccfe6bb354c4d0445c2df9519c1" title=" " alt="" coords="179,5,285,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,23,163,23,163,28,131,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,131,55"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="40,30,35,21,38,11,49,5,68,3,88,5,99,12,96,16,86,10,68,8,51,10,42,15,40,20,45,28"/>
+<area shape="rect" id="Node000002" href="$namespacehh_1_1util.html#a18305ccfe6bb354c4d0445c2df9519c1" title=" " alt="" coords="179,22,285,62"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="131,40,163,40,163,45,131,45"/>
 </map>

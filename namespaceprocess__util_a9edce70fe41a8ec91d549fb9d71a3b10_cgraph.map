@@ -1,5 +1,7 @@
 <map id="process_util::suspend_suspicious" name="process_util::suspend_suspicious">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,152,46"/>
-<area shape="rect" id="Node000002" href="$suspend_8cpp.html#a3c63f252433e6e7532e441ed5cacca9d" title=" " alt="" coords="200,13,323,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="152,23,184,23,184,28,152,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,152,70"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="43,29,42,19,47,10,60,5,79,3,99,5,110,11,108,16,97,10,78,8,61,10,51,14,47,20,49,28"/>
+<area shape="rect" id="Node000002" href="$suspend_8cpp.html#a3c63f252433e6e7532e441ed5cacca9d" title=" " alt="" coords="200,37,323,62"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="152,47,184,47,184,52,152,52"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="230,38,225,28,228,19,241,12,261,10,283,13,295,19,292,24,282,18,261,15,242,17,232,22,230,28,235,35"/>
 </map>

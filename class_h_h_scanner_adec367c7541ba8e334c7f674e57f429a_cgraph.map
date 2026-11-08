@@ -1,5 +1,6 @@
 <map id="HHScanner::isScannerCompatibile" name="HHScanner::isScannerCompatibile">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,227,31"/>
-<area shape="rect" id="Node000002" href="$namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01" title=" " alt="" coords="275,5,437,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="227,16,259,16,259,21,227,21"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,227,55"/>
+<area shape="rect" id="Node000002" href="$namespaceprocess__util.html#a1550838f32323b66051e0d05a0acdb01" title=" " alt="" coords="275,29,437,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="227,40,259,40,259,45,227,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="316,31,308,21,313,11,329,5,356,3,386,5,400,13,398,17,384,11,356,8,330,10,317,15,314,20,320,27"/>
 </map>

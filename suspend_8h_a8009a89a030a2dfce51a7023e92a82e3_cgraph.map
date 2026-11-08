@@ -1,5 +1,7 @@
 <map id="is_process_associated" name="is_process_associated">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,160,31"/>
-<area shape="rect" id="Node000002" href="$suspend_8cpp.html#a6844401d82ea5410225fae1dd2f33365" title=" " alt="" coords="208,5,349,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,16,192,16,192,21,160,21"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,160,55"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="50,30,43,21,47,11,61,5,83,3,107,5,119,12,116,17,105,10,82,8,62,10,51,15,49,20,54,27"/>
+<area shape="rect" id="Node000002" href="$suspend_8cpp.html#a6844401d82ea5410225fae1dd2f33365" title=" " alt="" coords="208,29,349,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,40,192,40,192,45,160,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="245,30,239,21,243,11,256,5,278,3,302,5,315,12,312,17,301,10,278,8,258,10,247,15,244,20,250,27"/>
 </map>
